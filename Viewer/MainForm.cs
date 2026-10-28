@@ -4,64 +4,76 @@ namespace AF.DecalFinder;
 
 internal sealed class MainForm : Form
 {
-    private readonly ImageViewControl view = new() { Dock = DockStyle.Fill };
+    private readonly ImageViewControl view = new() { Dock = DockStyle.Fill, Mode = ImageViewMode.Detail, AccessibleName = "拡大画像（左ドラッグでパン）" };
+    private readonly ImageViewControl overview = new() { Dock = DockStyle.Fill, Mode = ImageViewMode.Overview, AccessibleName = "全体画像（クリック・青い破線枠のドラッグで移動）" };
+    private readonly OcrResultsList list = new();
+    private readonly SplitContainer panes = new() { Dock = DockStyle.Fill, FixedPanel = FixedPanel.Panel1, SplitterWidth = 6 };
+    private readonly SplitContainer images = new() { Dock = DockStyle.Fill, SplitterWidth = 6 };
+    private readonly CheckBox showList = new() { Text = "一覧表示", Checked = true, AutoSize = true, Margin = new Padding(12, 7, 5, 0) };
+    private readonly ComboBox zoom = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 85, AccessibleName = "拡大倍率" };
+    private int savedListWidth = 150;
     private readonly DigitsTextBox number = new() { Width = 130, Enabled = false, AccessibleName = "検索番号" };
     private readonly Label count = new() { AutoSize = true, Text = "検索不可", Margin = new Padding(12, 8, 0, 0) };
     private readonly ToolStripStatusLabel status = new() { Spring = true, TextAlign = ContentAlignment.MiddleLeft, Text = "画像を開いてください。" };
     private readonly string jsonPath = Path.Combine(AppContext.BaseDirectory, "results", "600dpi.json");
     private OcrCatalog? catalog;
-    private OcrResultsForm? resultsWindow;
     private static string AppTitle => $"AF-DecalFinder {typeof(MainForm).Assembly.GetName().Version?.ToString(3)}";
 
     public MainForm(string? initialImage)
     {
-        Text = $"{AppTitle} — Phase 3";
+        Text = $"{AppTitle} — Phase 4";
         ClientSize = new Size(1200, 880);
-        MinimumSize = new Size(700, 450);
+        MinimumSize = new Size(850, 450);
         StartPosition = FormStartPosition.CenterScreen;
         AutoScaleMode = AutoScaleMode.Dpi;
         var open = new Button { Text = "画像を開く…", AutoSize = true, Height = 30 };
         open.Click += (_, _) => SelectImage();
-        var fit = new Button { Text = "全体表示", AutoSize = true, Height = 30 };
-        fit.Click += (_, _) => view.FitImage();
-        var results = new Button { Text = "OCR結果一覧", AutoSize = true, Height = 30 };
-        results.Click += (_, _) => ShowOcrResults();
         var toolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 48, Padding = new Padding(8), WrapContents = false };
-        toolbar.Controls.AddRange([open, fit, results, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count]);
+        toolbar.Controls.AddRange([open, showList, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count]);
+        var detailToolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 38, Padding = new Padding(4), WrapContents = false };
+        detailToolbar.Controls.AddRange([new Label { Text = "拡大画像", AutoSize = true, Margin = new Padding(3, 5, 8, 0) }, zoom]);
+        zoom.Items.AddRange(new object[] { "25%", "50%", "75%", "100%", "150%", "200%" });
+        zoom.SelectedIndex = 3;
+        zoom.SelectedIndexChanged += (_, _) => view.SetZoom(new double[] { .25, .5, .75, 1, 1.5, 2 }[zoom.SelectedIndex]);
+        panes.Panel1.Controls.Add(list);
+        panes.Panel2.Controls.Add(images);
+        images.Panel1.Controls.Add(overview);
+        images.Panel1.Controls.Add(new Label { Text = "全体画像 — 青い破線：拡大表示範囲", Dock = DockStyle.Top, Height = 38, TextAlign = ContentAlignment.MiddleLeft });
+        images.Panel2.Controls.Add(view);
+        images.Panel2.Controls.Add(detailToolbar);
         var strip = new StatusStrip();
         strip.Items.Add(status);
-        Controls.Add(view);
+        Controls.Add(panes);
         Controls.Add(toolbar);
         Controls.Add(strip);
         number.TextChanged += (_, _) => Search();
+        list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
+        view.ViewportChanged += () => overview.SetNavigationBounds(view.VisibleImageBounds);
+        overview.NavigateRequested += view.CenterOn;
+        showList.CheckedChanged += (_, _) =>
+        {
+            if (!showList.Checked)
+            {
+                savedListWidth = panes.SplitterDistance;
+                panes.Panel1Collapsed = true;
+            }
+            else
+            {
+                panes.Panel1Collapsed = false;
+                panes.SplitterDistance = Math.Clamp(savedListWidth, panes.Panel1MinSize, Math.Max(panes.Panel1MinSize, panes.ClientSize.Width - panes.SplitterWidth - panes.Panel2MinSize));
+            }
+        };
         InstallDropHandlers(this);
         Shown += (_, _) =>
         {
+            panes.Panel1MinSize = 60;
+            panes.Panel2MinSize = 350;
+            panes.SplitterDistance = 150;
+            images.Panel1MinSize = 120;
+            images.Panel2MinSize = 120;
+            images.SplitterDistance = (images.ClientSize.Width - images.SplitterWidth) / 2;
             if (!string.IsNullOrWhiteSpace(initialImage)) OpenImage(initialImage);
         };
-    }
-
-    private void ShowOcrResults()
-    {
-        if (resultsWindow is { IsDisposed: false })
-        {
-            if (resultsWindow.WindowState == FormWindowState.Minimized) resultsWindow.WindowState = FormWindowState.Normal;
-            resultsWindow.Activate();
-            return;
-        }
-        resultsWindow = new OcrResultsForm();
-        var workArea = Screen.FromControl(this).WorkingArea;
-        resultsWindow.Location = new Point(
-            Math.Clamp(Right - resultsWindow.Width, workArea.Left, Math.Max(workArea.Left, workArea.Right - resultsWindow.Width)),
-            Math.Clamp(Top + 60, workArea.Top, Math.Max(workArea.Top, workArea.Bottom - resultsWindow.Height)));
-        resultsWindow.SelectionChanged += view.SetSelection;
-        resultsWindow.SetDetections(catalog?.Detections ?? Array.Empty<Detection>());
-        resultsWindow.FormClosed += (_, _) =>
-        {
-            view.SetSelection(null);
-            resultsWindow = null;
-        };
-        resultsWindow.Show(this); // Modeless owned window; main search/pan/zoom remain available.
     }
 
     private void InstallDropHandlers(Control control)
@@ -112,9 +124,12 @@ internal sealed class MainForm : Form
         }
 
         catalog = null;
-        resultsWindow?.SetDetections(Array.Empty<Detection>());
+        list.SetDetections(Array.Empty<Detection>());
+        number.Clear();
         number.Enabled = false;
+        overview.SetImage(loaded, takeOwnership: false);
         view.SetImage(loaded);
+        zoom.SelectedIndex = 3;
         count.Text = "検索不可";
         Text = $"{AppTitle} — {Path.GetFileName(path)}";
         var description = $"{Path.GetFileName(path)}  |  {loaded.Width} × {loaded.Height} px";
@@ -128,9 +143,9 @@ internal sealed class MainForm : Form
                 return;
             }
             catalog = candidate;
-            resultsWindow?.SetDetections(catalog.Detections);
+            list.SetDetections(catalog.Detections);
             number.Enabled = true;
-            status.Text = $"{description}  |  OCR結果 {catalog.Detections.Count}件  |  ホイール：ズーム / 左ドラッグ：移動";
+            status.Text = $"{description}  |  OCR結果 {catalog.Detections.Count}件  |  全体：クリック・枠ドラッグ / 拡大：左ドラッグ";
             Search();
             number.Focus();
         }
@@ -149,6 +164,7 @@ internal sealed class MainForm : Form
     {
         var matches = catalog?.Find(number.Text) ?? Array.Empty<Detection>();
         view.SetHighlights(matches);
+        overview.SetHighlights(matches);
         count.Text = catalog == null ? "検索不可" : $"{matches.Count}件";
     }
 }

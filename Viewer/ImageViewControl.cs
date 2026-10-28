@@ -2,11 +2,28 @@ using System.Drawing.Drawing2D;
 
 namespace AF.DecalFinder;
 
+public enum ImageViewMode { Free, Overview, Detail }
+
 public class ImageViewControl : Control
 {
     private Bitmap? bitmap;
     private IReadOnlyList<Detection> highlights = Array.Empty<Detection>();
-    private Detection? selectedDetection;
+    private IReadOnlyList<Detection> selections = Array.Empty<Detection>();
+    private bool ownsBitmap = true;
+    private PointF navigationGrabOffset;
+    private Point? navigationStart;
+    private bool navigationMoved;
+    private RectangleF navigationBounds;
+    [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+    public ImageViewMode Mode { get; init; }
+    public event Action? ViewportChanged;
+    public event Action<PointF>? NavigateRequested;
+    public double Zoom => transform.Scale;
+    public PointF ImageCenter => transform.ToImage(new PointF(ClientSize.Width / 2f, ClientSize.Height / 2f));
+    public RectangleF VisibleImageBounds => bitmap == null ? RectangleF.Empty : RectangleF.Intersect(
+        new RectangleF(transform.ToImage(PointF.Empty), new SizeF((float)(ClientSize.Width / Zoom), (float)(ClientSize.Height / Zoom))),
+        new RectangleF(0, 0, bitmap.Width, bitmap.Height));
+    public RectangleF ScreenBounds(Rectangle bounds) => transform.ToScreen(bounds);
     private readonly ViewTransform transform = new();
     private bool fitted = true;
     private Point? dragPoint;
@@ -21,15 +38,25 @@ public class ImageViewControl : Control
         AccessibleName = "画像ビュー（ホイールでズーム、左ドラッグで移動）";
     }
 
-    // Takes ownership of the bitmap. No OCR or file-selection logic lives here.
-    public void SetImage(Bitmap image)
+    // The detail view owns the bitmap; the overview shares it without a second full-size copy.
+    public void SetImage(Bitmap image, bool takeOwnership = true)
     {
         var old = bitmap;
+        var disposeOld = ownsBitmap;
         bitmap = image;
+        ownsBitmap = takeOwnership;
         highlights = Array.Empty<Detection>();
-        selectedDetection = null;
-        FitImage();
-        old?.Dispose();
+        selections = Array.Empty<Detection>();
+        navigationBounds = RectangleF.Empty;
+        EndDrag();
+        if (Mode == ImageViewMode.Detail)
+        {
+            transform.SetViewport(image.Size, ClientSize, 1, new PointF(image.Width / 2f, image.Height / 2f));
+            ViewportChanged?.Invoke();
+            Invalidate();
+        }
+        else FitImage();
+        if (disposeOld && !ReferenceEquals(old, image)) old?.Dispose();
     }
 
     public void SetHighlights(IReadOnlyList<Detection> matches)
@@ -40,8 +67,32 @@ public class ImageViewControl : Control
 
     public void SetSelection(Detection? detection)
     {
-        selectedDetection = detection;
+        SetSelections(detection == null ? Array.Empty<Detection>() : new[] { detection });
+    }
+
+    public void SetSelections(IReadOnlyList<Detection> detections)
+    {
+        selections = detections;
         Invalidate(); // Selection never changes the image transform or red search matches.
+    }
+
+    public void SetNavigationBounds(RectangleF bounds) { navigationBounds = bounds; Invalidate(); }
+
+    public void CenterOn(PointF center)
+    {
+        if (bitmap == null || Mode != ImageViewMode.Detail) return;
+        transform.SetViewport(bitmap.Size, ClientSize, Zoom, center);
+        ViewportChanged?.Invoke();
+        Invalidate();
+    }
+
+    public void SetZoom(double scale)
+    {
+        if (!double.IsFinite(scale) || scale <= 0) throw new ArgumentOutOfRangeException(nameof(scale));
+        if (bitmap == null || Mode != ImageViewMode.Detail) return;
+        transform.SetViewport(bitmap.Size, ClientSize, scale, ImageCenter);
+        ViewportChanged?.Invoke();
+        Invalidate();
     }
 
     public void FitImage()
@@ -56,7 +107,13 @@ public class ImageViewControl : Control
         base.OnResize(e);
         if (bitmap != null)
         {
-            if (fitted) transform.Fit(bitmap.Size, ClientSize);
+            if (Mode == ImageViewMode.Detail)
+            {
+                var center = transform.ToImage(new PointF(previousSize.Width / 2f, previousSize.Height / 2f));
+                transform.SetViewport(bitmap.Size, ClientSize, Zoom, center);
+                ViewportChanged?.Invoke();
+            }
+            else if (Mode == ImageViewMode.Overview || fitted) transform.Fit(bitmap.Size, ClientSize);
             else transform.Pan((ClientSize.Width - previousSize.Width) / 2.0, (ClientSize.Height - previousSize.Height) / 2.0);
         }
         previousSize = ClientSize;
@@ -86,21 +143,27 @@ public class ImageViewControl : Control
                 e.Graphics.DrawRectangle(pen, box.X, box.Y, box.Width, box.Height);
         }
         // Last pass gives blue priority where it overlaps red, with the same screen-space pen width.
-        if (selectedDetection != null)
+        using var selectionPen = new Pen(Color.Blue, 2f);
+        foreach (var selectedDetection in selections)
         {
             var box = transform.ToScreen(selectedDetection.Bounds);
             if (box.IntersectsWith(ClientRectangle))
             {
-                using var selectionPen = new Pen(Color.Blue, 2f);
                 e.Graphics.DrawRectangle(selectionPen, box.X, box.Y, box.Width, box.Height);
             }
+        }
+        if (Mode == ImageViewMode.Overview && !navigationBounds.IsEmpty)
+        {
+            var box = transform.ToScreen(navigationBounds);
+            using var navigationPen = new Pen(Color.Blue, 2f) { DashStyle = DashStyle.Dash };
+            e.Graphics.DrawRectangle(navigationPen, box.X, box.Y, box.Width, box.Height);
         }
     }
 
     protected override void OnMouseWheel(MouseEventArgs e)
     {
         base.OnMouseWheel(e);
-        if (bitmap == null) return;
+        if (bitmap == null || Mode != ImageViewMode.Free) return;
         var fit = Math.Min((double)ClientSize.Width / bitmap.Width, (double)ClientSize.Height / bitmap.Height);
         if (fit <= 0) return;
         transform.ZoomAt(e.Location, Math.Pow(1.2, e.Delta / 120.0), Math.Min(fit * .1, 1), Math.Max(16, fit));
@@ -113,6 +176,17 @@ public class ImageViewControl : Control
         base.OnMouseDown(e);
         Focus();
         if (e.Button != MouseButtons.Left || bitmap == null) return;
+        if (Mode == ImageViewMode.Overview)
+        {
+            var point = transform.ToImage(e.Location);
+            if (point.X < 0 || point.Y < 0 || point.X > bitmap.Width || point.Y > bitmap.Height) return;
+            navigationStart = e.Location;
+            navigationMoved = false;
+            navigationGrabOffset = navigationBounds.Contains(point)
+                ? new PointF(point.X - (navigationBounds.Left + navigationBounds.Width / 2), point.Y - (navigationBounds.Top + navigationBounds.Height / 2))
+                : PointF.Empty;
+            if (navigationGrabOffset == PointF.Empty) NavigateRequested?.Invoke(point);
+        }
         dragPoint = e.Location;
         Capture = true;
         Cursor = Cursors.SizeAll;
@@ -122,7 +196,21 @@ public class ImageViewControl : Control
     {
         base.OnMouseMove(e);
         if (dragPoint is not Point previous) return;
+        if (Mode == ImageViewMode.Overview)
+        {
+            if (navigationStart is Point start && (Math.Abs(e.X - start.X) + Math.Abs(e.Y - start.Y) > 2)) navigationMoved = true;
+            if (!navigationMoved) return;
+            var point = transform.ToImage(e.Location);
+            NavigateRequested?.Invoke(new PointF(point.X - navigationGrabOffset.X, point.Y - navigationGrabOffset.Y));
+            dragPoint = e.Location;
+            return;
+        }
         transform.Pan(e.X - previous.X, e.Y - previous.Y);
+        if (Mode == ImageViewMode.Detail && bitmap != null)
+        {
+            transform.SetViewport(bitmap.Size, ClientSize, Zoom, ImageCenter);
+            ViewportChanged?.Invoke();
+        }
         dragPoint = e.Location;
         fitted = false;
         Invalidate();
@@ -131,6 +219,8 @@ public class ImageViewControl : Control
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
+        if (e.Button == MouseButtons.Left && Mode == ImageViewMode.Overview && navigationStart != null && !navigationMoved)
+            NavigateRequested?.Invoke(transform.ToImage(e.Location));
         if (e.Button == MouseButtons.Left) EndDrag();
     }
 
@@ -140,11 +230,11 @@ public class ImageViewControl : Control
         if (!Capture) EndDrag();
     }
 
-    private void EndDrag() { dragPoint = null; Capture = false; Cursor = Cursors.Default; }
+    private void EndDrag() { dragPoint = null; navigationStart = null; Capture = false; Cursor = Cursors.Default; }
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing) bitmap?.Dispose();
+        if (disposing && ownsBitmap) bitmap?.Dispose();
         base.Dispose(disposing);
     }
 }

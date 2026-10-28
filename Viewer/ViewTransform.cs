@@ -26,6 +26,22 @@ internal sealed class ViewTransform
 
     public void Pan(double x, double y) { OffsetX += x; OffsetY += y; }
 
+    public PointF ToImage(PointF point) => new((float)((point.X - OffsetX) / Scale), (float)((point.Y - OffsetY) / Scale));
+
+    public void SetViewport(Size image, Size viewport, double scale, PointF center)
+    {
+        Scale = scale;
+        OffsetX = Constrain(viewport.Width / 2.0 - center.X * scale, image.Width * scale, viewport.Width);
+        OffsetY = Constrain(viewport.Height / 2.0 - center.Y * scale, image.Height * scale, viewport.Height);
+    }
+
+    private static double Constrain(double offset, double imageLength, double viewportLength) =>
+        imageLength <= viewportLength ? (viewportLength - imageLength) / 2 : Math.Clamp(offset, viewportLength - imageLength, 0);
+
+    public RectangleF ToScreen(RectangleF bounds) => new(
+        (float)(OffsetX + bounds.X * Scale), (float)(OffsetY + bounds.Y * Scale),
+        (float)(bounds.Width * Scale), (float)(bounds.Height * Scale));
+
     public RectangleF ToScreen(Rectangle bounds) => new(
         (float)(OffsetX + bounds.X * Scale), (float)(OffsetY + bounds.Y * Scale),
         (float)(bounds.Width * Scale), (float)(bounds.Height * Scale));

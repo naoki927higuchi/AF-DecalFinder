@@ -44,6 +44,12 @@ internal static class Program
         input.Text = "a10+2 日本３";
         Check(input.Text == "102", "Paste filters ASCII non-digits including full-width digits");
         input.Text = ""; Check(input.Text.Length == 0, "Empty input allowed");
+        input.Text = "102";
+        typeof(Control).GetMethod("OnEnter", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(input, new object[] { EventArgs.Empty });
+        Check(input.SelectionLength == 3, "Search focus selects existing text");
+        input.DeselectAll();
+        typeof(Control).GetMethod("OnMouseClick", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(input, new object[] { new MouseEventArgs(MouseButtons.Left, 1, 5, 5, 0) });
+        Check(input.SelectionLength == 3, "Search click reselects existing text");
 
         var drop = new DataObject(); drop.SetData(DataFormats.FileDrop, new[] { "test.png" });
         Check(MainForm.GetDroppedImage(drop) == "test.png", "Single PNG file drop accepted");
@@ -68,35 +74,55 @@ internal static class Program
             form.Show();
             Application.DoEvents();
             var toolbar = form.Controls.OfType<FlowLayoutPanel>().Single();
-            var openList = toolbar.Controls.OfType<Button>().Single(b => b.Text == "OCR結果一覧");
-            openList.PerformClick();
-            var resultsForm = form.OwnedForms.OfType<OcrResultsForm>().Single();
-            openList.PerformClick();
-            Check(form.OwnedForms.Count(w => w is OcrResultsForm) == 1 && resultsForm.Visible && !resultsForm.Modal && form.Enabled,
-                "Single modeless results window, main form remains enabled");
-            var list = resultsForm.Controls.OfType<ListView>().Single();
-            Check(list.Items.Count == 181 && list.View == View.Details && list.FullRowSelect && !list.MultiSelect && !list.LabelEdit,
-                "181 read-only Details rows with full single selection");
-            Check(list.Columns.Cast<ColumnHeader>().Select(c => c.Text).SequenceEqual(new[] { "ID", "番号", "X", "Y", "信頼度" }), "Requested list columns");
+            var toggle = toolbar.Controls.OfType<CheckBox>().Single();
+            var panes = form.Controls.OfType<SplitContainer>().Single();
+            var images = panes.Panel2.Controls.OfType<SplitContainer>().Single();
+            var list = panes.Panel1.Controls.OfType<OcrResultsList>().Single();
+            var overview = images.Panel1.Controls.OfType<ImageViewControl>().Single();
+            var detail = images.Panel2.Controls.OfType<ImageViewControl>().Single();
+            Check(panes.SplitterDistance == 150 && Math.Abs(images.Panel1.Width - images.Panel2.Width) <= 1, "Initial 150px list and equal image panes");
+            panes.SplitterDistance = 210;
+            toggle.Checked = false;
+            Check(panes.Panel1Collapsed && images.Width == panes.Panel2.ClientSize.Width, "List toggle hides list and splitter");
+            toggle.Checked = true;
+            Check(panes.SplitterDistance == 210 && !panes.Panel1Collapsed, "List toggle restores previous width");
+            images.SplitterDistance += 30;
+            Check(images.Panel1.Width != images.Panel2.Width, "Image splitter independently adjustable");
+            Check(list.Items.Count == 181 && list.View == View.Details && list.FullRowSelect && list.MultiSelect && !list.LabelEdit,
+                "181 read-only Details rows with multi selection");
+            Check(list.Columns.Count == 1 && list.Columns[0].Text == "番号", "Number-only list column");
             var rows = list.Items.Cast<ListViewItem>().Select(i => (Detection)i.Tag!).ToArray();
             var expected = catalog.Detections.OrderBy(d => BigInteger.Parse(d.Number)).ThenBy(d => d.Bounds.Y).ThenBy(d => d.Bounds.X).ThenBy(d => d.Id, StringComparer.Ordinal).Select(d => d.Id);
-            Check(rows.Select(d => d.Id).SequenceEqual(expected), "Numeric sort with Y/X tie breakers");
+            Check(rows.Select(d => d.Id).SequenceEqual(expected) && list.Items.Cast<ListViewItem>().All(i => i.Text == ((Detection)i.Tag!).Number), "Numeric Y/X sort preserves text and IDs");
             var duplicates = list.Items.Cast<ListViewItem>().Where(i => ((Detection)i.Tag!).Number == "49").ToArray();
-            Detection? notified = null;
-            resultsForm.SelectionChanged += d => notified = d;
+            IReadOnlyList<Detection> notified = Array.Empty<Detection>();
+            list.SelectionChanged += d => notified = d;
+            var priorCenter = detail.ImageCenter;
             duplicates[0].Selected = true;
-            Check(ReferenceEquals(notified, duplicates[0].Tag) && ReferenceEquals(resultsForm.SelectedDetection, duplicates[0].Tag), "Selection passes record reference, not row index");
-            duplicates[0].Selected = false;
             duplicates[1].Selected = true;
-            Check(ReferenceEquals(notified, duplicates[1].Tag) && notified!.Id != ((Detection)duplicates[0].Tag!).Id, "Duplicate number rows select distinct IDs");
-            duplicates[1].Selected = false;
-            Check(notified == null, "Deselection clears selected record");
+            Check(notified.Count == 2 && ReferenceEquals(notified[0], duplicates[0].Tag) && ReferenceEquals(notified[1], duplicates[1].Tag), "Multiple selected rows retain distinct record references");
+            Check(detail.ImageCenter == priorCenter && detail.Zoom == 1, "Selection and search do not move detail view");
+            typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
+                .Invoke(list, new object[] { new KeyEventArgs(Keys.Control | Keys.A) });
+            Check(notified.Count == 181 && list.SelectedItems.Count == 181, "Ctrl+A selects all 181 records");
+            typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
+                .Invoke(list, new object[] { new KeyEventArgs(Keys.Escape) });
+            Check(notified.Count == 0, "Escape clears all selected records");
+            detail.CenterOn(new PointF(4000, 3000));
+            var zoom = images.Panel2.Controls.OfType<FlowLayoutPanel>().Single().Controls.OfType<ComboBox>().Single();
+            zoom.SelectedIndex = 5;
+            Check(detail.Zoom == 2 && detail.ImageCenter == new PointF(4000, 3000), "Dropdown zoom preserves image center");
+            form.ClientSize = new Size(1000, 700);
+            Application.DoEvents();
+            Check(detail.ImageCenter == new PointF(4000, 3000) && detail.Zoom == 2, "Resize preserves detail center and zoom");
+            var fitted = overview.ScreenBounds(new Rectangle(Point.Empty, catalog.ImageSize));
+            Check(fitted.Left >= -.01 && fitted.Top >= -.01 && fitted.Right <= overview.Width + .01 && fitted.Bottom <= overview.Height + .01, "Overview auto fits after splitter and window resize");
             duplicates[0].Selected = true;
             typeof(Control).GetMethod("OnDragDrop", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                 .Invoke(form, new object[] { new DragEventArgs(originalDrop, 0, 0, 0, DragDropEffects.Copy, DragDropEffects.Copy) });
-            Check(list.Items.Count == 181 && resultsForm.SelectedDetection == null && notified == null && !ReferenceEquals(list.Items.Cast<ListViewItem>().First(i => ((Detection)i.Tag!).Id == rows[0].Id).Tag, rows[0]),
-                "Image reload replaces catalog records and clears selection in existing window");
-            // Mutate only the test executable's copied JSON; always restore its exact bytes.
+            Check(list.Items.Count == 181 && list.SelectedItems.Count == 0 && notified.Count == 0 && search.Text == "" && detail.Zoom == 1,
+                "Image reload resets search, selection and zoom");
+            Check(!ReferenceEquals(list.Items.Cast<ListViewItem>().First(i => ((Detection)i.Tag!).Id == rows[0].Id).Tag, rows[0]), "Image reload replaces catalog references");
             var copiedJson = Path.Combine(AppContext.BaseDirectory, "results", "600dpi.json");
             var savedJson = File.ReadAllBytes(copiedJson);
             try
@@ -104,21 +130,13 @@ internal static class Program
                 File.Delete(copiedJson);
                 typeof(Control).GetMethod("OnDragDrop", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                     .Invoke(form, new object[] { new DragEventArgs(originalDrop, 0, 0, 0, DragDropEffects.Copy, DragDropEffects.Copy) });
-                Check(list.Items.Count == 0 && resultsForm.SelectedDetection == null && !search.Enabled, "Missing JSON empties open list and disables search");
+                Check(list.Items.Count == 0 && !search.Enabled, "Missing JSON empties list and disables search");
             }
             finally { File.WriteAllBytes(copiedJson, savedJson); }
             typeof(Control).GetMethod("OnDragDrop", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                 .Invoke(form, new object[] { new DragEventArgs(originalDrop, 0, 0, 0, DragDropEffects.Copy, DragDropEffects.Copy) });
-            Check(list.Items.Count == 181 && search.Enabled, "Restored JSON repopulates existing window on next image load");
-            list.Items[0].Selected = true;
-            resultsForm.Close();
-            Check(notified == null && resultsForm.IsDisposed, "Closing results clears selection");
-            openList.PerformClick();
-            var reopened = form.OwnedForms.OfType<OcrResultsForm>().Single();
-            Check(!ReferenceEquals(reopened, resultsForm) && reopened.SelectedDetection == null, "Closed results window can reopen without stale selection");
-            reopened.Close();
+            Check(list.Items.Count == 181 && search.Enabled, "Restored JSON repopulates list on next load");
         }
-
         var temp = Path.Combine(root, "viewer-checks"); Directory.CreateDirectory(temp);
         var cases = new[] {
             "{", "{}", "null",
@@ -179,6 +197,44 @@ internal static class Program
         canvas.SetImage(new Bitmap(400, 300));
         using var replacedImage = canvas.Render();
         Check(!BlueNear(replacedImage, 100, 100), "Replacing image clears blue selection");
+        using var detailCanvas = new TestCanvas { Size = new Size(400, 300), Mode = ImageViewMode.Detail };
+        using var overviewCanvas = new TestCanvas { Size = new Size(400, 300), Mode = ImageViewMode.Overview };
+        var shared = new Bitmap(800, 600);
+        using (var g = Graphics.FromImage(shared)) g.Clear(Color.White);
+        overviewCanvas.SetImage(shared, false);
+        detailCanvas.SetImage(shared);
+        detailCanvas.ViewportChanged += () => overviewCanvas.SetNavigationBounds(detailCanvas.VisibleImageBounds);
+        overviewCanvas.NavigateRequested += detailCanvas.CenterOn;
+        detailCanvas.CenterOn(new PointF(400, 300));
+        Check(detailCanvas.Zoom == 1 && detailCanvas.ScreenBounds(new Rectangle(300, 250, 30, 20)).Size == new SizeF(30, 20), "100 percent maps original pixels one to one");
+        overviewCanvas.ClickAt(150, 125);
+        Check(detailCanvas.ImageCenter == new PointF(300, 250), "Overview click centers detail on image coordinate");
+        // Frame spans x50..250/y50..200; grab away from its center and preserve the grab offset.
+        overviewCanvas.DragFrom(100, 100, 40, 20);
+        Check(detailCanvas.ImageCenter == new PointF(380, 290), "Overview frame drag follows without grab offset jump");
+        detailCanvas.PanBy(20, 10);
+        Check(detailCanvas.ImageCenter == new PointF(360, 280) && detailCanvas.VisibleImageBounds == new RectangleF(160, 130, 400, 300), "Detail pan updates source viewport bounds");
+        detailCanvas.CenterOn(new PointF(-1000, -1000));
+        Check(detailCanvas.VisibleImageBounds == new RectangleF(0, 0, 400, 300), "Top and left pan limits prevent empty margins");
+        detailCanvas.CenterOn(new PointF(9000, 9000));
+        Check(detailCanvas.VisibleImageBounds == new RectangleF(400, 300, 400, 300), "Bottom and right pan limits prevent empty margins");
+        detailCanvas.SetZoom(.25);
+        var smallImage = detailCanvas.ScreenBounds(new Rectangle(0, 0, 800, 600));
+        Check(smallImage == new RectangleF(100, 75, 200, 150) && detailCanvas.ImageCenter == new PointF(400, 300), "Small image centered when viewport exceeds image size");
+        detailCanvas.SetZoom(1);
+        detailCanvas.CenterOn(new PointF(400, 300));
+        var marks = new[] { new Detection("04", new Rectangle(300, 250, 30, 20), 90, "a"), new Detection("4", new Rectangle(450, 250, 30, 20), 90, "b") };
+        foreach (var c in new[] { overviewCanvas, detailCanvas }) { c.SetHighlights(marks); c.SetSelections(new[] { marks[0] }); }
+        using var detailPaint = detailCanvas.Render();
+        using var overviewPaint = overviewCanvas.Render();
+        Check(BlueNear(detailPaint, 100, 100) && RedNear(detailPaint, 250, 100) && BlueNear(overviewPaint, 150, 125) && RedNear(overviewPaint, 225, 125), "Both panes paint identical records with blue priority and red remainder");
+        detailCanvas.SetSelections(marks);
+        using var multiPaint = detailCanvas.Render();
+        Check(BlueNear(multiPaint, 100, 100) && BlueNear(multiPaint, 250, 100), "Multiple selected records are simultaneously blue");
+        detailCanvas.SetZoom(2);
+        Check(detailCanvas.ImageCenter == new PointF(400, 300) && detailCanvas.VisibleImageBounds == new RectangleF(300, 225, 200, 150), "Zoom updates navigation bounds and retains center");
+        overviewCanvas.Size = new Size(600, 300);
+        Check(overviewCanvas.ScreenBounds(new Rectangle(0, 0, 800, 600)) == new RectangleF(100, 0, 400, 300), "Overview letterboxes and fits on resize");
         using var png = new Bitmap(120, 80); png.Save(Path.Combine(temp, "mismatch.png"));
         File.WriteAllText(Path.Combine(temp, "broken.jpg"), "not an image");
         Console.WriteLine($"PASS: {checks} checks");
@@ -193,10 +249,17 @@ internal static class Program
         public Bitmap Render() { var b = new Bitmap(Width, Height); using var g = Graphics.FromImage(b); g.Clear(BackColor); OnPaint(new PaintEventArgs(g, ClientRectangle)); return b; }
         public void Wheel(int x, int y, int delta) => OnMouseWheel(new MouseEventArgs(MouseButtons.None, 0, x, y, delta));
         public void PanBy(int dx, int dy)
+            => DragFrom(100, 100, dx, dy);
+        public void ClickAt(int x, int y)
         {
-            OnMouseDown(new MouseEventArgs(MouseButtons.Left, 1, 100, 100, 0));
-            OnMouseMove(new MouseEventArgs(MouseButtons.Left, 0, 100 + dx, 100 + dy, 0));
-            OnMouseUp(new MouseEventArgs(MouseButtons.Left, 1, 100 + dx, 100 + dy, 0));
+            OnMouseDown(new MouseEventArgs(MouseButtons.Left, 1, x, y, 0));
+            OnMouseUp(new MouseEventArgs(MouseButtons.Left, 1, x, y, 0));
+        }
+        public void DragFrom(int x, int y, int dx, int dy)
+        {
+            OnMouseDown(new MouseEventArgs(MouseButtons.Left, 1, x, y, 0));
+            OnMouseMove(new MouseEventArgs(MouseButtons.Left, 0, x + dx, y + dy, 0));
+            OnMouseUp(new MouseEventArgs(MouseButtons.Left, 1, x + dx, y + dy, 0));
         }
     }
 }

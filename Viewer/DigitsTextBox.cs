@@ -4,6 +4,9 @@ internal sealed class DigitsTextBox : TextBox
 {
     public DigitsTextBox() { ImeMode = ImeMode.Disable; }
 
+    protected override void OnEnter(EventArgs e) { base.OnEnter(e); SelectAll(); }
+    protected override void OnMouseClick(MouseEventArgs e) { base.OnMouseClick(e); SelectAll(); }
+
     protected override void OnKeyPress(KeyPressEventArgs e)
     {
         if (!char.IsControl(e.KeyChar) && e.KeyChar is < '0' or > '9') e.Handled = true;
