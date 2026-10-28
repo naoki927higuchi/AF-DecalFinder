@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace AF.DecalFinder;
 
-public sealed record Detection(string Number, Rectangle Bounds, double Confidence);
+public sealed record Detection(string Number, Rectangle Bounds, double Confidence, string Id = "");
 
 public sealed class OcrCatalog
 {
@@ -34,8 +34,12 @@ public sealed class OcrCatalog
             if (width <= 0 || height <= 0)
                 throw new InvalidDataException("JSONの画像寸法が不正です。");
             var detections = new List<Detection>();
+            var ids = new HashSet<string>(StringComparer.Ordinal);
             foreach (var item in root.GetProperty("detections").EnumerateArray())
             {
+                var id = item.GetProperty("id").GetString();
+                if (string.IsNullOrWhiteSpace(id) || !ids.Add(id))
+                    throw new InvalidDataException("JSONの検出IDが空、または重複しています。");
                 var number = item.GetProperty("number").GetString();
                 if (string.IsNullOrEmpty(number) || number.Any(c => c is < '0' or > '9'))
                     throw new InvalidDataException("JSONの認識番号は半角数字の文字列である必要があります。");
@@ -46,7 +50,7 @@ public sealed class OcrCatalog
                 var confidence = item.GetProperty("confidence").GetDouble();
                 if (!double.IsFinite(confidence) || confidence is < 0 or > 100)
                     throw new InvalidDataException("JSONの信頼度が不正です。");
-                detections.Add(new Detection(number, new Rectangle(box[0], box[1], box[2], box[3]), confidence));
+                detections.Add(new Detection(number, new Rectangle(box[0], box[1], box[2], box[3]), confidence, id));
             }
             return new OcrCatalog(new Size(width, height), detections);
         }

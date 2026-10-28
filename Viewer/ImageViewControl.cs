@@ -6,6 +6,7 @@ public class ImageViewControl : Control
 {
     private Bitmap? bitmap;
     private IReadOnlyList<Detection> highlights = Array.Empty<Detection>();
+    private Detection? selectedDetection;
     private readonly ViewTransform transform = new();
     private bool fitted = true;
     private Point? dragPoint;
@@ -26,6 +27,7 @@ public class ImageViewControl : Control
         var old = bitmap;
         bitmap = image;
         highlights = Array.Empty<Detection>();
+        selectedDetection = null;
         FitImage();
         old?.Dispose();
     }
@@ -34,6 +36,12 @@ public class ImageViewControl : Control
     {
         highlights = matches;
         Invalidate(); // Search never modifies the transform.
+    }
+
+    public void SetSelection(Detection? detection)
+    {
+        selectedDetection = detection;
+        Invalidate(); // Selection never changes the image transform or red search matches.
     }
 
     public void FitImage()
@@ -76,6 +84,16 @@ public class ImageViewControl : Control
             var box = transform.ToScreen(match.Bounds);
             if (box.IntersectsWith(ClientRectangle))
                 e.Graphics.DrawRectangle(pen, box.X, box.Y, box.Width, box.Height);
+        }
+        // Last pass gives blue priority where it overlaps red, with the same screen-space pen width.
+        if (selectedDetection != null)
+        {
+            var box = transform.ToScreen(selectedDetection.Bounds);
+            if (box.IntersectsWith(ClientRectangle))
+            {
+                using var selectionPen = new Pen(Color.Blue, 2f);
+                e.Graphics.DrawRectangle(selectionPen, box.X, box.Y, box.Width, box.Height);
+            }
         }
     }
 

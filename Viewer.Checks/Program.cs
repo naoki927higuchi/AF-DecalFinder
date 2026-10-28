@@ -1,5 +1,6 @@
 using AF.DecalFinder;
 using System.Text.Json;
+using System.Numerics;
 
 namespace AF.DecalFinder.Checks;
 
@@ -22,6 +23,8 @@ internal static class Program
         Check(catalog.ImageSize == new Size(7783, 6579) && catalog.Detections.Count == 181, "Phase 1 JSON: dimensions and 181 records");
         Check(catalog.Find("102").Count == 1 && catalog.Find("102")[0].Bounds == new Rectangle(4249, 3354, 49, 44), "102 exact match and source pixel bbox");
         Check(catalog.Find("49").Count == 2 && catalog.Find("118").Count == 2, "All separately located duplicate numbers retained");
+        using (var json = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "results", "600dpi.json"))))
+            Check(catalog.Detections.Select(d => d.Id).SequenceEqual(json.RootElement.GetProperty("detections").EnumerateArray().Select(d => d.GetProperty("id").GetString())), "Detection IDs preserved from JSON in source order");
         Check(catalog.Find("10").All(d => d.Number == "10") && catalog.Find("999999").Count == 0 && catalog.Find("0102").Count == 0 && catalog.Find("").Count == 0, "Exact string matching and empty query");
 
         var transform = new ViewTransform();
@@ -61,14 +64,67 @@ internal static class Program
             Check(form.Controls.OfType<FlowLayoutPanel>().Single().Controls.OfType<Label>().Any(l => l.Text == "2件"), "Drop-to-search integration finds two matches");
             using var exclusive = new FileStream(originalPath, FileMode.Open, FileAccess.Read, FileShare.None);
             Check(exclusive.Length > 0, "Displayed image does not lock source file");
+            exclusive.Dispose();
+            form.Show();
+            Application.DoEvents();
+            var toolbar = form.Controls.OfType<FlowLayoutPanel>().Single();
+            var openList = toolbar.Controls.OfType<Button>().Single(b => b.Text == "OCR結果一覧");
+            openList.PerformClick();
+            var resultsForm = form.OwnedForms.OfType<OcrResultsForm>().Single();
+            openList.PerformClick();
+            Check(form.OwnedForms.Count(w => w is OcrResultsForm) == 1 && resultsForm.Visible && !resultsForm.Modal && form.Enabled,
+                "Single modeless results window, main form remains enabled");
+            var list = resultsForm.Controls.OfType<ListView>().Single();
+            Check(list.Items.Count == 181 && list.View == View.Details && list.FullRowSelect && !list.MultiSelect && !list.LabelEdit,
+                "181 read-only Details rows with full single selection");
+            Check(list.Columns.Cast<ColumnHeader>().Select(c => c.Text).SequenceEqual(new[] { "ID", "番号", "X", "Y", "信頼度" }), "Requested list columns");
+            var rows = list.Items.Cast<ListViewItem>().Select(i => (Detection)i.Tag!).ToArray();
+            var expected = catalog.Detections.OrderBy(d => BigInteger.Parse(d.Number)).ThenBy(d => d.Bounds.Y).ThenBy(d => d.Bounds.X).ThenBy(d => d.Id, StringComparer.Ordinal).Select(d => d.Id);
+            Check(rows.Select(d => d.Id).SequenceEqual(expected), "Numeric sort with Y/X tie breakers");
+            var duplicates = list.Items.Cast<ListViewItem>().Where(i => ((Detection)i.Tag!).Number == "49").ToArray();
+            Detection? notified = null;
+            resultsForm.SelectionChanged += d => notified = d;
+            duplicates[0].Selected = true;
+            Check(ReferenceEquals(notified, duplicates[0].Tag) && ReferenceEquals(resultsForm.SelectedDetection, duplicates[0].Tag), "Selection passes record reference, not row index");
+            duplicates[0].Selected = false;
+            duplicates[1].Selected = true;
+            Check(ReferenceEquals(notified, duplicates[1].Tag) && notified!.Id != ((Detection)duplicates[0].Tag!).Id, "Duplicate number rows select distinct IDs");
+            duplicates[1].Selected = false;
+            Check(notified == null, "Deselection clears selected record");
+            duplicates[0].Selected = true;
+            typeof(Control).GetMethod("OnDragDrop", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
+                .Invoke(form, new object[] { new DragEventArgs(originalDrop, 0, 0, 0, DragDropEffects.Copy, DragDropEffects.Copy) });
+            Check(list.Items.Count == 181 && resultsForm.SelectedDetection == null && notified == null && !ReferenceEquals(list.Items.Cast<ListViewItem>().First(i => ((Detection)i.Tag!).Id == rows[0].Id).Tag, rows[0]),
+                "Image reload replaces catalog records and clears selection in existing window");
+            // Mutate only the test executable's copied JSON; always restore its exact bytes.
+            var copiedJson = Path.Combine(AppContext.BaseDirectory, "results", "600dpi.json");
+            var savedJson = File.ReadAllBytes(copiedJson);
+            try
+            {
+                File.Delete(copiedJson);
+                typeof(Control).GetMethod("OnDragDrop", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
+                    .Invoke(form, new object[] { new DragEventArgs(originalDrop, 0, 0, 0, DragDropEffects.Copy, DragDropEffects.Copy) });
+                Check(list.Items.Count == 0 && resultsForm.SelectedDetection == null && !search.Enabled, "Missing JSON empties open list and disables search");
+            }
+            finally { File.WriteAllBytes(copiedJson, savedJson); }
+            typeof(Control).GetMethod("OnDragDrop", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
+                .Invoke(form, new object[] { new DragEventArgs(originalDrop, 0, 0, 0, DragDropEffects.Copy, DragDropEffects.Copy) });
+            Check(list.Items.Count == 181 && search.Enabled, "Restored JSON repopulates existing window on next image load");
+            list.Items[0].Selected = true;
+            resultsForm.Close();
+            Check(notified == null && resultsForm.IsDisposed, "Closing results clears selection");
+            openList.PerformClick();
+            var reopened = form.OwnedForms.OfType<OcrResultsForm>().Single();
+            Check(!ReferenceEquals(reopened, resultsForm) && reopened.SelectedDetection == null, "Closed results window can reopen without stale selection");
+            reopened.Close();
         }
 
         var temp = Path.Combine(root, "viewer-checks"); Directory.CreateDirectory(temp);
         var cases = new[] {
             "{", "{}", "null",
             "{\"schema_version\":2}",
-            "{\"schema_version\":1,\"image\":{\"width\":10,\"height\":10},\"detections\":[{\"number\":\"1\",\"bbox\":[9,0,2,1],\"confidence\":90}]}",
-            "{\"schema_version\":1,\"image\":{\"width\":10,\"height\":10},\"detections\":[{\"number\":\"abc\",\"bbox\":[0,0,2,1],\"confidence\":90}]}"
+            "{\"schema_version\":1,\"image\":{\"width\":10,\"height\":10},\"detections\":[{\"id\":\"a\",\"number\":\"1\",\"bbox\":[9,0,2,1],\"confidence\":90}]}",
+            "{\"schema_version\":1,\"image\":{\"width\":10,\"height\":10},\"detections\":[{\"id\":\"a\",\"number\":\"abc\",\"bbox\":[0,0,2,1],\"confidence\":90}]}"
         };
         for (int i = 0; i < cases.Length; i++)
         {
@@ -103,6 +159,26 @@ internal static class Program
         canvas.SetHighlights(highlights);
         using var restored = canvas.Render();
         Check(RedNear(restored, 110, 110), "Changing matches does not zoom or move image");
+        canvas.SetSelection(highlights[0]);
+        using var blue = canvas.Render();
+        Check(BlueNear(blue, 110, 110) && !RedNear(blue, 110, 110) && RedNear(blue, 230, 110), "Blue overrides red for selected hit only, other red hit remains");
+        canvas.PanBy(20, 30);
+        canvas.Wheel(0, 0, 120);
+        using var movedBlue = canvas.Render();
+        Check(BlueNear(movedBlue, 156, 168) && RedNear(movedBlue, 300, 168), "Blue and red follow the same pan and zoom mapping");
+        canvas.SetSelection(highlights[1]);
+        using var switchedBlue = canvas.Render();
+        Check(RedNear(switchedBlue, 156, 168) && BlueNear(switchedBlue, 300, 168), "Switching selection restores red on previous record without moving view");
+        canvas.SetSelection(null);
+        using var unselected = canvas.Render();
+        Check(RedNear(unselected, 156, 168) && RedNear(unselected, 300, 168), "Clearing blue preserves red matches");
+        canvas.SetSelection(highlights[0]);
+        canvas.SetHighlights(Array.Empty<Detection>());
+        using var onlyBlue = canvas.Render();
+        Check(BlueNear(onlyBlue, 156, 168) && !RedNear(onlyBlue, 300, 168), "Empty search leaves independent blue selection");
+        canvas.SetImage(new Bitmap(400, 300));
+        using var replacedImage = canvas.Render();
+        Check(!BlueNear(replacedImage, 100, 100), "Replacing image clears blue selection");
         using var png = new Bitmap(120, 80); png.Save(Path.Combine(temp, "mismatch.png"));
         File.WriteAllText(Path.Combine(temp, "broken.jpg"), "not an image");
         Console.WriteLine($"PASS: {checks} checks");
@@ -110,6 +186,7 @@ internal static class Program
 
     private static bool IsRed(Color c) => c.R > 200 && c.G < 80 && c.B < 80;
     private static bool RedNear(Bitmap image, int x, int y) => Enumerable.Range(-2, 5).Any(dx => Enumerable.Range(-2, 5).Any(dy => IsRed(image.GetPixel(x + dx, y + dy))));
+    private static bool BlueNear(Bitmap image, int x, int y) => Enumerable.Range(-2, 5).Any(dx => Enumerable.Range(-2, 5).Any(dy => { var c = image.GetPixel(x + dx, y + dy); return c.B > 200 && c.R < 80 && c.G < 80; }));
 
     private sealed class TestCanvas : ImageViewControl
     {

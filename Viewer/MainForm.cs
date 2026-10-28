@@ -10,10 +10,12 @@ internal sealed class MainForm : Form
     private readonly ToolStripStatusLabel status = new() { Spring = true, TextAlign = ContentAlignment.MiddleLeft, Text = "画像を開いてください。" };
     private readonly string jsonPath = Path.Combine(AppContext.BaseDirectory, "results", "600dpi.json");
     private OcrCatalog? catalog;
+    private OcrResultsForm? resultsWindow;
+    private static string AppTitle => $"AF-DecalFinder {typeof(MainForm).Assembly.GetName().Version?.ToString(3)}";
 
     public MainForm(string? initialImage)
     {
-        Text = "AF-DecalFinder 1.1.0 — Phase 2";
+        Text = $"{AppTitle} — Phase 3";
         ClientSize = new Size(1200, 880);
         MinimumSize = new Size(700, 450);
         StartPosition = FormStartPosition.CenterScreen;
@@ -22,8 +24,10 @@ internal sealed class MainForm : Form
         open.Click += (_, _) => SelectImage();
         var fit = new Button { Text = "全体表示", AutoSize = true, Height = 30 };
         fit.Click += (_, _) => view.FitImage();
+        var results = new Button { Text = "OCR結果一覧", AutoSize = true, Height = 30 };
+        results.Click += (_, _) => ShowOcrResults();
         var toolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 48, Padding = new Padding(8), WrapContents = false };
-        toolbar.Controls.AddRange([open, fit, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count]);
+        toolbar.Controls.AddRange([open, fit, results, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count]);
         var strip = new StatusStrip();
         strip.Items.Add(status);
         Controls.Add(view);
@@ -35,6 +39,29 @@ internal sealed class MainForm : Form
         {
             if (!string.IsNullOrWhiteSpace(initialImage)) OpenImage(initialImage);
         };
+    }
+
+    private void ShowOcrResults()
+    {
+        if (resultsWindow is { IsDisposed: false })
+        {
+            if (resultsWindow.WindowState == FormWindowState.Minimized) resultsWindow.WindowState = FormWindowState.Normal;
+            resultsWindow.Activate();
+            return;
+        }
+        resultsWindow = new OcrResultsForm();
+        var workArea = Screen.FromControl(this).WorkingArea;
+        resultsWindow.Location = new Point(
+            Math.Clamp(Right - resultsWindow.Width, workArea.Left, Math.Max(workArea.Left, workArea.Right - resultsWindow.Width)),
+            Math.Clamp(Top + 60, workArea.Top, Math.Max(workArea.Top, workArea.Bottom - resultsWindow.Height)));
+        resultsWindow.SelectionChanged += view.SetSelection;
+        resultsWindow.SetDetections(catalog?.Detections ?? Array.Empty<Detection>());
+        resultsWindow.FormClosed += (_, _) =>
+        {
+            view.SetSelection(null);
+            resultsWindow = null;
+        };
+        resultsWindow.Show(this); // Modeless owned window; main search/pan/zoom remain available.
     }
 
     private void InstallDropHandlers(Control control)
@@ -85,10 +112,11 @@ internal sealed class MainForm : Form
         }
 
         catalog = null;
+        resultsWindow?.SetDetections(Array.Empty<Detection>());
         number.Enabled = false;
         view.SetImage(loaded);
         count.Text = "検索不可";
-        Text = $"AF-DecalFinder 1.1.0 — {Path.GetFileName(path)}";
+        Text = $"{AppTitle} — {Path.GetFileName(path)}";
         var description = $"{Path.GetFileName(path)}  |  {loaded.Width} × {loaded.Height} px";
         try
         {
@@ -100,6 +128,7 @@ internal sealed class MainForm : Form
                 return;
             }
             catalog = candidate;
+            resultsWindow?.SetDetections(catalog.Detections);
             number.Enabled = true;
             status.Text = $"{description}  |  OCR結果 {catalog.Detections.Count}件  |  ホイール：ズーム / 左ドラッグ：移動";
             Search();

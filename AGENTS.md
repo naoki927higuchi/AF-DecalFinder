@@ -13,10 +13,10 @@
 | 項目 | 内容 |
 |---|---|
 | 対象プラットフォーム | Windows、C# WinForms (.NET 9) |
-| 製品プロジェクト | Phase 1: Python OCR検証を維持。Phase 2: Viewer/AF.DecalFinder.Viewer.csproj |
+| 製品プロジェクト | Phase 1: Python OCR検証を維持。Phase 2/3: Viewer/AF.DecalFinder.Viewer.csproj |
 | バージョン設定元 | VERSION.txt |
 | Windowsリリース出力 | bin/Release-<Version>/。EXEとDLL、results/600dpi.jsonを配置 |
-| 検証方法 | Phase 1はrun.ps1。Phase 2はBuild-Viewer.ps1、Viewer.Checks、自動確認とWindows実画面確認 |
+| 検証方法 | Phase 1はrun.ps1。Phase 2/3はBuild-Viewer.ps1、Viewer.Checks、自動確認とWindows実画面確認 |
 | 公開先 | 未定（非公開・ローカルのみ） |
 | 利用者が別途用意するランタイム・外部ツール | ビューアは.NET 9 Desktop Runtime。Python等はPhase 1の再解析時のみ必要 |
 | 製品ライセンス | 公開時に決定 |
@@ -25,6 +25,7 @@
 - 入力ZIP/画像は変更しない。確認画像はresults以下に別出力。
 - OCRの前に目視で正解を作成する。OCR出力から正解を生成しない。
 - Phase 2は単一ビュー、JPG/PNG読込、既存JSONの番号検索、赤枠、ズーム・パンのみ。画像描画コントロールを独立させる。
+- Phase 3は表示専用のモードレスOCR結果ListViewと選択1件の青枠を追加する。行は検出ID・レコード参照を保持し、赤枠と共存する。選択による自動移動はせず、画像切替・選択解除・一覧終了で青枠を解除する。
 - Phase 2からOCRを起動しない。2ビュー・編集・キャッシュ・前回画像の復元等は実装しない。
 - JSONは実行フォルダーのresults/600dpi.json。寸法不一致・欠落・不正時は強調と検索を無効にする。画像原本・Phase 1のJSON/検証コード/REPORT.mdは維持する。
 
