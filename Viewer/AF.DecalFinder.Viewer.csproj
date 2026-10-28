@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Version>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)../VERSION.txt').Trim())</Version>
+    <AssemblyName>AF-DecalFinder</AssemblyName>
+    <RootNamespace>AF.DecalFinder</RootNamespace>
+    <OutputPath>../bin/$(Configuration)-$(Version)/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="../results/600dpi.json" Link="results/600dpi.json" CopyToOutputDirectory="PreserveNewest" />
+    <InternalsVisibleTo Include="AF.DecalFinder.Checks" />
+  </ItemGroup>
+</Project>

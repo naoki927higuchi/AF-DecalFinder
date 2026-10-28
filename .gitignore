@@ -7,3 +7,6 @@ results/**/*.jpg
 __pycache__/
 *.zip
 .env
+bin/
+obj/
+viewer-checks/

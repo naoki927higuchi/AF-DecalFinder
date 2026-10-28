@@ -12,19 +12,21 @@
 
 | 項目 | 内容 |
 |---|---|
-| 対象プラットフォーム | Windows、将来はC# WinForms |
-| 製品プロジェクト | Phase 1: PythonによるTesseractネイティブAPI技術検証のみ |
+| 対象プラットフォーム | Windows、C# WinForms (.NET 9) |
+| 製品プロジェクト | Phase 1: Python OCR検証を維持。Phase 2: Viewer/AF.DecalFinder.Viewer.csproj |
 | バージョン設定元 | VERSION.txt |
-| Windowsリリース出力 | 今回はスクリプトのみ。アプリのReleaseビルド対象外 |
-| 検証方法 | run.ps1、目視正解データとの空間照合、原本SHA256照合 |
+| Windowsリリース出力 | bin/Release-<Version>/。EXEとDLL、results/600dpi.jsonを配置 |
+| 検証方法 | Phase 1はrun.ps1。Phase 2はBuild-Viewer.ps1、Viewer.Checks、自動確認とWindows実画面確認 |
 | 公開先 | 未定（非公開・ローカルのみ） |
-| 利用者が別途用意するランタイム・外部ツール | Python 3.12、requirements.txt、eng.traineddata |
+| 利用者が別途用意するランタイム・外部ツール | ビューアは.NET 9 Desktop Runtime。Python等はPhase 1の再解析時のみ必要 |
 | 製品ライセンス | 公開時に決定 |
 | 第三者ライセンス表記 | 公開時に決定。入力画像と依存物はGit管理外 |
 
 - 入力ZIP/画像は変更しない。確認画像はresults以下に別出力。
 - OCRの前に目視で正解を作成する。OCR出力から正解を生成しない。
-- GUI、キャッシュ、編集機能等のアプリ実装は行わない。
+- Phase 2は単一ビュー、JPG/PNG読込、既存JSONの番号検索、赤枠、ズーム・パンのみ。画像描画コントロールを独立させる。
+- Phase 2からOCRを起動しない。2ビュー・編集・キャッシュ・前回画像の復元等は実装しない。
+- JSONは実行フォルダーのresults/600dpi.json。寸法不一致・欠落・不正時は強調と検索を無効にする。画像原本・Phase 1のJSON/検証コード/REPORT.mdは維持する。
 
 ## 構成管理
 
