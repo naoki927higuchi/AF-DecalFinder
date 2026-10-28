@@ -1,0 +1,45 @@
+﻿config,dpi,region,gt_id,expected,recognized,status,iou,center_error_px,confidence,gt_bbox,det_bbox,detection_id,tags
+tile_psm11_separators,300,A_head,A_head_01,81,,miss,0,,,"[895, 249, 20, 21]",,,two_digits
+tile_psm11_separators,300,A_head,A_head_02,77,,miss,0,,,"[960, 249, 22, 21]",,,two_digits
+tile_psm11_separators,300,A_head,A_head_03,14,14,correct,0.8658,1.118,82.13044738769531,"[1168, 315, 22, 21]","[1168, 315, 20, 20]",300-0032,two_digits
+tile_psm11_separators,300,A_head,A_head_04,1,1,correct,0.5128,4.031,12.066413879394531,"[1240, 315, 11, 21]","[1240, 309, 7, 26]",300-0030,one_digit
+tile_psm11_separators,300,A_head,A_head_05,2,,miss,0,,,"[1299, 315, 13, 21]",,,one_digit
+tile_psm11_separators,300,A_head,A_head_06,41,41,correct,0.7403,2.0,81.33474731445312,"[1339, 315, 22, 21]","[1339, 316, 18, 19]",300-0033,two_digits
+tile_psm11_separators,300,A_head,A_head_07,78,18,wrong_number,0.8658,0.5,77.14432525634766,"[1547, 249, 22, 21]","[1548, 249, 20, 20]",300-0028,two_digits
+tile_psm11_separators,300,A_head,A_head_08,82,62,wrong_number,0.6077,3.808,76.25547790527344,"[1613, 249, 22, 21]","[1609, 243, 27, 26]",300-0027,two_digits
+tile_psm11_separators,300,B_feet,B_feet_01,49,49,correct,0.8714,1.118,33.734214782714844,"[1052, 1981, 22, 21]","[1051, 1982, 22, 20]",300-0119,"two_digits,leader_nearby,dense,compound"
+tile_psm11_separators,300,B_feet,B_feet_02,118,118,correct,0.8067,1.803,33.734214782714844,"[1110, 1981, 25, 21]","[1111, 1982, 25, 22]",300-0120,"three_digits,small_print,leader_nearby,dense,compound"
+tile_psm11_separators,300,B_feet,B_feet_03,120,,miss,0,,,"[1110, 2020, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_separators,300,B_feet,B_feet_04,49,49,correct,0.79,1.803,44.76528549194336,"[1388, 1981, 22, 21]","[1387, 1983, 21, 19]",300-0121,"two_digits,leader_nearby,dense,compound"
+tile_psm11_separators,300,B_feet,B_feet_05,118,118,correct,0.6076,4.031,44.76528549194336,"[1446, 1981, 25, 21]","[1439, 1980, 32, 27]",300-0118,"three_digits,small_print,leader_nearby,dense,compound"
+tile_psm11_separators,300,B_feet,B_feet_06,120,120,correct,0.8381,0.707,81.89146423339844,"[1385, 2020, 25, 21]","[1386, 2020, 22, 20]",300-0122,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_separators,300,C_side,C_side_01,99,9,wrong_number,0.4742,1.118,0.0,"[1939, 1424, 21, 21]","[1934, 1418, 30, 31]",300-0093,"two_digits,leader_nearby,dense,parentheses"
+tile_psm11_separators,300,C_side,C_side_02,106,10,wrong_number,0.5333,5.523,62.110191345214844,"[1981, 1424, 25, 21]","[1981, 1424, 14, 20]",300-0094,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_separators,300,C_side,C_side_03,102,2,wrong_number,0.5645,0.5,28.870193481445312,"[1936, 1529, 25, 21]","[1934, 1524, 30, 31]",300-0099,"three_digits,small_print,leader_nearby,dense,parentheses"
+tile_psm11_separators,300,C_side,C_side_04,107,,miss,0,,,"[1981, 1529, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_separators,300,C_side,C_side_05,103,408,wrong_number,0.6034,1.5,0.0,"[1936, 1683, 25, 21]","[1934, 1677, 29, 30]",300-0107,"three_digits,small_print,leader_nearby,dense,parentheses"
+tile_psm11_separators,300,C_side,C_side_06,109,,miss,0,,,"[1981, 1683, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_separators,300,C_side,C_side_07,112,2,wrong_number,0.5645,1.118,29.61053466796875,"[1885, 1783, 25, 21]","[1882, 1777, 30, 31]",300-0108,"three_digits,small_print,leader_nearby,dense,parentheses"
+tile_psm11_separators,300,C_side,C_side_08,114,,miss,0,,,"[1928, 1783, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_separators,300,C_side,C_side_09,119,419,wrong_number,0.4268,4.031,24.129539489746094,"[1885, 1879, 25, 21]","[1882, 1873, 30, 41]",300-0114,"three_digits,small_print,leader_nearby,dense,parentheses"
+tile_psm11_separators,300,C_side,C_side_10,51,,miss,0,,,"[1941, 1879, 21, 21]",,,"two_digits,leader_nearby,dense,parentheses,compound"
+tile_psm11_separators,300,C_side,C_side_11,132,,miss,0,,,"[2007, 1879, 25, 21]",,,"three_digits,small_print,leader_nearby,dense,parentheses,compound"
+tile_psm11_separators,300,C_side,C_side_12,121,,miss,0,,,"[1885, 1914, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_separators,300,C_side,C_side_13,50,60,wrong_number,0.4742,1.118,0.0,"[1941, 1914, 21, 21]","[1936, 1908, 30, 31]",300-0116,"two_digits,leader_nearby,dense,compound"
+tile_psm11_separators,300,C_side,C_side_14,127,427,wrong_number,0.5669,2.693,0.0,"[2007, 1914, 25, 21]","[2003, 1908, 28, 31]",300-0117,"three_digits,small_print,leader_nearby,dense,compound"
+tile_psm11_separators,300,D_rear,D_rear_01,9,,miss,0,,,"[2900, 1048, 12, 21]",,,one_digit
+tile_psm11_separators,300,D_rear,D_rear_02,77,,miss,0,,,"[2705, 1208, 22, 21]",,,two_digits
+tile_psm11_separators,300,D_rear,D_rear_03,78,8,wrong_number,0.5893,3.202,0.0,"[3146, 1208, 22, 21]","[3141, 1202, 28, 28]",300-0086,two_digits
+tile_psm11_separators,300,D_rear,D_rear_04,12,,miss,0,,,"[2814, 1294, 22, 21]",,,two_digits
+tile_psm11_separators,300,D_rear,D_rear_05,13,,miss,0,,,"[3035, 1294, 22, 21]",,,two_digits
+tile_psm11_separators,300,D_rear,,,44,false_positive,0,,0.0,,"[2831, 1155, 64, 26]",300-0080,
+tile_psm11_separators,300,E_bottom,E_bottom_01,149,,miss,0,,,"[1491, 2182, 25, 21]",,,"three_digits,small_print,parentheses"
+tile_psm11_separators,300,E_bottom,E_bottom_02,148,,miss,0,,,"[1532, 2182, 25, 21]",,,"three_digits,small_print"
+tile_psm11_separators,300,E_bottom,E_bottom_03,147,4,wrong_number,0.625,1.581,0.0,"[1608, 2182, 25, 21]","[1605, 2177, 30, 28]",300-0127,"three_digits,small_print"
+tile_psm11_separators,300,E_bottom,E_bottom_04,145,,miss,0,,,"[1705, 2182, 25, 21]",,,"three_digits,small_print"
+tile_psm11_separators,300,E_bottom,E_bottom_05,146,4,wrong_number,0.5833,2.121,32.078712463378906,"[1748, 2182, 25, 21]","[1744, 2176, 30, 30]",300-0126,"three_digits,small_print,parentheses"
+tile_psm11_separators,300,F_paint,,,349,false_positive,0,,0.0,,"[1680, 127, 183, 24]",300-0014,negative_control
+tile_psm11_separators,300,F_paint,,,774,false_positive,0,,0.0,,"[1227, 128, 153, 20]",300-0015,negative_control
+tile_psm11_separators,300,F_paint,,,4,false_positive,0,,0.0,,"[1454, 129, 154, 19]",300-0016,negative_control
+tile_psm11_separators,300,F_paint,,,60190,false_positive,0,,0.0,,"[1567, 158, 194, 31]",300-0023,negative_control
+tile_psm11_separators,300,F_paint,,,40,false_positive,0,,0.0,,"[1453, 159, 77, 31]",300-0026,negative_control

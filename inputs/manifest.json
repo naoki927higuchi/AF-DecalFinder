@@ -1,0 +1,26 @@
+[
+  {
+    "dpi": 300,
+    "zip": "D:\\Picture\\テムジンデカール300dpi.zip",
+    "member": "テムジンデカール300dpi.jpg",
+    "image": "inputs\\300dpi.jpg",
+    "size": [
+      3549,
+      3000
+    ],
+    "sha256": "8f2b667638c3bd671f1b89dbf37aef3f8686f9a3bf7cc0ec5c29617481b96295",
+    "zip_sha256": "19656dd242c576338fee8be352770bc5b99cf66024b7209937c8c51344b36c95"
+  },
+  {
+    "dpi": 600,
+    "zip": "D:\\Picture\\テムジンデカール600dpi.zip",
+    "member": "テムジンデカール600dpi.jpg",
+    "image": "inputs\\600dpi.jpg",
+    "size": [
+      7783,
+      6579
+    ],
+    "sha256": "6bbfc36f3ecdd204b40c9ba35d6382da1aa5005862182d0c5cde70baaca53bfb",
+    "zip_sha256": "37402f8232cb77708d56f7d2c2a171f68bf106c1c8070246212f7df871a06e4a"
+  }
+]

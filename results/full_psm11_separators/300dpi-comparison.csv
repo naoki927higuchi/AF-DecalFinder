@@ -1,0 +1,45 @@
+﻿config,dpi,region,gt_id,expected,recognized,status,iou,center_error_px,confidence,gt_bbox,det_bbox,detection_id,tags
+full_psm11_separators,300,A_head,A_head_01,81,81,correct,0.8143,1.414,94.41260528564453,"[895, 249, 20, 21]","[895, 249, 18, 19]",300-0023,two_digits
+full_psm11_separators,300,A_head,A_head_02,77,,miss,0,,,"[960, 249, 22, 21]",,,two_digits
+full_psm11_separators,300,A_head,A_head_03,14,,miss,0,,,"[1168, 315, 22, 21]",,,two_digits
+full_psm11_separators,300,A_head,A_head_04,1,,miss,0,,,"[1240, 315, 11, 21]",,,one_digit
+full_psm11_separators,300,A_head,A_head_05,2,,miss,0,,,"[1299, 315, 13, 21]",,,one_digit
+full_psm11_separators,300,A_head,A_head_06,41,,miss,0,,,"[1339, 315, 22, 21]",,,two_digits
+full_psm11_separators,300,A_head,A_head_07,78,,miss,0,,,"[1547, 249, 22, 21]",,,two_digits
+full_psm11_separators,300,A_head,A_head_08,82,62,wrong_number,0.5867,3.64,58.40385437011719,"[1613, 249, 22, 21]","[1609, 243, 28, 26]",300-0022,two_digits
+full_psm11_separators,300,B_feet,B_feet_01,49,49,correct,0.8714,1.118,33.734214782714844,"[1052, 1981, 22, 21]","[1051, 1982, 22, 20]",300-0124,"two_digits,leader_nearby,dense,compound"
+full_psm11_separators,300,B_feet,B_feet_02,118,118,correct,0.8067,1.803,33.734214782714844,"[1110, 1981, 25, 21]","[1111, 1982, 25, 22]",300-0125,"three_digits,small_print,leader_nearby,dense,compound"
+full_psm11_separators,300,B_feet,B_feet_03,120,,miss,0,,,"[1110, 2020, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm11_separators,300,B_feet,B_feet_04,49,49,correct,0.626,4.031,41.866966247558594,"[1388, 1981, 22, 21]","[1383, 1983, 25, 21]",300-0126,"two_digits,leader_nearby,dense,compound"
+full_psm11_separators,300,B_feet,B_feet_05,118,118,correct,0.6272,3.606,41.866966247558594,"[1446, 1981, 25, 21]","[1440, 1980, 31, 27]",300-0123,"three_digits,small_print,leader_nearby,dense,compound"
+full_psm11_separators,300,B_feet,B_feet_06,120,20,wrong_number,0.7175,2.915,56.23468017578125,"[1385, 2020, 25, 21]","[1386, 2016, 26, 24]",300-0127,"three_digits,small_print,leader_nearby,dense"
+full_psm11_separators,300,C_side,C_side_01,99,9,wrong_number,0.4589,1.414,0.0,"[1939, 1424, 21, 21]","[1933, 1418, 31, 31]",300-0096,"two_digits,leader_nearby,dense,parentheses"
+full_psm11_separators,300,C_side,C_side_02,106,,miss,0,,,"[1981, 1424, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm11_separators,300,C_side,C_side_03,102,2,wrong_number,0.5645,0.5,47.14516067504883,"[1936, 1529, 25, 21]","[1934, 1524, 30, 31]",300-0101,"three_digits,small_print,leader_nearby,dense,parentheses"
+full_psm11_separators,300,C_side,C_side_04,107,,miss,0,,,"[1981, 1529, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm11_separators,300,C_side,C_side_05,103,409,wrong_number,0.5833,1.581,0.0,"[1936, 1683, 25, 21]","[1934, 1677, 30, 30]",300-0110,"three_digits,small_print,leader_nearby,dense,parentheses"
+full_psm11_separators,300,C_side,C_side_06,109,9,wrong_number,0.6034,1.803,0.0,"[1981, 1683, 25, 21]","[1978, 1677, 29, 30]",300-0111,"three_digits,small_print,leader_nearby,dense"
+full_psm11_separators,300,C_side,C_side_07,112,2,wrong_number,0.5645,1.118,60.573631286621094,"[1885, 1783, 25, 21]","[1882, 1777, 30, 31]",300-0115,"three_digits,small_print,leader_nearby,dense,parentheses"
+full_psm11_separators,300,C_side,C_side_08,114,,miss,0,,,"[1928, 1783, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm11_separators,300,C_side,C_side_09,119,,miss,0,,,"[1885, 1879, 25, 21]",,,"three_digits,small_print,leader_nearby,dense,parentheses"
+full_psm11_separators,300,C_side,C_side_10,51,,miss,0,,,"[1941, 1879, 21, 21]",,,"two_digits,leader_nearby,dense,parentheses,compound"
+full_psm11_separators,300,C_side,C_side_11,132,,miss,0,,,"[2007, 1879, 25, 21]",,,"three_digits,small_print,leader_nearby,dense,parentheses,compound"
+full_psm11_separators,300,C_side,C_side_12,121,,miss,0,,,"[1885, 1914, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm11_separators,300,C_side,C_side_13,50,,miss,0,,,"[1941, 1914, 21, 21]",,,"two_digits,leader_nearby,dense,compound"
+full_psm11_separators,300,C_side,C_side_14,127,,miss,0,,,"[2007, 1914, 25, 21]",,,"three_digits,small_print,leader_nearby,dense,compound"
+full_psm11_separators,300,D_rear,D_rear_01,9,,miss,0,,,"[2900, 1048, 12, 21]",,,one_digit
+full_psm11_separators,300,D_rear,D_rear_02,77,,miss,0,,,"[2705, 1208, 22, 21]",,,two_digits
+full_psm11_separators,300,D_rear,D_rear_03,78,8,wrong_number,0.3555,7.071,0.0,"[3146, 1208, 22, 21]","[3145, 1208, 10, 19]",300-0085,two_digits
+full_psm11_separators,300,D_rear,D_rear_04,12,,miss,0,,,"[2814, 1294, 22, 21]",,,two_digits
+full_psm11_separators,300,D_rear,D_rear_05,13,,miss,0,,,"[3035, 1294, 22, 21]",,,two_digits
+full_psm11_separators,300,E_bottom,E_bottom_01,149,449,wrong_number,0.7962,1.5,47.27857971191406,"[1491, 2182, 25, 21]","[1491, 2183, 22, 19]",300-0139,"three_digits,small_print,parentheses"
+full_psm11_separators,300,E_bottom,E_bottom_02,148,448,wrong_number,0.639,0.707,47.27857971191406,"[1532, 2182, 25, 21]","[1533, 2177, 22, 30]",300-0137,"three_digits,small_print"
+full_psm11_separators,300,E_bottom,E_bottom_03,147,447,wrong_number,0.8686,1.118,64.06981658935547,"[1608, 2182, 25, 21]","[1609, 2182, 24, 19]",300-0138,"three_digits,small_print"
+full_psm11_separators,300,E_bottom,E_bottom_04,145,446,wrong_number,0.6272,1.414,0.0,"[1705, 2182, 25, 21]","[1705, 2176, 27, 31]",300-0135,"three_digits,small_print"
+full_psm11_separators,300,E_bottom,E_bottom_05,146,446,wrong_number,0.5645,1.803,0.0,"[1748, 2182, 25, 21]","[1744, 2176, 30, 31]",300-0136,"three_digits,small_print,parentheses"
+full_psm11_separators,300,F_paint,,,774,false_positive,0,,0.0,,"[1227, 128, 153, 20]",300-0009,negative_control
+full_psm11_separators,300,F_paint,,,549,false_positive,0,,0.0,,"[1680, 128, 148, 23]",300-0010,negative_control
+full_psm11_separators,300,F_paint,,,40,false_positive,0,,0.0,,"[1454, 129, 154, 19]",300-0011,negative_control
+full_psm11_separators,300,F_paint,,,6090,false_positive,0,,0.0,,"[1567, 158, 189, 31]",300-0018,negative_control
+full_psm11_separators,300,F_paint,,,316,false_positive,0,,71.458984375,,"[1227, 159, 46, 31]",300-0020,negative_control
+full_psm11_separators,300,F_paint,,,40,false_positive,0,,0.0,,"[1453, 159, 77, 31]",300-0021,negative_control

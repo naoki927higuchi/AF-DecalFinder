@@ -1,0 +1,43 @@
+﻿config,dpi,region,gt_id,expected,recognized,status,iou,center_error_px,confidence,gt_bbox,det_bbox,detection_id,tags
+full_psm3_digits,600,A_head,A_head_01,81,,miss,0,,,"[1962, 546, 45, 47]",,,two_digits
+full_psm3_digits,600,A_head,A_head_02,77,,miss,0,,,"[2105, 546, 49, 47]",,,two_digits
+full_psm3_digits,600,A_head,A_head_03,14,,miss,0,,,"[2561, 690, 49, 47]",,,two_digits
+full_psm3_digits,600,A_head,A_head_04,1,,miss,0,,,"[2719, 690, 25, 47]",,,one_digit
+full_psm3_digits,600,A_head,A_head_05,2,,miss,0,,,"[2848, 690, 30, 47]",,,one_digit
+full_psm3_digits,600,A_head,A_head_06,41,,miss,0,,,"[2936, 690, 49, 47]",,,two_digits
+full_psm3_digits,600,A_head,A_head_07,78,78,correct,0.3163,12.021,76.31884002685547,"[3392, 546, 49, 47]","[3378, 529, 70, 104]",600-0014,two_digits
+full_psm3_digits,600,A_head,A_head_08,82,8,wrong_number,0.4012,13.086,95.2538833618164,"[3537, 546, 49, 47]","[3538, 546, 21, 44]",600-0015,two_digits
+full_psm3_digits,600,B_feet,B_feet_01,49,,miss,0,,,"[2307, 4344, 49, 47]",,,"two_digits,leader_nearby,dense,compound"
+full_psm3_digits,600,B_feet,B_feet_02,118,498,wrong_number,0.1975,68.002,0.0,"[2434, 4344, 56, 47]","[2296, 4333, 196, 68]",600-0018,"three_digits,small_print,leader_nearby,dense,compound"
+full_psm3_digits,600,B_feet,B_feet_03,120,,miss,0,,,"[2434, 4429, 56, 47]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm3_digits,600,B_feet,B_feet_04,49,,miss,0,,,"[3043, 4344, 50, 47]",,,"two_digits,leader_nearby,dense,compound"
+full_psm3_digits,600,B_feet,B_feet_05,118,,miss,0,,,"[3171, 4344, 55, 47]",,,"three_digits,small_print,leader_nearby,dense,compound"
+full_psm3_digits,600,B_feet,B_feet_06,120,,miss,0,,,"[3037, 4429, 56, 47]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm3_digits,600,C_side,C_side_01,99,,miss,0,,,"[4252, 3122, 47, 47]",,,"two_digits,leader_nearby,dense,parentheses"
+full_psm3_digits,600,C_side,C_side_02,106,,miss,0,,,"[4344, 3122, 56, 47]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm3_digits,600,C_side,C_side_03,102,,miss,0,,,"[4245, 3353, 56, 47]",,,"three_digits,small_print,leader_nearby,dense,parentheses"
+full_psm3_digits,600,C_side,C_side_04,107,,miss,0,,,"[4344, 3353, 56, 47]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm3_digits,600,C_side,C_side_05,103,,miss,0,,,"[4245, 3690, 56, 47]",,,"three_digits,small_print,leader_nearby,dense,parentheses"
+full_psm3_digits,600,C_side,C_side_06,109,,miss,0,,,"[4344, 3690, 56, 47]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm3_digits,600,C_side,C_side_07,112,,miss,0,,,"[4133, 3910, 56, 47]",,,"three_digits,small_print,leader_nearby,dense,parentheses"
+full_psm3_digits,600,C_side,C_side_08,114,,miss,0,,,"[4228, 3910, 55, 47]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm3_digits,600,C_side,C_side_09,119,,miss,0,,,"[4133, 4120, 56, 47]",,,"three_digits,small_print,leader_nearby,dense,parentheses"
+full_psm3_digits,600,C_side,C_side_10,51,,miss,0,,,"[4256, 4120, 47, 47]",,,"two_digits,leader_nearby,dense,parentheses,compound"
+full_psm3_digits,600,C_side,C_side_11,132,,miss,0,,,"[4401, 4120, 56, 47]",,,"three_digits,small_print,leader_nearby,dense,parentheses,compound"
+full_psm3_digits,600,C_side,C_side_12,121,,miss,0,,,"[4133, 4197, 56, 47]",,,"three_digits,small_print,leader_nearby,dense"
+full_psm3_digits,600,C_side,C_side_13,50,,miss,0,,,"[4256, 4197, 47, 47]",,,"two_digits,leader_nearby,dense,compound"
+full_psm3_digits,600,C_side,C_side_14,127,,miss,0,,,"[4401, 4197, 56, 47]",,,"three_digits,small_print,leader_nearby,dense,compound"
+full_psm3_digits,600,D_rear,D_rear_01,9,,miss,0,,,"[6359, 2298, 28, 47]",,,one_digit
+full_psm3_digits,600,D_rear,D_rear_02,77,,miss,0,,,"[5932, 2649, 49, 47]",,,two_digits
+full_psm3_digits,600,D_rear,D_rear_03,78,,miss,0,,,"[6899, 2649, 49, 47]",,,two_digits
+full_psm3_digits,600,D_rear,D_rear_04,12,42,wrong_number,0.4107,11.18,69.0396728515625,"[6171, 2837, 49, 47]","[6162, 2805, 63, 89]",600-0017,two_digits
+full_psm3_digits,600,D_rear,D_rear_05,13,43,wrong_number,0.3897,11.769,0.0,"[6655, 2837, 50, 47]","[6644, 2804, 67, 90]",600-0016,two_digits
+full_psm3_digits,600,E_bottom,E_bottom_01,149,,miss,0,,,"[3269, 4785, 56, 47]",,,"three_digits,small_print,parentheses"
+full_psm3_digits,600,E_bottom,E_bottom_02,148,,miss,0,,,"[3359, 4785, 56, 47]",,,"three_digits,small_print"
+full_psm3_digits,600,E_bottom,E_bottom_03,147,,miss,0,,,"[3526, 4785, 56, 47]",,,"three_digits,small_print"
+full_psm3_digits,600,E_bottom,E_bottom_04,145,,miss,0,,,"[3739, 4785, 55, 47]",,,"three_digits,small_print"
+full_psm3_digits,600,E_bottom,E_bottom_05,146,,miss,0,,,"[3833, 4785, 56, 47]",,,"three_digits,small_print,parentheses"
+full_psm3_digits,600,F_paint,,,74,false_positive,0,,0.0,,"[2691, 281, 335, 44]",600-0008,negative_control
+full_psm3_digits,600,F_paint,,,4,false_positive,0,,0.0,,"[3188, 282, 339, 42]",600-0009,negative_control
+full_psm3_digits,600,F_paint,,,316,false_positive,0,,88.89634704589844,,"[2688, 343, 103, 82]",600-0012,negative_control
+full_psm3_digits,600,F_paint,,,234046090410,false_positive,0,,0.0,,"[3186, 346, 1059, 70]",600-0013,negative_control

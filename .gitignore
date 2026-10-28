@@ -1,0 +1,9 @@
+.deps/
+tessdata/
+inputs/*.jpg
+inspection/
+results/**/*.png
+results/**/*.jpg
+__pycache__/
+*.zip
+.env

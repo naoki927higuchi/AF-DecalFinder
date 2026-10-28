@@ -1,0 +1,4621 @@
+{
+  "schema_version": 1,
+  "dpi": 600,
+  "image": {
+    "path": "inputs\\600dpi.jpg",
+    "width": 7783,
+    "height": 6579,
+    "sha256": "6bbfc36f3ecdd204b40c9ba35d6382da1aa5005862182d0c5cde70baaca53bfb"
+  },
+  "engine": "tesseract 5.5.3\n leptonica-1.87.0 (Apr  6 2026, 06:47:44) [MSC v.1944 LIB Release x64]\n  libgif 5.2.2 : libjpeg 8d (libjpeg-turbo 3.1.2) : libpng 1.6.59 : libtiff 4.7.2 : zlib 1.3.2 : libwebp 1.6.0 : libopenjp2 2.5.4",
+  "config": {
+    "name": "tile_psm11_otsu",
+    "psm": 11,
+    "whitelist": "0123456789()+",
+    "tile": true,
+    "prep": "otsu",
+    "oem": 1,
+    "lang": "eng",
+    "dictionaries": false,
+    "omp_thread_limit": 1,
+    "grid": 4,
+    "overlap_fraction": 0.1,
+    "opencv_threads": 1
+  },
+  "timing": {
+    "total_seconds": 5.20278700000199,
+    "load_seconds": 0.6594065999961458,
+    "initialize_seconds": 0.024070500003290363,
+    "preprocessing_seconds": 0.19530109997140244,
+    "recognition_and_extraction_seconds": 4.320527799951378
+  },
+  "memory": {
+    "sampled_peak_rss_mb": 515.828125,
+    "windows_peak_wset_mb": 533.9453125,
+    "sampling_ms": 10,
+    "scope": "fresh Python process; imports+image+Tesseract; excludes overlay/JSON output"
+  },
+  "detection_count": 117,
+  "unique_number_count": 62,
+  "detections": [
+    {
+      "number": "328",
+      "bbox": [
+        1751,
+        168,
+        791,
+        72
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 38.919097900390625,
+      "raw_word": "328",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            1751,
+            168,
+            685,
+            72
+          ],
+          "confidence": 0.0
+        },
+        {
+          "text": "2",
+          "bbox": [
+            2392,
+            168,
+            44,
+            72
+          ],
+          "confidence": 92.3378677368164
+        },
+        {
+          "text": "8",
+          "bbox": [
+            2442,
+            169,
+            100,
+            71
+          ],
+          "confidence": 24.41942596435547
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0001",
+      "x": 1751,
+      "y": 168,
+      "width": 791,
+      "height": 72
+    },
+    {
+      "number": "747",
+      "bbox": [
+        1614,
+        253,
+        426,
+        39
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 41.50096893310547,
+      "raw_word": "747",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            1614,
+            254,
+            131,
+            36
+          ],
+          "confidence": 0.9835662841796875
+        },
+        {
+          "text": "4",
+          "bbox": [
+            1743,
+            255,
+            35,
+            35
+          ],
+          "confidence": 98.85543823242188
+        },
+        {
+          "text": "7",
+          "bbox": [
+            1781,
+            253,
+            259,
+            39
+          ],
+          "confidence": 24.663902282714844
+        }
+      ],
+      "tile_id": "0:0",
+      "id": "600-0002",
+      "x": 1614,
+      "y": 253,
+      "width": 426,
+      "height": 39
+    },
+    {
+      "number": "794738",
+      "bbox": [
+        1751,
+        253,
+        791,
+        61
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 51.409247716267906,
+      "raw_word": "794738",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            1751,
+            253,
+            192,
+            39
+          ],
+          "confidence": 13.779182434082031
+        },
+        {
+          "text": "9",
+          "bbox": [
+            1948,
+            253,
+            151,
+            40
+          ],
+          "confidence": 36.97530746459961
+        },
+        {
+          "text": "4",
+          "bbox": [
+            2100,
+            255,
+            40,
+            38
+          ],
+          "confidence": 86.59422302246094
+        },
+        {
+          "text": "7",
+          "bbox": [
+            2147,
+            253,
+            44,
+            39
+          ],
+          "confidence": 94.3632583618164
+        },
+        {
+          "text": "3",
+          "bbox": [
+            2194,
+            264,
+            26,
+            27
+          ],
+          "confidence": 52.62201690673828
+        },
+        {
+          "text": "8",
+          "bbox": [
+            2224,
+            254,
+            318,
+            60
+          ],
+          "confidence": 24.121498107910156
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0003",
+      "x": 1751,
+      "y": 253,
+      "width": 791,
+      "height": 61
+    },
+    {
+      "number": "499",
+      "bbox": [
+        6655,
+        272,
+        422,
+        53
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 49.49735895792643,
+      "raw_word": "499",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            6655,
+            272,
+            74,
+            46
+          ],
+          "confidence": 98.15524291992188
+        },
+        {
+          "text": "9",
+          "bbox": [
+            6739,
+            276,
+            29,
+            40
+          ],
+          "confidence": 50.33683395385742
+        },
+        {
+          "text": "9",
+          "bbox": [
+            6776,
+            273,
+            301,
+            52
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0004",
+      "x": 6655,
+      "y": 272,
+      "width": 422,
+      "height": 53
+    },
+    {
+      "number": "7",
+      "bbox": [
+        6160,
+        273,
+        269,
+        52
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 0.0,
+      "raw_word": "7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            6160,
+            273,
+            269,
+            52
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0005",
+      "x": 6160,
+      "y": 273,
+      "width": 269,
+      "height": 52
+    },
+    {
+      "number": "772",
+      "bbox": [
+        7152,
+        273,
+        332,
+        45
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 60.3530019124349,
+      "raw_word": "772",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            7152,
+            273,
+            46,
+            45
+          ],
+          "confidence": 90.14608001708984
+        },
+        {
+          "text": "7",
+          "bbox": [
+            7206,
+            276,
+            37,
+            41
+          ],
+          "confidence": 90.91292572021484
+        },
+        {
+          "text": "2",
+          "bbox": [
+            7260,
+            275,
+            224,
+            43
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0006",
+      "x": 7152,
+      "y": 273,
+      "width": 332,
+      "height": 45
+    },
+    {
+      "number": "499",
+      "bbox": [
+        5169,
+        276,
+        428,
+        44
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 35.4056650797526,
+      "raw_word": "499",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            5169,
+            276,
+            140,
+            41
+          ],
+          "confidence": 7.91656494140625
+        },
+        {
+          "text": "9",
+          "bbox": [
+            5317,
+            277,
+            50,
+            41
+          ],
+          "confidence": 98.30043029785156
+        },
+        {
+          "text": "9",
+          "bbox": [
+            5380,
+            276,
+            217,
+            44
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0007",
+      "x": 5169,
+      "y": 276,
+      "width": 428,
+      "height": 44
+    },
+    {
+      "number": "7",
+      "bbox": [
+        4673,
+        277,
+        163,
+        42
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 5.8056182861328125,
+      "raw_word": "7)",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            4673,
+            277,
+            163,
+            42
+          ],
+          "confidence": 5.8056182861328125
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0008",
+      "x": 4673,
+      "y": 277,
+      "width": 163,
+      "height": 42
+    },
+    {
+      "number": "349",
+      "bbox": [
+        3685,
+        278,
+        402,
+        52
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 63.76021830240885,
+      "raw_word": "349",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            3685,
+            283,
+            26,
+            41
+          ],
+          "confidence": 91.3691177368164
+        },
+        {
+          "text": "4",
+          "bbox": [
+            3718,
+            281,
+            26,
+            42
+          ],
+          "confidence": 97.10057830810547
+        },
+        {
+          "text": "9",
+          "bbox": [
+            3762,
+            278,
+            325,
+            52
+          ],
+          "confidence": 2.8109588623046875
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0009",
+      "x": 3685,
+      "y": 278,
+      "width": 402,
+      "height": 52
+    },
+    {
+      "number": "4",
+      "bbox": [
+        2691,
+        281,
+        335,
+        44
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 0.0,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            2691,
+            281,
+            335,
+            44
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0010",
+      "x": 2691,
+      "y": 281,
+      "width": 335,
+      "height": 44
+    },
+    {
+      "number": "4",
+      "bbox": [
+        3188,
+        282,
+        339,
+        42
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 0.0,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            3188,
+            282,
+            339,
+            42
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0011",
+      "x": 3188,
+      "y": 282,
+      "width": 339,
+      "height": 42
+    },
+    {
+      "number": "90",
+      "bbox": [
+        6160,
+        340,
+        193,
+        68
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 89.05810165405273,
+      "raw_word": "90+10",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            6160,
+            340,
+            107,
+            68
+          ],
+          "confidence": 79.3057632446289
+        },
+        {
+          "text": "0",
+          "bbox": [
+            6272,
+            350,
+            81,
+            50
+          ],
+          "confidence": 98.81044006347656
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0012",
+      "x": 6160,
+      "y": 340,
+      "width": 193,
+      "height": 68
+    },
+    {
+      "number": "10",
+      "bbox": [
+        6439,
+        340,
+        319,
+        68
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 33.31362533569336,
+      "raw_word": "90+10",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            6439,
+            340,
+            93,
+            68
+          ],
+          "confidence": 66.62725067138672
+        },
+        {
+          "text": "0",
+          "bbox": [
+            6537,
+            340,
+            221,
+            68
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0013",
+      "x": 6439,
+      "y": 340,
+      "width": 319,
+      "height": 68
+    },
+    {
+      "number": "33",
+      "bbox": [
+        7153,
+        340,
+        67,
+        68
+      ],
+      "confidence": 81.0747299194336,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.98637008666992,
+      "raw_word": "33)",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            7153,
+            340,
+            30,
+            68
+          ],
+          "confidence": 99.35527038574219
+        },
+        {
+          "text": "3",
+          "bbox": [
+            7153,
+            340,
+            67,
+            68
+          ],
+          "confidence": 98.61746978759766
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0014",
+      "x": 7153,
+      "y": 340,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "30",
+      "bbox": [
+        4922,
+        341,
+        179,
+        69
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 28.44242286682129,
+      "raw_word": "370+30",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            4922,
+            341,
+            100,
+            69
+          ],
+          "confidence": 56.88484573364258
+        },
+        {
+          "text": "0",
+          "bbox": [
+            5026,
+            351,
+            75,
+            50
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0015",
+      "x": 4922,
+      "y": 341,
+      "width": 179,
+      "height": 69
+    },
+    {
+      "number": "950",
+      "bbox": [
+        5168,
+        341,
+        178,
+        69
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 82.64984130859375,
+      "raw_word": "950+7250",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            5168,
+            341,
+            68,
+            69
+          ],
+          "confidence": 50.353294372558594
+        },
+        {
+          "text": "5",
+          "bbox": [
+            5242,
+            351,
+            26,
+            50
+          ],
+          "confidence": 98.56045532226562
+        },
+        {
+          "text": "0",
+          "bbox": [
+            5272,
+            350,
+            74,
+            51
+          ],
+          "confidence": 99.03577423095703
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0016",
+      "x": 5168,
+      "y": 341,
+      "width": 178,
+      "height": 69
+    },
+    {
+      "number": "7250",
+      "bbox": [
+        5411,
+        341,
+        186,
+        69
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 64.42775917053223,
+      "raw_word": "950+7250",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            5411,
+            341,
+            23,
+            69
+          ],
+          "confidence": 80.75509643554688
+        },
+        {
+          "text": "2",
+          "bbox": [
+            5418,
+            341,
+            67,
+            68
+          ],
+          "confidence": 88.59785461425781
+        },
+        {
+          "text": "5",
+          "bbox": [
+            5492,
+            351,
+            26,
+            49
+          ],
+          "confidence": 88.35808563232422
+        },
+        {
+          "text": "0",
+          "bbox": [
+            5522,
+            350,
+            75,
+            50
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0017",
+      "x": 5411,
+      "y": 341,
+      "width": 186,
+      "height": 69
+    },
+    {
+      "number": "370",
+      "bbox": [
+        4671,
+        342,
+        180,
+        68
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 89.80301920572917,
+      "raw_word": "370+30",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            4671,
+            342,
+            68,
+            68
+          ],
+          "confidence": 71.64108276367188
+        },
+        {
+          "text": "7",
+          "bbox": [
+            4746,
+            352,
+            26,
+            48
+          ],
+          "confidence": 98.75933074951172
+        },
+        {
+          "text": "0",
+          "bbox": [
+            4775,
+            351,
+            76,
+            50
+          ],
+          "confidence": 99.0086441040039
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0018",
+      "x": 4671,
+      "y": 342,
+      "width": 180,
+      "height": 68
+    },
+    {
+      "number": "8",
+      "bbox": [
+        4178,
+        346,
+        67,
+        69
+      ],
+      "confidence": 64.4888916015625,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 94.92698669433594,
+      "raw_word": "8",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            4178,
+            346,
+            67,
+            69
+          ],
+          "confidence": 94.92698669433594
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0019",
+      "x": 4178,
+      "y": 346,
+      "width": 67,
+      "height": 69
+    },
+    {
+      "number": "40",
+      "bbox": [
+        3186,
+        347,
+        169,
+        69
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 81.62154388427734,
+      "raw_word": "40+60)90+(109",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            3186,
+            347,
+            102,
+            69
+          ],
+          "confidence": 64.9771499633789
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3291,
+            357,
+            64,
+            50
+          ],
+          "confidence": 98.26593780517578
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0020",
+      "x": 3186,
+      "y": 347,
+      "width": 169,
+      "height": 69
+    },
+    {
+      "number": "60",
+      "bbox": [
+        3437,
+        347,
+        180,
+        69
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 83.88804626464844,
+      "raw_word": "40+60)90+(109",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            3437,
+            347,
+            101,
+            69
+          ],
+          "confidence": 68.7414321899414
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3542,
+            356,
+            75,
+            51
+          ],
+          "confidence": 99.03466033935547
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0021",
+      "x": 3437,
+      "y": 347,
+      "width": 180,
+      "height": 69
+    },
+    {
+      "number": "90",
+      "bbox": [
+        3757,
+        355,
+        104,
+        51
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.81132888793945,
+      "raw_word": "40+60)90+(109",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            3757,
+            356,
+            26,
+            50
+          ],
+          "confidence": 98.59534454345703
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3787,
+            355,
+            74,
+            51
+          ],
+          "confidence": 99.02731323242188
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0022",
+      "x": 3757,
+      "y": 355,
+      "width": 104,
+      "height": 51
+    },
+    {
+      "number": "10",
+      "bbox": [
+        4007,
+        355,
+        93,
+        50
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 35.17791748046875,
+      "raw_word": "1)90+(10",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            4007,
+            356,
+            14,
+            48
+          ],
+          "confidence": 70.3558349609375
+        },
+        {
+          "text": "0",
+          "bbox": [
+            4025,
+            355,
+            75,
+            50
+          ],
+          "confidence": 0.0
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0023",
+      "x": 4007,
+      "y": 355,
+      "width": 93,
+      "height": 50
+    },
+    {
+      "number": "0",
+      "bbox": [
+        6374,
+        525,
+        263,
+        73
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 54.16785430908203,
+      "raw_word": "0)",
+      "symbols": [
+        {
+          "text": "0",
+          "bbox": [
+            6374,
+            525,
+            263,
+            73
+          ],
+          "confidence": 54.16785430908203
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0024",
+      "x": 6374,
+      "y": 525,
+      "width": 263,
+      "height": 73
+    },
+    {
+      "number": "7",
+      "bbox": [
+        2095,
+        533,
+        67,
+        69
+      ],
+      "confidence": 46.604736328125,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 92.37210845947266,
+      "raw_word": "7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            2095,
+            533,
+            67,
+            69
+          ],
+          "confidence": 92.37210845947266
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0025",
+      "x": 2095,
+      "y": 533,
+      "width": 67,
+      "height": 69
+    },
+    {
+      "number": "782",
+      "bbox": [
+        3382,
+        533,
+        210,
+        96
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 76.29486719767253,
+      "raw_word": "782)",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            3382,
+            533,
+            67,
+            96
+          ],
+          "confidence": 85.5409927368164
+        },
+        {
+          "text": "8",
+          "bbox": [
+            3421,
+            533,
+            79,
+            96
+          ],
+          "confidence": 86.05816650390625
+        },
+        {
+          "text": "2",
+          "bbox": [
+            3528,
+            535,
+            64,
+            64
+          ],
+          "confidence": 57.28544235229492
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0026",
+      "x": 3382,
+      "y": 533,
+      "width": 210,
+      "height": 96
+    },
+    {
+      "number": "6",
+      "bbox": [
+        327,
+        559,
+        87,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 77.03651428222656,
+      "raw_word": ")6)",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            327,
+            559,
+            87,
+            67
+          ],
+          "confidence": 77.03651428222656
+        }
+      ],
+      "tile_id": "0:0",
+      "id": "600-0027",
+      "x": 327,
+      "y": 559,
+      "width": 87,
+      "height": 67
+    },
+    {
+      "number": "40",
+      "bbox": [
+        6226,
+        679,
+        67,
+        68
+      ],
+      "confidence": 37.594757080078125,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 94.53573226928711,
+      "raw_word": "(40))",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            6226,
+            679,
+            25,
+            68
+          ],
+          "confidence": 91.08496856689453
+        },
+        {
+          "text": "0",
+          "bbox": [
+            6226,
+            679,
+            67,
+            68
+          ],
+          "confidence": 97.98649597167969
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0028",
+      "x": 6226,
+      "y": 679,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "0",
+      "bbox": [
+        4494,
+        727,
+        88,
+        68
+      ],
+      "confidence": 16.134750366210938,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 88.01924896240234,
+      "raw_word": "0)",
+      "symbols": [
+        {
+          "text": "0",
+          "bbox": [
+            4494,
+            727,
+            88,
+            68
+          ],
+          "confidence": 88.01924896240234
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0029",
+      "x": 4494,
+      "y": 727,
+      "width": 88,
+      "height": 68
+    },
+    {
+      "number": "8",
+      "bbox": [
+        6132,
+        767,
+        66,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 96.78191375732422,
+      "raw_word": "(8)(9)",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            6132,
+            767,
+            66,
+            67
+          ],
+          "confidence": 96.78191375732422
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0030",
+      "x": 6132,
+      "y": 767,
+      "width": 66,
+      "height": 67
+    },
+    {
+      "number": "9",
+      "bbox": [
+        6226,
+        768,
+        67,
+        66
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 48.45674133300781,
+      "raw_word": "(8)(9)",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            6226,
+            768,
+            67,
+            66
+          ],
+          "confidence": 48.45674133300781
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0031",
+      "x": 6226,
+      "y": 768,
+      "width": 67,
+      "height": 66
+    },
+    {
+      "number": "69",
+      "bbox": [
+        787,
+        890,
+        263,
+        64
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 92.4267692565918,
+      "raw_word": "69",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            787,
+            890,
+            263,
+            64
+          ],
+          "confidence": 85.37358856201172
+        },
+        {
+          "text": "9",
+          "bbox": [
+            1010,
+            890,
+            40,
+            64
+          ],
+          "confidence": 99.47994995117188
+        }
+      ],
+      "tile_id": "0:0",
+      "id": "600-0032",
+      "x": 787,
+      "y": 890,
+      "width": 263,
+      "height": 64
+    },
+    {
+      "number": "65",
+      "bbox": [
+        327,
+        903,
+        86,
+        67
+      ],
+      "confidence": 10.873565673828125,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 91.82899856567383,
+      "raw_word": "65",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            327,
+            903,
+            86,
+            67
+          ],
+          "confidence": 87.26765441894531
+        },
+        {
+          "text": "5",
+          "bbox": [
+            380,
+            903,
+            33,
+            67
+          ],
+          "confidence": 96.39034271240234
+        }
+      ],
+      "tile_id": "0:0",
+      "id": "600-0033",
+      "x": 327,
+      "y": 903,
+      "width": 86,
+      "height": 67
+    },
+    {
+      "number": "2",
+      "bbox": [
+        4997,
+        1005,
+        109,
+        11
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 36.02051544189453,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            4997,
+            1005,
+            109,
+            11
+          ],
+          "confidence": 36.02051544189453
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0034",
+      "x": 4997,
+      "y": 1005,
+      "width": 109,
+      "height": 11
+    },
+    {
+      "number": "4",
+      "bbox": [
+        7457,
+        1036,
+        64,
+        41
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 38.25450897216797,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            7457,
+            1036,
+            64,
+            41
+          ],
+          "confidence": 38.25450897216797
+        }
+      ],
+      "tile_id": "0:3",
+      "id": "600-0035",
+      "x": 7457,
+      "y": 1036,
+      "width": 64,
+      "height": 41
+    },
+    {
+      "number": "4",
+      "bbox": [
+        4959,
+        1084,
+        33,
+        64
+      ],
+      "confidence": 65.93052673339844,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 95.1329345703125,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            4959,
+            1084,
+            33,
+            64
+          ],
+          "confidence": 95.1329345703125
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0036",
+      "x": 4959,
+      "y": 1084,
+      "width": 33,
+      "height": 64
+    },
+    {
+      "number": "56",
+      "bbox": [
+        984,
+        1088,
+        67,
+        67
+      ],
+      "confidence": 67.26844024658203,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 97.02503967285156,
+      "raw_word": "56)",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            984,
+            1088,
+            29,
+            67
+          ],
+          "confidence": 95.32406616210938
+        },
+        {
+          "text": "6",
+          "bbox": [
+            984,
+            1088,
+            67,
+            67
+          ],
+          "confidence": 98.72601318359375
+        }
+      ],
+      "tile_id": "0:0",
+      "id": "600-0037",
+      "x": 984,
+      "y": 1088,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "1",
+      "bbox": [
+        3475,
+        1376,
+        69,
+        79
+      ],
+      "confidence": 18.709136962890625,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 88.38702392578125,
+      "raw_word": "1",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            3475,
+            1376,
+            69,
+            79
+          ],
+          "confidence": 88.38702392578125
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0038",
+      "x": 3475,
+      "y": 1376,
+      "width": 69,
+      "height": 79
+    },
+    {
+      "number": "29",
+      "bbox": [
+        4238,
+        1378,
+        67,
+        68
+      ],
+      "confidence": 19.092498779296875,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.31826400756836,
+      "raw_word": "(29)0)",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            4246,
+            1378,
+            25,
+            68
+          ],
+          "confidence": 97.919189453125
+        },
+        {
+          "text": "9",
+          "bbox": [
+            4238,
+            1378,
+            67,
+            68
+          ],
+          "confidence": 98.71733856201172
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0039",
+      "x": 4238,
+      "y": 1378,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "0",
+      "bbox": [
+        4333,
+        1378,
+        67,
+        68
+      ],
+      "confidence": 19.092498779296875,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 88.44178771972656,
+      "raw_word": "(29)0)",
+      "symbols": [
+        {
+          "text": "0",
+          "bbox": [
+            4333,
+            1378,
+            67,
+            68
+          ],
+          "confidence": 88.44178771972656
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0040",
+      "x": 4333,
+      "y": 1378,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "7",
+      "bbox": [
+        2025,
+        1516,
+        27,
+        12
+      ],
+      "confidence": 23.040740966796875,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 89.00582122802734,
+      "raw_word": "7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            2025,
+            1516,
+            27,
+            12
+          ],
+          "confidence": 89.00582122802734
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0041",
+      "x": 2025,
+      "y": 1516,
+      "width": 27,
+      "height": 12
+    },
+    {
+      "number": "22",
+      "bbox": [
+        4143,
+        1547,
+        67,
+        68
+      ],
+      "confidence": 19.599159240722656,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 93.25581741333008,
+      "raw_word": "(22)",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            4152,
+            1547,
+            17,
+            68
+          ],
+          "confidence": 88.51416778564453
+        },
+        {
+          "text": "2",
+          "bbox": [
+            4143,
+            1547,
+            67,
+            68
+          ],
+          "confidence": 97.99746704101562
+        }
+      ],
+      "tile_id": "0:2",
+      "id": "600-0042",
+      "x": 4143,
+      "y": 1547,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "7",
+      "bbox": [
+        2050,
+        1552,
+        45,
+        43
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 27.842788696289062,
+      "raw_word": "(7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            2050,
+            1552,
+            45,
+            43
+          ],
+          "confidence": 27.842788696289062
+        }
+      ],
+      "tile_id": "0:1",
+      "id": "600-0043",
+      "x": 2050,
+      "y": 1552,
+      "width": 45,
+      "height": 43
+    },
+    {
+      "number": "25",
+      "bbox": [
+        4143,
+        1671,
+        67,
+        67
+      ],
+      "confidence": 14.567779541015625,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.53573226928711,
+      "raw_word": "(25)",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            4151,
+            1671,
+            26,
+            67
+          ],
+          "confidence": 99.3275146484375
+        },
+        {
+          "text": "5",
+          "bbox": [
+            4143,
+            1671,
+            67,
+            67
+          ],
+          "confidence": 97.74394989013672
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0044",
+      "x": 4143,
+      "y": 1671,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "1",
+      "bbox": [
+        5011,
+        1700,
+        46,
+        35
+      ],
+      "confidence": 37.04773712158203,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 91.00682067871094,
+      "raw_word": "1)",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            5011,
+            1700,
+            46,
+            35
+          ],
+          "confidence": 91.00682067871094
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0045",
+      "x": 5011,
+      "y": 1700,
+      "width": 46,
+      "height": 35
+    },
+    {
+      "number": "44",
+      "bbox": [
+        4143,
+        1907,
+        67,
+        67
+      ],
+      "confidence": 2.5846023559570312,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 95.20046997070312,
+      "raw_word": "(44)",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            4151,
+            1907,
+            17,
+            67
+          ],
+          "confidence": 95.43428039550781
+        },
+        {
+          "text": "4",
+          "bbox": [
+            4143,
+            1907,
+            67,
+            67
+          ],
+          "confidence": 94.96665954589844
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0046",
+      "x": 4143,
+      "y": 1907,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "4",
+      "bbox": [
+        4655,
+        1941,
+        64,
+        44
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 43.908287048339844,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            4655,
+            1941,
+            64,
+            44
+          ],
+          "confidence": 43.908287048339844
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0047",
+      "x": 4655,
+      "y": 1941,
+      "width": 64,
+      "height": 44
+    },
+    {
+      "number": "40",
+      "bbox": [
+        3896,
+        1982,
+        45,
+        43
+      ],
+      "confidence": 96.85486602783203,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.56274032592773,
+      "raw_word": "40",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            3896,
+            1982,
+            21,
+            42
+          ],
+          "confidence": 99.57478332519531
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3921,
+            1982,
+            20,
+            43
+          ],
+          "confidence": 99.55069732666016
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0048",
+      "x": 3896,
+      "y": 1982,
+      "width": 45,
+      "height": 43
+    },
+    {
+      "number": "7",
+      "bbox": [
+        6536,
+        2047,
+        73,
+        21
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 50.632320404052734,
+      "raw_word": "7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            6536,
+            2047,
+            73,
+            21
+          ],
+          "confidence": 50.632320404052734
+        }
+      ],
+      "tile_id": "1:3",
+      "id": "600-0049",
+      "x": 6536,
+      "y": 2047,
+      "width": 73,
+      "height": 21
+    },
+    {
+      "number": "6",
+      "bbox": [
+        4474,
+        2119,
+        87,
+        67
+      ],
+      "confidence": 39.92292785644531,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 91.41756439208984,
+      "raw_word": "6",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            4474,
+            2119,
+            87,
+            67
+          ],
+          "confidence": 91.41756439208984
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0050",
+      "x": 4474,
+      "y": 2119,
+      "width": 87,
+      "height": 67
+    },
+    {
+      "number": "89",
+      "bbox": [
+        5363,
+        2159,
+        67,
+        68
+      ],
+      "confidence": 53.269405364990234,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 95.8636703491211,
+      "raw_word": "(89)",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            5372,
+            2159,
+            25,
+            68
+          ],
+          "confidence": 98.40313720703125
+        },
+        {
+          "text": "9",
+          "bbox": [
+            5363,
+            2159,
+            67,
+            68
+          ],
+          "confidence": 93.32420349121094
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0051",
+      "x": 5363,
+      "y": 2159,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "89",
+      "bbox": [
+        3898,
+        2160,
+        43,
+        43
+      ],
+      "confidence": 96.83226776123047,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.54851150512695,
+      "raw_word": "89",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            3898,
+            2160,
+            21,
+            43
+          ],
+          "confidence": 99.54955291748047
+        },
+        {
+          "text": "9",
+          "bbox": [
+            3921,
+            2160,
+            20,
+            43
+          ],
+          "confidence": 99.54747009277344
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0052",
+      "x": 3898,
+      "y": 2160,
+      "width": 43,
+      "height": 43
+    },
+    {
+      "number": "91",
+      "bbox": [
+        3896,
+        2242,
+        40,
+        44
+      ],
+      "confidence": 81.83501434326172,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.37174606323242,
+      "raw_word": "91",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            3896,
+            2242,
+            21,
+            44
+          ],
+          "confidence": 99.33849334716797
+        },
+        {
+          "text": "1",
+          "bbox": [
+            3920,
+            2243,
+            16,
+            42
+          ],
+          "confidence": 97.40499877929688
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0053",
+      "x": 3896,
+      "y": 2242,
+      "width": 40,
+      "height": 44
+    },
+    {
+      "number": "86",
+      "bbox": [
+        5363,
+        2276,
+        68,
+        68
+      ],
+      "confidence": 71.63894653320312,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 96.01689910888672,
+      "raw_word": "(86)",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            5372,
+            2276,
+            17,
+            68
+          ],
+          "confidence": 95.94842529296875
+        },
+        {
+          "text": "6",
+          "bbox": [
+            5363,
+            2276,
+            68,
+            68
+          ],
+          "confidence": 96.08537292480469
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0054",
+      "x": 5363,
+      "y": 2276,
+      "width": 68,
+      "height": 68
+    },
+    {
+      "number": "4",
+      "bbox": [
+        844,
+        2365,
+        89,
+        85
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 84.4382095336914,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            844,
+            2365,
+            89,
+            85
+          ],
+          "confidence": 84.4382095336914
+        }
+      ],
+      "tile_id": "1:0",
+      "id": "600-0055",
+      "x": 844,
+      "y": 2365,
+      "width": 89,
+      "height": 85
+    },
+    {
+      "number": "2",
+      "bbox": [
+        6373,
+        2452,
+        161,
+        15
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 84.68125915527344,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            6373,
+            2452,
+            161,
+            15
+          ],
+          "confidence": 84.68125915527344
+        }
+      ],
+      "tile_id": "1:3",
+      "id": "600-0056",
+      "x": 6373,
+      "y": 2452,
+      "width": 161,
+      "height": 15
+    },
+    {
+      "number": "1",
+      "bbox": [
+        6315,
+        2468,
+        227,
+        50
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 12.733070373535156,
+      "raw_word": "1",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            6315,
+            2468,
+            227,
+            50
+          ],
+          "confidence": 12.733070373535156
+        }
+      ],
+      "tile_id": "1:3",
+      "id": "600-0057",
+      "x": 6315,
+      "y": 2468,
+      "width": 227,
+      "height": 50
+    },
+    {
+      "number": "5",
+      "bbox": [
+        4243,
+        2529,
+        67,
+        68
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 43.772579193115234,
+      "raw_word": "(5))",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            4243,
+            2529,
+            67,
+            68
+          ],
+          "confidence": 43.772579193115234
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0058",
+      "x": 4243,
+      "y": 2529,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "3",
+      "bbox": [
+        6330,
+        2533,
+        39,
+        31
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 49.754486083984375,
+      "raw_word": "3",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            6330,
+            2533,
+            39,
+            31
+          ],
+          "confidence": 49.754486083984375
+        }
+      ],
+      "tile_id": "1:3",
+      "id": "600-0059",
+      "x": 6330,
+      "y": 2533,
+      "width": 39,
+      "height": 31
+    },
+    {
+      "number": "2627",
+      "bbox": [
+        2699,
+        2607,
+        138,
+        69
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 87.21146965026855,
+      "raw_word": "47)2627)",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            2699,
+            2607,
+            66,
+            69
+          ],
+          "confidence": 61.652366638183594
+        },
+        {
+          "text": "6",
+          "bbox": [
+            2734,
+            2607,
+            33,
+            69
+          ],
+          "confidence": 96.90536499023438
+        },
+        {
+          "text": "2",
+          "bbox": [
+            2766,
+            2607,
+            33,
+            69
+          ],
+          "confidence": 91.3869400024414
+        },
+        {
+          "text": "7",
+          "bbox": [
+            2770,
+            2608,
+            67,
+            68
+          ],
+          "confidence": 98.90120697021484
+        }
+      ],
+      "tile_id": "1:1",
+      "id": "600-0060",
+      "x": 2699,
+      "y": 2607,
+      "width": 138,
+      "height": 69
+    },
+    {
+      "number": "4",
+      "bbox": [
+        4243,
+        2617,
+        67,
+        68
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 58.180015563964844,
+      "raw_word": "((4))6)",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            4243,
+            2617,
+            67,
+            68
+          ],
+          "confidence": 58.180015563964844
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0061",
+      "x": 4243,
+      "y": 2617,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "6",
+      "bbox": [
+        4341,
+        2619,
+        63,
+        63
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 87.39105987548828,
+      "raw_word": "((4))6)",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            4341,
+            2619,
+            63,
+            63
+          ],
+          "confidence": 87.39105987548828
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0062",
+      "x": 4341,
+      "y": 2619,
+      "width": 63,
+      "height": 63
+    },
+    {
+      "number": "8",
+      "bbox": [
+        2865,
+        2622,
+        47,
+        112
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 85.33515930175781,
+      "raw_word": "8",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            2865,
+            2622,
+            47,
+            112
+          ],
+          "confidence": 85.33515930175781
+        }
+      ],
+      "tile_id": "1:1",
+      "id": "600-0063",
+      "x": 2865,
+      "y": 2622,
+      "width": 47,
+      "height": 112
+    },
+    {
+      "number": "47",
+      "bbox": [
+        2623,
+        2623,
+        47,
+        41
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.40687561035156,
+      "raw_word": "47)2627)",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            2623,
+            2623,
+            22,
+            41
+          ],
+          "confidence": 98.46440124511719
+        },
+        {
+          "text": "7",
+          "bbox": [
+            2649,
+            2623,
+            21,
+            41
+          ],
+          "confidence": 98.34934997558594
+        }
+      ],
+      "tile_id": "1:1",
+      "id": "600-0064",
+      "x": 2623,
+      "y": 2623,
+      "width": 47,
+      "height": 41
+    },
+    {
+      "number": "1",
+      "bbox": [
+        6626,
+        2678,
+        93,
+        110
+      ],
+      "confidence": 42.233699798583984,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 91.74767303466797,
+      "raw_word": "1)",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            6626,
+            2678,
+            93,
+            110
+          ],
+          "confidence": 91.74767303466797
+        }
+      ],
+      "tile_id": "1:3",
+      "id": "600-0065",
+      "x": 6626,
+      "y": 2678,
+      "width": 93,
+      "height": 110
+    },
+    {
+      "number": "4",
+      "bbox": [
+        6827,
+        2786,
+        91,
+        86
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 41.5321044921875,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            6827,
+            2786,
+            91,
+            86
+          ],
+          "confidence": 41.5321044921875
+        }
+      ],
+      "tile_id": "1:3",
+      "id": "600-0066",
+      "x": 6827,
+      "y": 2786,
+      "width": 91,
+      "height": 86
+    },
+    {
+      "number": "3",
+      "bbox": [
+        5526,
+        2790,
+        265,
+        24
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 84.25154113769531,
+      "raw_word": "3",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            5526,
+            2790,
+            265,
+            24
+          ],
+          "confidence": 84.25154113769531
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0067",
+      "x": 5526,
+      "y": 2790,
+      "width": 265,
+      "height": 24
+    },
+    {
+      "number": "7",
+      "bbox": [
+        6004,
+        2876,
+        45,
+        56
+      ],
+      "confidence": 80.54936218261719,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 97.2213363647461,
+      "raw_word": "7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            6004,
+            2876,
+            45,
+            56
+          ],
+          "confidence": 97.2213363647461
+        }
+      ],
+      "tile_id": "1:3",
+      "id": "600-0068",
+      "x": 6004,
+      "y": 2876,
+      "width": 45,
+      "height": 56
+    },
+    {
+      "number": "78",
+      "bbox": [
+        5642,
+        3048,
+        38,
+        16
+      ],
+      "confidence": 60.6312255859375,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 95.25115966796875,
+      "raw_word": "78",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            5642,
+            3048,
+            9,
+            16
+          ],
+          "confidence": 94.37589263916016
+        },
+        {
+          "text": "8",
+          "bbox": [
+            5668,
+            3055,
+            12,
+            3
+          ],
+          "confidence": 96.12642669677734
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0069",
+      "x": 5642,
+      "y": 3048,
+      "width": 38,
+      "height": 16
+    },
+    {
+      "number": "9",
+      "bbox": [
+        5279,
+        3089,
+        69,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 55.45736312866211,
+      "raw_word": "9)",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            5279,
+            3089,
+            69,
+            67
+          ],
+          "confidence": 55.45736312866211
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0070",
+      "x": 5279,
+      "y": 3089,
+      "width": 69,
+      "height": 67
+    },
+    {
+      "number": "105",
+      "bbox": [
+        3731,
+        3103,
+        48,
+        43
+      ],
+      "confidence": 72.61177825927734,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.39510854085286,
+      "raw_word": "105)",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            3731,
+            3103,
+            12,
+            42
+          ],
+          "confidence": 99.54082489013672
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3746,
+            3103,
+            15,
+            43
+          ],
+          "confidence": 99.5571060180664
+        },
+        {
+          "text": "5",
+          "bbox": [
+            3763,
+            3104,
+            16,
+            42
+          ],
+          "confidence": 96.08739471435547
+        }
+      ],
+      "tile_id": "1:1",
+      "id": "600-0071",
+      "x": 3731,
+      "y": 3103,
+      "width": 48,
+      "height": 43
+    },
+    {
+      "number": "9",
+      "bbox": [
+        4240,
+        3111,
+        67,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 42.76140213012695,
+      "raw_word": "(9))",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            4240,
+            3111,
+            67,
+            67
+          ],
+          "confidence": 42.76140213012695
+        }
+      ],
+      "tile_id": "1:2",
+      "id": "600-0072",
+      "x": 4240,
+      "y": 3111,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "105",
+      "bbox": [
+        2580,
+        3197,
+        48,
+        43
+      ],
+      "confidence": 92.46378326416016,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.19373830159505,
+      "raw_word": "105",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            2580,
+            3197,
+            11,
+            42
+          ],
+          "confidence": 99.4605712890625
+        },
+        {
+          "text": "0",
+          "bbox": [
+            2594,
+            3197,
+            15,
+            43
+          ],
+          "confidence": 98.92340087890625
+        },
+        {
+          "text": "5",
+          "bbox": [
+            2612,
+            3198,
+            16,
+            42
+          ],
+          "confidence": 99.1972427368164
+        }
+      ],
+      "tile_id": "1:1",
+      "id": "600-0073",
+      "x": 2580,
+      "y": 3197,
+      "width": 48,
+      "height": 43
+    },
+    {
+      "number": "63",
+      "bbox": [
+        7524,
+        3226,
+        69,
+        68
+      ],
+      "confidence": 71.46455383300781,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 97.53241348266602,
+      "raw_word": "63)",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            7524,
+            3226,
+            32,
+            68
+          ],
+          "confidence": 95.92350769042969
+        },
+        {
+          "text": "3",
+          "bbox": [
+            7524,
+            3226,
+            69,
+            68
+          ],
+          "confidence": 99.14131927490234
+        }
+      ],
+      "tile_id": "1:3",
+      "id": "600-0074",
+      "x": 7524,
+      "y": 3226,
+      "width": 69,
+      "height": 68
+    },
+    {
+      "number": "2",
+      "bbox": [
+        6714,
+        3339,
+        116,
+        70
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 85.09978485107422,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            6714,
+            3339,
+            116,
+            70
+          ],
+          "confidence": 85.09978485107422
+        }
+      ],
+      "tile_id": "2:3",
+      "id": "600-0075",
+      "x": 6714,
+      "y": 3339,
+      "width": 116,
+      "height": 70
+    },
+    {
+      "number": "7",
+      "bbox": [
+        4336,
+        3341,
+        67,
+        68
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 56.53940200805664,
+      "raw_word": "(2)7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            4336,
+            3341,
+            67,
+            68
+          ],
+          "confidence": 56.53940200805664
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0076",
+      "x": 4336,
+      "y": 3341,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "2",
+      "bbox": [
+        4240,
+        3342,
+        67,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 87.22503662109375,
+      "raw_word": "(2)7",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            4240,
+            3342,
+            67,
+            67
+          ],
+          "confidence": 87.22503662109375
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0077",
+      "x": 4240,
+      "y": 3342,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "3",
+      "bbox": [
+        4722,
+        3364,
+        60,
+        95
+      ],
+      "confidence": 33.413063049316406,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 90.48757934570312,
+      "raw_word": "3",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            4722,
+            3364,
+            60,
+            95
+          ],
+          "confidence": 90.48757934570312
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0078",
+      "x": 4722,
+      "y": 3364,
+      "width": 60,
+      "height": 95
+    },
+    {
+      "number": "4",
+      "bbox": [
+        1479,
+        3461,
+        14,
+        26
+      ],
+      "confidence": 50.72239303588867,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 92.96034240722656,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            1479,
+            3461,
+            14,
+            26
+          ],
+          "confidence": 92.96034240722656
+        }
+      ],
+      "tile_id": "2:0",
+      "id": "600-0079",
+      "x": 1479,
+      "y": 3461,
+      "width": 14,
+      "height": 26
+    },
+    {
+      "number": "1",
+      "bbox": [
+        4846,
+        3540,
+        73,
+        56
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 11.938507080078125,
+      "raw_word": "1",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            4846,
+            3540,
+            73,
+            56
+          ],
+          "confidence": 11.938507080078125
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0080",
+      "x": 4846,
+      "y": 3540,
+      "width": 73,
+      "height": 56
+    },
+    {
+      "number": "108",
+      "bbox": [
+        2439,
+        3567,
+        48,
+        43
+      ],
+      "confidence": 96.88737487792969,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.56067403157552,
+      "raw_word": "108",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            2439,
+            3567,
+            12,
+            42
+          ],
+          "confidence": 99.55694580078125
+        },
+        {
+          "text": "0",
+          "bbox": [
+            2454,
+            3567,
+            15,
+            42
+          ],
+          "confidence": 99.56974029541016
+        },
+        {
+          "text": "8",
+          "bbox": [
+            2472,
+            3567,
+            15,
+            43
+          ],
+          "confidence": 99.55533599853516
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0081",
+      "x": 2439,
+      "y": 3567,
+      "width": 48,
+      "height": 43
+    },
+    {
+      "number": "03",
+      "bbox": [
+        4240,
+        3678,
+        67,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 84.1173210144043,
+      "raw_word": "(03))09",
+      "symbols": [
+        {
+          "text": "0",
+          "bbox": [
+            4240,
+            3678,
+            67,
+            67
+          ],
+          "confidence": 82.90371704101562
+        },
+        {
+          "text": "3",
+          "bbox": [
+            4280,
+            3678,
+            17,
+            67
+          ],
+          "confidence": 85.33092498779297
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0082",
+      "x": 4240,
+      "y": 3678,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "09",
+      "bbox": [
+        4336,
+        3678,
+        67,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 93.44629669189453,
+      "raw_word": "(03))09",
+      "symbols": [
+        {
+          "text": "0",
+          "bbox": [
+            4336,
+            3678,
+            67,
+            66
+          ],
+          "confidence": 88.35664367675781
+        },
+        {
+          "text": "9",
+          "bbox": [
+            4377,
+            3678,
+            25,
+            67
+          ],
+          "confidence": 98.53594970703125
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0083",
+      "x": 4336,
+      "y": 3678,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "4",
+      "bbox": [
+        1069,
+        3713,
+        100,
+        23
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 43.00922393798828,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            1069,
+            3713,
+            100,
+            23
+          ],
+          "confidence": 43.00922393798828
+        }
+      ],
+      "tile_id": "2:0",
+      "id": "600-0084",
+      "x": 1069,
+      "y": 3713,
+      "width": 100,
+      "height": 23
+    },
+    {
+      "number": "12",
+      "bbox": [
+        4126,
+        3897,
+        67,
+        67
+      ],
+      "confidence": 37.09260940551758,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 93.22120666503906,
+      "raw_word": "(12)",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            4134,
+            3897,
+            26,
+            67
+          ],
+          "confidence": 91.01322937011719
+        },
+        {
+          "text": "2",
+          "bbox": [
+            4126,
+            3897,
+            67,
+            67
+          ],
+          "confidence": 95.42918395996094
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0085",
+      "x": 4126,
+      "y": 3897,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "46",
+      "bbox": [
+        7006,
+        3905,
+        67,
+        68
+      ],
+      "confidence": 66.61003112792969,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 96.90184783935547,
+      "raw_word": "46)",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            7006,
+            3905,
+            21,
+            68
+          ],
+          "confidence": 95.2300033569336
+        },
+        {
+          "text": "6",
+          "bbox": [
+            7006,
+            3905,
+            67,
+            68
+          ],
+          "confidence": 98.57369232177734
+        }
+      ],
+      "tile_id": "2:3",
+      "id": "600-0086",
+      "x": 7006,
+      "y": 3905,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "113",
+      "bbox": [
+        2437,
+        3928,
+        49,
+        43
+      ],
+      "confidence": 66.59342193603516,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 96.83011881510417,
+      "raw_word": "113)",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            2437,
+            3928,
+            12,
+            42
+          ],
+          "confidence": 99.17391204833984
+        },
+        {
+          "text": "1",
+          "bbox": [
+            2453,
+            3928,
+            11,
+            42
+          ],
+          "confidence": 96.08881378173828
+        },
+        {
+          "text": "3",
+          "bbox": [
+            2470,
+            3929,
+            16,
+            42
+          ],
+          "confidence": 95.22763061523438
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0087",
+      "x": 2437,
+      "y": 3928,
+      "width": 49,
+      "height": 43
+    },
+    {
+      "number": "9",
+      "bbox": [
+        5348,
+        4297,
+        67,
+        67
+      ],
+      "confidence": 46.26072692871094,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 92.32295989990234,
+      "raw_word": "(9)",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            5348,
+            4297,
+            67,
+            67
+          ],
+          "confidence": 92.32295989990234
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0088",
+      "x": 5348,
+      "y": 4297,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "49",
+      "bbox": [
+        2296,
+        4333,
+        67,
+        68
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 91.13722610473633,
+      "raw_word": "49+",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            2296,
+            4333,
+            29,
+            68
+          ],
+          "confidence": 87.44917297363281
+        },
+        {
+          "text": "9",
+          "bbox": [
+            2296,
+            4333,
+            67,
+            68
+          ],
+          "confidence": 94.82527923583984
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0089",
+      "x": 2296,
+      "y": 4333,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "4918",
+      "bbox": [
+        3032,
+        4334,
+        197,
+        68
+      ],
+      "confidence": 18.874740600585938,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 95.20789909362793,
+      "raw_word": "4918)",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            3032,
+            4334,
+            29,
+            68
+          ],
+          "confidence": 96.29359436035156
+        },
+        {
+          "text": "9",
+          "bbox": [
+            3032,
+            4335,
+            124,
+            66
+          ],
+          "confidence": 96.84761810302734
+        },
+        {
+          "text": "1",
+          "bbox": [
+            3163,
+            4334,
+            66,
+            68
+          ],
+          "confidence": 88.41067504882812
+        },
+        {
+          "text": "8",
+          "bbox": [
+            3199,
+            4334,
+            17,
+            68
+          ],
+          "confidence": 99.27970886230469
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0090",
+      "x": 3032,
+      "y": 4334,
+      "width": 197,
+      "height": 68
+    },
+    {
+      "number": "4",
+      "bbox": [
+        2427,
+        4416,
+        64,
+        33
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 94.52214813232422,
+      "raw_word": "4)",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            2427,
+            4416,
+            64,
+            33
+          ],
+          "confidence": 94.52214813232422
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0091",
+      "x": 2427,
+      "y": 4416,
+      "width": 64,
+      "height": 33
+    },
+    {
+      "number": "120",
+      "bbox": [
+        3040,
+        4431,
+        48,
+        43
+      ],
+      "confidence": 83.17022705078125,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.88528951009114,
+      "raw_word": "120",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            3040,
+            4431,
+            12,
+            42
+          ],
+          "confidence": 97.59574890136719
+        },
+        {
+          "text": "2",
+          "bbox": [
+            3055,
+            4431,
+            16,
+            42
+          ],
+          "confidence": 99.50877380371094
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3073,
+            4431,
+            15,
+            43
+          ],
+          "confidence": 99.55134582519531
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0092",
+      "x": 3040,
+      "y": 4431,
+      "width": 48,
+      "height": 43
+    },
+    {
+      "number": "434",
+      "bbox": [
+        5385,
+        4479,
+        70,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 89.71626790364583,
+      "raw_word": "128)(434))",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            5385,
+            4479,
+            26,
+            67
+          ],
+          "confidence": 80.98989868164062
+        },
+        {
+          "text": "3",
+          "bbox": [
+            5388,
+            4479,
+            67,
+            67
+          ],
+          "confidence": 98.51325988769531
+        },
+        {
+          "text": "4",
+          "bbox": [
+            5429,
+            4479,
+            7,
+            67
+          ],
+          "confidence": 89.64564514160156
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0093",
+      "x": 5385,
+      "y": 4479,
+      "width": 70,
+      "height": 67
+    },
+    {
+      "number": "128",
+      "bbox": [
+        5302,
+        4492,
+        48,
+        43
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 94.43710327148438,
+      "raw_word": "128)(434))",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            5302,
+            4492,
+            12,
+            42
+          ],
+          "confidence": 85.6614761352539
+        },
+        {
+          "text": "2",
+          "bbox": [
+            5316,
+            4492,
+            16,
+            42
+          ],
+          "confidence": 98.90835571289062
+        },
+        {
+          "text": "8",
+          "bbox": [
+            5334,
+            4492,
+            16,
+            43
+          ],
+          "confidence": 98.7414779663086
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0094",
+      "x": 5302,
+      "y": 4492,
+      "width": 48,
+      "height": 43
+    },
+    {
+      "number": "0",
+      "bbox": [
+        4512,
+        4692,
+        67,
+        67
+      ],
+      "confidence": 69.34899139404297,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 95.62128448486328,
+      "raw_word": "(0)",
+      "symbols": [
+        {
+          "text": "0",
+          "bbox": [
+            4512,
+            4692,
+            67,
+            67
+          ],
+          "confidence": 95.62128448486328
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0095",
+      "x": 4512,
+      "y": 4692,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "439",
+      "bbox": [
+        4734,
+        4693,
+        67,
+        68
+      ],
+      "confidence": 46.69702911376953,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 95.11340586344402,
+      "raw_word": "(439)",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            4734,
+            4693,
+            18,
+            68
+          ],
+          "confidence": 92.38529205322266
+        },
+        {
+          "text": "3",
+          "bbox": [
+            4751,
+            4693,
+            17,
+            68
+          ],
+          "confidence": 94.96216583251953
+        },
+        {
+          "text": "9",
+          "bbox": [
+            4734,
+            4693,
+            67,
+            68
+          ],
+          "confidence": 97.99275970458984
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0096",
+      "x": 4734,
+      "y": 4693,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "9",
+      "bbox": [
+        5240,
+        4708,
+        65,
+        67
+      ],
+      "confidence": 46.07052230834961,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 92.29579162597656,
+      "raw_word": "(9)",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            5240,
+            4708,
+            65,
+            67
+          ],
+          "confidence": 92.29579162597656
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0097",
+      "x": 5240,
+      "y": 4708,
+      "width": 65,
+      "height": 67
+    },
+    {
+      "number": "53",
+      "bbox": [
+        5039,
+        4756,
+        18,
+        21
+      ],
+      "confidence": 34.38190460205078,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 92.7015151977539,
+      "raw_word": "53",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            5039,
+            4763,
+            6,
+            14
+          ],
+          "confidence": 90.62598419189453
+        },
+        {
+          "text": "3",
+          "bbox": [
+            5050,
+            4756,
+            7,
+            14
+          ],
+          "confidence": 94.77704620361328
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0098",
+      "x": 5039,
+      "y": 4756,
+      "width": 18,
+      "height": 21
+    },
+    {
+      "number": "7",
+      "bbox": [
+        5594,
+        4769,
+        95,
+        107
+      ],
+      "confidence": 15.087554931640625,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 87.8696517944336,
+      "raw_word": "7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            5594,
+            4769,
+            95,
+            107
+          ],
+          "confidence": 87.8696517944336
+        }
+      ],
+      "tile_id": "2:2",
+      "id": "600-0099",
+      "x": 5594,
+      "y": 4769,
+      "width": 95,
+      "height": 107
+    },
+    {
+      "number": "10",
+      "bbox": [
+        3824,
+        4772,
+        67,
+        67
+      ],
+      "confidence": 27.548667907714844,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 90.16438674926758,
+      "raw_word": "(10)",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            3824,
+            4772,
+            67,
+            67
+          ],
+          "confidence": 89.64981079101562
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3865,
+            4772,
+            17,
+            67
+          ],
+          "confidence": 90.67896270751953
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0100",
+      "x": 3824,
+      "y": 4772,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "9",
+      "bbox": [
+        3261,
+        4773,
+        67,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 68.46009826660156,
+      "raw_word": "((9))448",
+      "symbols": [
+        {
+          "text": "9",
+          "bbox": [
+            3261,
+            4773,
+            67,
+            67
+          ],
+          "confidence": 68.46009826660156
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0101",
+      "x": 3261,
+      "y": 4773,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "448",
+      "bbox": [
+        3362,
+        4773,
+        47,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 94.54549662272136,
+      "raw_word": "((9))448",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            3362,
+            4786,
+            11,
+            42
+          ],
+          "confidence": 87.56045532226562
+        },
+        {
+          "text": "4",
+          "bbox": [
+            3371,
+            4773,
+            17,
+            67
+          ],
+          "confidence": 97.6798324584961
+        },
+        {
+          "text": "8",
+          "bbox": [
+            3377,
+            4786,
+            32,
+            43
+          ],
+          "confidence": 98.39620208740234
+        }
+      ],
+      "tile_id": "2:1",
+      "id": "600-0102",
+      "x": 3362,
+      "y": 4773,
+      "width": 47,
+      "height": 67
+    },
+    {
+      "number": "8",
+      "bbox": [
+        5318,
+        4902,
+        68,
+        68
+      ],
+      "confidence": 36.913726806640625,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 90.98767852783203,
+      "raw_word": "8)",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            5318,
+            4902,
+            68,
+            68
+          ],
+          "confidence": 90.98767852783203
+        }
+      ],
+      "tile_id": "3:2",
+      "id": "600-0103",
+      "x": 5318,
+      "y": 4902,
+      "width": 68,
+      "height": 68
+    },
+    {
+      "number": "8",
+      "bbox": [
+        6551,
+        4985,
+        66,
+        68
+      ],
+      "confidence": 12.620002746582031,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 87.51714324951172,
+      "raw_word": "8)",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            6551,
+            4985,
+            66,
+            68
+          ],
+          "confidence": 87.51714324951172
+        }
+      ],
+      "tile_id": "3:3",
+      "id": "600-0104",
+      "x": 6551,
+      "y": 4985,
+      "width": 66,
+      "height": 68
+    },
+    {
+      "number": "8",
+      "bbox": [
+        2254,
+        5084,
+        66,
+        67
+      ],
+      "confidence": 73.1943359375,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 96.17061614990234,
+      "raw_word": "(8)",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            2254,
+            5084,
+            66,
+            67
+          ],
+          "confidence": 96.17061614990234
+        }
+      ],
+      "tile_id": "3:1",
+      "id": "600-0105",
+      "x": 2254,
+      "y": 5084,
+      "width": 66,
+      "height": 67
+    },
+    {
+      "number": "156",
+      "bbox": [
+        4023,
+        5136,
+        63,
+        63
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 93.9904073079427,
+      "raw_word": "((156)",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            4035,
+            5136,
+            12,
+            63
+          ],
+          "confidence": 87.25228881835938
+        },
+        {
+          "text": "5",
+          "bbox": [
+            4023,
+            5136,
+            63,
+            63
+          ],
+          "confidence": 97.20497131347656
+        },
+        {
+          "text": "6",
+          "bbox": [
+            4059,
+            5136,
+            12,
+            63
+          ],
+          "confidence": 97.51396179199219
+        }
+      ],
+      "tile_id": "3:2",
+      "id": "600-0106",
+      "x": 4023,
+      "y": 5136,
+      "width": 63,
+      "height": 63
+    },
+    {
+      "number": "52",
+      "bbox": [
+        4021,
+        5237,
+        67,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 88.18336868286133,
+      "raw_word": "(52)",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            4021,
+            5237,
+            67,
+            67
+          ],
+          "confidence": 93.37859344482422
+        },
+        {
+          "text": "2",
+          "bbox": [
+            4060,
+            5237,
+            13,
+            67
+          ],
+          "confidence": 82.98814392089844
+        }
+      ],
+      "tile_id": "3:2",
+      "id": "600-0107",
+      "x": 4021,
+      "y": 5237,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "4",
+      "bbox": [
+        1643,
+        5685,
+        41,
+        52
+      ],
+      "confidence": 1.9506759643554688,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 85.99295043945312,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            1643,
+            5685,
+            41,
+            52
+          ],
+          "confidence": 85.99295043945312
+        }
+      ],
+      "tile_id": "3:0",
+      "id": "600-0108",
+      "x": 1643,
+      "y": 5685,
+      "width": 41,
+      "height": 52
+    },
+    {
+      "number": "4",
+      "bbox": [
+        4158,
+        5697,
+        85,
+        72
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 47.557228088378906,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            4158,
+            5697,
+            85,
+            72
+          ],
+          "confidence": 47.557228088378906
+        }
+      ],
+      "tile_id": "3:2",
+      "id": "600-0109",
+      "x": 4158,
+      "y": 5697,
+      "width": 85,
+      "height": 72
+    },
+    {
+      "number": "2",
+      "bbox": [
+        3112,
+        5707,
+        67,
+        68
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 83.0687026977539,
+      "raw_word": "(2)",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            3112,
+            5707,
+            67,
+            68
+          ],
+          "confidence": 83.0687026977539
+        }
+      ],
+      "tile_id": "3:1",
+      "id": "600-0110",
+      "x": 3112,
+      "y": 5707,
+      "width": 67,
+      "height": 68
+    },
+    {
+      "number": "4",
+      "bbox": [
+        4093,
+        5824,
+        86,
+        72
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 49.66230392456055,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            4093,
+            5824,
+            86,
+            72
+          ],
+          "confidence": 49.66230392456055
+        }
+      ],
+      "tile_id": "3:2",
+      "id": "600-0111",
+      "x": 4093,
+      "y": 5824,
+      "width": 86,
+      "height": 72
+    },
+    {
+      "number": "6",
+      "bbox": [
+        3687,
+        5928,
+        67,
+        67
+      ],
+      "confidence": 21.16693115234375,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 88.7381362915039,
+      "raw_word": "(6)",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            3687,
+            5928,
+            67,
+            67
+          ],
+          "confidence": 88.7381362915039
+        }
+      ],
+      "tile_id": "3:1",
+      "id": "600-0112",
+      "x": 3687,
+      "y": 5928,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "50",
+      "bbox": [
+        3501,
+        5930,
+        159,
+        64
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 71.57543754577637,
+      "raw_word": "50)",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            3501,
+            5930,
+            159,
+            64
+          ],
+          "confidence": 55.0069465637207
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3630,
+            5930,
+            20,
+            64
+          ],
+          "confidence": 88.14392852783203
+        }
+      ],
+      "tile_id": "3:1",
+      "id": "600-0113",
+      "x": 3501,
+      "y": 5930,
+      "width": 159,
+      "height": 64
+    },
+    {
+      "number": "453",
+      "bbox": [
+        3500,
+        6014,
+        162,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 84.46129989624023,
+      "raw_word": "453)(450))",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            3500,
+            6030,
+            79,
+            38
+          ],
+          "confidence": 56.57407760620117
+        },
+        {
+          "text": "5",
+          "bbox": [
+            3594,
+            6014,
+            68,
+            67
+          ],
+          "confidence": 98.52680206298828
+        },
+        {
+          "text": "3",
+          "bbox": [
+            3633,
+            6014,
+            13,
+            67
+          ],
+          "confidence": 98.28302001953125
+        }
+      ],
+      "tile_id": "3:1",
+      "id": "600-0114",
+      "x": 3500,
+      "y": 6014,
+      "width": 162,
+      "height": 67
+    },
+    {
+      "number": "450",
+      "bbox": [
+        3683,
+        6014,
+        71,
+        67
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 91.69862365722656,
+      "raw_word": "453)(450))",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            3683,
+            6014,
+            26,
+            67
+          ],
+          "confidence": 87.4840087890625
+        },
+        {
+          "text": "5",
+          "bbox": [
+            3687,
+            6014,
+            67,
+            67
+          ],
+          "confidence": 97.94342803955078
+        },
+        {
+          "text": "0",
+          "bbox": [
+            3727,
+            6014,
+            13,
+            67
+          ],
+          "confidence": 89.6684341430664
+        }
+      ],
+      "tile_id": "3:1",
+      "id": "600-0115",
+      "x": 3683,
+      "y": 6014,
+      "width": 71,
+      "height": 67
+    },
+    {
+      "number": "61",
+      "bbox": [
+        4320,
+        6019,
+        67,
+        67
+      ],
+      "confidence": 17.588790893554688,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 91.90513229370117,
+      "raw_word": "((61))",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            4336,
+            6019,
+            18,
+            67
+          ],
+          "confidence": 93.07875061035156
+        },
+        {
+          "text": "1",
+          "bbox": [
+            4320,
+            6019,
+            67,
+            67
+          ],
+          "confidence": 90.73151397705078
+        }
+      ],
+      "tile_id": "3:2",
+      "id": "600-0116",
+      "x": 4320,
+      "y": 6019,
+      "width": 67,
+      "height": 67
+    },
+    {
+      "number": "200411",
+      "bbox": [
+        6786,
+        6437,
+        716,
+        38
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 66.02124150594075,
+      "raw_word": "200411()",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            6786,
+            6437,
+            571,
+            38
+          ],
+          "confidence": 0.0
+        },
+        {
+          "text": "0",
+          "bbox": [
+            7360,
+            6437,
+            25,
+            37
+          ],
+          "confidence": 99.04354858398438
+        },
+        {
+          "text": "0",
+          "bbox": [
+            7388,
+            6437,
+            25,
+            37
+          ],
+          "confidence": 99.03687286376953
+        },
+        {
+          "text": "4",
+          "bbox": [
+            7416,
+            6438,
+            25,
+            35
+          ],
+          "confidence": 99.04232025146484
+        },
+        {
+          "text": "1",
+          "bbox": [
+            7446,
+            6437,
+            29,
+            36
+          ],
+          "confidence": 0.0
+        },
+        {
+          "text": "1",
+          "bbox": [
+            7487,
+            6437,
+            15,
+            36
+          ],
+          "confidence": 99.00470733642578
+        }
+      ],
+      "tile_id": "3:3",
+      "id": "600-0117",
+      "x": 6786,
+      "y": 6437,
+      "width": 716,
+      "height": 38
+    }
+  ],
+  "suppressed_tile_duplicates": [],
+  "candidate_count": null
+}

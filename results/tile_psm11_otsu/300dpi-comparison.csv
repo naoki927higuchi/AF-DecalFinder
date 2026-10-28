@@ -1,0 +1,46 @@
+﻿config,dpi,region,gt_id,expected,recognized,status,iou,center_error_px,confidence,gt_bbox,det_bbox,detection_id,tags
+tile_psm11_otsu,300,A_head,A_head_01,81,,miss,0,,,"[895, 249, 20, 21]",,,two_digits
+tile_psm11_otsu,300,A_head,A_head_02,77,,miss,0,,,"[960, 249, 22, 21]",,,two_digits
+tile_psm11_otsu,300,A_head,A_head_03,14,14,correct,0.8658,1.118,77.0862045288086,"[1168, 315, 22, 21]","[1168, 315, 20, 20]",300-0033,two_digits
+tile_psm11_otsu,300,A_head,A_head_04,1,,miss,0,,,"[1240, 315, 11, 21]",,,one_digit
+tile_psm11_otsu,300,A_head,A_head_05,2,,miss,0,,,"[1299, 315, 13, 21]",,,one_digit
+tile_psm11_otsu,300,A_head,A_head_06,41,41,correct,0.7792,2.062,94.09544372558594,"[1339, 315, 22, 21]","[1339, 315, 18, 20]",300-0034,two_digits
+tile_psm11_otsu,300,A_head,A_head_07,78,,miss,0,,,"[1547, 249, 22, 21]",,,two_digits
+tile_psm11_otsu,300,A_head,A_head_08,82,62,wrong_number,0.5867,3.64,81.42498779296875,"[1613, 249, 22, 21]","[1609, 243, 28, 26]",300-0028,two_digits
+tile_psm11_otsu,300,B_feet,B_feet_01,49,,miss,0,,,"[1052, 1981, 22, 21]",,,"two_digits,leader_nearby,dense,compound"
+tile_psm11_otsu,300,B_feet,B_feet_02,118,8,wrong_number,0.8067,1.803,0.0,"[1110, 1981, 25, 21]","[1111, 1982, 25, 22]",300-0109,"three_digits,small_print,leader_nearby,dense,compound"
+tile_psm11_otsu,300,B_feet,B_feet_03,120,,miss,0,,,"[1110, 2020, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_otsu,300,B_feet,B_feet_04,49,,miss,0,,,"[1388, 1981, 22, 21]",,,"two_digits,leader_nearby,dense,compound"
+tile_psm11_otsu,300,B_feet,B_feet_05,118,,miss,0,,,"[1446, 1981, 25, 21]",,,"three_digits,small_print,leader_nearby,dense,compound"
+tile_psm11_otsu,300,B_feet,B_feet_06,120,120,correct,0.8381,0.707,71.43053436279297,"[1385, 2020, 25, 21]","[1386, 2020, 22, 20]",300-0110,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_otsu,300,C_side,C_side_01,99,99,correct,0.4742,1.118,6.04351806640625,"[1939, 1424, 21, 21]","[1934, 1418, 30, 31]",300-0083,"two_digits,leader_nearby,dense,parentheses"
+tile_psm11_otsu,300,C_side,C_side_02,106,,miss,0,,,"[1981, 1424, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_otsu,300,C_side,C_side_03,102,,miss,0,,,"[1936, 1529, 25, 21]",,,"three_digits,small_print,leader_nearby,dense,parentheses"
+tile_psm11_otsu,300,C_side,C_side_04,107,,miss,0,,,"[1981, 1529, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_otsu,300,C_side,C_side_05,103,08,wrong_number,0.6034,1.5,0.0,"[1936, 1683, 25, 21]","[1934, 1677, 29, 30]",300-0094,"three_digits,small_print,leader_nearby,dense,parentheses"
+tile_psm11_otsu,300,C_side,C_side_06,109,,miss,0,,,"[1981, 1683, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_otsu,300,C_side,C_side_07,112,4,wrong_number,0.5645,1.118,24.838134765625,"[1885, 1783, 25, 21]","[1882, 1777, 30, 31]",300-0097,"three_digits,small_print,leader_nearby,dense,parentheses"
+tile_psm11_otsu,300,C_side,C_side_08,114,,miss,0,,,"[1928, 1783, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_otsu,300,C_side,C_side_09,119,8,wrong_number,0.4573,4.031,63.14582061767578,"[1885, 1879, 25, 21]","[1884, 1873, 28, 41]",300-0106,"three_digits,small_print,leader_nearby,dense,parentheses"
+tile_psm11_otsu,300,C_side,C_side_10,51,0,wrong_number,0.294,8.515,0.0,"[1941, 1879, 21, 21]","[1936, 1873, 30, 50]",300-0107,"two_digits,leader_nearby,dense,parentheses,compound"
+tile_psm11_otsu,300,C_side,C_side_11,132,,miss,0,,,"[2007, 1879, 25, 21]",,,"three_digits,small_print,leader_nearby,dense,parentheses,compound"
+tile_psm11_otsu,300,C_side,C_side_12,121,,miss,0,,,"[1885, 1914, 25, 21]",,,"three_digits,small_print,leader_nearby,dense"
+tile_psm11_otsu,300,C_side,C_side_13,50,,miss,0,,,"[1941, 1914, 21, 21]",,,"two_digits,leader_nearby,dense,compound"
+tile_psm11_otsu,300,C_side,C_side_14,127,,miss,0,,,"[2007, 1914, 25, 21]",,,"three_digits,small_print,leader_nearby,dense,compound"
+tile_psm11_otsu,300,D_rear,D_rear_01,9,,miss,0,,,"[2900, 1048, 12, 21]",,,one_digit
+tile_psm11_otsu,300,D_rear,D_rear_02,77,,miss,0,,,"[2705, 1208, 22, 21]",,,two_digits
+tile_psm11_otsu,300,D_rear,D_rear_03,78,18,wrong_number,0.875,0.5,24.811386108398438,"[3146, 1208, 22, 21]","[3145, 1208, 24, 22]",300-0076,two_digits
+tile_psm11_otsu,300,D_rear,D_rear_04,12,,miss,0,,,"[2814, 1294, 22, 21]",,,two_digits
+tile_psm11_otsu,300,D_rear,D_rear_05,13,,miss,0,,,"[3035, 1294, 22, 21]",,,two_digits
+tile_psm11_otsu,300,D_rear,,,12,false_positive,0,,0.0,,"[2814, 1294, 191, 27]",300-0077,
+tile_psm11_otsu,300,E_bottom,E_bottom_01,149,,miss,0,,,"[1491, 2182, 25, 21]",,,"three_digits,small_print,parentheses"
+tile_psm11_otsu,300,E_bottom,E_bottom_02,148,,miss,0,,,"[1532, 2182, 25, 21]",,,"three_digits,small_print"
+tile_psm11_otsu,300,E_bottom,E_bottom_03,147,,miss,0,,,"[1608, 2182, 25, 21]",,,"three_digits,small_print"
+tile_psm11_otsu,300,E_bottom,E_bottom_04,145,6,wrong_number,0.5833,1.581,0.0,"[1705, 2182, 25, 21]","[1702, 2176, 30, 30]",300-0115,"three_digits,small_print"
+tile_psm11_otsu,300,E_bottom,E_bottom_05,146,,miss,0,,,"[1748, 2182, 25, 21]",,,"three_digits,small_print,parentheses"
+tile_psm11_otsu,300,F_paint,,,9,false_positive,0,,0.0,,"[1227, 128, 153, 20]",300-0015,negative_control
+tile_psm11_otsu,300,F_paint,,,40,false_positive,0,,0.0,,"[1454, 129, 154, 19]",300-0016,negative_control
+tile_psm11_otsu,300,F_paint,,,7,false_positive,0,,92.2012939453125,,"[1680, 134, 12, 13]",300-0017,negative_control
+tile_psm11_otsu,300,F_paint,,,6090,false_positive,0,,0.0,,"[1567, 158, 194, 31]",300-0023,negative_control
+tile_psm11_otsu,300,F_paint,,,316,false_positive,0,,59.0921745300293,,"[1227, 159, 46, 31]",300-0026,negative_control
+tile_psm11_otsu,300,F_paint,,,40,false_positive,0,,0.0,,"[1453, 159, 77, 31]",300-0027,negative_control

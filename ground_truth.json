@@ -1,0 +1,958 @@
+{
+  "provenance": "Manually transcribed from original-image crops before running OCR. Both resolutions visually checked. 600 dpi boxes transferred by image feature registration, not OCR.",
+  "bbox_definition": "Digit ink rectangle; excludes circle, parentheses, plus and leader. Manual tolerance approx +/-2 pixels at 300 dpi, scaled at 600 dpi.",
+  "registration": {
+    "matrix": [
+      [
+        2.19300791974778,
+        -1.1937078105724813e-06,
+        0.0165293128356237
+      ],
+      [
+        1.1937078105724813e-06,
+        2.19300791974778,
+        0.01124551407837965
+      ]
+    ],
+    "matches": 2078,
+    "inliers": 1922,
+    "median_inlier_residual_px": 0.1421857625246048
+  },
+  "regions": [
+    {
+      "id": "A_head",
+      "bbox_300": [
+        860,
+        220,
+        820,
+        150
+      ],
+      "bbox_600": [
+        1886,
+        482,
+        1799,
+        330
+      ],
+      "negative_only": false
+    },
+    {
+      "id": "B_feet",
+      "bbox_300": [
+        1030,
+        1930,
+        470,
+        130
+      ],
+      "bbox_600": [
+        2258,
+        4232,
+        1032,
+        286
+      ],
+      "negative_only": false
+    },
+    {
+      "id": "C_side",
+      "bbox_300": [
+        1860,
+        1380,
+        190,
+        570
+      ],
+      "bbox_600": [
+        4079,
+        3026,
+        417,
+        1251
+      ],
+      "negative_only": false
+    },
+    {
+      "id": "D_rear",
+      "bbox_300": [
+        2670,
+        1010,
+        540,
+        330
+      ],
+      "bbox_600": [
+        5855,
+        2214,
+        1185,
+        725
+      ],
+      "negative_only": false
+    },
+    {
+      "id": "E_bottom",
+      "bbox_300": [
+        1450,
+        2130,
+        340,
+        100
+      ],
+      "bbox_600": [
+        3179,
+        4671,
+        747,
+        220
+      ],
+      "negative_only": false
+    },
+    {
+      "id": "F_paint",
+      "bbox_300": [
+        1210,
+        110,
+        590,
+        95
+      ],
+      "bbox_600": [
+        2653,
+        241,
+        1295,
+        209
+      ],
+      "negative_only": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "A_head_01",
+      "region": "A_head",
+      "number": "81",
+      "bbox_300": [
+        895,
+        249,
+        20,
+        21
+      ],
+      "bbox_600": [
+        1962,
+        546,
+        45,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "A_head_02",
+      "region": "A_head",
+      "number": "77",
+      "bbox_300": [
+        960,
+        249,
+        22,
+        21
+      ],
+      "bbox_600": [
+        2105,
+        546,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "A_head_03",
+      "region": "A_head",
+      "number": "14",
+      "bbox_300": [
+        1168,
+        315,
+        22,
+        21
+      ],
+      "bbox_600": [
+        2561,
+        690,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "A_head_04",
+      "region": "A_head",
+      "number": "1",
+      "bbox_300": [
+        1240,
+        315,
+        11,
+        21
+      ],
+      "bbox_600": [
+        2719,
+        690,
+        25,
+        47
+      ],
+      "tags": [
+        "one_digit"
+      ]
+    },
+    {
+      "id": "A_head_05",
+      "region": "A_head",
+      "number": "2",
+      "bbox_300": [
+        1299,
+        315,
+        13,
+        21
+      ],
+      "bbox_600": [
+        2848,
+        690,
+        30,
+        47
+      ],
+      "tags": [
+        "one_digit"
+      ]
+    },
+    {
+      "id": "A_head_06",
+      "region": "A_head",
+      "number": "41",
+      "bbox_300": [
+        1339,
+        315,
+        22,
+        21
+      ],
+      "bbox_600": [
+        2936,
+        690,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "A_head_07",
+      "region": "A_head",
+      "number": "78",
+      "bbox_300": [
+        1547,
+        249,
+        22,
+        21
+      ],
+      "bbox_600": [
+        3392,
+        546,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "A_head_08",
+      "region": "A_head",
+      "number": "82",
+      "bbox_300": [
+        1613,
+        249,
+        22,
+        21
+      ],
+      "bbox_600": [
+        3537,
+        546,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "B_feet_01",
+      "region": "B_feet",
+      "number": "49",
+      "bbox_300": [
+        1052,
+        1981,
+        22,
+        21
+      ],
+      "bbox_600": [
+        2307,
+        4344,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits",
+        "leader_nearby",
+        "dense",
+        "compound"
+      ]
+    },
+    {
+      "id": "B_feet_02",
+      "region": "B_feet",
+      "number": "118",
+      "bbox_300": [
+        1110,
+        1981,
+        25,
+        21
+      ],
+      "bbox_600": [
+        2434,
+        4344,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense",
+        "compound"
+      ]
+    },
+    {
+      "id": "B_feet_03",
+      "region": "B_feet",
+      "number": "120",
+      "bbox_300": [
+        1110,
+        2020,
+        25,
+        21
+      ],
+      "bbox_600": [
+        2434,
+        4429,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense"
+      ]
+    },
+    {
+      "id": "B_feet_04",
+      "region": "B_feet",
+      "number": "49",
+      "bbox_300": [
+        1388,
+        1981,
+        22,
+        21
+      ],
+      "bbox_600": [
+        3043,
+        4344,
+        50,
+        47
+      ],
+      "tags": [
+        "two_digits",
+        "leader_nearby",
+        "dense",
+        "compound"
+      ]
+    },
+    {
+      "id": "B_feet_05",
+      "region": "B_feet",
+      "number": "118",
+      "bbox_300": [
+        1446,
+        1981,
+        25,
+        21
+      ],
+      "bbox_600": [
+        3171,
+        4344,
+        55,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense",
+        "compound"
+      ]
+    },
+    {
+      "id": "B_feet_06",
+      "region": "B_feet",
+      "number": "120",
+      "bbox_300": [
+        1385,
+        2020,
+        25,
+        21
+      ],
+      "bbox_600": [
+        3037,
+        4429,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense"
+      ]
+    },
+    {
+      "id": "C_side_01",
+      "region": "C_side",
+      "number": "99",
+      "bbox_300": [
+        1939,
+        1424,
+        21,
+        21
+      ],
+      "bbox_600": [
+        4252,
+        3122,
+        47,
+        47
+      ],
+      "tags": [
+        "two_digits",
+        "leader_nearby",
+        "dense",
+        "parentheses"
+      ]
+    },
+    {
+      "id": "C_side_02",
+      "region": "C_side",
+      "number": "106",
+      "bbox_300": [
+        1981,
+        1424,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4344,
+        3122,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense"
+      ]
+    },
+    {
+      "id": "C_side_03",
+      "region": "C_side",
+      "number": "102",
+      "bbox_300": [
+        1936,
+        1529,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4245,
+        3353,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense",
+        "parentheses"
+      ]
+    },
+    {
+      "id": "C_side_04",
+      "region": "C_side",
+      "number": "107",
+      "bbox_300": [
+        1981,
+        1529,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4344,
+        3353,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense"
+      ]
+    },
+    {
+      "id": "C_side_05",
+      "region": "C_side",
+      "number": "103",
+      "bbox_300": [
+        1936,
+        1683,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4245,
+        3690,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense",
+        "parentheses"
+      ]
+    },
+    {
+      "id": "C_side_06",
+      "region": "C_side",
+      "number": "109",
+      "bbox_300": [
+        1981,
+        1683,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4344,
+        3690,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense"
+      ]
+    },
+    {
+      "id": "C_side_07",
+      "region": "C_side",
+      "number": "112",
+      "bbox_300": [
+        1885,
+        1783,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4133,
+        3910,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense",
+        "parentheses"
+      ]
+    },
+    {
+      "id": "C_side_08",
+      "region": "C_side",
+      "number": "114",
+      "bbox_300": [
+        1928,
+        1783,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4228,
+        3910,
+        55,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense"
+      ]
+    },
+    {
+      "id": "C_side_09",
+      "region": "C_side",
+      "number": "119",
+      "bbox_300": [
+        1885,
+        1879,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4133,
+        4120,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense",
+        "parentheses"
+      ]
+    },
+    {
+      "id": "C_side_10",
+      "region": "C_side",
+      "number": "51",
+      "bbox_300": [
+        1941,
+        1879,
+        21,
+        21
+      ],
+      "bbox_600": [
+        4256,
+        4120,
+        47,
+        47
+      ],
+      "tags": [
+        "two_digits",
+        "leader_nearby",
+        "dense",
+        "parentheses",
+        "compound"
+      ]
+    },
+    {
+      "id": "C_side_11",
+      "region": "C_side",
+      "number": "132",
+      "bbox_300": [
+        2007,
+        1879,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4401,
+        4120,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense",
+        "parentheses",
+        "compound"
+      ]
+    },
+    {
+      "id": "C_side_12",
+      "region": "C_side",
+      "number": "121",
+      "bbox_300": [
+        1885,
+        1914,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4133,
+        4197,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense"
+      ]
+    },
+    {
+      "id": "C_side_13",
+      "region": "C_side",
+      "number": "50",
+      "bbox_300": [
+        1941,
+        1914,
+        21,
+        21
+      ],
+      "bbox_600": [
+        4256,
+        4197,
+        47,
+        47
+      ],
+      "tags": [
+        "two_digits",
+        "leader_nearby",
+        "dense",
+        "compound"
+      ]
+    },
+    {
+      "id": "C_side_14",
+      "region": "C_side",
+      "number": "127",
+      "bbox_300": [
+        2007,
+        1914,
+        25,
+        21
+      ],
+      "bbox_600": [
+        4401,
+        4197,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "leader_nearby",
+        "dense",
+        "compound"
+      ]
+    },
+    {
+      "id": "D_rear_01",
+      "region": "D_rear",
+      "number": "9",
+      "bbox_300": [
+        2900,
+        1048,
+        12,
+        21
+      ],
+      "bbox_600": [
+        6359,
+        2298,
+        28,
+        47
+      ],
+      "tags": [
+        "one_digit"
+      ]
+    },
+    {
+      "id": "D_rear_02",
+      "region": "D_rear",
+      "number": "77",
+      "bbox_300": [
+        2705,
+        1208,
+        22,
+        21
+      ],
+      "bbox_600": [
+        5932,
+        2649,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "D_rear_03",
+      "region": "D_rear",
+      "number": "78",
+      "bbox_300": [
+        3146,
+        1208,
+        22,
+        21
+      ],
+      "bbox_600": [
+        6899,
+        2649,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "D_rear_04",
+      "region": "D_rear",
+      "number": "12",
+      "bbox_300": [
+        2814,
+        1294,
+        22,
+        21
+      ],
+      "bbox_600": [
+        6171,
+        2837,
+        49,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "D_rear_05",
+      "region": "D_rear",
+      "number": "13",
+      "bbox_300": [
+        3035,
+        1294,
+        22,
+        21
+      ],
+      "bbox_600": [
+        6655,
+        2837,
+        50,
+        47
+      ],
+      "tags": [
+        "two_digits"
+      ]
+    },
+    {
+      "id": "E_bottom_01",
+      "region": "E_bottom",
+      "number": "149",
+      "bbox_300": [
+        1491,
+        2182,
+        25,
+        21
+      ],
+      "bbox_600": [
+        3269,
+        4785,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "parentheses"
+      ]
+    },
+    {
+      "id": "E_bottom_02",
+      "region": "E_bottom",
+      "number": "148",
+      "bbox_300": [
+        1532,
+        2182,
+        25,
+        21
+      ],
+      "bbox_600": [
+        3359,
+        4785,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print"
+      ]
+    },
+    {
+      "id": "E_bottom_03",
+      "region": "E_bottom",
+      "number": "147",
+      "bbox_300": [
+        1608,
+        2182,
+        25,
+        21
+      ],
+      "bbox_600": [
+        3526,
+        4785,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print"
+      ]
+    },
+    {
+      "id": "E_bottom_04",
+      "region": "E_bottom",
+      "number": "145",
+      "bbox_300": [
+        1705,
+        2182,
+        25,
+        21
+      ],
+      "bbox_600": [
+        3739,
+        4785,
+        55,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print"
+      ]
+    },
+    {
+      "id": "E_bottom_05",
+      "region": "E_bottom",
+      "number": "146",
+      "bbox_300": [
+        1748,
+        2182,
+        25,
+        21
+      ],
+      "bbox_600": [
+        3833,
+        4785,
+        56,
+        47
+      ],
+      "tags": [
+        "three_digits",
+        "small_print",
+        "parentheses"
+      ]
+    }
+  ]
+}
