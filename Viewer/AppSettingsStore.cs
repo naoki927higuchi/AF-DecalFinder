@@ -30,6 +30,18 @@ internal sealed class AppSettingsStore(string? path = null)
             .Distinct(StringComparer.OrdinalIgnoreCase).Take(10).ToArray();
         data["LastImagePath"] = absolute;
         data["RecentImages"] = new JsonArray(recent.Select(p => (JsonNode?)JsonValue.Create(p)).ToArray());
+        WriteDocument(data);
+        return new(absolute, recent);
+    }
+    internal WindowPlacement? LoadWindow() => ReadDocument()["Window"]?.Deserialize<WindowPlacement>();
+    internal void SaveWindow(WindowPlacement placement)
+    {
+        var data = ReadDocument();
+        data["Window"] = JsonSerializer.SerializeToNode(placement);
+        WriteDocument(data);
+    }
+    private void WriteDocument(JsonObject data)
+    {
         Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
         var temp = FilePath + "." + Guid.NewGuid().ToString("N") + ".tmp";
         try
@@ -40,6 +52,5 @@ internal sealed class AppSettingsStore(string? path = null)
             else File.Move(temp, FilePath);
         }
         finally { if (File.Exists(temp)) File.Delete(temp); }
-        return new(absolute, recent);
     }
 }

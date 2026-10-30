@@ -7,6 +7,8 @@ namespace AF.DecalFinder;
 internal sealed class OcrResultsList : ListView
 {
     private bool updating;
+    private int navigationGeneration;
+    private bool navigationQueued;
     private bool explicitEdit;
     private bool editing;
     private NativeWindow? labelWindow;
@@ -34,7 +36,12 @@ internal sealed class OcrResultsList : ListView
         ImeMode = ImeMode.Disable;
         AccessibleName = "OCR検出番号一覧";
         Columns.Add("番号", 120);
-        SelectedIndexChanged += (_, _) => { if (!updating) SelectionChanged?.Invoke(SelectedDetections); };
+        SelectedIndexChanged += (_, _) =>
+        {
+            if (updating) return;
+            SelectionChanged?.Invoke(SelectedDetections);
+            QueueSelectionNavigation();
+        };
         Resize += (_, _) => Columns[0].Width = Math.Max(40, ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 4);
         ItemCheck += (_, e) =>
         {
@@ -79,13 +86,39 @@ internal sealed class OcrResultsList : ListView
         return true;
     }
 
+    private void CancelSelectionNavigation()
+    {
+        navigationGeneration++;
+        navigationQueued = false;
+    }
+
+    private void QueueSelectionNavigation()
+    {
+        if (navigationQueued || !IsHandleCreated || IsDisposed) return;
+        navigationQueued = true;
+        int generation = navigationGeneration;
+        BeginInvoke(() =>
+        {
+            if (IsDisposed || generation != navigationGeneration) return;
+            navigationQueued = false;
+            if (!updating && SelectedItems.Count > 0 && SelectedItems[0].Tag is Detection target)
+                NavigateRequested?.Invoke(target);
+        });
+    }
+
     private void RefreshEditedRow(ListViewItem row)
     {
+        CancelSelectionNavigation();
+        updating = true;
+        try
+        {
         row.Text = ((Detection)row.Tag!).Number;
         ListViewItemSorter = new DetectionComparer();
         Sort();
         // Existing row objects and their selected state survive native sorting.
         row.Selected = true; row.Focused = true; row.EnsureVisible();
+        }
+        finally { updating = false; }
         SelectionChanged?.Invoke(SelectedDetections);
     }
 
@@ -151,6 +184,7 @@ internal sealed class OcrResultsList : ListView
     {
         var selected = preserveSelection ? SelectedDetections.Select(d => d.Id).ToHashSet(StringComparer.Ordinal) : [];
         var focusedId = preserveSelection ? (FocusedItem?.Tag as Detection)?.Id : null;
+        CancelSelectionNavigation();
         updating = true;
         BeginUpdate();
         try
@@ -174,6 +208,7 @@ internal sealed class OcrResultsList : ListView
     internal void SelectDetection(string id, bool add)
     {
         if (!rowsById.TryGetValue(id, out var row)) return;
+        CancelSelectionNavigation();
         updating = true;
         BeginUpdate();
         try
@@ -199,6 +234,7 @@ internal sealed class OcrResultsList : ListView
         }
         if (e.KeyCode == Keys.Enter && e.Modifiers == Keys.None)
         {
+            CancelSelectionNavigation();
             // Multiple selection is not a navigation target: the focused selected row is.
             var target = FocusedItem is { Selected: true } focused ? focused
                 : SelectedItems.Count == 1 ? SelectedItems[0] : null;
@@ -207,6 +243,7 @@ internal sealed class OcrResultsList : ListView
         }
         if ((e.Control && e.KeyCode == Keys.A) || e.KeyCode == Keys.Escape)
         {
+            CancelSelectionNavigation();
             updating = true;
             BeginUpdate();
             try
@@ -215,6 +252,7 @@ internal sealed class OcrResultsList : ListView
             }
             finally { EndUpdate(); updating = false; }
             SelectionChanged?.Invoke(SelectedDetections);
+            QueueSelectionNavigation();
             e.Handled = true;
             e.SuppressKeyPress = true;
         }
@@ -226,6 +264,7 @@ internal sealed class OcrResultsList : ListView
         var selected = SelectedItems.Cast<ListViewItem>().ToHashSet();
         var focused = FocusedItem;
         var top = TopItem;
+        CancelSelectionNavigation();
         updating = true;
         BeginUpdate();
         try

@@ -15,6 +15,7 @@ internal sealed class MainForm : Form
     private readonly Button floatList = new() { Text = "一覧を切り離す", AutoSize = true, Height = 30 };
     private Form? floatingList;
     private bool closing;
+    private FormWindowState lastVisibleState = FormWindowState.Normal;
     private readonly DigitsTextBox number = new() { Width = 130, Enabled = false, AccessibleName = "検索番号" };
     private readonly Label count = new() { AutoSize = true, Text = "検索不可", Margin = new Padding(12, 8, 0, 0) };
     private readonly ToolStripStatusLabel status = new() { Spring = true, TextAlign = ContentAlignment.MiddleLeft, Text = "画像を開いてください。" };
@@ -124,11 +125,46 @@ internal sealed class MainForm : Form
         };
     }
 
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e); // Apply WinForms DPI autoscaling before restoring physical screen bounds.
+        try
+        {
+            if (settings.LoadWindow() is { Width: > 0, Height: > 0 } saved)
+            {
+                var bounds = saved.Fit(Screen.AllScreens.Select(s => s.WorkingArea).ToArray(), MinimumSize);
+                MinimumSize = new Size(Math.Min(MinimumSize.Width, bounds.Width), Math.Min(MinimumSize.Height, bounds.Height));
+                StartPosition = FormStartPosition.Manual;
+                Bounds = bounds;
+                lastVisibleState = saved.Maximized ? FormWindowState.Maximized : FormWindowState.Normal;
+                WindowState = lastVisibleState;
+            }
+        }
+        catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
+    }
+
+    protected override void OnResize(EventArgs e)
+    {
+        base.OnResize(e);
+        if (Visible && WindowState != FormWindowState.Minimized) lastVisibleState = WindowState;
+    }
+
+    protected override void OnDpiChanged(DpiChangedEventArgs e)
+    {
+        base.OnDpiChanged(e);
+        if (WindowState == FormWindowState.Normal)
+            BeginInvoke(() =>
+            {
+                if (IsDisposed || WindowState != FormWindowState.Normal) return;
+                Bounds = WindowPlacement.From(Bounds, false).Fit(Screen.AllScreens.Select(s => s.WorkingArea).ToArray(), MinimumSize);
+            });
+    }
+
     private static bool SettingsError(Exception ex) => ex is IOException or UnauthorizedAccessException or JsonException
         or InvalidOperationException or ArgumentException or System.Security.SecurityException;
 
     private void NotifySettingsError(Exception ex) => MessageBox.Show(this,
-        $"画像履歴の設定を読み書きできませんでした。画像の閲覧・編集は続行できます。\n{settings.FilePath}\n{ex.Message}",
+        $"アプリ設定を読み書きできませんでした。画像の閲覧・編集は続行できます。\n{settings.FilePath}\n{ex.Message}",
         "設定エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
     private void UpdateHistoryMenu()
@@ -204,6 +240,13 @@ internal sealed class MainForm : Form
         if (dirty && !ConfirmLeave()) { e.Cancel = true; return; }
         base.OnFormClosing(e);
         closing = !e.Cancel;
+        if (closing)
+        {
+            var normalBounds = WindowState == FormWindowState.Normal ? Bounds : RestoreBounds;
+            var state = WindowState == FormWindowState.Minimized ? lastVisibleState : WindowState;
+            try { settings.SaveWindow(WindowPlacement.From(normalBounds, state == FormWindowState.Maximized)); }
+            catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
+        }
     }
 
     private void InstallDropHandlers(Control control)

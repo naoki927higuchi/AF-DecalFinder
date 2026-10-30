@@ -308,6 +308,7 @@ internal static class Program
         ReverseLookupChecks();
         Phase5Checks.Run(root, Check);
         HistoryChecks.Run(root, Check);
+        WindowSelectionChecks.Run(root, Check);
         File.WriteAllText(Path.Combine(temp, "broken.jpg"), "not an image");
         Console.WriteLine($"PASS: {checks} checks");
     }
