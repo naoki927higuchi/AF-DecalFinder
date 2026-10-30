@@ -20,11 +20,20 @@ internal sealed class MainForm : Form
     private readonly ToolStripStatusLabel status = new() { Spring = true, TextAlign = ContentAlignment.MiddleLeft, Text = "画像を開いてください。" };
     private readonly string jsonPath = Path.Combine(AppContext.BaseDirectory, "results", "600dpi.json");
     private OcrCatalog? catalog;
+    private readonly EditStore store;
+    private ImageIdentity? identity;
+    private bool dirty;
+    private bool adding;
+    private bool listWasVisible;
+    private readonly Button addNumber = new() { Text = "番号追加", Dock = DockStyle.Top, Height = 30, Enabled = false };
+    private readonly Label addPrompt = new() { Text = "追加したい箇所をクリックしてください", AutoSize = true, Visible = false, Margin = new Padding(5, 8, 0, 0) };
+    private readonly Button cancelAdd = new() { Text = "キャンセル", AutoSize = true, Visible = false };
     private static string AppTitle => $"AF-DecalFinder {typeof(MainForm).Assembly.GetName().Version?.ToString(3)}";
 
-    public MainForm(string? initialImage)
+    public MainForm(string? initialImage, EditStore? editStore = null)
     {
-        Text = $"{AppTitle} — Phase 4.1";
+        store = editStore ?? new EditStore();
+        Text = $"{AppTitle} — Phase 5";
         ClientSize = new Size(1200, 880);
         MinimumSize = new Size(850, 450);
         StartPosition = FormStartPosition.CenterScreen;
@@ -32,13 +41,15 @@ internal sealed class MainForm : Form
         var open = new Button { Text = "画像を開く…", AutoSize = true, Height = 30 };
         open.Click += (_, _) => SelectImage();
         var toolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 48, Padding = new Padding(8), WrapContents = false };
-        toolbar.Controls.AddRange([open, showList, floatList, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count]);
+        toolbar.Controls.AddRange([open, showList, floatList, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count, addPrompt, cancelAdd]);
+        toolbar.AutoSize = true; toolbar.WrapContents = true;
         var detailToolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 38, Padding = new Padding(4), WrapContents = false };
         detailToolbar.Controls.AddRange([new Label { Text = "拡大画像", AutoSize = true, Margin = new Padding(3, 5, 8, 0) }, zoom]);
         zoom.Items.AddRange(new object[] { "25%", "50%", "75%", "100%", "150%", "200%" });
         zoom.SelectedIndex = 3;
         zoom.SelectedIndexChanged += (_, _) => view.SetZoom(new double[] { .25, .5, .75, 1, 1.5, 2 }[zoom.SelectedIndex]);
         panes.Panel1.Controls.Add(list);
+        panes.Panel1.Controls.Add(addNumber);
         panes.Panel2.Controls.Add(images);
         images.Panel1.Controls.Add(overview);
         images.Panel1.Controls.Add(new Label { Text = "全体画像 — 青い破線：拡大表示範囲", Dock = DockStyle.Top, Height = 38, TextAlign = ContentAlignment.MiddleLeft });
@@ -53,6 +64,19 @@ internal sealed class MainForm : Form
         list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
         view.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
         overview.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
+        list.DataChanged += Changed;
+        list.EditRejected += message => MessageBox.Show(this, message, "番号編集", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        addNumber.Click += (_, _) => BeginAdd();
+        cancelAdd.Click += (_, _) => EndAdd();
+        view.AddPointClicked += point =>
+        {
+            using var dialog = new NumberDialog(number.Text);
+            if (dialog.ShowDialog(this) == DialogResult.OK && identity != null)
+            {
+                AddAt(dialog.Number, point);
+            }
+            else EndAdd();
+        };
         list.NavigateRequested += detection => view.CenterOn(new PointF(detection.Bounds.X + detection.Bounds.Width / 2f, detection.Bounds.Y + detection.Bounds.Height / 2f));
         floatList.Click += (_, _) => { if (floatingList == null) FloatList(); else DockList(); };
         view.ViewportChanged += () => overview.SetNavigationBounds(view.VisibleImageBounds);
@@ -78,14 +102,14 @@ internal sealed class MainForm : Form
 
     private void ApplyListVisibility()
     {
-        panes.Panel1Collapsed = !showList.Checked || floatingList != null;
+        panes.Panel1Collapsed = adding || !showList.Checked || floatingList != null;
         if (!panes.Panel1Collapsed)
             panes.SplitterDistance = Math.Clamp(savedListWidth, panes.Panel1MinSize, Math.Max(panes.Panel1MinSize, panes.ClientSize.Width - panes.SplitterWidth - panes.Panel2MinSize));
         floatList.Text = floatingList == null ? "一覧を切り離す" : "一覧を戻す";
-        floatList.Enabled = showList.Checked;
+        floatList.Enabled = showList.Checked && !adding;
         if (floatingList != null)
         {
-            if (showList.Checked) floatingList.Show(this);
+            if (showList.Checked && !adding) floatingList.Show(this);
             else floatingList.Hide();
         }
     }
@@ -106,6 +130,7 @@ internal sealed class MainForm : Form
             if (!closing) ReturnListToDock();
         };
         list.MoveTo(floatingList);
+        floatingList.Controls.Add(addNumber);
         ApplyListVisibility();
         list.Focus();
     }
@@ -113,6 +138,7 @@ internal sealed class MainForm : Form
     private void ReturnListToDock()
     {
         list.MoveTo(panes.Panel1);
+        panes.Panel1.Controls.Add(addNumber);
         floatingList = null;
         ApplyListVisibility();
     }
@@ -125,6 +151,7 @@ internal sealed class MainForm : Form
 
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
+        if (dirty && !ConfirmLeave()) { e.Cancel = true; return; }
         base.OnFormClosing(e);
         closing = !e.Cancel;
     }
@@ -160,7 +187,9 @@ internal sealed class MainForm : Form
 
     private void OpenImage(string path)
     {
+        if (dirty && !ConfirmLeave()) return;
         Bitmap loaded;
+        ImageIdentity loadedIdentity;
         try
         {
             if (!IsImageExtension(path)) throw new InvalidDataException("JPGまたはPNGを選択してください。");
@@ -169,6 +198,7 @@ internal sealed class MainForm : Form
             // Clone to release the source file immediately. Do not apply EXIF rotation:
             // JSON coordinates refer to the original pixel matrix.
             loaded = DisplayBitmap.Create(source);
+            loadedIdentity = ImageIdentity.Read(path, loaded.Size);
         }
         catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or OutOfMemoryException or System.Runtime.InteropServices.ExternalException)
         {
@@ -176,7 +206,11 @@ internal sealed class MainForm : Form
             return;
         }
 
+        EndAdd();
+        dirty = false;
+        identity = loadedIdentity;
         catalog = null;
+        addNumber.Enabled = true;
         list.SetDetections(Array.Empty<Detection>());
         number.Clear();
         number.Enabled = false;
@@ -188,7 +222,14 @@ internal sealed class MainForm : Form
         var description = $"{Path.GetFileName(path)}  |  {loaded.Width} × {loaded.Height} px";
         try
         {
-            var candidate = OcrCatalog.Load(jsonPath);
+            OcrCatalog? candidate = null;
+            try { candidate = store.Load(identity); }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or InvalidDataException)
+            {
+                MessageBox.Show(this, $"編集データを復元できませんでした。元のOCR結果を使用します。\n{ex.Message}\n\n既存の保存ファイルは保持し、次回保存時にはバックアップします。", "編集データの警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            bool restored = candidate != null;
+            candidate ??= OcrCatalog.Load(jsonPath);
             if (candidate.ImageSize != loaded.Size)
             {
                 status.Text = $"{description}  |  寸法不一致：検索不可";
@@ -200,7 +241,7 @@ internal sealed class MainForm : Form
             overview.SetDetections(catalog.Detections);
             view.SetDetections(catalog.Detections);
             number.Enabled = true;
-            status.Text = $"{description}  |  OCR結果 {catalog.Detections.Count}件  |  全体：クリック・枠ドラッグ / 拡大：左ドラッグ";
+            status.Text = $"{description}  |  検出結果 {catalog.Detections.Count}件  |  {(restored ? "編集データ復元済み" : "元のOCR結果")}  |  全体：クリック・枠ドラッグ / 拡大：左ドラッグ";
             Search();
             number.Focus();
         }
@@ -213,6 +254,69 @@ internal sealed class MainForm : Form
             status.Text = $"{description}  |  OCR結果JSONを読めません：検索不可";
             MessageBox.Show(this, $"OCR結果JSONを読み込めませんでした。\n{jsonPath}\n\n{ex.Message}", "JSONの読み込みエラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
+
+    internal void BeginAdd()
+    {
+        if (identity == null || adding) return;
+        listWasVisible = showList.Checked;
+        if (floatingList == null && !panes.Panel1Collapsed) savedListWidth = panes.SplitterDistance;
+        adding = true; view.AddingPoint = true;
+        addPrompt.Visible = cancelAdd.Visible = true; showList.Enabled = false;
+        ApplyListVisibility();
+    }
+
+    internal void EndAdd()
+    {
+        if (!adding) return;
+        adding = false; view.AddingPoint = false;
+        addPrompt.Visible = cancelAdd.Visible = false; showList.Enabled = true;
+        showList.Checked = listWasVisible;
+        ApplyListVisibility();
+    }
+
+    internal void AddAt(string value, PointF point)
+    {
+        if (!adding || identity == null) return;
+        catalog ??= new OcrCatalog(new Size(identity.Width, identity.Height), []);
+        var record = catalog.AddManual(value, point);
+        list.SetDetections(catalog.Detections, preserveSelection: true);
+        EndAdd();
+        list.SelectDetection(record.Id, false);
+        Changed();
+    }
+
+    private void Changed()
+    {
+        if (catalog == null) return;
+        dirty = true;
+        number.Enabled = true;
+        view.SetDetections(catalog.Detections); overview.SetDetections(catalog.Detections);
+        Search(); // Invalidate both images; keeps transform and selection intact.
+        SaveChanges();
+    }
+
+    private bool SaveChanges()
+    {
+        if (!dirty || identity == null || catalog == null) return true;
+        try
+        {
+            store.Save(identity, catalog); dirty = false;
+            status.Text = $"{Path.GetFileName(identity.AbsolutePath)}  |  検出結果 {catalog.Detections.Count}件  |  保存済み";
+            return true;
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or System.Security.SecurityException)
+        {
+            status.Text = "未保存 — 保存に失敗しました。編集内容はこの画面に保持されています。";
+            MessageBox.Show(this, $"編集データを保存できませんでした。\n{ex.Message}\n\n保存先：{store.DirectoryPath}", "保存エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+    }
+
+    private bool ConfirmLeave()
+    {
+        if (SaveChanges()) return true;
+        return MessageBox.Show(this, "未保存の変更があります。変更を破棄して続けますか？", "未保存の変更", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
     }
 
     private void Search()

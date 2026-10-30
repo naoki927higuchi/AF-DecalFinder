@@ -23,6 +23,8 @@ public class ImageViewControl : Control
     public event Action? ViewportChanged;
     public event Action<PointF>? NavigateRequested;
     public event Action<Detection, bool>? DetectionClicked;
+    public event Action<PointF>? AddPointClicked;
+    internal bool AddingPoint;
     protected virtual bool AddToSelection => (ModifierKeys & Keys.Control) != 0;
     public double Zoom => transform.Scale;
     public PointF ImageCenter => transform.ToImage(new PointF(ClientSize.Width / 2f, ClientSize.Height / 2f));
@@ -195,6 +197,13 @@ public class ImageViewControl : Control
         var overlayStart = Probe == null ? 0 : Stopwatch.GetTimestamp();
         // Draw directly in screen coordinates: zoom and monitor DPI don't scale the 2px pen.
         e.Graphics.SmoothingMode = SmoothingMode.None;
+        using var doneBrush = new SolidBrush(Color.FromArgb(128, Color.Black));
+        foreach (var detection in detections)
+        {
+            if (!detection.IsDone) continue;
+            var box = transform.ToScreen(detection.Bounds);
+            if (box.IntersectsWith(e.ClipRectangle)) e.Graphics.FillRectangle(doneBrush, box);
+        }
         using var pen = new Pen(Color.Red, 2f);
         foreach (var match in highlights)
         {
@@ -347,6 +356,14 @@ public class ImageViewControl : Control
             TrackMovement(e.Location);
             if (!navigationMoved && ClientRectangle.Contains(e.Location))
             {
+                if (AddingPoint && Mode == ImageViewMode.Detail)
+                {
+                    var point = transform.ToImage(e.Location);
+                    EndDrag(); // Release capture before opening a modal number dialog.
+                    if (bitmap != null && point.X >= 0 && point.Y >= 0 && point.X < bitmap.Width && point.Y < bitmap.Height)
+                        AddPointClicked?.Invoke(point);
+                    return;
+                }
                 var hit = HitTestDetection(e.Location);
                 if (hit != null)
                 {

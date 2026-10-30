@@ -65,7 +65,7 @@ internal static class Program
         drop.SetData(DataFormats.FileDrop, new[] { "test.json" });
         Check(MainForm.GetDroppedImage(drop) == null, "Non-image drop rejected");
 
-        using (var form = new MainForm(null))
+        using (var form = new MainForm(null, new EditStore(Path.Combine(root, "viewer-checks", "isolated-" + Guid.NewGuid().ToString("N")))))
         {
             var originalPath = Path.Combine(root, "inputs", "600dpi.jpg");
             var originalDrop = new DataObject(); originalDrop.SetData(DataFormats.FileDrop, new[] { originalPath });
@@ -95,8 +95,8 @@ internal static class Program
             Check(panes.SplitterDistance == 210 && !panes.Panel1Collapsed, "List toggle restores previous width");
             images.SplitterDistance += 30;
             Check(images.Panel1.Width != images.Panel2.Width, "Image splitter independently adjustable");
-            Check(list.Items.Count == 181 && list.View == View.Details && list.FullRowSelect && list.MultiSelect && !list.LabelEdit,
-                "181 read-only Details rows with multi selection");
+            Check(list.Items.Count == 181 && list.View == View.Details && list.FullRowSelect && list.MultiSelect && list.LabelEdit && list.CheckBoxes,
+                "181 editable Details rows with multi selection and checkboxes");
             Check(list.Columns.Count == 1 && list.Columns[0].Text == "番号", "Number-only list column");
             var rows = list.Items.Cast<ListViewItem>().Select(i => (Detection)i.Tag!).ToArray();
             var expected = catalog.Detections.OrderBy(d => BigInteger.Parse(d.Number)).ThenBy(d => d.Bounds.Y).ThenBy(d => d.Bounds.X).ThenBy(d => d.Id, StringComparer.Ordinal).Select(d => d.Id);
@@ -119,9 +119,7 @@ internal static class Program
             Check(ReferenceEquals(navigationTarget, target) && detail.ImageCenter == new PointF(target.Bounds.X + target.Bounds.Width / 2f, target.Bounds.Y + target.Bounds.Height / 2f) && detail.Zoom == 2,
                 "Enter navigates focused selected duplicate by record, retaining zoom");
             var navigationCenter = detail.ImageCenter;
-            Key(list, Keys.F2);
-            typeof(Control).GetMethod("OnDoubleClick", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(list, new object[] { EventArgs.Empty });
-            Check(navigationCount == 1 && detail.ImageCenter == navigationCenter, "F2 and double click reserved, no navigation");
+            Check(navigationCount == 1 && detail.ImageCenter == navigationCenter, "Selection retains navigation target");
             list.Items[0].Focused = true; // Deliberately focused but not selected.
             Key(list, Keys.Enter);
             Check(navigationCount == 1, "Ambiguous multiple selection without selected focus does not navigate");
@@ -134,7 +132,7 @@ internal static class Program
                 "Float reparents same selected ListView, collapses pane, remains modeless");
             Check(ReferenceEquals(list.FocusedItem, duplicates[1]) && ReferenceEquals(list.SelectedItems[1].Tag, target) && search.Text == "49", "Float retains focused record, selection references and search");
             floating.ClientSize = new Size(350, 500);
-            Check(list.Size == floating.ClientSize, "Floating list follows host resize");
+            Check(list.Width == floating.ClientSize.Width && list.Height == floating.ClientSize.Height - 30, "Floating list and add toolbar follow host resize");
             toggle.Checked = false;
             Check(!floating.Visible && panes.Panel1Collapsed && !undock.Enabled && list.SelectedItems.Count == 2, "Floating OFF hides host, retains selection and float mode");
             toggle.Checked = true;
@@ -308,6 +306,7 @@ internal static class Program
         Check(overviewCanvas.ScreenBounds(new Rectangle(0, 0, 800, 600)) == new RectangleF(100, 0, 400, 300), "Overview letterboxes and fits on resize");
         using var png = new Bitmap(120, 80); png.Save(Path.Combine(temp, "mismatch.png"));
         ReverseLookupChecks();
+        Phase5Checks.Run(root, Check);
         File.WriteAllText(Path.Combine(temp, "broken.jpg"), "not an image");
         Console.WriteLine($"PASS: {checks} checks");
     }

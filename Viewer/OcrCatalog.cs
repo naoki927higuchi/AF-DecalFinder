@@ -2,17 +2,47 @@ using System.Text.Json;
 
 namespace AF.DecalFinder;
 
-public sealed record Detection(string Number, Rectangle Bounds, double Confidence, string Id = "");
+public sealed class Detection(string number, Rectangle bounds, double confidence, string id = "")
+{
+    public string Id { get; } = id;
+    public string Number { get; internal set; } = number;
+    public Rectangle Bounds { get; internal set; } = bounds;
+    public double Confidence { get; } = confidence;
+    public bool IsManual { get; init; }
+    public bool IsModified { get; internal set; }
+    public bool IsDone { get; internal set; }
+    // Preserve OCR evidence separately from editable values for a future explicit merge.
+    public string? OriginalNumber { get; init; } = number;
+    public Rectangle? OriginalBounds { get; init; } = bounds;
+    public static bool ValidNumber(string? value) => !string.IsNullOrEmpty(value) && value.All(c => c is >= '0' and <= '9');
+}
 
 public sealed class OcrCatalog
 {
     public Size ImageSize { get; }
     public IReadOnlyList<Detection> Detections { get; }
 
-    private OcrCatalog(Size imageSize, List<Detection> detections)
+    private readonly List<Detection> records;
+    internal OcrCatalog(Size imageSize, List<Detection> detections)
     {
         ImageSize = imageSize;
+        records = detections;
         Detections = detections.AsReadOnly();
+    }
+
+    internal Detection AddManual(string number, PointF center)
+    {
+        if (!Detection.ValidNumber(number)) throw new ArgumentException("半角数字を入力してください。");
+        var source = records.Where(d => !d.IsManual).ToArray();
+        int Median(Func<Detection, int> get, int fallback) => source.Length == 0 ? fallback : source.Select(get).Order().ElementAt(source.Length / 2);
+        int width = Math.Clamp(Median(d => d.Bounds.Width, 45), 1, ImageSize.Width);
+        int height = Math.Clamp(Median(d => d.Bounds.Height, 40), 1, ImageSize.Height);
+        var box = new Rectangle(Math.Clamp((int)Math.Round(center.X - width / 2f), 0, ImageSize.Width - width),
+            Math.Clamp((int)Math.Round(center.Y - height / 2f), 0, ImageSize.Height - height), width, height);
+        var record = new Detection(number, box, 0, "manual-" + Guid.NewGuid().ToString("N"))
+            { IsManual = true, OriginalNumber = null, OriginalBounds = null };
+        records.Add(record);
+        return record;
     }
 
     public IReadOnlyList<Detection> Find(string number) => string.IsNullOrEmpty(number)

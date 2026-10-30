@@ -13,17 +13,19 @@ internal static class Program
     {
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         var root = Path.GetFullPath(args[0]);
-        var variant = args[1];
+        var requestedVariant = args[1];
         var output = Path.GetFullPath(args[2]);
         var frames = args.Length > 3 ? int.Parse(args[3]) : 30;
         var repeats = args.Length > 4 ? int.Parse(args[4]) : 3;
         using var sourceFile = Image.FromFile(Path.Combine(root, "inputs", "600dpi.jpg"));
-        using var source = variant is "pargb" or "improved" or "previous" ? DisplayBitmap.Create(sourceFile) : new Bitmap(sourceFile);
+        using var source = requestedVariant is "pargb" or "improved" or "previous" or "before-editing" or "done" or "paired" ? DisplayBitmap.Create(sourceFile) : new Bitmap(sourceFile);
         var catalog = OcrCatalog.Load(Path.Combine(root, "results", "600dpi.json"));
-        if (variant == "quality") { Quality(sourceFile, source, catalog, output); return; }
+        if (requestedVariant is "done" or "paired") foreach (var detection in catalog.Detections) detection.IsDone = true;
+        if (requestedVariant == "quality") { Quality(sourceFile, source, catalog, output); return; }
         var results = new List<object>();
         foreach (double scale in new[] { .25, .5, 1, 2 })
         foreach (var operation in new[] { "detail-pan", "overview-drag" })
+        foreach (var variant in requestedVariant == "paired" ? new[] { "before-editing", "done", "done", "before-editing" } : new[] { requestedVariant })
         {
             using var left = new Surface(variant, ImageViewMode.Overview, source, new Size(1838, 2016));
             using var right = new Surface(variant, ImageViewMode.Detail, source, new Size(1838, 2016));
@@ -32,6 +34,8 @@ internal static class Program
             { r.ViewportChanged += () => l.SetNavigationBounds(r.VisibleImageBounds); l.NavigateRequested += r.CenterOn; }
             else if (right.Control is PreviousImageViewControl pr && left.Control is PreviousImageViewControl pl)
             { pr.ViewportChanged += () => pl.SetNavigationBounds(pr.VisibleImageBounds); pl.NavigateRequested += pr.CenterOn; }
+            else if (right.Control is BeforeEditingImageViewControl er && left.Control is BeforeEditingImageViewControl el)
+            { er.ViewportChanged += () => el.SetNavigationBounds(er.VisibleImageBounds); el.NavigateRequested += er.CenterOn; }
             else
             {
                 var br = (BaselineImageViewControl)right.Control; var bl = (BaselineImageViewControl)left.Control;
@@ -79,11 +83,11 @@ internal static class Program
                     gcCollections = Enumerable.Range(0, 3).Select(i => GC.CollectionCount(i) - gc[i]).ToArray()
                 });
             }
-            results.Add(new { scale, operation, samples });
+            results.Add(new { scale, operation, variant, samples });
             Console.WriteLine($"Finished {variant}: {scale:P0} {operation}");
             Directory.CreateDirectory(Path.GetDirectoryName(output)!);
             File.WriteAllText(output, JsonSerializer.Serialize(new {
-                variant, sourceCommit = variant == "baseline" ? "6008a2e" : variant == "previous" ? "fde03af (1.4.0)" : "working tree", image = new { source.Width, source.Height, pixelFormat = source.PixelFormat.ToString() },
+                variant = requestedVariant, sourceCommit = requestedVariant == "baseline" ? "6008a2e" : requestedVariant == "previous" ? "fde03af (1.4.0)" : requestedVariant == "before-editing" ? "0070af4 (1.4.1)" : "working tree (paired: before-editing = 0070af4)", doneCount = catalog.Detections.Count(d => d.IsDone), image = new { source.Width, source.Height, pixelFormat = source.PixelFormat.ToString() },
                 modeledWindowPixels = "3840x2160 (32-inch 4K scenario; physical inches do not define render cost)",
                 panePixels = "1838x2016 each", frames, repeats,
                 methodology = "Reusable offscreen GDI+ targets; production OnMouseMove and OnPaint; invalidated controls flushed once per move, without OS event coalescing, compositor or display latency; timings are CPU-side surrogate responsiveness, not measured physical mouse-to-photon latency.",
@@ -143,6 +147,7 @@ internal static class Program
         {
             Control = variant == "baseline" ? new BaselineImageViewControl { Mode = mode, Size = size, Probe = Probe }
                 : variant == "previous" ? new PreviousImageViewControl { Mode = mode, Size = size, Probe = Probe }
+                : variant == "before-editing" ? new BeforeEditingImageViewControl { Mode = mode, Size = size, Probe = Probe }
                 : new ImageViewControl { Mode = mode, Size = size, Probe = Probe };
             Control.CreateControl();
             Control.Invalidated += (_, _) => { dirty = true; Invalidations++; };

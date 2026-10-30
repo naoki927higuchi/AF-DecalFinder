@@ -40,3 +40,17 @@ dotnet run --project Performance/AF.DecalFinder.Performance.csproj -c Release --
 ```
 
 [逆引き追加前後の実測値](REVERSE-MEASUREMENTS.md)。描画経路は変更していないため、今回の結果を描画最適化の効果とは扱わない。
+
+## Phase 5 済み表示の性能回帰
+
+`before-editing` は1.4.1（0070af4）の固定スナップショット。`done` は現行コードで181件すべてを済みにする。検索49・全件選択を共通条件とし、原本描画・補間・既存のFit再利用は維持する。追加の25%縮小画像キャッシュは作らない。
+
+```powershell
+dotnet run --project Performance/AF.DecalFinder.Performance.csproj -c Release -- W:\dev\AF-DecalFinder before-editing Performance/results/edit-before.json 30 3
+dotnet run --project Performance/AF.DecalFinder.Performance.csproj -c Release -- W:\dev\AF-DecalFinder done Performance/results/edit-done.json 30 3
+dotnet run --project Performance/AF.DecalFinder.Performance.csproj -c Release -- W:\dev\AF-DecalFinder paired Performance/results/edit-paired.json 30 1
+& 'C:\Program Files\LibreOffice\program\python.exe' Performance/edit_report.py
+& 'C:\Program Files\LibreOffice\program\python.exe' Performance/edit_paired_report.py
+```
+
+[逐次比較](EDIT-MEASUREMENTS.md)では原本描画時間にも変動があったため、[交互比較](EDIT-PAIRED.md)を追加。各倍率・操作の中で旧→新→新→旧の順に測定し、時間順による環境差を抑えて比較する。どちらの生データも保持する。
