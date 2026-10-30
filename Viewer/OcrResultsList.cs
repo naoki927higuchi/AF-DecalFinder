@@ -250,7 +250,9 @@ internal sealed class OcrResultsList : ListView
         SelectionChanged?.Invoke(SelectedDetections);
     }
 
-    internal void SelectDetection(string id, bool add)
+    internal bool ContainsDetection(string id) => rowsById.ContainsKey(id);
+
+    internal void SelectDetection(string id, bool add, bool toggle = false)
     {
         if (!rowsById.TryGetValue(id, out var row)) return;
         CancelSelectionNavigation();
@@ -260,7 +262,7 @@ internal sealed class OcrResultsList : ListView
         {
             if (!add)
                 foreach (var selected in SelectedItems.Cast<ListViewItem>().ToArray()) selected.Selected = false;
-            row.Selected = true;
+            row.Selected = toggle ? !row.Selected : true;
             row.Focused = true;
             row.EnsureVisible();
         }

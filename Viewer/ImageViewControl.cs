@@ -25,6 +25,7 @@ public class ImageViewControl : Control
     public event Action<Detection, bool>? DetectionClicked;
     public event Action<PointF>? AddPointClicked;
     internal bool AddingPoint;
+    internal Predicate<Detection>? ControlClickTarget;
     protected virtual bool AddToSelection => (ModifierKeys & Keys.Control) != 0;
     public double Zoom => transform.Scale;
     public PointF ImageCenter => transform.ToImage(new PointF(ClientSize.Width / 2f, ClientSize.Height / 2f));
@@ -78,7 +79,7 @@ public class ImageViewControl : Control
 
     public void SetDetections(IReadOnlyList<Detection> records) => detections = records.Where(d => !d.IsDeleted).ToArray();
 
-    internal Detection? HitTestDetection(Point point)
+    internal Detection? HitTestDetection(Point point, Predicate<Detection>? eligible = null)
     {
         if (bitmap == null || !ClientRectangle.Contains(point)) return null;
         var imageBox = transform.ToScreen(new Rectangle(Point.Empty, bitmap.Size));
@@ -87,6 +88,7 @@ public class ImageViewControl : Control
         double bestDistance = double.PositiveInfinity;
         foreach (var record in detections)
         {
+            if (eligible != null && !eligible(record)) continue;
             var box = transform.ToScreen(record.UiBounds);
             if (!box.Contains(point)) continue; // Exactly the same rectangle as all overlays; no hidden halo.
             var center = record.UiCenter;
@@ -355,10 +357,11 @@ public class ImageViewControl : Control
                         AddPointClicked?.Invoke(point);
                     return;
                 }
-                var hit = HitTestDetection(e.Location);
+                bool control = AddToSelection;
+                var hit = HitTestDetection(e.Location, control && Mode == ImageViewMode.Detail ? ControlClickTarget : null);
                 if (hit != null)
                 {
-                    DetectionClicked?.Invoke(hit, AddToSelection);
+                    DetectionClicked?.Invoke(hit, control);
                     if (Mode == ImageViewMode.Overview)
                         NavigateRequested?.Invoke(hit.UiCenter);
                 }

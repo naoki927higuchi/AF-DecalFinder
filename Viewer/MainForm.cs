@@ -101,7 +101,12 @@ internal sealed class MainForm : Form
             if (first != null) view.CenterOn(first.UiCenter);
         };
         list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
-        view.DetectionClicked += SelectFromImage;
+        view.ControlClickTarget = record => list.ContainsDetection(record.Id);
+        view.DetectionClicked += (record, control) =>
+        {
+            if (control) list.SelectDetection(record.Id, add: true, toggle: true);
+            else SelectFromImage(record, false);
+        };
         overview.DetectionClicked += SelectFromImage;
         list.DataChanged += Changed;
         list.DeleteRequested += selected =>

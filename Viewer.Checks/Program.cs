@@ -19,6 +19,7 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
+        if (args.Contains("--toggle")) { ToggleChecks.Run(root); return; }
         if (args.Contains("--geometry")) { GeometryChecks.Run(root); return; }
         if (args.Contains("--workflow")) { WorkflowChecks.Run(root); return; }
         if (args.Contains("--ocr")) { OcrChecks.Run(root); return; }
