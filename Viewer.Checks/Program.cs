@@ -19,6 +19,8 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
+        if (args.Contains("--image-edit")) { ImageEditChecks.Run(root); return; }
+        if (args.Contains("--frames")) { FrameChecks.Run(root); return; }
         if (args.Contains("--toggle")) { ToggleChecks.Run(root); return; }
         if (args.Contains("--geometry")) { GeometryChecks.Run(root); return; }
         if (args.Contains("--workflow")) { WorkflowChecks.Run(root); return; }
@@ -391,6 +393,7 @@ internal static class Program
         {
             OnMouseDown(new MouseEventArgs(MouseButtons.Left, 1, x, y, 0));
             OnMouseUp(new MouseEventArgs(MouseButtons.Left, 1, x, y, 0));
+            CommitControlClick(); // Simulate expiration of the OS double-click interval.
         }
         public void DragFrom(int x, int y, int dx, int dy)
         {

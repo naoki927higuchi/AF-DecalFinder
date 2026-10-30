@@ -17,7 +17,7 @@ internal static class ToggleChecks
         internal void Down(Point p) => OnMouseDown(new(MouseButtons.Left,1,p.X,p.Y,0));
         internal void MovePointer(Point p) => OnMouseMove(new(MouseButtons.Left,0,p.X,p.Y,0));
         internal void Up(Point p) => OnMouseUp(new(MouseButtons.Left,1,p.X,p.Y,0));
-        internal void ClickAt(Point p) { Down(p);Up(p);Application.DoEvents(); }
+        internal void ClickAt(Point p) { Down(p);Up(p);CommitControlClick();Application.DoEvents(); }
     }
     internal static void Run(string root)
     {

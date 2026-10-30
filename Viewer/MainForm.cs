@@ -12,6 +12,8 @@ internal sealed class MainForm : Form
     private readonly CheckBox showList = new() { Text = "一覧表示", Checked = true, AutoSize = true, Margin = new Padding(12, 7, 5, 0) };
     private readonly CheckBox unknownOnly = new() { Text = "未認識のみ表示", AutoSize = true, Margin = new Padding(8, 7, 5, 0) };
     private readonly ComboBox zoom = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 85, AccessibleName = "拡大倍率" };
+    private readonly ComboBox frameWidth = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 70, AccessibleName = "枠線幅" };
+    private bool restoringFrameWidth;
     private int savedListWidth = 150;
     private readonly Button floatList = new() { Text = "一覧を切り離す", AutoSize = true, Height = 30 };
     private Form? floatingList;
@@ -26,6 +28,7 @@ internal sealed class MainForm : Form
     internal Task ActiveOcrTask { get; private set; } = Task.CompletedTask;
     internal bool IsAnalyzing { get; private set; }
     internal Func<int, bool>? ConfirmDeletion;
+    internal Func<Detection, Point, string?>? ImageEditPrompt;
     private OcrCatalog? catalog;
     private readonly EditStore store;
     private readonly AppSettingsStore settings;
@@ -60,6 +63,19 @@ internal sealed class MainForm : Form
         toolbar.AutoSize = true; toolbar.WrapContents = true;
         toolbar.Controls.Add(unknownOnly);
         unknownOnly.CheckedChanged += (_, _) => list.FilterUnrecognized(unknownOnly.Checked);
+        toolbar.Controls.AddRange([new Label { Text = "枠線幅", AutoSize = true, Margin = new Padding(12, 7, 5, 0) }, frameWidth]);
+        frameWidth.Items.AddRange(new object[] { "1 px", "2 px", "3 px", "4 px" });
+        frameWidth.SelectedIndex = 1;
+        frameWidth.SelectedIndexChanged += (_, _) =>
+        {
+            int width = frameWidth.SelectedIndex + 1;
+            view.FrameWidthPx = overview.FrameWidthPx = width;
+            if (!restoringFrameWidth)
+            {
+                try { settings.SaveFrameWidth(width); }
+                catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
+            }
+        };
         var detailToolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 38, Padding = new Padding(4), WrapContents = false };
         detailToolbar.Controls.AddRange([new Label { Text = "拡大画像", AutoSize = true, Margin = new Padding(3, 5, 8, 0) }, zoom]);
         zoom.Items.AddRange(new object[] { "25%", "50%", "75%", "100%", "150%", "200%" });
@@ -108,6 +124,20 @@ internal sealed class MainForm : Form
             else SelectFromImage(record, false);
         };
         overview.DetectionClicked += SelectFromImage;
+        view.DetectionEditRequested += (record, point) =>
+        {
+            if (IsAnalyzing || adding || catalog == null) return;
+            list.SuppressPendingNavigation();
+            string? value;
+            if (ImageEditPrompt != null) value = ImageEditPrompt(record, point);
+            else
+            {
+                using var dialog = new NumberDialog(record.IsUnrecognized ? "" : record.Number, point);
+                value = dialog.ShowDialog(this) == DialogResult.OK ? dialog.Number : null;
+            }
+            if (value != null && catalog.Detections.Any(d => ReferenceEquals(d, record) && !d.IsDeleted))
+                list.RenameFromImage(record.Id, value);
+        };
         list.DataChanged += Changed;
         list.DeleteRequested += selected =>
         {
@@ -156,6 +186,10 @@ internal sealed class MainForm : Form
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e); // Apply WinForms DPI autoscaling before restoring physical screen bounds.
+        restoringFrameWidth = true;
+        try { frameWidth.SelectedIndex = settings.LoadFrameWidth() - 1; }
+        catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
+        finally { restoringFrameWidth = false; }
         try
         {
             if (settings.LoadWindow() is { Width: > 0, Height: > 0 } saved)

@@ -21,6 +21,15 @@ internal sealed class AppSettingsStore(string? path = null)
         return new(last, recent);
     }
     internal ImageHistory Load() => ReadHistory(ReadDocument());
+    internal int LoadFrameWidth() => ReadDocument()["FrameWidthPx"] is JsonValue value &&
+        value.TryGetValue<int>(out var width) && width is >= 1 and <= 4 ? width : 2;
+    internal void SaveFrameWidth(int width)
+    {
+        if (width is < 1 or > 4) throw new ArgumentOutOfRangeException(nameof(width));
+        var data = ReadDocument();
+        data["FrameWidthPx"] = width;
+        WriteDocument(data);
+    }
     internal ImageHistory RecordOpened(string imagePath)
     {
         var absolute = Path.GetFullPath(imagePath);

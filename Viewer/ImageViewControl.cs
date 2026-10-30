@@ -23,9 +23,26 @@ public class ImageViewControl : Control
     public event Action? ViewportChanged;
     public event Action<PointF>? NavigateRequested;
     public event Action<Detection, bool>? DetectionClicked;
+    public event Action<Detection, Point>? DetectionEditRequested;
+    private readonly System.Windows.Forms.Timer controlClickTimer = new();
+    private Detection? pendingControlClick;
+    private bool editingGesture;
     public event Action<PointF>? AddPointClicked;
     internal bool AddingPoint;
     internal Predicate<Detection>? ControlClickTarget;
+    private int frameWidthPx = 2;
+    [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+    public int FrameWidthPx
+    {
+        get => frameWidthPx;
+        set
+        {
+            if (value is < 1 or > 4) throw new ArgumentOutOfRangeException(nameof(value));
+            if (frameWidthPx == value) return;
+            frameWidthPx = value;
+            Invalidate();
+        }
+    }
     protected virtual bool AddToSelection => (ModifierKeys & Keys.Control) != 0;
     public double Zoom => transform.Scale;
     public PointF ImageCenter => transform.ToImage(new PointF(ClientSize.Width / 2f, ClientSize.Height / 2f));
@@ -41,6 +58,9 @@ public class ImageViewControl : Control
 
     public ImageViewControl()
     {
+        SetStyle(ControlStyles.StandardClick | ControlStyles.StandardDoubleClick, true);
+        controlClickTimer.Interval = SystemInformation.DoubleClickTime;
+        controlClickTimer.Tick += (_, _) => CommitControlClick();
         SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint |
             ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.Selectable, true);
         BackColor = Color.FromArgb(48, 50, 54);
@@ -51,6 +71,7 @@ public class ImageViewControl : Control
     // The detail view owns the bitmap; the overview shares it without a second full-size copy.
     public void SetImage(Bitmap image, bool takeOwnership = true)
     {
+        CancelControlClick();
         var old = bitmap;
         var disposeOld = ownsBitmap;
         bitmap = image;
@@ -77,7 +98,20 @@ public class ImageViewControl : Control
         Invalidate(); // Search never modifies the transform.
     }
 
-    public void SetDetections(IReadOnlyList<Detection> records) => detections = records.Where(d => !d.IsDeleted).ToArray();
+    public void SetDetections(IReadOnlyList<Detection> records)
+    {
+        CancelControlClick();
+        detections = records.Where(d => !d.IsDeleted).ToArray();
+    }
+
+    private void CancelControlClick() { controlClickTimer.Stop(); pendingControlClick = null; }
+    internal void CommitControlClick()
+    {
+        var record = pendingControlClick;
+        CancelControlClick();
+        if (record != null && !record.IsDeleted && (ControlClickTarget?.Invoke(record) ?? true))
+            DetectionClicked?.Invoke(record, true);
+    }
 
     internal Detection? HitTestDetection(Point point, Predicate<Detection>? eligible = null)
     {
@@ -197,7 +231,7 @@ public class ImageViewControl : Control
             var box = transform.ToScreen(detection.UiBounds);
             if (box.IntersectsWith(e.ClipRectangle)) e.Graphics.FillRectangle(doneBrush, box);
         }
-        using var pen = new Pen(Color.Red, 2f);
+        using var pen = new Pen(Color.Red, FrameWidthPx);
         foreach (var match in highlights)
         {
             var box = transform.ToScreen(match.UiBounds);
@@ -205,7 +239,7 @@ public class ImageViewControl : Control
                 e.Graphics.DrawRectangle(pen, box.X, box.Y, box.Width, box.Height);
         }
         // Last pass gives blue priority where it overlaps red, with the same screen-space pen width.
-        using var selectionPen = new Pen(Color.Blue, 2f);
+        using var selectionPen = new Pen(Color.Blue, FrameWidthPx);
         foreach (var selectedDetection in selections)
         {
             var box = transform.ToScreen(selectedDetection.UiBounds);
@@ -294,6 +328,9 @@ public class ImageViewControl : Control
         base.OnMouseDown(e);
         Focus();
         if (e.Button != MouseButtons.Left || bitmap == null) return;
+        editingGesture = Mode == ImageViewMode.Detail && AddToSelection && e.Clicks == 2 && !AddingPoint;
+        if (editingGesture) CancelControlClick();
+        else CommitControlClick();
         navigationStart = e.Location;
         navigationMoved = false;
         if (Mode == ImageViewMode.Overview)
@@ -349,6 +386,14 @@ public class ImageViewControl : Control
             TrackMovement(e.Location);
             if (!navigationMoved && ClientRectangle.Contains(e.Location))
             {
+                if (editingGesture)
+                {
+                    var target = HitTestDetection(e.Location); // Editing also accepts recognized, filtered-out records.
+                    var screenPoint = PointToScreen(e.Location);
+                    EndDrag(); // Release mouse capture before entering the modal loop.
+                    if (target != null) DetectionEditRequested?.Invoke(target, screenPoint);
+                    return;
+                }
                 if (AddingPoint && Mode == ImageViewMode.Detail)
                 {
                     var point = transform.ToImage(e.Location);
@@ -361,7 +406,12 @@ public class ImageViewControl : Control
                 var hit = HitTestDetection(e.Location, control && Mode == ImageViewMode.Detail ? ControlClickTarget : null);
                 if (hit != null)
                 {
-                    DetectionClicked?.Invoke(hit, control);
+                    if (control && Mode == ImageViewMode.Detail)
+                    {
+                        pendingControlClick = hit;
+                        controlClickTimer.Start();
+                    }
+                    else DetectionClicked?.Invoke(hit, control);
                     if (Mode == ImageViewMode.Overview)
                         NavigateRequested?.Invoke(hit.UiCenter);
                 }
@@ -384,11 +434,12 @@ public class ImageViewControl : Control
         if (!Capture) EndDrag();
     }
 
-    private void EndDrag() { dragPoint = null; navigationStart = null; Capture = false; Cursor = Cursors.Default; }
+    private void EndDrag() { dragPoint = null; navigationStart = null; editingGesture = false; Capture = false; Cursor = Cursors.Default; }
 
     protected override void Dispose(bool disposing)
     {
         if (disposing) ClearOverviewImage();
+        if (disposing) controlClickTimer.Dispose();
         if (disposing && ownsBitmap && bitmap != null) { bitmap.Dispose(); if (Probe != null) Probe.BitmapDisposals++; }
         base.Dispose(disposing);
     }

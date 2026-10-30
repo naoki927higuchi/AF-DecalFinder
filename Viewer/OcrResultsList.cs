@@ -101,6 +101,24 @@ internal sealed class OcrResultsList : ListView
         return true;
     }
 
+    internal void SuppressPendingNavigation() => CancelSelectionNavigation();
+    internal bool RenameFromImage(string id, string value)
+    {
+        var record = allRecords.FirstOrDefault(d => d.Id == id && !d.IsDeleted);
+        if (record == null || !Detection.ValidLabel(value)) return false;
+        CancelSelectionNavigation();
+        updating = true;
+        try
+        {
+            record.Number = value; record.IsUnrecognized = false; record.IsModified = true;
+            if (rowsById.TryGetValue(id, out var row)) row.Selected = false;
+        }
+        finally { updating = false; }
+        SetDetections(allRecords, preserveSelection: true);
+        DataChanged?.Invoke();
+        return true;
+    }
+
     private void CancelSelectionNavigation()
     {
         navigationGeneration++;
