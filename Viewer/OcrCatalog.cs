@@ -13,6 +13,12 @@ public sealed class Detection(string number, Rectangle bounds, double confidence
     public bool IsDone { get; internal set; }
     public bool IsUnrecognized { get; internal set; }
     public bool IsDeleted { get; internal set; }
+    public CircleEvidence? Circle { get; internal set; }
+    public PointF? ManualCenter { get; init; }
+    public RectangleF UiBounds { get; internal set; } = bounds;
+    public PointF UiCenter => IsManual && ManualCenter is PointF clicked ? clicked
+        : Circle is { } circle ? new PointF(circle.X, circle.Y)
+        : new PointF(Bounds.X + Bounds.Width / 2f, Bounds.Y + Bounds.Height / 2f);
     public string DisplayNumber => IsUnrecognized ? "?" : Number;
     public static bool ValidLabel(string? value) => !string.IsNullOrWhiteSpace(value) && !value.Any(char.IsControl);
     // Preserve OCR evidence separately from editable values for a future explicit merge.
@@ -29,11 +35,18 @@ public sealed class OcrCatalog
     public IReadOnlyList<Detection> ActiveDetections => records.Where(d => !d.IsDeleted).ToArray();
     public int DoneCount => records.Count(d => !d.IsDeleted && d.IsDone);
     private readonly List<Detection> records;
+    public LabelSizeEstimate? RepresentativeSize { get; private set; }
+    internal void RecalculateUiBounds()
+    {
+        RepresentativeSize = LabelGeometry.Estimate(records);
+        foreach (var record in records) record.UiBounds = LabelGeometry.Bounds(record, ImageSize, RepresentativeSize);
+    }
     internal OcrCatalog(Size imageSize, List<Detection> detections)
     {
         ImageSize = imageSize;
         records = detections;
         Detections = detections.AsReadOnly();
+        RecalculateUiBounds();
     }
 
     internal Detection AddManual(string number, PointF center)
@@ -46,17 +59,27 @@ public sealed class OcrCatalog
         var box = new Rectangle(Math.Clamp((int)Math.Round(center.X - width / 2f), 0, ImageSize.Width - width),
             Math.Clamp((int)Math.Round(center.Y - height / 2f), 0, ImageSize.Height - height), width, height);
         var record = new Detection(number, box, 0, "manual-" + Guid.NewGuid().ToString("N"))
-            { IsManual = true, OriginalNumber = null, OriginalBounds = null };
+            { IsManual = true, ManualCenter = center, OriginalNumber = null, OriginalBounds = null };
         records.Add(record);
+        RecalculateUiBounds();
         return record;
     }
 
     internal int PreserveWork(OcrCatalog old)
     {
         var protectedRecords = old.Detections.Where(d => d.IsModified || d.IsManual || d.IsDone || d.IsDeleted).ToArray();
+        foreach (var saved in protectedRecords.Where(d => !d.IsManual && d.Circle == null))
+        {
+            // Same-image reanalysis: attach actual new measurements only on an exact original-box match.
+            // Never infer a center from the text bbox or an ambiguous neighboring circle.
+            var evidence = records.Where(d => d.Bounds == (saved.OriginalBounds ?? saved.Bounds) && d.Circle != null)
+                .Select(d => d.Circle!).Distinct().ToArray();
+            if (evidence.Length == 1) saved.Circle = evidence[0];
+        }
         records.RemoveAll(d => protectedRecords.Any(saved => d.Id == saved.Id || SamePosition(d.Bounds, saved.Bounds)));
         // Preserve every protected fixed ID, even when two user records overlap.
         records.AddRange(protectedRecords);
+        RecalculateUiBounds();
         return protectedRecords.Length;
     }
 

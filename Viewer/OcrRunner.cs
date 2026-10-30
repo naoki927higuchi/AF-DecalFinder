@@ -61,7 +61,20 @@ internal sealed class OcrRunner(string? runtimeDirectory = null) : IOcrRunner
                     box[0] < 0 || box[1] < 0 || box[2] <= 0 || box[3] <= 0 || (long)box[0]+box[2] > expected.Width ||
                     (long)box[1]+box[3] > expected.Height || !double.IsFinite(confidence) || confidence is < 0 or > 100) continue;
                 ids.Add(id);
-                records.Add(new(number!, new Rectangle(box[0],box[1],box[2],box[3]),confidence,id!) { IsUnrecognized = unknown });
+                CircleEvidence? circle = null;
+                if (row.TryGetProperty("candidate_circle", out var measured))
+                {
+                    // Optional malformed evidence must not discard an otherwise valid OCR record.
+                    try
+                    {
+                        var c = measured.EnumerateArray().Select(v => v.GetSingle()).ToArray();
+                        if (c.Length == 3 && c.All(float.IsFinite) && c[0] >= 0 && c[0] < expected.Width &&
+                            c[1] >= 0 && c[1] < expected.Height && c[2] > 0 && c[2]*2 <= Math.Min(expected.Width,expected.Height))
+                            circle = new(c[0],c[1],c[2]*2,c[2]*2);
+                    }
+                    catch (Exception ex) when (ex is InvalidOperationException or FormatException or OverflowException) { }
+                }
+                records.Add(new(number!, new Rectangle(box[0],box[1],box[2],box[3]),confidence,id!) { IsUnrecognized = unknown, Circle = circle });
             }
             catch (Exception ex) when (ex is KeyNotFoundException or InvalidOperationException or FormatException or OverflowException) { }
         }

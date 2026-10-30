@@ -19,6 +19,7 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
+        if (args.Contains("--geometry")) { GeometryChecks.Run(root); return; }
         if (args.Contains("--workflow")) { WorkflowChecks.Run(root); return; }
         if (args.Contains("--ocr")) { OcrChecks.Run(root); return; }
         if (args.Contains("--inputs")) { OcrChecks.Run(root); return; }
@@ -84,7 +85,7 @@ internal static class Program
             form.Show();
             Application.DoEvents();
             var toolbar = form.Controls.OfType<FlowLayoutPanel>().Single();
-            var toggle = toolbar.Controls.OfType<CheckBox>().Single();
+            var toggle = toolbar.Controls.OfType<CheckBox>().Single(c => c.Text == "一覧表示");
             var panes = form.Controls.OfType<SplitContainer>().Single();
             var images = panes.Panel2.Controls.OfType<SplitContainer>().Single();
             var list = panes.Panel1.Controls.OfType<OcrResultsList>().Single();
@@ -343,7 +344,7 @@ internal static class Program
         Check(hits == 3, "MouseUp displacement also rejects a click without MouseMove");
         detail.Down(110, 110); detail.LoseCapture(); detail.Up(110, 110);
         Check(hits == 3, "Capture loss cancels pending click");
-        Check(ReferenceEquals(detail.HitTestDetection(new Point(96, 110)), records[0]) && detail.HitTestDetection(new Point(94, 110)) == null, "Detail hit halo uses screen-space five pixels");
+        Check(detail.HitTestDetection(new Point(96, 110)) == null && ReferenceEquals(detail.HitTestDetection(new Point(100, 110)), records[0]), "Hit area equals visible rectangle without hidden halo (1.8.1)");
         detail.SetZoom(2);
         var box = detail.ScreenBounds(records[0].Bounds);
         Check(ReferenceEquals(detail.HitTestDetection(new Point((int)box.X + 5, (int)box.Y + 5)), records[0]), "Hit testing follows zoom and pan transform");
@@ -364,7 +365,7 @@ internal static class Program
         Check(overviewHits == 1, "Dragging from OCR box inside navigation frame never selects");
         var dense = new[] { new Detection("1", new Rectangle(300, 250, 10, 10), 90, "x"), new Detection("2", new Rectangle(304, 250, 10, 10), 90, "y") };
         overview.SetDetections(dense);
-        Check(overview.HitTestDetection(new Point(154, 127)) == null, "Ambiguous overlapping Fit labels are not selected");
+        Check(overview.HitTestDetection(new Point(154, 127))?.Id == "y", "Overlapping Fit labels choose nearest center (1.8.1)");
         Check(overview.HitTestDetection(new Point(146, 127)) == null, "Fit hit expansion stays small for tiny labels");
         detail.SetDetections(new[] { new Detection("1", new Rectangle(300, 250, 30, 20), 90, "inside"), new Detection("2", new Rectangle(328, 250, 2, 20), 90, "near") });
         Check(detail.HitTestDetection(new Point(126,110))?.Id == "inside", "Actual bbox containment beats a nearer halo candidate");

@@ -1,0 +1,114 @@
+[
+  {
+    "Image": "300dpi.jpg.json",
+    "Count": 247,
+    "Estimate": {
+      "Size": {
+        "IsEmpty": false,
+        "Width": 30.925985,
+        "Height": 30.925985
+      },
+      "Samples": 247,
+      "Inliers": 246
+    },
+    "MeanDerivationMs": 0.11698700000000001
+  },
+  {
+    "Image": "600dpi.jpg.json",
+    "Count": 276,
+    "Estimate": {
+      "Size": {
+        "IsEmpty": false,
+        "Width": 63.99206,
+        "Height": 63.99206
+      },
+      "Samples": 276,
+      "Inliers": 273
+    },
+    "MeanDerivationMs": 0.122203
+  },
+  {
+    "Image": "MGUC\u30DA\u30EB\u30D5\u30A7\u30AF\u30C6\u30A3\u30D3\u30C6\u30A32.png.json",
+    "Count": 129,
+    "Estimate": {
+      "Size": {
+        "IsEmpty": false,
+        "Width": 68.71183,
+        "Height": 68.71183
+      },
+      "Samples": 129,
+      "Inliers": 122
+    },
+    "MeanDerivationMs": 0.050954
+  },
+  {
+    "Image": "RG RX-78-2 ver 2.png.json",
+    "Count": 146,
+    "Estimate": {
+      "Size": {
+        "IsEmpty": false,
+        "Width": 55.677128,
+        "Height": 55.677128
+      },
+      "Samples": 146,
+      "Inliers": 144
+    },
+    "MeanDerivationMs": 0.07503
+  },
+  {
+    "Image": "RG\u30EB\u30FC\u30B8\u30E5.png.json",
+    "Count": 199,
+    "Estimate": {
+      "Size": {
+        "IsEmpty": false,
+        "Width": 53.638878,
+        "Height": 53.638878
+      },
+      "Samples": 199,
+      "Inliers": 199
+    },
+    "MeanDerivationMs": 0.088911
+  },
+  {
+    "Image": "RX-78 ver 3.0.png.json",
+    "Count": 357,
+    "Estimate": {
+      "Size": {
+        "IsEmpty": false,
+        "Width": 23.491537,
+        "Height": 23.491537
+      },
+      "Samples": 357,
+      "Inliers": 340
+    },
+    "MeanDerivationMs": 0.17554099999999997
+  },
+  {
+    "Image": "\u30AB\u30C8\u30AD\u30AC\u30F3\u30C0\u30E0.png.json",
+    "Count": 110,
+    "Estimate": {
+      "Size": {
+        "IsEmpty": false,
+        "Width": 59.965557,
+        "Height": 59.965557
+      },
+      "Samples": 110,
+      "Inliers": 110
+    },
+    "MeanDerivationMs": 0.046381
+  },
+  {
+    "Image": "\u30EB\u30CA\u30DE\u30EA\u30A2\u30B6\u30AF\u30A6\u30A9\u30FC\u30EA\u30A2.png.json",
+    "Count": 93,
+    "Estimate": {
+      "Size": {
+        "IsEmpty": false,
+        "Width": 70.654976,
+        "Height": 70.654976
+      },
+      "Samples": 93,
+      "Inliers": 93
+    },
+    "MeanDerivationMs": 0.038814
+  }
+]

@@ -20,6 +20,15 @@ internal sealed class OcrResultsList : ListView
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     private static extern bool SetWindowText(IntPtr window, string text);
     private readonly Dictionary<string, ListViewItem> rowsById = new(StringComparer.Ordinal);
+    private IReadOnlyList<Detection> allRecords = [];
+    internal bool OnlyUnrecognized { get; private set; }
+    internal IEnumerable<Detection> OrderedDetections => allRecords.Where(d => !d.IsDeleted)
+        .OrderBy(d => d, Comparer<Detection>.Create(CompareRecords));
+    internal void FilterUnrecognized(bool value)
+    {
+        OnlyUnrecognized = value;
+        SetDetections(allRecords, preserveSelection: true);
+    }
     public event Action<IReadOnlyList<Detection>>? SelectionChanged;
     public event Action<Detection>? NavigateRequested;
     public event Action? DataChanged;
@@ -114,6 +123,11 @@ internal sealed class OcrResultsList : ListView
 
     private void RefreshEditedRow(ListViewItem row)
     {
+        if (OnlyUnrecognized && !((Detection)row.Tag!).IsUnrecognized)
+        {
+            SetDetections(allRecords, preserveSelection: true);
+            return;
+        }
         CancelSelectionNavigation();
         updating = true;
         try
@@ -147,9 +161,10 @@ internal sealed class OcrResultsList : ListView
 
     private sealed class DetectionComparer : System.Collections.IComparer
     {
-        public int Compare(object? x, object? y)
-        {
-            var a = (Detection)((ListViewItem)x!).Tag!; var b = (Detection)((ListViewItem)y!).Tag!;
+        public int Compare(object? x, object? y) => CompareRecords((Detection)((ListViewItem)x!).Tag!, (Detection)((ListViewItem)y!).Tag!);
+    }
+    private static int CompareRecords(Detection a, Detection b)
+    {
             int c = LabelGroup(a).CompareTo(LabelGroup(b));
             if (c == 0) c = LabelGroup(a) == 0
                 ? NumericValue(a.Number).CompareTo(NumericValue(b.Number))
@@ -157,7 +172,6 @@ internal sealed class OcrResultsList : ListView
             if (c == 0) c = a.Bounds.Y.CompareTo(b.Bounds.Y);
             if (c == 0) c = a.Bounds.X.CompareTo(b.Bounds.X);
             return c == 0 ? StringComparer.Ordinal.Compare(a.Id, b.Id) : c;
-        }
     }
 
     private void EditRow(ListViewItem? row)
@@ -211,6 +225,7 @@ internal sealed class OcrResultsList : ListView
 
     public void SetDetections(IReadOnlyList<Detection> detections, bool preserveSelection = false)
     {
+        allRecords = detections;
         var selected = preserveSelection ? SelectedDetections.Select(d => d.Id).ToHashSet(StringComparer.Ordinal) : [];
         var focusedId = preserveSelection ? (FocusedItem?.Tag as Detection)?.Id : null;
         CancelSelectionNavigation();
@@ -220,7 +235,7 @@ internal sealed class OcrResultsList : ListView
         {
             Items.Clear();
             rowsById.Clear();
-            foreach (var detection in detections.Where(d => !d.IsDeleted))
+            foreach (var detection in detections.Where(d => !d.IsDeleted && (!OnlyUnrecognized || d.IsUnrecognized)))
             {
                 var row = new ListViewItem(detection.DisplayNumber) { Tag = detection, Checked = detection.IsDone };
                 Items.Add(row);

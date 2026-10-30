@@ -22,3 +22,7 @@ Evaluation180/*.png.*.json
 Evaluation180/mono-source.png
 Evaluation180/mono-new.json
 Evaluation180/mono-old.json
+Evaluation181/*.jpg.json
+Evaluation181/*.png.json
+Evaluation181/*.log
+Evaluation181/*.png

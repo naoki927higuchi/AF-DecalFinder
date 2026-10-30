@@ -32,6 +32,7 @@ public class ImageViewControl : Control
         new RectangleF(transform.ToImage(PointF.Empty), new SizeF((float)(ClientSize.Width / Zoom), (float)(ClientSize.Height / Zoom))),
         new RectangleF(0, 0, bitmap.Width, bitmap.Height));
     public RectangleF ScreenBounds(Rectangle bounds) => transform.ToScreen(bounds);
+    public RectangleF ScreenBounds(RectangleF bounds) => transform.ToScreen(bounds);
     private readonly ViewTransform transform = new();
     private bool fitted = true;
     private Point? dragPoint;
@@ -83,31 +84,21 @@ public class ImageViewControl : Control
         var imageBox = transform.ToScreen(new Rectangle(Point.Empty, bitmap.Size));
         if (!imageBox.Contains(point)) return null;
         Detection? best = null;
-        bool bestInside = false;
-        double bestDistance = double.PositiveInfinity, secondDistance = double.PositiveInfinity;
+        double bestDistance = double.PositiveInfinity;
         foreach (var record in detections)
         {
-            var box = transform.ToScreen(record.Bounds);
-            bool inside = box.Contains(point);
-            // Fit labels can be only a few pixels wide; do not give each one a 10px halo.
-            float margin = Mode == ImageViewMode.Overview ? Math.Min(2f, Math.Min(box.Width, box.Height) / 4f) : 5f;
-            var target = box; target.Inflate(margin, margin);
-            if (!target.Contains(point)) continue;
-            double dx = point.X - (box.X + box.Width / 2), dy = point.Y - (box.Y + box.Height / 2);
-            double distance = Math.Sqrt(dx * dx + dy * dy);
-            if (best == null || (inside && !bestInside))
-            { best = record; bestInside = inside; bestDistance = distance; secondDistance = double.PositiveInfinity; }
-            else if (inside == bestInside)
-            {
-                if (distance < bestDistance || (distance == bestDistance && StringComparer.Ordinal.Compare(record.Id, best.Id) < 0))
-                { secondDistance = bestDistance; best = record; bestDistance = distance; }
-                else secondDistance = Math.Min(secondDistance, distance);
-            }
+            var box = transform.ToScreen(record.UiBounds);
+            if (!box.Contains(point)) continue; // Exactly the same rectangle as all overlays; no hidden halo.
+            var center = record.UiCenter;
+            var centerBox = transform.ToScreen(new RectangleF(center, SizeF.Empty));
+            double dx = point.X - centerBox.X, dy = point.Y - centerBox.Y;
+            double distance = dx * dx + dy * dy;
+            if (best == null || distance < bestDistance ||
+                (distance == bestDistance && StringComparer.Ordinal.Compare(record.Id, best.Id) < 0))
+            { best = record; bestDistance = distance; }
         }
-        // No arbitrary winner for dense Fit labels. A miss still permits normal navigation.
-        return Mode == ImageViewMode.Overview && secondDistance - bestDistance <= 2 ? null : best;
+        return best;
     }
-
     public void SetSelection(Detection? detection)
     {
         SetSelections(detection == null ? Array.Empty<Detection>() : new[] { detection });
@@ -201,13 +192,13 @@ public class ImageViewControl : Control
         foreach (var detection in detections)
         {
             if (!detection.IsDone) continue;
-            var box = transform.ToScreen(detection.Bounds);
+            var box = transform.ToScreen(detection.UiBounds);
             if (box.IntersectsWith(e.ClipRectangle)) e.Graphics.FillRectangle(doneBrush, box);
         }
         using var pen = new Pen(Color.Red, 2f);
         foreach (var match in highlights)
         {
-            var box = transform.ToScreen(match.Bounds);
+            var box = transform.ToScreen(match.UiBounds);
             if (box.IntersectsWith(ClientRectangle))
                 e.Graphics.DrawRectangle(pen, box.X, box.Y, box.Width, box.Height);
         }
@@ -215,7 +206,7 @@ public class ImageViewControl : Control
         using var selectionPen = new Pen(Color.Blue, 2f);
         foreach (var selectedDetection in selections)
         {
-            var box = transform.ToScreen(selectedDetection.Bounds);
+            var box = transform.ToScreen(selectedDetection.UiBounds);
             if (box.IntersectsWith(ClientRectangle))
             {
                 e.Graphics.DrawRectangle(selectionPen, box.X, box.Y, box.Width, box.Height);
@@ -369,7 +360,7 @@ public class ImageViewControl : Control
                 {
                     DetectionClicked?.Invoke(hit, AddToSelection);
                     if (Mode == ImageViewMode.Overview)
-                        NavigateRequested?.Invoke(new PointF(hit.Bounds.X + hit.Bounds.Width / 2f, hit.Bounds.Y + hit.Bounds.Height / 2f));
+                        NavigateRequested?.Invoke(hit.UiCenter);
                 }
                 else if (Mode == ImageViewMode.Overview) NavigateRequested?.Invoke(transform.ToImage(e.Location));
             }

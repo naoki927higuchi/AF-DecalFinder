@@ -29,7 +29,8 @@ internal sealed class EditStore(string? directory = null)
         return archive;
     }
     internal sealed record Entry(string Id, string Number, int[] Bbox, double Confidence, bool IsManual, bool IsModified, bool IsDone,
-        string? OriginalNumber, int[]? OriginalBbox, bool IsUnrecognized = false, bool IsDeleted = false);
+        string? OriginalNumber, int[]? OriginalBbox, bool IsUnrecognized = false, bool IsDeleted = false,
+        CircleEvidence? Circle = null, PointF? ManualCenter = null);
     internal sealed record Document(int SchemaVersion, ImageIdentity Image, Entry[] Records, string? SourceSha256 = null);
     private readonly Dictionary<ImageIdentity, string> hashes = new();
     private string SourceHash(ImageIdentity image)
@@ -72,11 +73,18 @@ internal sealed class EditStore(string? directory = null)
                 || (!entry.IsManual && (entry.OriginalNumber == null || entry.OriginalBbox == null)))
                 throw new InvalidDataException("保存データの番号・ID・OCR情報が不正です。");
             records.Add(new Detection(entry.Number, ReadBox(entry.Bbox, image), entry.Confidence, entry.Id) {
+                Circle = ValidCircle(entry.Circle,image) ? entry.Circle : null,
+                ManualCenter = entry.ManualCenter is PointF p && ValidPoint(p,image) ? p : null,
                 IsManual = entry.IsManual, IsModified = entry.IsModified, IsDone = entry.IsDone, IsUnrecognized = entry.IsUnrecognized, IsDeleted = entry.IsDeleted,
                 OriginalNumber = entry.OriginalNumber, OriginalBounds = entry.OriginalBbox == null ? null : ReadBox(entry.OriginalBbox, image) });
         }
         return new OcrCatalog(new Size(image.Width, image.Height), records);
     }
+    private static bool ValidPoint(PointF p, ImageIdentity image) => float.IsFinite(p.X) && float.IsFinite(p.Y)
+        && p.X >= 0 && p.Y >= 0 && p.X < image.Width && p.Y < image.Height;
+    private static bool ValidCircle(CircleEvidence? c, ImageIdentity image) => c != null && ValidPoint(new(c.X,c.Y),image)
+        && float.IsFinite(c.Width) && float.IsFinite(c.Height) && c.Width > 0 && c.Height > 0
+        && c.Width <= image.Width && c.Height <= image.Height;
     internal int RestoreProtected(ImageIdentity image, OcrCatalog fresh, string archive)
     {
         Document? old;
@@ -98,7 +106,8 @@ internal sealed class EditStore(string? directory = null)
         var path = PathFor(image.AbsolutePath);
         var temp = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
         var data = new Document(2, image, catalog.Detections.Select(d => new Entry(d.Id, d.Number, Box(d.Bounds), d.Confidence,
-            d.IsManual, d.IsModified, d.IsDone, d.OriginalNumber, d.OriginalBounds is Rectangle original ? Box(original) : null, d.IsUnrecognized, d.IsDeleted)).ToArray(), SourceHash(image));
+            d.IsManual, d.IsModified, d.IsDone, d.OriginalNumber, d.OriginalBounds is Rectangle original ? Box(original) : null, d.IsUnrecognized, d.IsDeleted,
+            d.Circle, d.ManualCenter)).ToArray(), SourceHash(image));
         try
         {
             using (var stream = new FileStream(temp, FileMode.CreateNew, FileAccess.Write, FileShare.None))

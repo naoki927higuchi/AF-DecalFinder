@@ -10,6 +10,7 @@ internal sealed class MainForm : Form
     private readonly SplitContainer panes = new() { Dock = DockStyle.Fill, FixedPanel = FixedPanel.Panel1, SplitterWidth = 6 };
     private readonly SplitContainer images = new() { Dock = DockStyle.Fill, SplitterWidth = 6 };
     private readonly CheckBox showList = new() { Text = "一覧表示", Checked = true, AutoSize = true, Margin = new Padding(12, 7, 5, 0) };
+    private readonly CheckBox unknownOnly = new() { Text = "未認識のみ表示", AutoSize = true, Margin = new Padding(8, 7, 5, 0) };
     private readonly ComboBox zoom = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 85, AccessibleName = "拡大倍率" };
     private int savedListWidth = 150;
     private readonly Button floatList = new() { Text = "一覧を切り離す", AutoSize = true, Height = 30 };
@@ -57,6 +58,8 @@ internal sealed class MainForm : Form
         var toolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 48, Padding = new Padding(8), WrapContents = false };
         toolbar.Controls.AddRange([open, showList, floatList, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count, addPrompt, cancelAdd]);
         toolbar.AutoSize = true; toolbar.WrapContents = true;
+        toolbar.Controls.Add(unknownOnly);
+        unknownOnly.CheckedChanged += (_, _) => list.FilterUnrecognized(unknownOnly.Checked);
         var detailToolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 38, Padding = new Padding(4), WrapContents = false };
         detailToolbar.Controls.AddRange([new Label { Text = "拡大画像", AutoSize = true, Margin = new Padding(3, 5, 8, 0) }, zoom]);
         zoom.Items.AddRange(new object[] { "25%", "50%", "75%", "100%", "150%", "200%" });
@@ -93,13 +96,13 @@ internal sealed class MainForm : Form
         {
             if (e.KeyCode != Keys.Enter) return;
             e.Handled = e.SuppressKeyPress = true;
-            var first = list.Items.Cast<ListViewItem>().Select(row => (Detection)row.Tag!)
+            var first = list.OrderedDetections
                 .FirstOrDefault(d => !d.IsUnrecognized && !d.IsDeleted && number.Text.Length > 0 && d.Number == number.Text);
-            if (first != null) view.CenterOn(new PointF(first.Bounds.X + first.Bounds.Width / 2f, first.Bounds.Y + first.Bounds.Height / 2f));
+            if (first != null) view.CenterOn(first.UiCenter);
         };
         list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
-        view.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
-        overview.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
+        view.DetectionClicked += SelectFromImage;
+        overview.DetectionClicked += SelectFromImage;
         list.DataChanged += Changed;
         list.DeleteRequested += selected =>
         {
@@ -118,7 +121,7 @@ internal sealed class MainForm : Form
             }
             else EndAdd();
         };
-        list.NavigateRequested += detection => view.CenterOn(new PointF(detection.Bounds.X + detection.Bounds.Width / 2f, detection.Bounds.Y + detection.Bounds.Height / 2f));
+        list.NavigateRequested += detection => view.CenterOn(detection.UiCenter);
         floatList.Click += (_, _) => { if (floatingList == null) FloatList(); else DockList(); };
         view.ViewportChanged += () => overview.SetNavigationBounds(view.VisibleImageBounds);
         overview.NavigateRequested += view.CenterOn;
@@ -344,6 +347,7 @@ internal sealed class MainForm : Form
 
     private void SetAnalyzing(bool value)
     {
+        unknownOnly.Enabled = !value;
         IsAnalyzing = value;
         UseWaitCursor = value;
         if (floatingList != null) floatingList.UseWaitCursor = value;
@@ -454,6 +458,7 @@ internal sealed class MainForm : Form
         if (!adding || identity == null) return;
         catalog ??= new OcrCatalog(new Size(identity.Width, identity.Height), []);
         var record = catalog.AddManual(value, point);
+        unknownOnly.Checked = false;
         list.SetDetections(catalog.Detections, preserveSelection: true);
         EndAdd();
         list.SelectDetection(record.Id, false);
@@ -469,10 +474,17 @@ internal sealed class MainForm : Form
         Changed();
     }
 
+    private void SelectFromImage(Detection record, bool add)
+    {
+        if (!record.IsUnrecognized) unknownOnly.Checked = false;
+        list.SelectDetection(record.Id, add);
+    }
+
     private void Changed()
     {
         if (catalog == null) return;
         dirty = true;
+        catalog.RecalculateUiBounds();
         number.Enabled = true;
         view.SetDetections(catalog.Detections); overview.SetDetections(catalog.Detections);
         Search(); // Invalidate both images; keeps transform and selection intact.

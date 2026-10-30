@@ -1,0 +1,338 @@
+[
+  {
+    "file": "300dpi.jpg",
+    "records": 247,
+    "candidates": 247,
+    "median": 32.0,
+    "thresholds": [
+      {
+        "tolerance": 0.2,
+        "inliers": 223,
+        "width": 31.32961651962434,
+        "height": 31.32961651962434,
+        "cv": 0.0676652482679583
+      },
+      {
+        "tolerance": 0.3,
+        "inliers": 246,
+        "width": 30.925986196200054,
+        "height": 30.925986196200054,
+        "cv": 0.09553495275987609
+      },
+      {
+        "tolerance": 0.4,
+        "inliers": 247,
+        "width": 30.971148199320805,
+        "height": 30.971148199320805,
+        "cv": 0.0979110003696113
+      }
+    ],
+    "old": {
+      "tp": 12,
+      "fn": 0,
+      "fp": 1
+    },
+    "two_pass": {
+      "tp": 12,
+      "fn": 0,
+      "fp": 2
+    },
+    "two_pass_count": 253,
+    "ocr_seconds": 4.0293823999818414,
+    "extra_pass_seconds": 0.3915256999898702
+  },
+  {
+    "file": "600dpi.jpg",
+    "records": 276,
+    "candidates": 276,
+    "median": 65.4000015258789,
+    "thresholds": [
+      {
+        "tolerance": 0.2,
+        "inliers": 263,
+        "width": 63.75760762060161,
+        "height": 63.75760762060161,
+        "cv": 0.07663002746654608
+      },
+      {
+        "tolerance": 0.3,
+        "inliers": 273,
+        "width": 63.99206096848164,
+        "height": 63.99206096848164,
+        "cv": 0.08885038096529109
+      },
+      {
+        "tolerance": 0.4,
+        "inliers": 276,
+        "width": 64.23915658291452,
+        "height": 64.23915658291452,
+        "cv": 0.09537634285325353
+      }
+    ],
+    "old": {
+      "tp": 12,
+      "fn": 0,
+      "fp": 4
+    },
+    "two_pass": {
+      "tp": 12,
+      "fn": 0,
+      "fp": 4
+    },
+    "two_pass_count": 284,
+    "ocr_seconds": 5.75765839999076,
+    "extra_pass_seconds": 1.1640762999886647
+  },
+  {
+    "file": "RGルージュ.png",
+    "records": 199,
+    "candidates": 199,
+    "median": 55.85485633577619,
+    "thresholds": [
+      {
+        "tolerance": 0.2,
+        "inliers": 168,
+        "width": 55.02088188714722,
+        "height": 55.02088188714722,
+        "cv": 0.08249688892939071
+      },
+      {
+        "tolerance": 0.3,
+        "inliers": 199,
+        "width": 53.63887718720994,
+        "height": 53.63887718720994,
+        "cv": 0.11943941758972283
+      },
+      {
+        "tolerance": 0.4,
+        "inliers": 199,
+        "width": 53.63887718720994,
+        "height": 53.63887718720994,
+        "cv": 0.11943941758972283
+      }
+    ],
+    "old": {
+      "tp": 9,
+      "fn": 0,
+      "fp": 1
+    },
+    "two_pass": {
+      "tp": 9,
+      "fn": 0,
+      "fp": 1
+    },
+    "two_pass_count": 221,
+    "ocr_seconds": 3.7206450999947265,
+    "extra_pass_seconds": 0.9191685999976471
+  },
+  {
+    "file": "カトキガンダム.png",
+    "records": 110,
+    "candidates": 110,
+    "median": 61.824355560030256,
+    "thresholds": [
+      {
+        "tolerance": 0.2,
+        "inliers": 94,
+        "width": 61.51978152760619,
+        "height": 61.51978152760619,
+        "cv": 0.05181752160988264
+      },
+      {
+        "tolerance": 0.3,
+        "inliers": 110,
+        "width": 59.96555683400415,
+        "height": 59.96555683400415,
+        "cv": 0.09849207103100092
+      },
+      {
+        "tolerance": 0.4,
+        "inliers": 110,
+        "width": 59.96555683400415,
+        "height": 59.96555683400415,
+        "cv": 0.09849207103100092
+      }
+    ],
+    "old": {
+      "tp": 12,
+      "fn": 0,
+      "fp": 1
+    },
+    "two_pass": {
+      "tp": 12,
+      "fn": 0,
+      "fp": 1
+    },
+    "two_pass_count": 124,
+    "ocr_seconds": 3.9029382999869995,
+    "extra_pass_seconds": 1.0467566000006627
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "records": 129,
+    "candidates": 129,
+    "median": 67.2,
+    "thresholds": [
+      {
+        "tolerance": 0.2,
+        "inliers": 120,
+        "width": 68.7370257997513,
+        "height": 68.7370257997513,
+        "cv": 0.09928288470868933
+      },
+      {
+        "tolerance": 0.3,
+        "inliers": 122,
+        "width": 68.71182865549306,
+        "height": 68.71182865549306,
+        "cv": 0.10249136373008617
+      },
+      {
+        "tolerance": 0.4,
+        "inliers": 129,
+        "width": 69.76932632535004,
+        "height": 69.76932632535004,
+        "cv": 0.11678858570803302
+      }
+    ],
+    "old": {
+      "tp": 9,
+      "fn": 0,
+      "fp": 2
+    },
+    "two_pass": {
+      "tp": 9,
+      "fn": 0,
+      "fp": 2
+    },
+    "two_pass_count": 141,
+    "ocr_seconds": 2.7759042999823578,
+    "extra_pass_seconds": 0.6144769999955315
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "records": 146,
+    "candidates": 146,
+    "median": 56.88257060664041,
+    "thresholds": [
+      {
+        "tolerance": 0.2,
+        "inliers": 133,
+        "width": 55.986002300144136,
+        "height": 55.986002300144136,
+        "cv": 0.0967107622425136
+      },
+      {
+        "tolerance": 0.3,
+        "inliers": 144,
+        "width": 55.677128097280146,
+        "height": 55.677128097280146,
+        "cv": 0.11111488255525986
+      },
+      {
+        "tolerance": 0.4,
+        "inliers": 146,
+        "width": 55.94157256025391,
+        "height": 55.94157256025391,
+        "cv": 0.11693884246951551
+      }
+    ],
+    "old": {
+      "tp": 10,
+      "fn": 1,
+      "fp": 1
+    },
+    "two_pass": {
+      "tp": 11,
+      "fn": 0,
+      "fp": 2
+    },
+    "two_pass_count": 175,
+    "ocr_seconds": 2.9832205999991857,
+    "extra_pass_seconds": 0.5697667000058573
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "records": 357,
+    "candidates": 357,
+    "median": 23.78542895589556,
+    "thresholds": [
+      {
+        "tolerance": 0.2,
+        "inliers": 310,
+        "width": 22.930556470855592,
+        "height": 22.930556470855592,
+        "cv": 0.12959340000725408
+      },
+      {
+        "tolerance": 0.3,
+        "inliers": 340,
+        "width": 23.49153634285927,
+        "height": 23.49153634285927,
+        "cv": 0.14319047015561778
+      },
+      {
+        "tolerance": 0.4,
+        "inliers": 345,
+        "width": 23.60388467743481,
+        "height": 23.60388467743481,
+        "cv": 0.14681624622819733
+      }
+    ],
+    "old": {
+      "tp": 14,
+      "fn": 0,
+      "fp": 7
+    },
+    "two_pass": {
+      "tp": 14,
+      "fn": 0,
+      "fp": 10
+    },
+    "two_pass_count": 396,
+    "ocr_seconds": 2.2075101000082213,
+    "extra_pass_seconds": 0.27974430000176653
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "records": 93,
+    "candidates": 93,
+    "median": 73.82571266719273,
+    "thresholds": [
+      {
+        "tolerance": 0.2,
+        "inliers": 90,
+        "width": 71.11500035967146,
+        "height": 71.11500035967146,
+        "cv": 0.08623249792227716
+      },
+      {
+        "tolerance": 0.3,
+        "inliers": 93,
+        "width": 70.65497729789277,
+        "height": 70.65497729789277,
+        "cv": 0.09258087590756241
+      },
+      {
+        "tolerance": 0.4,
+        "inliers": 93,
+        "width": 70.65497729789277,
+        "height": 70.65497729789277,
+        "cv": 0.09258087590756241
+      }
+    ],
+    "old": {
+      "tp": 9,
+      "fn": 0,
+      "fp": 0
+    },
+    "two_pass": {
+      "tp": 9,
+      "fn": 0,
+      "fp": 0
+    },
+    "two_pass_count": 103,
+    "ocr_seconds": 2.783261100004893,
+    "extra_pass_seconds": 0.8272372999927029
+  }
+]

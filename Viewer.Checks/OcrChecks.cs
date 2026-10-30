@@ -51,7 +51,7 @@ internal static class OcrChecks
         var store = new EditStore(Path.Combine(folder, "cache"));
         var settings = new AppSettingsStore(Path.Combine(folder, "Settings.json"));
         var runner = new CountingRunner(new OcrRunner(runtime));
-        var report = new StringBuilder("# 1.8.0 OCR統合検証\n\n日時：" + DateTimeOffset.Now.ToString("u") + "\n\n専用の空キャッシュ・設定を使用。Release実MainFormから8原本を順次読み込み、UIメッセージを処理しながら完了待機。各値は1回測定。OCR秒はプロセス起動・Python import・画像decode・認識・JSON検証を含む。初回/再読込秒は画像decode・表示・キャッシュI/Oを含む。\n\n|画像|寸法|検出数|OCR秒|初回秒|キャッシュ再読込秒|待機中UI処理回数|\n|---|---|---:|---:|---:|---:|---:|\n");
+        var report = new StringBuilder("# 1.8.1 OCR統合検証\n\n日時：" + DateTimeOffset.Now.ToString("u") + "\n\n専用の空キャッシュ・設定を使用。Release実MainFormから8原本を順次読み込み、UIメッセージを処理しながら完了待機。各値は1回測定。OCR秒はプロセス起動・Python import・画像decode・認識・JSON検証を含む。初回/再読込秒は画像decode・表示・キャッシュI/Oを含む。\n\n|画像|寸法|検出数|OCR秒|初回秒|キャッシュ再読込秒|待機中UI処理回数|\n|---|---|---:|---:|---:|---:|---:|\n");
         var files = Directory.GetFiles(Path.Combine(root, "inputs")).Where(p => Path.GetFileName(p) != "icon.png" && new[] { ".jpg", ".png", ".jpeg" }.Contains(Path.GetExtension(p).ToLowerInvariant())).Order().ToArray();
         Check(files.Length == 8, "Exactly eight provided inputs");
         using (var form = new MainForm(null, store, settings, runner))
@@ -133,7 +133,7 @@ internal static class OcrChecks
             Check(canceled, "Real subprocess supports cancellation");
         }
         report.AppendLine($"\n自動確認 {checks}項目成功。全8画像で原本SHA256不変、初回OCR・キャッシュ再読込・編集/追加/済み復元・25/50/100/200%パンを確認。テムジン600dpiは181件の番号とbboxがPhase 1と全件一致。更新日時/寸法不一致では再解析し旧編集データを別ファイル退避。遅延結果混入・0件・失敗・不正レコード・実プロセス取消しを確認。\n\n検証データ（専用キャッシュと検出JSON）：`{folder}`\n");
-        File.WriteAllText(Path.Combine(root, "OCR-INTEGRATION-180.md"), report.ToString());
-        Console.WriteLine($"SUCCESS: {checks} checks; report OCR-INTEGRATION-180.md");
+        File.WriteAllText(Path.Combine(root, "OCR-INTEGRATION-181.md"), report.ToString());
+        Console.WriteLine($"SUCCESS: {checks} checks; report OCR-INTEGRATION-181.md");
     }
 }
