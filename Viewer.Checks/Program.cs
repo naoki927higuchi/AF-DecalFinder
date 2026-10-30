@@ -44,6 +44,13 @@ internal static class Program
         input.Text = "a10+2 日本３";
         Check(input.Text == "102", "Paste filters ASCII non-digits including full-width digits");
         input.Text = ""; Check(input.Text.Length == 0, "Empty input allowed");
+        using (var highDpi = new Bitmap(100, 80))
+        {
+            highDpi.SetResolution(600, 600);
+            using (var g = Graphics.FromImage(highDpi)) g.Clear(Color.Magenta);
+            using var display = DisplayBitmap.Create(highDpi);
+            Check(display.Size == highDpi.Size && display.GetPixel(99, 79).ToArgb() == Color.Magenta.ToArgb(), "600dpi display conversion copies original pixels, ignores physical print size");
+        }
         input.Text = "102";
         typeof(Control).GetMethod("OnEnter", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(input, new object[] { EventArgs.Empty });
         Check(input.SelectionLength == 3, "Search focus selects existing text");
@@ -102,9 +109,48 @@ internal static class Program
             duplicates[1].Selected = true;
             Check(notified.Count == 2 && ReferenceEquals(notified[0], duplicates[0].Tag) && ReferenceEquals(notified[1], duplicates[1].Tag), "Multiple selected rows retain distinct record references");
             Check(detail.ImageCenter == priorCenter && detail.Zoom == 1, "Selection and search do not move detail view");
+            var navigationCount = 0;
+            Detection? navigationTarget = null;
+            list.NavigateRequested += d => { navigationCount++; navigationTarget = d; };
+            duplicates[1].Focused = true;
+            detail.SetZoom(2);
+            Key(list, Keys.Enter);
+            var target = (Detection)duplicates[1].Tag!;
+            Check(ReferenceEquals(navigationTarget, target) && detail.ImageCenter == new PointF(target.Bounds.X + target.Bounds.Width / 2f, target.Bounds.Y + target.Bounds.Height / 2f) && detail.Zoom == 2,
+                "Enter navigates focused selected duplicate by record, retaining zoom");
+            var navigationCenter = detail.ImageCenter;
+            Key(list, Keys.F2);
+            typeof(Control).GetMethod("OnDoubleClick", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(list, new object[] { EventArgs.Empty });
+            Check(navigationCount == 1 && detail.ImageCenter == navigationCenter, "F2 and double click reserved, no navigation");
+            list.Items[0].Focused = true; // Deliberately focused but not selected.
+            Key(list, Keys.Enter);
+            Check(navigationCount == 1, "Ambiguous multiple selection without selected focus does not navigate");
+            duplicates[1].Focused = true;
+            var undock = toolbar.Controls.OfType<Button>().Single(b => b.Text == "一覧を切り離す");
+            var widthBeforeFloat = panes.SplitterDistance;
+            undock.PerformClick();
+            var floating = form.OwnedForms.Single();
+            Check(ReferenceEquals(list.Parent, floating) && panes.Panel1Collapsed && floating.Visible && !floating.Modal && list.SelectedItems.Count == 2,
+                "Float reparents same selected ListView, collapses pane, remains modeless");
+            Check(ReferenceEquals(list.FocusedItem, duplicates[1]) && ReferenceEquals(list.SelectedItems[1].Tag, target) && search.Text == "49", "Float retains focused record, selection references and search");
+            floating.ClientSize = new Size(350, 500);
+            Check(list.Size == floating.ClientSize, "Floating list follows host resize");
+            toggle.Checked = false;
+            Check(!floating.Visible && panes.Panel1Collapsed && !undock.Enabled && list.SelectedItems.Count == 2, "Floating OFF hides host, retains selection and float mode");
+            toggle.Checked = true;
+            Check(floating.Visible && panes.Panel1Collapsed && undock.Enabled, "Floating ON restores same host");
+            floating.Close();
+            Check(ReferenceEquals(list.Parent, panes.Panel1) && !list.IsDisposed && !panes.Panel1Collapsed && panes.SplitterDistance == widthBeforeFloat && list.SelectedItems.Count == 2,
+                "Closing floating host redocks same list and restores width");
+            undock.PerformClick();
+            undock.PerformClick();
+            Check(form.OwnedForms.Length == 0 && ReferenceEquals(list.Parent, panes.Panel1) && list.SelectedItems.Count == 2, "Toggle button redocks without duplicate host or selection loss");
+            detail.SetZoom(1);
+            var beforeSelectAll = detail.ImageCenter;
             typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                 .Invoke(list, new object[] { new KeyEventArgs(Keys.Control | Keys.A) });
             Check(notified.Count == 181 && list.SelectedItems.Count == 181, "Ctrl+A selects all 181 records");
+            Check(detail.ImageCenter == beforeSelectAll && navigationCount == 1, "Ctrl+A never triggers navigation");
             typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                 .Invoke(list, new object[] { new KeyEventArgs(Keys.Escape) });
             Check(notified.Count == 0, "Escape clears all selected records");
@@ -241,6 +287,7 @@ internal static class Program
     }
 
     private static bool IsRed(Color c) => c.R > 200 && c.G < 80 && c.B < 80;
+    private static void Key(Control control, Keys key) => typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(control, new object[] { new KeyEventArgs(key) });
     private static bool RedNear(Bitmap image, int x, int y) => Enumerable.Range(-2, 5).Any(dx => Enumerable.Range(-2, 5).Any(dy => IsRed(image.GetPixel(x + dx, y + dy))));
     private static bool BlueNear(Bitmap image, int x, int y) => Enumerable.Range(-2, 5).Any(dx => Enumerable.Range(-2, 5).Any(dy => { var c = image.GetPixel(x + dx, y + dy); return c.B > 200 && c.R < 80 && c.G < 80; }));
 

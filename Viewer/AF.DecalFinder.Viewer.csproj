@@ -15,5 +15,6 @@
   <ItemGroup>
     <Content Include="../results/600dpi.json" Link="results/600dpi.json" CopyToOutputDirectory="PreserveNewest" />
     <InternalsVisibleTo Include="AF.DecalFinder.Checks" />
+    <InternalsVisibleTo Include="AF.DecalFinder.Performance" />
   </ItemGroup>
 </Project>

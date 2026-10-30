@@ -1,4 +1,5 @@
 using System.Drawing.Drawing2D;
+using System.Diagnostics;
 
 namespace AF.DecalFinder;
 
@@ -7,9 +8,11 @@ public enum ImageViewMode { Free, Overview, Detail }
 public class ImageViewControl : Control
 {
     private Bitmap? bitmap;
+    private Bitmap? overviewImage;
     private IReadOnlyList<Detection> highlights = Array.Empty<Detection>();
     private IReadOnlyList<Detection> selections = Array.Empty<Detection>();
     private bool ownsBitmap = true;
+    internal RenderProbe? Probe;
     private PointF navigationGrabOffset;
     private Point? navigationStart;
     private bool navigationMoved;
@@ -44,6 +47,7 @@ public class ImageViewControl : Control
         var old = bitmap;
         var disposeOld = ownsBitmap;
         bitmap = image;
+        ClearOverviewImage();
         ownsBitmap = takeOwnership;
         highlights = Array.Empty<Detection>();
         selections = Array.Empty<Detection>();
@@ -56,7 +60,7 @@ public class ImageViewControl : Control
             Invalidate();
         }
         else FitImage();
-        if (disposeOld && !ReferenceEquals(old, image)) old?.Dispose();
+        if (disposeOld && !ReferenceEquals(old, image) && old != null) { old.Dispose(); if (Probe != null) Probe.BitmapDisposals++; }
     }
 
     public void SetHighlights(IReadOnlyList<Detection> matches)
@@ -76,7 +80,16 @@ public class ImageViewControl : Control
         Invalidate(); // Selection never changes the image transform or red search matches.
     }
 
-    public void SetNavigationBounds(RectangleF bounds) { navigationBounds = bounds; Invalidate(); }
+    public void SetNavigationBounds(RectangleF bounds)
+    {
+        if (navigationBounds == bounds) return;
+        var old = Rectangle.Ceiling(transform.ToScreen(navigationBounds));
+        navigationBounds = bounds;
+        var next = Rectangle.Ceiling(transform.ToScreen(bounds));
+        var dirty = Rectangle.Union(old, next);
+        dirty.Inflate(3, 3);
+        Invalidate(dirty);
+    }
 
     public void CenterOn(PointF center)
     {
@@ -97,6 +110,7 @@ public class ImageViewControl : Control
 
     public void FitImage()
     {
+        ClearOverviewImage();
         fitted = true;
         if (bitmap != null) transform.Fit(bitmap.Size, ClientSize);
         Invalidate();
@@ -105,6 +119,7 @@ public class ImageViewControl : Control
     protected override void OnResize(EventArgs e)
     {
         base.OnResize(e);
+        ClearOverviewImage();
         if (bitmap != null)
         {
             if (Mode == ImageViewMode.Detail)
@@ -122,6 +137,14 @@ public class ImageViewControl : Control
 
     protected override void OnPaint(PaintEventArgs e)
     {
+        if (Probe == null) { PaintImage(e); return; }
+        var start = Stopwatch.GetTimestamp();
+        PaintImage(e);
+        Probe.PaintMs.Add(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
+    }
+
+    private void PaintImage(PaintEventArgs e)
+    {
         base.OnPaint(e);
         if (bitmap == null)
         {
@@ -129,10 +152,10 @@ public class ImageViewControl : Control
                 ClientRectangle, Color.Gainsboro, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak);
             return;
         }
-        e.Graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
-        e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
-        var destination = transform.ToScreen(new Rectangle(Point.Empty, bitmap.Size));
-        e.Graphics.DrawImage(bitmap, destination, new RectangleF(0, 0, bitmap.Width, bitmap.Height), GraphicsUnit.Pixel);
+        var imageStart = Probe == null ? 0 : Stopwatch.GetTimestamp();
+        DrawBitmap(e.Graphics, e.ClipRectangle);
+        Probe?.ImageMs.Add(Stopwatch.GetElapsedTime(imageStart).TotalMilliseconds);
+        var overlayStart = Probe == null ? 0 : Stopwatch.GetTimestamp();
         // Draw directly in screen coordinates: zoom and monitor DPI don't scale the 2px pen.
         e.Graphics.SmoothingMode = SmoothingMode.None;
         using var pen = new Pen(Color.Red, 2f);
@@ -158,6 +181,62 @@ public class ImageViewControl : Control
             using var navigationPen = new Pen(Color.Blue, 2f) { DashStyle = DashStyle.Dash };
             e.Graphics.DrawRectangle(navigationPen, box.X, box.Y, box.Width, box.Height);
         }
+        Probe?.OverlayMs.Add(Stopwatch.GetElapsedTime(overlayStart).TotalMilliseconds);
+    }
+
+    private void DrawBitmap(Graphics graphics, Rectangle clip)
+    {
+        if (bitmap == null) return;
+        graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
+        graphics.PixelOffsetMode = PixelOffsetMode.Half;
+        if (Mode == ImageViewMode.Overview && ClientSize.Width > 0 && ClientSize.Height > 0)
+        {
+            if (overviewImage == null)
+            {
+                overviewImage = new Bitmap(ClientSize.Width, ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                if (Probe != null) Probe.BitmapCreations++;
+                using var g = Graphics.FromImage(overviewImage);
+                g.Clear(BackColor);
+                g.InterpolationMode = InterpolationMode.HighQualityBilinear;
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+                g.DrawImage(bitmap, transform.ToScreen(new Rectangle(Point.Empty, bitmap.Size)),
+                    new RectangleF(0, 0, bitmap.Width, bitmap.Height), GraphicsUnit.Pixel);
+            }
+            graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+            graphics.DrawImage(overviewImage, new Rectangle(Point.Empty, overviewImage.Size),
+                0, 0, overviewImage.Width, overviewImage.Height, GraphicsUnit.Pixel);
+            return;
+        }
+        // GDI+ quantizes cropped sampling differently at non-power-of-two scales.
+        // Keep the full-source path for these scales rather than change image appearance.
+        if (Zoom != .25 && Zoom != .5 && Zoom != 1 && Zoom != 2)
+        {
+            graphics.DrawImage(bitmap, transform.ToScreen(new Rectangle(Point.Empty, bitmap.Size)),
+                new RectangleF(0, 0, bitmap.Width, bitmap.Height), GraphicsUnit.Pixel);
+            return;
+        }
+        var visible = Rectangle.Intersect(ClientRectangle, clip);
+        if (visible.IsEmpty) return;
+        var topLeft = transform.ToImage(visible.Location);
+        var bottomRight = transform.ToImage(new PointF(visible.Right, visible.Bottom));
+        var padding = (int)Math.Ceiling(2 / Zoom) + 2;
+        var alignment = Zoom == .25 ? 4 : Zoom == .5 ? 2 : 1;
+        // Include interpolation neighbors, keeping source coordinates integral and the original sampling phase.
+        var source = Rectangle.Intersect(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+            Rectangle.FromLTRB((int)Math.Floor((topLeft.X - padding) / alignment) * alignment, (int)Math.Floor((topLeft.Y - padding) / alignment) * alignment,
+                (int)Math.Ceiling((bottomRight.X + padding) / alignment) * alignment, (int)Math.Ceiling((bottomRight.Y + padding) / alignment) * alignment));
+        if (source.IsEmpty) return;
+        var destination = transform.ToScreen(source);
+        if (Zoom == 1 && destination.X == MathF.Truncate(destination.X) && destination.Y == MathF.Truncate(destination.Y))
+            graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+        graphics.DrawImage(bitmap, destination, source, GraphicsUnit.Pixel);
+    }
+
+    private void ClearOverviewImage()
+    {
+        if (overviewImage == null) return;
+        overviewImage.Dispose(); overviewImage = null;
+        if (Probe != null) Probe.BitmapDisposals++;
     }
 
     protected override void OnMouseWheel(MouseEventArgs e)
@@ -193,6 +272,14 @@ public class ImageViewControl : Control
     }
 
     protected override void OnMouseMove(MouseEventArgs e)
+    {
+        if (Probe == null) { MovePointer(e); return; }
+        var start = Stopwatch.GetTimestamp();
+        MovePointer(e);
+        Probe.MouseMs.Add(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
+    }
+
+    private void MovePointer(MouseEventArgs e)
     {
         base.OnMouseMove(e);
         if (dragPoint is not Point previous) return;
@@ -234,7 +321,8 @@ public class ImageViewControl : Control
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing && ownsBitmap) bitmap?.Dispose();
+        if (disposing) ClearOverviewImage();
+        if (disposing && ownsBitmap && bitmap != null) { bitmap.Dispose(); if (Probe != null) Probe.BitmapDisposals++; }
         base.Dispose(disposing);
     }
 }

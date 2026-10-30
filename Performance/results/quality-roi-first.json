@@ -1,0 +1,66 @@
+[
+  {
+    "mode": "Overview",
+    "scale": 0.25,
+    "channels": 309456,
+    "differentPixels": 0,
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0
+  },
+  {
+    "mode": "Overview",
+    "scale": 0.5,
+    "channels": 309456,
+    "differentPixels": 0,
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0
+  },
+  {
+    "mode": "Overview",
+    "scale": 1,
+    "channels": 309456,
+    "differentPixels": 0,
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0
+  },
+  {
+    "mode": "Overview",
+    "scale": 2,
+    "channels": 309456,
+    "differentPixels": 0,
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0
+  },
+  {
+    "mode": "Detail",
+    "scale": 0.25,
+    "channels": 309456,
+    "differentPixels": 69237,
+    "meanAbsoluteChannelError": 7.766454681764128,
+    "maxChannelError": 145
+  },
+  {
+    "mode": "Detail",
+    "scale": 0.5,
+    "channels": 309456,
+    "differentPixels": 0,
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0
+  },
+  {
+    "mode": "Detail",
+    "scale": 1,
+    "channels": 309456,
+    "differentPixels": 0,
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0
+  },
+  {
+    "mode": "Detail",
+    "scale": 2,
+    "channels": 309456,
+    "differentPixels": 0,
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0
+  }
+]

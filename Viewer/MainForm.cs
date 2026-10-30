@@ -12,6 +12,9 @@ internal sealed class MainForm : Form
     private readonly CheckBox showList = new() { Text = "一覧表示", Checked = true, AutoSize = true, Margin = new Padding(12, 7, 5, 0) };
     private readonly ComboBox zoom = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 85, AccessibleName = "拡大倍率" };
     private int savedListWidth = 150;
+    private readonly Button floatList = new() { Text = "一覧を切り離す", AutoSize = true, Height = 30 };
+    private Form? floatingList;
+    private bool closing;
     private readonly DigitsTextBox number = new() { Width = 130, Enabled = false, AccessibleName = "検索番号" };
     private readonly Label count = new() { AutoSize = true, Text = "検索不可", Margin = new Padding(12, 8, 0, 0) };
     private readonly ToolStripStatusLabel status = new() { Spring = true, TextAlign = ContentAlignment.MiddleLeft, Text = "画像を開いてください。" };
@@ -21,7 +24,7 @@ internal sealed class MainForm : Form
 
     public MainForm(string? initialImage)
     {
-        Text = $"{AppTitle} — Phase 4";
+        Text = $"{AppTitle} — Phase 4.1";
         ClientSize = new Size(1200, 880);
         MinimumSize = new Size(850, 450);
         StartPosition = FormStartPosition.CenterScreen;
@@ -29,7 +32,7 @@ internal sealed class MainForm : Form
         var open = new Button { Text = "画像を開く…", AutoSize = true, Height = 30 };
         open.Click += (_, _) => SelectImage();
         var toolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 48, Padding = new Padding(8), WrapContents = false };
-        toolbar.Controls.AddRange([open, showList, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count]);
+        toolbar.Controls.AddRange([open, showList, floatList, new Label { Text = "番号", AutoSize = true, Margin = new Padding(16, 7, 5, 0) }, number, count]);
         var detailToolbar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 38, Padding = new Padding(4), WrapContents = false };
         detailToolbar.Controls.AddRange([new Label { Text = "拡大画像", AutoSize = true, Margin = new Padding(3, 5, 8, 0) }, zoom]);
         zoom.Items.AddRange(new object[] { "25%", "50%", "75%", "100%", "150%", "200%" });
@@ -48,20 +51,15 @@ internal sealed class MainForm : Form
         Controls.Add(strip);
         number.TextChanged += (_, _) => Search();
         list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
+        list.NavigateRequested += detection => view.CenterOn(new PointF(detection.Bounds.X + detection.Bounds.Width / 2f, detection.Bounds.Y + detection.Bounds.Height / 2f));
+        floatList.Click += (_, _) => { if (floatingList == null) FloatList(); else DockList(); };
         view.ViewportChanged += () => overview.SetNavigationBounds(view.VisibleImageBounds);
         overview.NavigateRequested += view.CenterOn;
         showList.CheckedChanged += (_, _) =>
         {
-            if (!showList.Checked)
-            {
+            if (!showList.Checked && floatingList == null && !panes.Panel1Collapsed)
                 savedListWidth = panes.SplitterDistance;
-                panes.Panel1Collapsed = true;
-            }
-            else
-            {
-                panes.Panel1Collapsed = false;
-                panes.SplitterDistance = Math.Clamp(savedListWidth, panes.Panel1MinSize, Math.Max(panes.Panel1MinSize, panes.ClientSize.Width - panes.SplitterWidth - panes.Panel2MinSize));
-            }
+            ApplyListVisibility();
         };
         InstallDropHandlers(this);
         Shown += (_, _) =>
@@ -74,6 +72,59 @@ internal sealed class MainForm : Form
             images.SplitterDistance = (images.ClientSize.Width - images.SplitterWidth) / 2;
             if (!string.IsNullOrWhiteSpace(initialImage)) OpenImage(initialImage);
         };
+    }
+
+    private void ApplyListVisibility()
+    {
+        panes.Panel1Collapsed = !showList.Checked || floatingList != null;
+        if (!panes.Panel1Collapsed)
+            panes.SplitterDistance = Math.Clamp(savedListWidth, panes.Panel1MinSize, Math.Max(panes.Panel1MinSize, panes.ClientSize.Width - panes.SplitterWidth - panes.Panel2MinSize));
+        floatList.Text = floatingList == null ? "一覧を切り離す" : "一覧を戻す";
+        floatList.Enabled = showList.Checked;
+        if (floatingList != null)
+        {
+            if (showList.Checked) floatingList.Show(this);
+            else floatingList.Hide();
+        }
+    }
+
+    private void FloatList()
+    {
+        if (!panes.Panel1Collapsed) savedListWidth = panes.SplitterDistance;
+        floatingList = new Form
+        {
+            Text = "OCR一覧 — Enter：フォーカス行へ移動", ClientSize = new Size(260, 600),
+            MinimumSize = new Size(200, 250), ShowInTaskbar = false, StartPosition = FormStartPosition.Manual
+        };
+        var area = Screen.FromControl(this).WorkingArea;
+        floatingList.Location = new Point(Math.Clamp(Left + 30, area.Left, Math.Max(area.Left, area.Right - floatingList.Width)),
+            Math.Clamp(Top + 80, area.Top, Math.Max(area.Top, area.Bottom - floatingList.Height)));
+        floatingList.FormClosing += (_, _) =>
+        {
+            if (!closing) ReturnListToDock();
+        };
+        list.MoveTo(floatingList);
+        ApplyListVisibility();
+        list.Focus();
+    }
+
+    private void ReturnListToDock()
+    {
+        list.MoveTo(panes.Panel1);
+        floatingList = null;
+        ApplyListVisibility();
+    }
+
+    private void DockList()
+    {
+        floatingList?.Close(); // FormClosing reparents the existing list before its host is disposed.
+        list.Focus();
+    }
+
+    protected override void OnFormClosing(FormClosingEventArgs e)
+    {
+        base.OnFormClosing(e);
+        closing = !e.Cancel;
     }
 
     private void InstallDropHandlers(Control control)
@@ -115,7 +166,7 @@ internal sealed class MainForm : Form
             using var source = Image.FromStream(stream, useEmbeddedColorManagement: false, validateImageData: true);
             // Clone to release the source file immediately. Do not apply EXIF rotation:
             // JSON coordinates refer to the original pixel matrix.
-            loaded = new Bitmap(source);
+            loaded = DisplayBitmap.Create(source);
         }
         catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or OutOfMemoryException or System.Runtime.InteropServices.ExternalException)
         {
