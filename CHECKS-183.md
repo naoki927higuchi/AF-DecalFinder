@@ -23,7 +23,7 @@ PASS: Hidden recognized edit OK preserves unrelated selection and filter
 PASS: Recognized edit saved under original fixed ID
 PASS: Delete removes remaining unknown selection, preserving corrected record
 PASS: Restart restores correction and deletions
-PASS: Dialog initial text/select-all/focus and work-area clipping: 
+PASS: Dialog initial text/select-all/focus and work-area clipping:
 PASS: Whitespace cannot confirm
 PASS: Mixed Unicode label accepted
 PASS: Dialog initial text/select-all/focus and work-area clipping: A102
