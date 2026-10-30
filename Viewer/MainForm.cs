@@ -21,6 +21,9 @@ internal sealed class MainForm : Form
     private readonly string jsonPath = Path.Combine(AppContext.BaseDirectory, "results", "600dpi.json");
     private OcrCatalog? catalog;
     private readonly EditStore store;
+    private readonly AppSettingsStore settings;
+    private ImageHistory history = new(null, Array.Empty<string>());
+    private readonly ToolStripMenuItem recentImages = new("最近使った画像");
     private ImageIdentity? identity;
     private bool dirty;
     private bool adding;
@@ -30,10 +33,11 @@ internal sealed class MainForm : Form
     private readonly Button cancelAdd = new() { Text = "キャンセル", AutoSize = true, Visible = false };
     private static string AppTitle => $"AF-DecalFinder {typeof(MainForm).Assembly.GetName().Version?.ToString(3)}";
 
-    public MainForm(string? initialImage, EditStore? editStore = null)
+    public MainForm(string? initialImage, EditStore? editStore = null, AppSettingsStore? settingsStore = null)
     {
         store = editStore ?? new EditStore();
-        Text = $"{AppTitle} — Phase 5";
+        settings = settingsStore ?? new AppSettingsStore();
+        Text = AppTitle;
         ClientSize = new Size(1200, 880);
         MinimumSize = new Size(850, 450);
         StartPosition = FormStartPosition.CenterScreen;
@@ -60,7 +64,23 @@ internal sealed class MainForm : Form
         Controls.Add(panes);
         Controls.Add(toolbar);
         Controls.Add(strip);
+        var menu = new MenuStrip { ShowItemToolTips = true };
+        var fileMenu = new ToolStripMenuItem("ファイル");
+        fileMenu.DropDownItems.Add("画像を開く…", null, (_, _) => SelectImage());
+        fileMenu.DropDownItems.Add(recentImages);
+        menu.Items.Add(fileMenu);
+        MainMenuStrip = menu;
+        Controls.Add(menu);
+        UpdateHistoryMenu();
         number.TextChanged += (_, _) => Search();
+        number.KeyDown += (_, e) =>
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            e.Handled = e.SuppressKeyPress = true;
+            var first = list.Items.Cast<ListViewItem>().Select(row => (Detection)row.Tag!)
+                .FirstOrDefault(d => number.Text.Length > 0 && d.Number == number.Text);
+            if (first != null) view.CenterOn(new PointF(first.Bounds.X + first.Bounds.Width / 2f, first.Bounds.Y + first.Bounds.Height / 2f));
+        };
         list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
         view.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
         overview.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
@@ -96,8 +116,38 @@ internal sealed class MainForm : Form
             images.Panel1MinSize = 120;
             images.Panel2MinSize = 120;
             images.SplitterDistance = (images.ClientSize.Width - images.SplitterWidth) / 2;
+            try { history = settings.Load(); UpdateHistoryMenu(); }
+            catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
+            // Explicit command-line image wins. Restore once, only when the recorded file exists.
             if (!string.IsNullOrWhiteSpace(initialImage)) OpenImage(initialImage);
+            else if (identity == null && history.LastImagePath is string last && File.Exists(last)) OpenImage(last);
         };
+    }
+
+    private static bool SettingsError(Exception ex) => ex is IOException or UnauthorizedAccessException or JsonException
+        or InvalidOperationException or ArgumentException or System.Security.SecurityException;
+
+    private void NotifySettingsError(Exception ex) => MessageBox.Show(this,
+        $"画像履歴の設定を読み書きできませんでした。画像の閲覧・編集は続行できます。\n{settings.FilePath}\n{ex.Message}",
+        "設定エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+    private void UpdateHistoryMenu()
+    {
+        foreach (var item in recentImages.DropDownItems.Cast<ToolStripItem>().ToArray()) item.Dispose();
+        recentImages.DropDownItems.Clear();
+        recentImages.Enabled = history.RecentImages.Count > 0;
+        foreach (var path in history.RecentImages)
+        {
+            var item = new ToolStripMenuItem(Path.GetFileName(path).Replace("&", "&&")) { ToolTipText = path };
+            item.Click += (_, _) => OpenImage(path);
+            recentImages.DropDownItems.Add(item);
+        }
+    }
+
+    private void RememberImage(string path)
+    {
+        try { history = settings.RecordOpened(path); UpdateHistoryMenu(); }
+        catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
     }
 
     private void ApplyListVisibility()
@@ -206,6 +256,7 @@ internal sealed class MainForm : Form
             return;
         }
 
+        RememberImage(loadedIdentity.AbsolutePath);
         EndAdd();
         dirty = false;
         identity = loadedIdentity;

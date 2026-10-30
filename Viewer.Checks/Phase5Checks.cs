@@ -110,7 +110,7 @@ internal static class Phase5Checks
             host.Close();
         }
 
-        using (var form = new MainForm(path, store))
+        using (var form = new MainForm(path, store, new AppSettingsStore(Path.Combine(folder, "settings.json"))))
         {
             form.Show(); Application.DoEvents();
             var list = Field<OcrResultsList>(form, "list");
@@ -169,7 +169,7 @@ internal static class Phase5Checks
             check(list.SelectedDetections.Select(d => d.Id).SequenceEqual(selectedIds), "List rebuild restores selection by IDs");
             form.Close();
         }
-        using (var restarted = new MainForm(path, new EditStore(store.DirectoryPath)))
+        using (var restarted = new MainForm(path, new EditStore(store.DirectoryPath), new AppSettingsStore(Path.Combine(folder, "settings.json"))))
         {
             restarted.Show(); Application.DoEvents();
             var list = Field<OcrResultsList>(restarted, "list");

@@ -65,7 +65,7 @@ internal static class Program
         drop.SetData(DataFormats.FileDrop, new[] { "test.json" });
         Check(MainForm.GetDroppedImage(drop) == null, "Non-image drop rejected");
 
-        using (var form = new MainForm(null, new EditStore(Path.Combine(root, "viewer-checks", "isolated-" + Guid.NewGuid().ToString("N")))))
+        using (var form = new MainForm(null, new EditStore(Path.Combine(root, "viewer-checks", "isolated-" + Guid.NewGuid().ToString("N"))), new AppSettingsStore(Path.Combine(root, "viewer-checks", Guid.NewGuid() + ".json"))))
         {
             var originalPath = Path.Combine(root, "inputs", "600dpi.jpg");
             var originalDrop = new DataObject(); originalDrop.SetData(DataFormats.FileDrop, new[] { originalPath });
@@ -307,6 +307,7 @@ internal static class Program
         using var png = new Bitmap(120, 80); png.Save(Path.Combine(temp, "mismatch.png"));
         ReverseLookupChecks();
         Phase5Checks.Run(root, Check);
+        HistoryChecks.Run(root, Check);
         File.WriteAllText(Path.Combine(temp, "broken.jpg"), "not an image");
         Console.WriteLine($"PASS: {checks} checks");
     }
