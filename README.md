@@ -2,6 +2,8 @@
 
 ## 1.6.2：画像別OCR参照の修正・アプリアイコン（現在版）
 
+追加入力画像でも検証済み：[8画像の寸法・DPI・表示結果](INPUT-IMAGE-CHECKS.md)。追加6枚を含め、専用設定で画像切替・25/50/100/200%・端へのパン・原本不変を確認。再実行は `dotnet run --project Viewer.Checks/AF.DecalFinder.Checks.csproj -c Release -- W:\dev\AF-DecalFinder --inputs`。製品コードと版数は変更していない。
+
 [AF-DecalFinder.exe](bin/Release-1.6.2/AF-DecalFinder.exe) を起動する。
 
 ### 原因と修正

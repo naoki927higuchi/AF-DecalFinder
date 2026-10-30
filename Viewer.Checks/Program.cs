@@ -19,6 +19,7 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
+        if (args.Contains("--inputs")) { InputImageChecks.Run(root); return; }
         var catalog = OcrCatalog.Load(Path.Combine(root, "results", "600dpi.json"));
         Check(catalog.ImageSize == new Size(7783, 6579) && catalog.Detections.Count == 181, "Phase 1 JSON: dimensions and 181 records");
         Check(catalog.Find("102").Count == 1 && catalog.Find("102")[0].Bounds == new Rectangle(4249, 3354, 49, 44), "102 exact match and source pixel bbox");
