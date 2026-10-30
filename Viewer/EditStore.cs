@@ -21,6 +21,13 @@ internal sealed class EditStore(string? directory = null)
     internal string PathFor(string imagePath) => Path.Combine(DirectoryPath,
         Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(Path.GetFullPath(imagePath).ToUpperInvariant()))) + ".json");
     private static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
+    internal string ArchiveInvalid(string imagePath)
+    {
+        var path = PathFor(imagePath);
+        var archive = path + ".stale-" + DateTime.UtcNow.ToString("yyyyMMddTHHmmss") + "-" + Guid.NewGuid().ToString("N") + ".json";
+        File.Copy(path, archive, overwrite: false);
+        return archive;
+    }
     internal sealed record Entry(string Id, string Number, int[] Bbox, double Confidence, bool IsManual, bool IsModified, bool IsDone,
         string? OriginalNumber, int[]? OriginalBbox);
     internal sealed record Document(int SchemaVersion, ImageIdentity Image, Entry[] Records);

@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace AF.DecalFinder;
 
@@ -19,7 +19,11 @@ internal sealed class MainForm : Form
     private readonly DigitsTextBox number = new() { Width = 130, Enabled = false, AccessibleName = "検索番号" };
     private readonly Label count = new() { AutoSize = true, Text = "検索不可", Margin = new Padding(12, 8, 0, 0) };
     private readonly ToolStripStatusLabel status = new() { Spring = true, TextAlign = ContentAlignment.MiddleLeft, Text = "画像を開いてください。" };
-    private readonly string jsonPath = Path.Combine(AppContext.BaseDirectory, "results", "600dpi.json");
+    private readonly IOcrRunner ocr;
+    private CancellationTokenSource? analysisCancellation;
+    private int analysisGeneration;
+    internal Task ActiveOcrTask { get; private set; } = Task.CompletedTask;
+    internal bool IsAnalyzing { get; private set; }
     private OcrCatalog? catalog;
     private readonly EditStore store;
     private readonly AppSettingsStore settings;
@@ -34,9 +38,10 @@ internal sealed class MainForm : Form
     private readonly Button cancelAdd = new() { Text = "キャンセル", AutoSize = true, Visible = false };
     private static string AppTitle => $"AF-DecalFinder {typeof(MainForm).Assembly.GetName().Version?.ToString(3)}";
 
-    public MainForm(string? initialImage, EditStore? editStore = null, AppSettingsStore? settingsStore = null)
+    public MainForm(string? initialImage, EditStore? editStore = null, AppSettingsStore? settingsStore = null, IOcrRunner? ocrRunner = null)
     {
         store = editStore ?? new EditStore();
+        ocr = ocrRunner ?? new OcrRunner();
         settings = settingsStore ?? new AppSettingsStore();
         Text = AppTitle;
         using (var iconStream = typeof(MainForm).Assembly.GetManifestResourceStream("AF.DecalFinder.App.ico")!)
@@ -62,7 +67,7 @@ internal sealed class MainForm : Form
         images.Panel1.Controls.Add(new Label { Text = "全体画像 — 青い破線：拡大表示範囲", Dock = DockStyle.Top, Height = 38, TextAlign = ContentAlignment.MiddleLeft });
         images.Panel2.Controls.Add(view);
         images.Panel2.Controls.Add(detailToolbar);
-        var strip = new StatusStrip();
+        var strip = new StatusStrip { ShowItemToolTips = true };
         strip.Items.Add(status);
         Controls.Add(panes);
         Controls.Add(toolbar);
@@ -207,7 +212,7 @@ internal sealed class MainForm : Form
         if (!panes.Panel1Collapsed) savedListWidth = panes.SplitterDistance;
         floatingList = new Form
         {
-            Text = "OCR一覧 — Enter：フォーカス行へ移動", ClientSize = new Size(260, 600),
+            UseWaitCursor = IsAnalyzing, Text = "OCR一覧 — Enter：フォーカス行へ移動", ClientSize = new Size(260, 600),
             MinimumSize = new Size(200, 250), ShowInTaskbar = false, StartPosition = FormStartPosition.Manual
         };
         var area = Screen.FromControl(this).WorkingArea;
@@ -244,6 +249,7 @@ internal sealed class MainForm : Form
         closing = !e.Cancel;
         if (closing)
         {
+            analysisCancellation?.Cancel();
             var normalBounds = WindowState == FormWindowState.Normal ? Bounds : RestoreBounds;
             var state = WindowState == FormWindowState.Minimized ? lastVisibleState : WindowState;
             try { settings.SaveWindow(WindowPlacement.From(normalBounds, state == FormWindowState.Maximized)); }
@@ -301,6 +307,10 @@ internal sealed class MainForm : Form
             return;
         }
 
+        analysisCancellation?.Cancel();
+        analysisCancellation?.Dispose();
+        analysisCancellation = new CancellationTokenSource();
+        int generation = ++analysisGeneration;
         RememberImage(loadedIdentity.AbsolutePath);
         EndAdd();
         dirty = false;
@@ -316,50 +326,74 @@ internal sealed class MainForm : Form
         count.Text = "検索不可";
         Text = $"{AppTitle} — {Path.GetFileName(path)}";
         var description = $"{Path.GetFileName(path)}  |  {loaded.Width} × {loaded.Height} px";
+        ActiveOcrTask = LoadAnalysisAsync(loadedIdentity, description, generation, analysisCancellation.Token);
+    }
+
+    private void SetAnalyzing(bool value)
+    {
+        IsAnalyzing = value;
+        UseWaitCursor = value;
+        if (floatingList != null) floatingList.UseWaitCursor = value;
+        list.Enabled = !value;
+        addNumber.Enabled = !value && identity != null;
+        number.Enabled = !value && catalog != null;
+    }
+
+    private async Task LoadAnalysisAsync(ImageIdentity image, string description, int generation, CancellationToken token)
+    {
+        SetAnalyzing(true);
+        status.ToolTipText = "";
+        status.Text = $"{description}  |  解析データ確認中…";
+        string? archive = null;
         try
         {
-            OcrCatalog? candidate = null;
-            try { candidate = store.Load(identity); }
-            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or InvalidDataException)
+            OcrCatalog? candidate;
+            try { candidate = store.Load(image); }
+            catch (Exception ex) when (ex is IOException or InvalidDataException or JsonException)
             {
-                MessageBox.Show(this, $"編集データを復元できませんでした。画像に対応する初期OCRデータがある場合のみ使用します。\n{ex.Message}\n\n既存の保存ファイルは保持し、次回保存時にはバックアップします。", "編集データの警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Copy first. If preservation fails, do not overwrite the user's old work.
+                archive = store.ArchiveInvalid(image.AbsolutePath);
+                candidate = null;
             }
             bool restored = candidate != null;
-            candidate ??= Phase1Seed.Load(identity.AbsolutePath, loaded.Size, jsonPath);
             if (candidate == null)
             {
-                status.Text = $"{description}  |  未解析画像：検索不可（番号追加は可能）";
-                return;
+                status.Text = $"{description}  |  OCR解析中…";
+                candidate = await ocr.RunAsync(image, token);
             }
-            if (candidate.ImageSize != loaded.Size)
-            {
-                status.Text = $"{description}  |  寸法不一致：検索不可";
-                MessageBox.Show(this, $"画像とOCR結果JSONの寸法が一致しません。赤枠表示を無効にしました。\n\n画像：{loaded.Width} × {loaded.Height}\nJSON：{candidate.ImageSize.Width} × {candidate.ImageSize.Height}", "寸法不一致", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (token.IsCancellationRequested || generation != analysisGeneration || closing || IsDisposed) return;
+            if (candidate.ImageSize != new Size(image.Width, image.Height))
+                throw new InvalidDataException("OCR結果の画像寸法が一致しません。");
+            if (!image.Matches(ImageIdentity.Read(image.AbsolutePath, candidate.ImageSize)))
+                throw new IOException("解析中に画像が更新されました。画像を開き直してください。");
             catalog = candidate;
             list.SetDetections(catalog.Detections);
             overview.SetDetections(catalog.Detections);
             view.SetDetections(catalog.Detections);
-            number.Enabled = true;
-            status.Text = $"{description}  |  検出結果 {catalog.Detections.Count}件  |  {(restored ? "編集データ復元済み" : "元のOCR結果")}  |  全体：クリック・枠ドラッグ / 拡大：左ドラッグ";
+            status.Text = $"{description}  |  検出{catalog.Detections.Count}件  |  {(restored ? "キャッシュ復元済み" : "OCR完了")}";
+            if (!restored)
+            {
+                dirty = true;
+                if (SaveChanges() && archive != null) status.Text += $"  |  旧データ退避：{archive}";
+            }
             Search();
-            number.Focus();
         }
-        catch (Exception ex) when (ex is FileNotFoundException or DirectoryNotFoundException)
+        catch (OperationCanceledException) when (token.IsCancellationRequested) { }
+        catch (Exception ex)
         {
-            status.Text = $"{description}  |  OCR結果JSONがありません：検索不可（{jsonPath}）";
+            if (generation != analysisGeneration || closing || IsDisposed) return;
+            status.Text = $"{description}  |  OCR失敗：{ex.Message}";
+            status.ToolTipText = status.Text;
         }
-        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or JsonException)
+        finally
         {
-            status.Text = $"{description}  |  OCR結果JSONを読めません：検索不可";
-            MessageBox.Show(this, $"OCR結果JSONを読み込めませんでした。\n{jsonPath}\n\n{ex.Message}", "JSONの読み込みエラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (generation == analysisGeneration && !closing && !IsDisposed) SetAnalyzing(false);
         }
     }
 
     internal void BeginAdd()
     {
-        if (identity == null || adding) return;
+        if (identity == null || adding || IsAnalyzing) return;
         listWasVisible = showList.Checked;
         if (floatingList == null && !panes.Panel1Collapsed) savedListWidth = panes.SplitterDistance;
         adding = true; view.AddingPoint = true;

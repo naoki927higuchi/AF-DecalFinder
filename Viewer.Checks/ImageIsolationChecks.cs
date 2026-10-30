@@ -1,4 +1,4 @@
-using AF.DecalFinder;
+﻿using AF.DecalFinder;
 using System.Reflection;
 namespace AF.DecalFinder.Checks;
 internal static class ImageIsolationChecks
@@ -19,7 +19,7 @@ internal static class ImageIsolationChecks
         check(Phase1Seed.Load(source,new Size(7783,6579),json)!.Detections.Count==181,"Verified original receives 181 Phase 1 detections");
         var store=new EditStore(Path.Combine(folder,"cache"));
         var settings=new AppSettingsStore(Path.Combine(folder,"Settings.json"));
-        using(var form=new MainForm(source,store,settings))
+        using(var form=new MainForm(source,store,settings,new FixtureOcrRunner(root)))
         {
             form.Show();Application.DoEvents();
             var list=Field<OcrResultsList>(form,"list");var search=Field<DigitsTextBox>(form,"number");
@@ -30,7 +30,7 @@ internal static class ImageIsolationChecks
             search.Text="9998";
             void Open(string path) { typeof(MainForm).GetMethod("OpenImage",Hidden)!.Invoke(form,[path]);Application.DoEvents(); }
             Open(other);
-            check(list.Items.Count==0 && !search.Enabled && search.Text=="","Switch to 5009x5809 clears list and disables search");
+            check(list.Items.Count==0 && search.Enabled && search.Text=="","Switch to 5009x5809 clears list and accepts zero-result OCR");
             check(Field<IReadOnlyList<Detection>>(view,"detections").Count==0 && Field<IReadOnlyList<Detection>>(view,"highlights").Count==0 && Field<IReadOnlyList<Detection>>(view,"selections").Count==0,"Image switch clears reverse lookup and all overlays");
             check(Field<Bitmap>(view,"bitmap").Size==new Size(5009,5809),"Unanalysed image remains displayed");
             form.BeginAdd();form.AddAt("8888",new PointF(2000,2000));

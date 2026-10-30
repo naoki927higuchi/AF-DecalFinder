@@ -1,4 +1,4 @@
-using AF.DecalFinder;
+﻿using AF.DecalFinder;
 using System.Text.Json;
 using System.Numerics;
 
@@ -19,7 +19,8 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
-        if (args.Contains("--inputs")) { InputImageChecks.Run(root); return; }
+        if (args.Contains("--ocr")) { OcrChecks.Run(root); return; }
+        if (args.Contains("--inputs")) { OcrChecks.Run(root); return; }
         var catalog = OcrCatalog.Load(Path.Combine(root, "results", "600dpi.json"));
         Check(catalog.ImageSize == new Size(7783, 6579) && catalog.Detections.Count == 181, "Phase 1 JSON: dimensions and 181 records");
         Check(catalog.Find("102").Count == 1 && catalog.Find("102")[0].Bounds == new Rectangle(4249, 3354, 49, 44), "102 exact match and source pixel bbox");
@@ -66,7 +67,7 @@ internal static class Program
         drop.SetData(DataFormats.FileDrop, new[] { "test.json" });
         Check(MainForm.GetDroppedImage(drop) == null, "Non-image drop rejected");
 
-        using (var form = new MainForm(null, new EditStore(Path.Combine(root, "viewer-checks", "isolated-" + Guid.NewGuid().ToString("N"))), new AppSettingsStore(Path.Combine(root, "viewer-checks", Guid.NewGuid() + ".json"))))
+        using (var form = new MainForm(null, new EditStore(Path.Combine(root, "viewer-checks", "isolated-" + Guid.NewGuid().ToString("N"))), new AppSettingsStore(Path.Combine(root, "viewer-checks", Guid.NewGuid() + ".json")), new FixtureOcrRunner(root)))
         {
             var originalPath = Path.Combine(root, "inputs", "600dpi.jpg");
             var originalDrop = new DataObject(); originalDrop.SetData(DataFormats.FileDrop, new[] { originalPath });
@@ -200,7 +201,7 @@ internal static class Program
                 File.Delete(copiedJson);
                 typeof(Control).GetMethod("OnDragDrop", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                     .Invoke(form, new object[] { new DragEventArgs(originalDrop, 0, 0, 0, DragDropEffects.Copy, DragDropEffects.Copy) });
-                Check(list.Items.Count == 0 && !search.Enabled, "Missing JSON empties list and disables search");
+                Check(list.Items.Count == 181 && search.Enabled, "Valid cache works even without Phase 1 JSON");
             }
             finally { File.WriteAllBytes(copiedJson, savedJson); }
             typeof(Control).GetMethod("OnDragDrop", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
