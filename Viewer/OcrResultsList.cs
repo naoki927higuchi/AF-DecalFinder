@@ -17,10 +17,13 @@ internal sealed class OcrResultsList : ListView
     private static readonly HashSet<NativeWindow> pendingLabelWindows = [];
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     private static extern IntPtr SendMessage(IntPtr window, uint message, IntPtr wParam, IntPtr lParam);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    private static extern bool SetWindowText(IntPtr window, string text);
     private readonly Dictionary<string, ListViewItem> rowsById = new(StringComparer.Ordinal);
     public event Action<IReadOnlyList<Detection>>? SelectionChanged;
     public event Action<Detection>? NavigateRequested;
     public event Action? DataChanged;
+    public event Action<IReadOnlyList<Detection>>? DeleteRequested;
     public event Action<string>? EditRejected;
     public IReadOnlyList<Detection> SelectedDetections => SelectedItems.Cast<ListViewItem>().Select(row => (Detection)row.Tag!).ToArray();
 
@@ -33,7 +36,10 @@ internal sealed class OcrResultsList : ListView
         HideSelection = false;
         LabelEdit = true;
         CheckBoxes = true;
-        ImeMode = ImeMode.Disable;
+        ImeMode = ImeMode.NoControl;
+        var menu = new ContextMenuStrip();
+        menu.Items.Add("誤検出として削除", null, (_, _) => RequestDelete());
+        ContextMenuStrip = menu;
         AccessibleName = "OCR検出番号一覧";
         Columns.Add("番号", 120);
         SelectedIndexChanged += (_, _) =>
@@ -59,13 +65,13 @@ internal sealed class OcrResultsList : ListView
             if (e.Label == null) return;
             var record = (Detection)Items[e.Item].Tag!;
             var value = e.Label;
-            if (!Detection.ValidNumber(value))
+            if (!Detection.ValidLabel(value))
             {
-                BeginInvoke(() => EditRejected?.Invoke("番号には空欄でない半角数字を入力してください。"));
+                BeginInvoke(() => EditRejected?.Invoke("空欄でないラベルを入力してください。"));
                 return;
             }
-            if (record.Number == value) return;
-            record.Number = value; record.IsModified = true;
+            if (!record.IsUnrecognized && record.Number == value) return;
+            record.Number = value; record.IsUnrecognized = false; record.IsModified = true;
             DataChanged?.Invoke(); // Closing or switching images cannot lose a queued edit.
             BeginInvoke(() =>
             {
@@ -77,10 +83,10 @@ internal sealed class OcrResultsList : ListView
     internal bool Rename(string id, string value)
     {
         if (!rowsById.TryGetValue(id, out var row)) return false;
-        if (!Detection.ValidNumber(value)) { EditRejected?.Invoke("番号には空欄でない半角数字を入力してください。"); return false; }
+        if (!Detection.ValidLabel(value)) { EditRejected?.Invoke("空欄でないラベルを入力してください。"); return false; }
         var record = (Detection)row.Tag!;
-        if (record.Number == value) return true;
-        record.Number = value; record.IsModified = true;
+        if (!record.IsUnrecognized && record.Number == value) return true;
+        record.Number = value; record.IsUnrecognized = false; record.IsModified = true;
         RefreshEditedRow(row);
         DataChanged?.Invoke();
         return true;
@@ -112,7 +118,7 @@ internal sealed class OcrResultsList : ListView
         updating = true;
         try
         {
-        row.Text = ((Detection)row.Tag!).Number;
+        row.Text = ((Detection)row.Tag!).DisplayNumber;
         ListViewItemSorter = new DetectionComparer();
         Sort();
         // Existing row objects and their selected state survive native sorting.
@@ -122,12 +128,32 @@ internal sealed class OcrResultsList : ListView
         SelectionChanged?.Invoke(SelectedDetections);
     }
 
+    private static bool NumericLabel(string value) => value.Length > 0 && value.All(char.IsDigit);
+    private static BigInteger NumericValue(string value)
+    {
+        BigInteger result = 0;
+        foreach (char c in value) result = result * 10 + (int)char.GetNumericValue(c);
+        return result;
+    }
+    private static int LabelGroup(Detection d) => d.IsUnrecognized ? 3 : NumericLabel(d.Number) ? 0
+        : d.Number.Any(c => c is >= 'A' and <= 'Z' or >= 'a' and <= 'z' or >= 'Ａ' and <= 'Ｚ' or >= 'ａ' and <= 'ｚ') ? 1 : 2;
+
+    private void RequestDelete()
+    {
+        if (editing || SelectedItems.Count == 0) return;
+        CancelSelectionNavigation();
+        DeleteRequested?.Invoke(SelectedDetections.ToArray());
+    }
+
     private sealed class DetectionComparer : System.Collections.IComparer
     {
         public int Compare(object? x, object? y)
         {
             var a = (Detection)((ListViewItem)x!).Tag!; var b = (Detection)((ListViewItem)y!).Tag!;
-            int c = BigInteger.Parse(a.Number, CultureInfo.InvariantCulture).CompareTo(BigInteger.Parse(b.Number, CultureInfo.InvariantCulture));
+            int c = LabelGroup(a).CompareTo(LabelGroup(b));
+            if (c == 0) c = LabelGroup(a) == 0
+                ? NumericValue(a.Number).CompareTo(NumericValue(b.Number))
+                : StringComparer.Ordinal.Compare(a.Number, b.Number);
             if (c == 0) c = a.Bounds.Y.CompareTo(b.Bounds.Y);
             if (c == 0) c = a.Bounds.X.CompareTo(b.Bounds.X);
             return c == 0 ? StringComparer.Ordinal.Compare(a.Id, b.Id) : c;
@@ -141,7 +167,10 @@ internal sealed class OcrResultsList : ListView
         try
         {
             row.BeginEdit();
-            labelWindow = NativeWindow.FromHandle(SendMessage(Handle, 0x1018, IntPtr.Zero, IntPtr.Zero)); // LVM_GETEDITCONTROL
+            var editHandle = SendMessage(Handle, 0x1018, IntPtr.Zero, IntPtr.Zero);
+            if (((Detection)row.Tag!).IsUnrecognized) SetWindowText(editHandle, "");
+            SendMessage(editHandle, 0x00B1, IntPtr.Zero, new IntPtr(-1)); // EM_SETSEL: select all
+            labelWindow = NativeWindow.FromHandle(editHandle); // LVM_GETEDITCONTROL
             if (labelWindow != null) pendingLabelWindows.Add(labelWindow);
         }
         finally { explicitEdit = false; }
@@ -191,15 +220,16 @@ internal sealed class OcrResultsList : ListView
         {
             Items.Clear();
             rowsById.Clear();
-            foreach (var detection in detections.OrderBy(d => BigInteger.Parse(d.Number, CultureInfo.InvariantCulture))
-                .ThenBy(d => d.Bounds.Y).ThenBy(d => d.Bounds.X).ThenBy(d => d.Id, StringComparer.Ordinal))
+            foreach (var detection in detections.Where(d => !d.IsDeleted))
             {
-                var row = new ListViewItem(detection.Number) { Tag = detection, Checked = detection.IsDone };
+                var row = new ListViewItem(detection.DisplayNumber) { Tag = detection, Checked = detection.IsDone };
                 Items.Add(row);
                 rowsById.Add(detection.Id, row);
                 row.Selected = selected.Contains(detection.Id);
                 if (detection.Id == focusedId) row.Focused = true;
             }
+            ListViewItemSorter = new DetectionComparer();
+            Sort();
         }
         finally { EndUpdate(); updating = false; }
         SelectionChanged?.Invoke(SelectedDetections);
@@ -226,6 +256,7 @@ internal sealed class OcrResultsList : ListView
     protected override void OnKeyDown(KeyEventArgs e)
     {
         if (editing) { base.OnKeyDown(e); return; }
+        if (e.KeyCode == Keys.Delete) { RequestDelete(); e.Handled = e.SuppressKeyPress = true; return; }
         if (e.KeyCode == Keys.Space || e.KeyCode == Keys.F2)
         {
             if (e.KeyCode == Keys.F2 && SelectedItems.Count > 0) EditRow(SelectedItems[0]);

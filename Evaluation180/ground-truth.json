@@ -1,0 +1,805 @@
+{
+  "method": "Manual visual annotation of source-pixel crops before running new detector. Grid coordinates hand-read; circles only, diamonds excluded. Evaluated candidate centers inside ROI. Two alphabet circles are candidate targets but excluded from numeric OCR accuracy denominator. Approximate center/radius annotations, not OCR-derived.",
+  "images": [
+    {
+      "file": "300dpi.jpg",
+      "sha256": "8f2b667638c3bd671f1b89dbf37aef3f8686f9a3bf7cc0ec5c29617481b96295",
+      "roi": [
+        600,
+        600,
+        380,
+        500
+      ],
+      "labels": [
+        {
+          "number": "79",
+          "circle": [
+            669,
+            624,
+            15
+          ]
+        },
+        {
+          "number": "16",
+          "circle": [
+            669,
+            684,
+            15
+          ]
+        },
+        {
+          "number": "17",
+          "circle": [
+            834,
+            707,
+            15
+          ]
+        },
+        {
+          "number": "18",
+          "circle": [
+            834,
+            745,
+            15
+          ]
+        },
+        {
+          "number": "83",
+          "circle": [
+            737,
+            771,
+            15
+          ]
+        },
+        {
+          "number": "23",
+          "circle": [
+            737,
+            809,
+            15
+          ]
+        },
+        {
+          "number": "42",
+          "circle": [
+            737,
+            846,
+            15
+          ]
+        },
+        {
+          "number": "36",
+          "circle": [
+            737,
+            883,
+            15
+          ]
+        },
+        {
+          "number": "35",
+          "circle": [
+            737,
+            920,
+            15
+          ]
+        },
+        {
+          "number": "39",
+          "circle": [
+            737,
+            957,
+            15
+          ]
+        },
+        {
+          "number": "85",
+          "circle": [
+            737,
+            994,
+            15
+          ]
+        },
+        {
+          "number": "88",
+          "circle": [
+            737,
+            1031,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "file": "600dpi.jpg",
+      "sha256": "6bbfc36f3ecdd204b40c9ba35d6382da1aa5005862182d0c5cde70baaca53bfb",
+      "roi": [
+        1316,
+        1316,
+        834,
+        1097
+      ],
+      "labels": [
+        {
+          "number": "79",
+          "circle": [
+            1466,
+            1369,
+            33
+          ]
+        },
+        {
+          "number": "16",
+          "circle": [
+            1466,
+            1498,
+            33
+          ]
+        },
+        {
+          "number": "17",
+          "circle": [
+            1832,
+            1550,
+            33
+          ]
+        },
+        {
+          "number": "18",
+          "circle": [
+            1832,
+            1634,
+            33
+          ]
+        },
+        {
+          "number": "83",
+          "circle": [
+            1616,
+            1691,
+            33
+          ]
+        },
+        {
+          "number": "23",
+          "circle": [
+            1616,
+            1774,
+            33
+          ]
+        },
+        {
+          "number": "42",
+          "circle": [
+            1616,
+            1857,
+            33
+          ]
+        },
+        {
+          "number": "36",
+          "circle": [
+            1616,
+            1938,
+            33
+          ]
+        },
+        {
+          "number": "35",
+          "circle": [
+            1616,
+            2018,
+            33
+          ]
+        },
+        {
+          "number": "39",
+          "circle": [
+            1616,
+            2098,
+            33
+          ]
+        },
+        {
+          "number": "85",
+          "circle": [
+            1616,
+            2182,
+            33
+          ]
+        },
+        {
+          "number": "88",
+          "circle": [
+            1616,
+            2262,
+            33
+          ]
+        }
+      ]
+    },
+    {
+      "file": "RGルージュ.png",
+      "sha256": "f757f5466de2062cd08ba154a6281223f1cd1935509f4c2c6da9911ff03a30b7",
+      "roi": [
+        180,
+        580,
+        450,
+        850
+      ],
+      "labels": [
+        {
+          "number": "16",
+          "circle": [
+            433,
+            647,
+            28
+          ]
+        },
+        {
+          "number": "1",
+          "circle": [
+            258,
+            732,
+            27
+          ]
+        },
+        {
+          "number": "2",
+          "circle": [
+            433,
+            732,
+            27
+          ]
+        },
+        {
+          "number": "27",
+          "circle": [
+            258,
+            869,
+            27
+          ]
+        },
+        {
+          "number": "28",
+          "circle": [
+            433,
+            869,
+            27
+          ]
+        },
+        {
+          "number": "5",
+          "circle": [
+            433,
+            981,
+            28
+          ]
+        },
+        {
+          "number": "6",
+          "circle": [
+            433,
+            1157,
+            28
+          ]
+        },
+        {
+          "number": "22",
+          "circle": [
+            433,
+            1246,
+            28
+          ]
+        },
+        {
+          "number": "33",
+          "circle": [
+            433,
+            1325,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "file": "カトキガンダム.png",
+      "sha256": "6b4d5505f7942372f9401300ffa338734e7fd83bdee3703294d67dbcc568cec7",
+      "roi": [
+        60,
+        1000,
+        300,
+        1500
+      ],
+      "labels": [
+        {
+          "number": "67",
+          "circle": [
+            142,
+            1092,
+            31
+          ]
+        },
+        {
+          "number": "16",
+          "circle": [
+            142,
+            1191,
+            31
+          ]
+        },
+        {
+          "number": "C",
+          "circle": [
+            142,
+            1267,
+            31
+          ]
+        },
+        {
+          "number": "E",
+          "circle": [
+            142,
+            1425,
+            31
+          ]
+        },
+        {
+          "number": "1",
+          "circle": [
+            142,
+            1559,
+            31
+          ]
+        },
+        {
+          "number": "23",
+          "circle": [
+            142,
+            1678,
+            31
+          ]
+        },
+        {
+          "number": "17",
+          "circle": [
+            142,
+            1752,
+            31
+          ]
+        },
+        {
+          "number": "24",
+          "circle": [
+            142,
+            1828,
+            31
+          ]
+        },
+        {
+          "number": "69",
+          "circle": [
+            142,
+            2088,
+            31
+          ]
+        },
+        {
+          "number": "4",
+          "circle": [
+            142,
+            2204,
+            31
+          ]
+        },
+        {
+          "number": "28",
+          "circle": [
+            142,
+            2305,
+            31
+          ]
+        },
+        {
+          "number": "7",
+          "circle": [
+            142,
+            2458,
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "file": "MGUCペルフェクティビティ2.png",
+      "sha256": "a227fbd29c1e400c27fb4c292e312a43084b83aad4caeeb5fa2d007c6f68ca7d",
+      "roi": [
+        50,
+        40,
+        350,
+        1600
+      ],
+      "labels": [
+        {
+          "number": "13",
+          "circle": [
+            119,
+            107,
+            36
+          ]
+        },
+        {
+          "number": "14",
+          "circle": [
+            272,
+            178,
+            36
+          ]
+        },
+        {
+          "number": "42",
+          "circle": [
+            119,
+            591,
+            36
+          ]
+        },
+        {
+          "number": "22",
+          "circle": [
+            119,
+            691,
+            36
+          ]
+        },
+        {
+          "number": "44",
+          "circle": [
+            119,
+            791,
+            36
+          ]
+        },
+        {
+          "number": "6",
+          "circle": [
+            119,
+            890,
+            36
+          ]
+        },
+        {
+          "number": "2",
+          "circle": [
+            119,
+            1226,
+            36
+          ]
+        },
+        {
+          "number": "1",
+          "circle": [
+            272,
+            1297,
+            36
+          ]
+        },
+        {
+          "number": "5",
+          "circle": [
+            119,
+            1485,
+            36
+          ]
+        }
+      ]
+    },
+    {
+      "file": "RG RX-78-2 ver 2.png",
+      "sha256": "c25d00e31c52e04c1b3625613dd5b99ee6ebbfa009dc8aec5815cc4d993cf583",
+      "roi": [
+        300,
+        680,
+        500,
+        1250
+      ],
+      "labels": [
+        {
+          "number": "18",
+          "circle": [
+            586,
+            756,
+            27
+          ]
+        },
+        {
+          "number": "20",
+          "circle": [
+            727,
+            756,
+            27
+          ]
+        },
+        {
+          "number": "26",
+          "circle": [
+            417,
+            1008,
+            27
+          ]
+        },
+        {
+          "number": "10",
+          "circle": [
+            417,
+            1099,
+            27
+          ]
+        },
+        {
+          "number": "1",
+          "circle": [
+            417,
+            1179,
+            27
+          ]
+        },
+        {
+          "number": "10",
+          "circle": [
+            417,
+            1328,
+            27
+          ]
+        },
+        {
+          "number": "5",
+          "circle": [
+            417,
+            1408,
+            27
+          ]
+        },
+        {
+          "number": "17",
+          "circle": [
+            417,
+            1526,
+            27
+          ]
+        },
+        {
+          "number": "11",
+          "circle": [
+            417,
+            1596,
+            27
+          ]
+        },
+        {
+          "number": "49",
+          "circle": [
+            417,
+            1684,
+            27
+          ]
+        },
+        {
+          "number": "40",
+          "circle": [
+            417,
+            1814,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "file": "RX-78 ver 3.0.png",
+      "sha256": "3cc0e7656f0109903bae093e06e29bca416e67dfc66ed21a135d9172203de126",
+      "roi": [
+        60,
+        1400,
+        200,
+        650
+      ],
+      "labels": [
+        {
+          "number": "82",
+          "circle": [
+            90,
+            1440,
+            14
+          ]
+        },
+        {
+          "number": "7",
+          "circle": [
+            90,
+            1496,
+            14
+          ]
+        },
+        {
+          "number": "110",
+          "circle": [
+            90,
+            1556,
+            14
+          ]
+        },
+        {
+          "number": "1",
+          "circle": [
+            90,
+            1619,
+            14
+          ]
+        },
+        {
+          "number": "3",
+          "circle": [
+            90,
+            1671,
+            14
+          ]
+        },
+        {
+          "number": "16",
+          "circle": [
+            90,
+            1722,
+            14
+          ]
+        },
+        {
+          "number": "14",
+          "circle": [
+            90,
+            1758,
+            14
+          ]
+        },
+        {
+          "number": "10",
+          "circle": [
+            90,
+            1798,
+            14
+          ]
+        },
+        {
+          "number": "18",
+          "circle": [
+            90,
+            1829,
+            14
+          ]
+        },
+        {
+          "number": "36",
+          "circle": [
+            90,
+            1866,
+            14
+          ]
+        },
+        {
+          "number": "87",
+          "circle": [
+            90,
+            1898,
+            14
+          ]
+        },
+        {
+          "number": "91",
+          "circle": [
+            90,
+            1938,
+            14
+          ]
+        },
+        {
+          "number": "24",
+          "circle": [
+            90,
+            1983,
+            14
+          ]
+        },
+        {
+          "number": "17",
+          "circle": [
+            90,
+            2024,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "file": "ルナマリアザクウォーリア.png",
+      "sha256": "80b51a46f1dc82d46f0acf4cafa06d752a03d6a37423167b025c6ded4d431707",
+      "roi": [
+        100,
+        550,
+        250,
+        1500
+      ],
+      "labels": [
+        {
+          "number": "1",
+          "circle": [
+            168,
+            683,
+            37
+          ]
+        },
+        {
+          "number": "32",
+          "circle": [
+            168,
+            831,
+            37
+          ]
+        },
+        {
+          "number": "6",
+          "circle": [
+            168,
+            1179,
+            37
+          ]
+        },
+        {
+          "number": "40",
+          "circle": [
+            168,
+            1274,
+            37
+          ]
+        },
+        {
+          "number": "39",
+          "circle": [
+            168,
+            1376,
+            37
+          ]
+        },
+        {
+          "number": "1",
+          "circle": [
+            168,
+            1561,
+            37
+          ]
+        },
+        {
+          "number": "7",
+          "circle": [
+            168,
+            1654,
+            37
+          ]
+        },
+        {
+          "number": "35",
+          "circle": [
+            168,
+            1745,
+            37
+          ]
+        },
+        {
+          "number": "4",
+          "circle": [
+            168,
+            2011,
+            37
+          ]
+        }
+      ]
+    }
+  ]
+}

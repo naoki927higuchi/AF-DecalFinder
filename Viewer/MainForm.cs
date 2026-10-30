@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 namespace AF.DecalFinder;
 
@@ -24,10 +24,12 @@ internal sealed class MainForm : Form
     private int analysisGeneration;
     internal Task ActiveOcrTask { get; private set; } = Task.CompletedTask;
     internal bool IsAnalyzing { get; private set; }
+    internal Func<int, bool>? ConfirmDeletion;
     private OcrCatalog? catalog;
     private readonly EditStore store;
     private readonly AppSettingsStore settings;
     private ImageHistory history = new(null, Array.Empty<string>());
+    private readonly ToolStripMenuItem reanalyze = new("OCRを再解析…") { Enabled = false };
     private readonly ToolStripMenuItem recentImages = new("最近使った画像");
     private ImageIdentity? identity;
     private bool dirty;
@@ -76,6 +78,12 @@ internal sealed class MainForm : Form
         var fileMenu = new ToolStripMenuItem("ファイル");
         fileMenu.DropDownItems.Add("画像を開く…", null, (_, _) => SelectImage());
         fileMenu.DropDownItems.Add(recentImages);
+        fileMenu.DropDownItems.Add(reanalyze);
+        reanalyze.Click += (_, _) =>
+        {
+            if (MessageBox.Show(this, "現在のデータを退避してOCRを再解析します。画像内容が同一の場合、手動修正・追加・削除・済みを維持し、未修正のOCR結果を更新します。実行しますか？",
+                "OCR再解析", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) Reanalyze();
+        };
         menu.Items.Add(fileMenu);
         MainMenuStrip = menu;
         Controls.Add(menu);
@@ -86,13 +94,18 @@ internal sealed class MainForm : Form
             if (e.KeyCode != Keys.Enter) return;
             e.Handled = e.SuppressKeyPress = true;
             var first = list.Items.Cast<ListViewItem>().Select(row => (Detection)row.Tag!)
-                .FirstOrDefault(d => number.Text.Length > 0 && d.Number == number.Text);
+                .FirstOrDefault(d => !d.IsUnrecognized && !d.IsDeleted && number.Text.Length > 0 && d.Number == number.Text);
             if (first != null) view.CenterOn(new PointF(first.Bounds.X + first.Bounds.Width / 2f, first.Bounds.Y + first.Bounds.Height / 2f));
         };
         list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
         view.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
         overview.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
         list.DataChanged += Changed;
+        list.DeleteRequested += selected =>
+        {
+            if (ConfirmDeletion?.Invoke(selected.Count) ?? (MessageBox.Show(this, $"選択した{selected.Count}件を誤検出として削除しますか？", "削除の確認",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) DeleteDetections(selected);
+        };
         list.EditRejected += message => MessageBox.Show(this, message, "番号編集", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         addNumber.Click += (_, _) => BeginAdd();
         cancelAdd.Click += (_, _) => EndAdd();
@@ -335,11 +348,12 @@ internal sealed class MainForm : Form
         UseWaitCursor = value;
         if (floatingList != null) floatingList.UseWaitCursor = value;
         list.Enabled = !value;
+        reanalyze.Enabled = !value && identity != null;
         addNumber.Enabled = !value && identity != null;
         number.Enabled = !value && catalog != null;
     }
 
-    private async Task LoadAnalysisAsync(ImageIdentity image, string description, int generation, CancellationToken token)
+    private async Task LoadAnalysisAsync(ImageIdentity image, string description, int generation, CancellationToken token, bool force = false)
     {
         SetAnalyzing(true);
         status.ToolTipText = "";
@@ -348,7 +362,11 @@ internal sealed class MainForm : Form
         try
         {
             OcrCatalog? candidate;
-            try { candidate = store.Load(image); }
+            try
+            {
+                if (force) { archive = store.ArchiveInvalid(image.AbsolutePath); candidate = null; }
+                else candidate = store.Load(image);
+            }
             catch (Exception ex) when (ex is IOException or InvalidDataException or JsonException)
             {
                 // Copy first. If preservation fails, do not overwrite the user's old work.
@@ -366,15 +384,20 @@ internal sealed class MainForm : Form
                 throw new InvalidDataException("OCR結果の画像寸法が一致しません。");
             if (!image.Matches(ImageIdentity.Read(image.AbsolutePath, candidate.ImageSize)))
                 throw new IOException("解析中に画像が更新されました。画像を開き直してください。");
+            int preserved = !restored && archive != null ? store.RestoreProtected(image, candidate, archive) : 0;
             catalog = candidate;
             list.SetDetections(catalog.Detections);
             overview.SetDetections(catalog.Detections);
             view.SetDetections(catalog.Detections);
-            status.Text = $"{description}  |  検出{catalog.Detections.Count}件  |  {(restored ? "キャッシュ復元済み" : "OCR完了")}";
+            status.Text = $"{description}  |  検出{catalog.ActiveDetections.Count}件  |  {(restored ? "キャッシュ復元済み" : "OCR完了")}";
             if (!restored)
             {
                 dirty = true;
-                if (SaveChanges() && archive != null) status.Text += $"  |  旧データ退避：{archive}";
+                if (SaveChanges() && archive != null)
+                {
+                    status.Text += $"  |  旧データ退避済み・同一画像の作業データ{preserved}件維持";
+                    status.ToolTipText = $"退避先：{archive}\n画像のバイト列が同一と確認できた場合のみ修正・追加・削除・済みを維持します。";
+                }
             }
             Search();
         }
@@ -389,6 +412,22 @@ internal sealed class MainForm : Form
         {
             if (generation == analysisGeneration && !closing && !IsDisposed) SetAnalyzing(false);
         }
+    }
+
+    internal void Reanalyze()
+    {
+        if (identity == null || IsAnalyzing) return;
+        // Upgrade a valid legacy cache and record its content fingerprint before rerunning.
+        if (catalog != null) { dirty = true; if (!SaveChanges()) return; }
+        EndAdd();
+        analysisCancellation?.Cancel(); analysisCancellation?.Dispose();
+        analysisCancellation = new CancellationTokenSource();
+        catalog = null;
+        list.SetDetections([]); view.SetDetections([]); overview.SetDetections([]);
+        number.Clear(); Search();
+        var description = $"{Path.GetFileName(identity.AbsolutePath)}  |  {identity.Width} × {identity.Height} px";
+        bool exists = File.Exists(store.PathFor(identity.AbsolutePath));
+        ActiveOcrTask = LoadAnalysisAsync(identity, description, ++analysisGeneration, analysisCancellation.Token, force: exists);
     }
 
     internal void BeginAdd()
@@ -421,6 +460,15 @@ internal sealed class MainForm : Form
         Changed();
     }
 
+    internal void DeleteDetections(IReadOnlyList<Detection> selected)
+    {
+        if (catalog == null || IsAnalyzing) return;
+        var ids = selected.Select(d => d.Id).ToHashSet(StringComparer.Ordinal);
+        foreach (var record in catalog.Detections.Where(d => ids.Contains(d.Id))) record.IsDeleted = true;
+        list.SetDetections(catalog.Detections, preserveSelection: true);
+        Changed();
+    }
+
     private void Changed()
     {
         if (catalog == null) return;
@@ -437,7 +485,7 @@ internal sealed class MainForm : Form
         try
         {
             store.Save(identity, catalog); dirty = false;
-            status.Text = $"{Path.GetFileName(identity.AbsolutePath)}  |  検出結果 {catalog.Detections.Count}件  |  保存済み";
+            status.Text = $"{Path.GetFileName(identity.AbsolutePath)}  |  検出結果 {catalog.ActiveDetections.Count}件  |  保存済み";
             return true;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or System.Security.SecurityException)

@@ -6,7 +6,7 @@ $version=(Get-Content "$PSScriptRoot\VERSION.txt" -Raw).Trim()
 $destination="$PSScriptRoot\bin\Release-$version\Ocr"
 New-Item -ItemType Directory -Force $destination | Out-Null
 Copy-Item -LiteralPath "$PSScriptRoot\benchmark.py" -Destination $destination
-Copy-Item -LiteralPath "$PSScriptRoot\Ocr\worker.py" -Destination $destination
+Copy-Item -Path "$PSScriptRoot\Ocr\*.py" -Destination $destination
 Copy-Item -LiteralPath "$PSScriptRoot\.deps" -Destination $destination -Recurse -Force
 Copy-Item -LiteralPath "$PSScriptRoot\tessdata" -Destination $destination -Recurse -Force
 @{ Python=(Resolve-Path -LiteralPath $Python).Path } | ConvertTo-Json | Set-Content "$destination\runtime.json" -Encoding UTF8

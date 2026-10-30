@@ -14,7 +14,7 @@ internal sealed class NumberDialog : Form
         var buttons = new FlowLayoutPanel { Dock = DockStyle.Bottom, Height = 35, FlowDirection = FlowDirection.RightToLeft };
         buttons.Controls.AddRange([cancel, ok]); Controls.AddRange([input, buttons]);
         AcceptButton = ok; CancelButton = cancel;
-        input.TextChanged += (_, _) => ok.Enabled = Detection.ValidNumber(input.Text);
+        input.TextChanged += (_, _) => ok.Enabled = Detection.ValidLabel(input.Text);
         input.Text = initial;
     }
 }

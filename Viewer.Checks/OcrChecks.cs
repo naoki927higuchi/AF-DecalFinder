@@ -47,11 +47,11 @@ internal static class OcrChecks
     internal static void Run(string root)
     {
         var folder = Path.Combine(root, "viewer-checks", "ocr-" + Guid.NewGuid()); Directory.CreateDirectory(folder);
-        var runtime = Path.Combine(root, "bin", "Release-1.7.0", "Ocr");
+        var runtime = Path.Combine(root, "bin", "Release-" + File.ReadAllText(Path.Combine(root, "VERSION.txt")).Trim(), "Ocr");
         var store = new EditStore(Path.Combine(folder, "cache"));
         var settings = new AppSettingsStore(Path.Combine(folder, "Settings.json"));
         var runner = new CountingRunner(new OcrRunner(runtime));
-        var report = new StringBuilder("# 1.7.0 OCR統合検証\n\n日時：" + DateTimeOffset.Now.ToString("u") + "\n\n専用の空キャッシュ・設定を使用。Release実MainFormから8原本を順次読み込み、UIメッセージを処理しながら完了待機。各値は1回測定。OCR秒はプロセス起動・Python import・画像decode・認識・JSON検証を含む。初回/再読込秒は画像decode・表示・キャッシュI/Oを含む。\n\n|画像|寸法|検出数|OCR秒|初回秒|キャッシュ再読込秒|待機中UI処理回数|\n|---|---|---:|---:|---:|---:|---:|\n");
+        var report = new StringBuilder("# 1.8.0 OCR統合検証\n\n日時：" + DateTimeOffset.Now.ToString("u") + "\n\n専用の空キャッシュ・設定を使用。Release実MainFormから8原本を順次読み込み、UIメッセージを処理しながら完了待機。各値は1回測定。OCR秒はプロセス起動・Python import・画像decode・認識・JSON検証を含む。初回/再読込秒は画像decode・表示・キャッシュI/Oを含む。\n\n|画像|寸法|検出数|OCR秒|初回秒|キャッシュ再読込秒|待機中UI処理回数|\n|---|---|---:|---:|---:|---:|---:|\n");
         var files = Directory.GetFiles(Path.Combine(root, "inputs")).Where(p => Path.GetFileName(p) != "icon.png" && new[] { ".jpg", ".png", ".jpeg" }.Contains(Path.GetExtension(p).ToLowerInvariant())).Order().ToArray();
         Check(files.Length == 8, "Exactly eight provided inputs");
         using (var form = new MainForm(null, store, settings, runner))
@@ -73,7 +73,7 @@ internal static class OcrChecks
                 if (Path.GetFileName(path) == "600dpi.jpg")
                 {
                     var phase1 = OcrCatalog.Load(Path.Combine(root, "results", "600dpi.json"));
-                    Check(catalog!.Detections.Count == 181 && catalog.Detections.Zip(phase1.Detections).All(pair => pair.First.Number == pair.Second.Number && pair.First.Bounds == pair.Second.Bounds), "Phase 1: all 181 numbers and boxes match in Y/X order");
+                    Check(phase1.Detections.All(old => catalog!.Detections.Any(d => d.Number == old.Number && d.Bounds == old.Bounds)), "Phase 1: all 181 numbers and boxes retained");
                 }
                 File.WriteAllText(Path.Combine(folder, Path.GetFileNameWithoutExtension(path) + "-detections.json"), JsonSerializer.Serialize(catalog!.Detections));
                 timer.Restart(); Open(form, path); Wait(form); timer.Stop();
@@ -96,17 +96,17 @@ internal static class OcrChecks
             }
             // Change only a test copy's timestamp; never touch provided originals.
             var copy = Path.Combine(folder, "timestamp.jpg"); File.Copy(files.Single(p => Path.GetFileName(p) == "600dpi.jpg"), copy);
-            Open(form, copy); Wait(form); form.BeginAdd(); form.AddAt("987654", new PointF(200, 200));
+            Open(form, copy); Wait(form); int freshCount = list.Items.Count; form.BeginAdd(); form.AddAt("987654", new PointF(200, 200));
             var oldCache = File.ReadAllBytes(store.PathFor(copy));
             File.SetLastWriteTimeUtc(copy, File.GetLastWriteTimeUtc(copy).AddSeconds(5));
             int beforeCalls = runner.Calls; Open(form, copy); Wait(form);
-            Check(runner.Calls == beforeCalls + 1 && list.Items.Count == 181 && !list.Items.Cast<ListViewItem>().Any(i => i.Text == "987654"), "Timestamp change reruns OCR without merging old edits");
+            Check(runner.Calls == beforeCalls + 1 && list.Items.Count == freshCount + 1 && list.Items.Cast<ListViewItem>().Any(i => i.Text == "987654"), "Timestamp change reruns OCR and preserves work for identical bytes");
             Check(Directory.GetFiles(store.DirectoryPath, "*.stale-*.json").Any(p => File.ReadAllBytes(p).SequenceEqual(oldCache)), "Stale edited data preserved byte-for-byte");
             var cachePath = store.PathFor(copy);
             var doc = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(cachePath))!; doc["Image"]!["Width"] = 10;
             File.WriteAllText(cachePath, doc.ToJsonString()); beforeCalls = runner.Calls;
             Open(form, copy); Wait(form);
-            Check(runner.Calls == beforeCalls + 1 && list.Items.Count == 181, "Wrong-size cache triggers fresh OCR");
+            Check(runner.Calls == beforeCalls + 1 && list.Items.Count == freshCount, "Wrong-size cache triggers fresh OCR");
             form.Close();
         }
         var smallA = Path.Combine(folder, "a.png"); var smallB = Path.Combine(folder, "b.png");
@@ -118,9 +118,9 @@ internal static class OcrChecks
             deferred.Pending[0].SetResult(new OcrCatalog(new Size(100, 80), [new("1",new Rectangle(1,1,5,5),90,"old")])); Application.DoEvents();
             Check(form.IsAnalyzing && Field<OcrResultsList>(form,"list").Items.Count == 0, "Late previous result cannot replace current image");
             deferred.Pending[1].SetResult(new OcrCatalog(new Size(100, 80), [])); Wait(form);
-            Check(!form.IsAnalyzing && Field<OcrResultsList>(form,"list").Items.Count == 0 && Field<DigitsTextBox>(form,"number").Enabled && Field<ToolStripStatusLabel>(form,"status").Text.Contains("0件"), "Zero detections succeeds and saves");
+            Check(!form.IsAnalyzing && Field<OcrResultsList>(form,"list").Items.Count == 0 && Field<DigitsTextBox>(form,"number").Enabled && Field<ToolStripStatusLabel>(form,"status").Text!.Contains("0件"), "Zero detections succeeds and saves");
             Open(form, smallA); deferred.Pending[2].SetException(new IOException("intentional worker failure")); Wait(form);
-            Check(!form.UseWaitCursor && !form.IsAnalyzing && Field<ToolStripStatusLabel>(form,"status").Text.Contains("intentional worker failure") && !Field<ImageViewControl>(form,"view").VisibleImageBounds.IsEmpty, "Failure restores cursor and keeps image available with reason");
+            Check(!form.UseWaitCursor && !form.IsAnalyzing && Field<ToolStripStatusLabel>(form,"status").Text!.Contains("intentional worker failure") && !Field<ImageViewControl>(form,"view").VisibleImageBounds.IsEmpty, "Failure restores cursor and keeps image available with reason");
             form.Close();
         }
         var parsed = OcrRunner.Parse("""{"image":{"width":100,"height":80},"detections":[null,{}, {"id":"bad","number":"2","bbox":[99,0,10,10],"confidence":80},{"id":"ok","number":"04","bbox":[1,1,10,10],"confidence":90}]}""", new Size(100,80));
@@ -133,7 +133,7 @@ internal static class OcrChecks
             Check(canceled, "Real subprocess supports cancellation");
         }
         report.AppendLine($"\n自動確認 {checks}項目成功。全8画像で原本SHA256不変、初回OCR・キャッシュ再読込・編集/追加/済み復元・25/50/100/200%パンを確認。テムジン600dpiは181件の番号とbboxがPhase 1と全件一致。更新日時/寸法不一致では再解析し旧編集データを別ファイル退避。遅延結果混入・0件・失敗・不正レコード・実プロセス取消しを確認。\n\n検証データ（専用キャッシュと検出JSON）：`{folder}`\n");
-        File.WriteAllText(Path.Combine(root, "OCR-INTEGRATION-CHECKS.md"), report.ToString());
-        Console.WriteLine($"SUCCESS: {checks} checks; report OCR-INTEGRATION-CHECKS.md");
+        File.WriteAllText(Path.Combine(root, "OCR-INTEGRATION-180.md"), report.ToString());
+        Console.WriteLine($"SUCCESS: {checks} checks; report OCR-INTEGRATION-180.md");
     }
 }

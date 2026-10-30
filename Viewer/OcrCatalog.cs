@@ -11,6 +11,10 @@ public sealed class Detection(string number, Rectangle bounds, double confidence
     public bool IsManual { get; init; }
     public bool IsModified { get; internal set; }
     public bool IsDone { get; internal set; }
+    public bool IsUnrecognized { get; internal set; }
+    public bool IsDeleted { get; internal set; }
+    public string DisplayNumber => IsUnrecognized ? "?" : Number;
+    public static bool ValidLabel(string? value) => !string.IsNullOrWhiteSpace(value) && !value.Any(char.IsControl);
     // Preserve OCR evidence separately from editable values for a future explicit merge.
     public string? OriginalNumber { get; init; } = number;
     public Rectangle? OriginalBounds { get; init; } = bounds;
@@ -22,6 +26,8 @@ public sealed class OcrCatalog
     public Size ImageSize { get; }
     public IReadOnlyList<Detection> Detections { get; }
 
+    public IReadOnlyList<Detection> ActiveDetections => records.Where(d => !d.IsDeleted).ToArray();
+    public int DoneCount => records.Count(d => !d.IsDeleted && d.IsDone);
     private readonly List<Detection> records;
     internal OcrCatalog(Size imageSize, List<Detection> detections)
     {
@@ -32,8 +38,8 @@ public sealed class OcrCatalog
 
     internal Detection AddManual(string number, PointF center)
     {
-        if (!Detection.ValidNumber(number)) throw new ArgumentException("半角数字を入力してください。");
-        var source = records.Where(d => !d.IsManual).ToArray();
+        if (!Detection.ValidLabel(number)) throw new ArgumentException("空欄でないラベルを入力してください。");
+        var source = records.Where(d => !d.IsManual && !d.IsDeleted).ToArray();
         int Median(Func<Detection, int> get, int fallback) => source.Length == 0 ? fallback : source.Select(get).Order().ElementAt(source.Length / 2);
         int width = Math.Clamp(Median(d => d.Bounds.Width, 45), 1, ImageSize.Width);
         int height = Math.Clamp(Median(d => d.Bounds.Height, 40), 1, ImageSize.Height);
@@ -45,9 +51,28 @@ public sealed class OcrCatalog
         return record;
     }
 
+    internal int PreserveWork(OcrCatalog old)
+    {
+        var protectedRecords = old.Detections.Where(d => d.IsModified || d.IsManual || d.IsDone || d.IsDeleted).ToArray();
+        records.RemoveAll(d => protectedRecords.Any(saved => d.Id == saved.Id || SamePosition(d.Bounds, saved.Bounds)));
+        // Preserve every protected fixed ID, even when two user records overlap.
+        records.AddRange(protectedRecords);
+        return protectedRecords.Length;
+    }
+
+    private static bool SamePosition(Rectangle a, Rectangle b)
+    {
+        var intersection = Rectangle.Intersect(a, b);
+        double minimum = Math.Min((double)a.Width * a.Height, (double)b.Width * b.Height);
+        double dx = (a.Left + a.Width / 2d) - (b.Left + b.Width / 2d);
+        double dy = (a.Top + a.Height / 2d) - (b.Top + b.Height / 2d);
+        return intersection.Width > 0 && intersection.Height > 0 && intersection.Width * (double)intersection.Height / minimum >= .6
+            && Math.Sqrt(dx * dx + dy * dy) <= Math.Max(b.Width, b.Height) * .6;
+    }
+
     public IReadOnlyList<Detection> Find(string number) => string.IsNullOrEmpty(number)
         ? Array.Empty<Detection>()
-        : Detections.Where(d => string.Equals(d.Number, number, StringComparison.Ordinal)).ToArray();
+        : Detections.Where(d => !d.IsDeleted && !d.IsUnrecognized && string.Equals(d.Number, number, StringComparison.Ordinal)).ToArray();
 
     public static OcrCatalog Load(string path)
     {

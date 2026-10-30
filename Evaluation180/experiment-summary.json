@@ -1,0 +1,362 @@
+[
+  {
+    "file": "300dpi.jpg",
+    "mode": "baseline",
+    "total": 208,
+    "tp": 12,
+    "fn": 0,
+    "fp": 0,
+    "seconds": 0.11056319999624975
+  },
+  {
+    "file": "300dpi.jpg",
+    "mode": "hough",
+    "total": 2427,
+    "tp": 12,
+    "fn": 0,
+    "fp": 77,
+    "seconds": 0.9442505000042729
+  },
+  {
+    "file": "300dpi.jpg",
+    "mode": "adaptive",
+    "total": 62,
+    "tp": 1,
+    "fn": 11,
+    "fp": 0,
+    "seconds": 0.2207114999764599
+  },
+  {
+    "file": "300dpi.jpg",
+    "mode": "otsu",
+    "total": 11,
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "seconds": 0.14701220000279136
+  },
+  {
+    "file": "300dpi.jpg",
+    "mode": "color",
+    "total": 4,
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "seconds": 0.13154709999798797
+  },
+  {
+    "file": "600dpi.jpg",
+    "mode": "baseline",
+    "total": 193,
+    "tp": 12,
+    "fn": 0,
+    "fp": 0,
+    "seconds": 0.6195402000157628
+  },
+  {
+    "file": "600dpi.jpg",
+    "mode": "hough",
+    "total": 2430,
+    "tp": 12,
+    "fn": 0,
+    "fp": 77,
+    "seconds": 1.2331520000007004
+  },
+  {
+    "file": "600dpi.jpg",
+    "mode": "adaptive",
+    "total": 78,
+    "tp": 1,
+    "fn": 11,
+    "fp": 0,
+    "seconds": 0.4743523000215646
+  },
+  {
+    "file": "600dpi.jpg",
+    "mode": "otsu",
+    "total": 10,
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "seconds": 0.3729361000005156
+  },
+  {
+    "file": "600dpi.jpg",
+    "mode": "color",
+    "total": 6,
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "seconds": 0.36031760001787916
+  },
+  {
+    "file": "RGルージュ.png",
+    "mode": "baseline",
+    "total": 123,
+    "tp": 0,
+    "fn": 9,
+    "fp": 1,
+    "seconds": 0.5533675999904517
+  },
+  {
+    "file": "RGルージュ.png",
+    "mode": "hough",
+    "total": 1492,
+    "tp": 9,
+    "fn": 0,
+    "fp": 27,
+    "seconds": 0.46667819999856874
+  },
+  {
+    "file": "RGルージュ.png",
+    "mode": "adaptive",
+    "total": 162,
+    "tp": 8,
+    "fn": 1,
+    "fp": 4,
+    "seconds": 0.29681280002114363
+  },
+  {
+    "file": "RGルージュ.png",
+    "mode": "otsu",
+    "total": 71,
+    "tp": 4,
+    "fn": 5,
+    "fp": 0,
+    "seconds": 0.23820180000620894
+  },
+  {
+    "file": "RGルージュ.png",
+    "mode": "color",
+    "total": 0,
+    "tp": 0,
+    "fn": 9,
+    "fp": 0,
+    "seconds": 0.21020110000972636
+  },
+  {
+    "file": "カトキガンダム.png",
+    "mode": "baseline",
+    "total": 21,
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "seconds": 0.3496360999997705
+  },
+  {
+    "file": "カトキガンダム.png",
+    "mode": "hough",
+    "total": 2074,
+    "tp": 12,
+    "fn": 0,
+    "fp": 22,
+    "seconds": 0.782500200002687
+  },
+  {
+    "file": "カトキガンダム.png",
+    "mode": "adaptive",
+    "total": 106,
+    "tp": 0,
+    "fn": 12,
+    "fp": 1,
+    "seconds": 0.35455869999714196
+  },
+  {
+    "file": "カトキガンダム.png",
+    "mode": "otsu",
+    "total": 68,
+    "tp": 1,
+    "fn": 11,
+    "fp": 0,
+    "seconds": 0.2631728000123985
+  },
+  {
+    "file": "カトキガンダム.png",
+    "mode": "color",
+    "total": 40,
+    "tp": 4,
+    "fn": 8,
+    "fp": 0,
+    "seconds": 0.2680879000108689
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "mode": "baseline",
+    "total": 29,
+    "tp": 0,
+    "fn": 9,
+    "fp": 2,
+    "seconds": 0.25741660001222044
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "mode": "hough",
+    "total": 1350,
+    "tp": 9,
+    "fn": 0,
+    "fp": 20,
+    "seconds": 0.42680700001074
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "mode": "adaptive",
+    "total": 90,
+    "tp": 6,
+    "fn": 3,
+    "fp": 1,
+    "seconds": 0.29584690000046976
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "mode": "otsu",
+    "total": 85,
+    "tp": 1,
+    "fn": 8,
+    "fp": 0,
+    "seconds": 0.2272962999995798
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "mode": "color",
+    "total": 0,
+    "tp": 0,
+    "fn": 9,
+    "fp": 0,
+    "seconds": 0.22120180001365952
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "mode": "baseline",
+    "total": 87,
+    "tp": 1,
+    "fn": 10,
+    "fp": 0,
+    "seconds": 0.581951600004686
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "mode": "hough",
+    "total": 1359,
+    "tp": 11,
+    "fn": 0,
+    "fp": 61,
+    "seconds": 0.43963380000786856
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "mode": "adaptive",
+    "total": 134,
+    "tp": 8,
+    "fn": 3,
+    "fp": 1,
+    "seconds": 0.3027124000072945
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "mode": "otsu",
+    "total": 34,
+    "tp": 2,
+    "fn": 9,
+    "fp": 0,
+    "seconds": 0.24086970000644214
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "mode": "color",
+    "total": 4,
+    "tp": 0,
+    "fn": 11,
+    "fp": 0,
+    "seconds": 0.21971770000527613
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "mode": "baseline",
+    "total": 209,
+    "tp": 7,
+    "fn": 7,
+    "fp": 3,
+    "seconds": 0.05535159999271855
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "mode": "hough",
+    "total": 1550,
+    "tp": 14,
+    "fn": 0,
+    "fp": 35,
+    "seconds": 0.40720760001568124
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "mode": "adaptive",
+    "total": 57,
+    "tp": 2,
+    "fn": 12,
+    "fp": 0,
+    "seconds": 0.16868699999758974
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "mode": "otsu",
+    "total": 59,
+    "tp": 2,
+    "fn": 12,
+    "fp": 0,
+    "seconds": 0.12414780000108294
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "mode": "color",
+    "total": 0,
+    "tp": 0,
+    "fn": 14,
+    "fp": 0,
+    "seconds": 0.09583530001691543
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "mode": "baseline",
+    "total": 50,
+    "tp": 0,
+    "fn": 9,
+    "fp": 2,
+    "seconds": 0.24533430000883527
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "mode": "hough",
+    "total": 1314,
+    "tp": 9,
+    "fn": 0,
+    "fp": 11,
+    "seconds": 0.43437629999243654
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "mode": "adaptive",
+    "total": 98,
+    "tp": 5,
+    "fn": 4,
+    "fp": 0,
+    "seconds": 0.29146530001889914
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "mode": "otsu",
+    "total": 110,
+    "tp": 6,
+    "fn": 3,
+    "fp": 0,
+    "seconds": 0.2481440000119619
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "mode": "color",
+    "total": 0,
+    "tp": 0,
+    "fn": 9,
+    "fp": 0,
+    "seconds": 0.18984149998868816
+  }
+]

@@ -1,0 +1,2630 @@
+[
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "79",
+      "circle": [
+        669,
+        624,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "79"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        669,
+        684,
+        15
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "46"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        834,
+        707,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "18",
+      "circle": [
+        834,
+        745,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "83",
+      "circle": [
+        737,
+        771,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "23",
+      "circle": [
+        737,
+        809,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "42",
+      "circle": [
+        737,
+        846,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "42"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "36",
+      "circle": [
+        737,
+        883,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "36"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "35",
+      "circle": [
+        737,
+        920,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "39",
+      "circle": [
+        737,
+        957,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "85",
+      "circle": [
+        737,
+        994,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "85"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "88",
+      "circle": [
+        737,
+        1031,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "88"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "79",
+      "circle": [
+        669,
+        624,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "79"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        669,
+        684,
+        15
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "46"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        834,
+        707,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "18",
+      "circle": [
+        834,
+        745,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "83",
+      "circle": [
+        737,
+        771,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "23",
+      "circle": [
+        737,
+        809,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "42",
+      "circle": [
+        737,
+        846,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "42"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "36",
+      "circle": [
+        737,
+        883,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "36"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "35",
+      "circle": [
+        737,
+        920,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "39",
+      "circle": [
+        737,
+        957,
+        15
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "85",
+      "circle": [
+        737,
+        994,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "85"
+    ]
+  },
+  {
+    "file": "300dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "88",
+      "circle": [
+        737,
+        1031,
+        15
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "88"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "79",
+      "circle": [
+        1466,
+        1369,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "79"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        1466,
+        1498,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "16"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        1832,
+        1550,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "17"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "18",
+      "circle": [
+        1832,
+        1634,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "18"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "83",
+      "circle": [
+        1616,
+        1691,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "83"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "23",
+      "circle": [
+        1616,
+        1774,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "23"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "42",
+      "circle": [
+        1616,
+        1857,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "42"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "36",
+      "circle": [
+        1616,
+        1938,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "36"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "35",
+      "circle": [
+        1616,
+        2018,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "35"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "39",
+      "circle": [
+        1616,
+        2098,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "39"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "85",
+      "circle": [
+        1616,
+        2182,
+        33
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "5"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.7.0",
+    "truth": {
+      "number": "88",
+      "circle": [
+        1616,
+        2262,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "88"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "79",
+      "circle": [
+        1466,
+        1369,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "79"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        1466,
+        1498,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "16"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        1832,
+        1550,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "17"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "18",
+      "circle": [
+        1832,
+        1634,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "18"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "83",
+      "circle": [
+        1616,
+        1691,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "83"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "23",
+      "circle": [
+        1616,
+        1774,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "23"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "42",
+      "circle": [
+        1616,
+        1857,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "42"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "36",
+      "circle": [
+        1616,
+        1938,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "36"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "35",
+      "circle": [
+        1616,
+        2018,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "35"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "39",
+      "circle": [
+        1616,
+        2098,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "39"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "85",
+      "circle": [
+        1616,
+        2182,
+        33
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "5"
+    ]
+  },
+  {
+    "file": "600dpi.jpg",
+    "version": "1.8.0",
+    "truth": {
+      "number": "88",
+      "circle": [
+        1616,
+        2262,
+        33
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "88"
+    ]
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        433,
+        647,
+        28
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        258,
+        732,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "2",
+      "circle": [
+        433,
+        732,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "27",
+      "circle": [
+        258,
+        869,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "28",
+      "circle": [
+        433,
+        869,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "5",
+      "circle": [
+        433,
+        981,
+        28
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "6",
+      "circle": [
+        433,
+        1157,
+        28
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "22",
+      "circle": [
+        433,
+        1246,
+        28
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "33",
+      "circle": [
+        433,
+        1325,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        433,
+        647,
+        28
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "16"
+    ]
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        258,
+        732,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "1"
+    ]
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "2",
+      "circle": [
+        433,
+        732,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "2"
+    ]
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "27",
+      "circle": [
+        258,
+        869,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "27"
+    ]
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "28",
+      "circle": [
+        433,
+        869,
+        27
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "5",
+      "circle": [
+        433,
+        981,
+        28
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "6",
+      "circle": [
+        433,
+        1157,
+        28
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "22",
+      "circle": [
+        433,
+        1246,
+        28
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "22"
+    ]
+  },
+  {
+    "file": "RGルージュ.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "33",
+      "circle": [
+        433,
+        1325,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "33"
+    ]
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "67",
+      "circle": [
+        142,
+        1092,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        142,
+        1191,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "C",
+      "circle": [
+        142,
+        1267,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "E",
+      "circle": [
+        142,
+        1425,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        142,
+        1559,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "23",
+      "circle": [
+        142,
+        1678,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        142,
+        1752,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "24",
+      "circle": [
+        142,
+        1828,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "69",
+      "circle": [
+        142,
+        2088,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "4",
+      "circle": [
+        142,
+        2204,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "28",
+      "circle": [
+        142,
+        2305,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "7",
+      "circle": [
+        142,
+        2458,
+        31
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "67",
+      "circle": [
+        142,
+        1092,
+        31
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        142,
+        1191,
+        31
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "C",
+      "circle": [
+        142,
+        1267,
+        31
+      ]
+    },
+    "state": "alphabet_not_scored",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "E",
+      "circle": [
+        142,
+        1425,
+        31
+      ]
+    },
+    "state": "alphabet_not_scored",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        142,
+        1559,
+        31
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "23",
+      "circle": [
+        142,
+        1678,
+        31
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "23"
+    ]
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        142,
+        1752,
+        31
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "24",
+      "circle": [
+        142,
+        1828,
+        31
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "24"
+    ]
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "69",
+      "circle": [
+        142,
+        2088,
+        31
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "69"
+    ]
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "4",
+      "circle": [
+        142,
+        2204,
+        31
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "28",
+      "circle": [
+        142,
+        2305,
+        31
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "28"
+    ]
+  },
+  {
+    "file": "カトキガンダム.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "7",
+      "circle": [
+        142,
+        2458,
+        31
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "13",
+      "circle": [
+        119,
+        107,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "14",
+      "circle": [
+        272,
+        178,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "42",
+      "circle": [
+        119,
+        591,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "22",
+      "circle": [
+        119,
+        691,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "44",
+      "circle": [
+        119,
+        791,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "6",
+      "circle": [
+        119,
+        890,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "2",
+      "circle": [
+        119,
+        1226,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        272,
+        1297,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "5",
+      "circle": [
+        119,
+        1485,
+        36
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "13",
+      "circle": [
+        119,
+        107,
+        36
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "3"
+    ]
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "14",
+      "circle": [
+        272,
+        178,
+        36
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "42",
+      "circle": [
+        119,
+        591,
+        36
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "22",
+      "circle": [
+        119,
+        691,
+        36
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "44",
+      "circle": [
+        119,
+        791,
+        36
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "44"
+    ]
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "6",
+      "circle": [
+        119,
+        890,
+        36
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "6"
+    ]
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "2",
+      "circle": [
+        119,
+        1226,
+        36
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        272,
+        1297,
+        36
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "1"
+    ]
+  },
+  {
+    "file": "MGUCペルフェクティビティ2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "5",
+      "circle": [
+        119,
+        1485,
+        36
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "5"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "18",
+      "circle": [
+        586,
+        756,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "20",
+      "circle": [
+        727,
+        756,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "26",
+      "circle": [
+        417,
+        1008,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "10",
+      "circle": [
+        417,
+        1099,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        417,
+        1179,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "10",
+      "circle": [
+        417,
+        1328,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "10"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "5",
+      "circle": [
+        417,
+        1408,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        417,
+        1526,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "11",
+      "circle": [
+        417,
+        1596,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "49",
+      "circle": [
+        417,
+        1684,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "40",
+      "circle": [
+        417,
+        1814,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "18",
+      "circle": [
+        586,
+        756,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "18"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "20",
+      "circle": [
+        727,
+        756,
+        27
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "26",
+      "circle": [
+        417,
+        1008,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "26"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "10",
+      "circle": [
+        417,
+        1099,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "10"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        417,
+        1179,
+        27
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "10",
+      "circle": [
+        417,
+        1328,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "10"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "5",
+      "circle": [
+        417,
+        1408,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "5"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        417,
+        1526,
+        27
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "47"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "11",
+      "circle": [
+        417,
+        1596,
+        27
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "49",
+      "circle": [
+        417,
+        1684,
+        27
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "49"
+    ]
+  },
+  {
+    "file": "RG RX-78-2 ver 2.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "40",
+      "circle": [
+        417,
+        1814,
+        27
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "0"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "82",
+      "circle": [
+        90,
+        1440,
+        14
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "9"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "7",
+      "circle": [
+        90,
+        1496,
+        14
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "110",
+      "circle": [
+        90,
+        1556,
+        14
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        90,
+        1619,
+        14
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "3",
+      "circle": [
+        90,
+        1671,
+        14
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        90,
+        1722,
+        14
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "1"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "14",
+      "circle": [
+        90,
+        1758,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "14"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "10",
+      "circle": [
+        90,
+        1798,
+        14
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "18",
+      "circle": [
+        90,
+        1829,
+        14
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "1"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "36",
+      "circle": [
+        90,
+        1866,
+        14
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "87",
+      "circle": [
+        90,
+        1898,
+        14
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "37"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "91",
+      "circle": [
+        90,
+        1938,
+        14
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "24",
+      "circle": [
+        90,
+        1983,
+        14
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        90,
+        2024,
+        14
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "82",
+      "circle": [
+        90,
+        1440,
+        14
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "7",
+      "circle": [
+        90,
+        1496,
+        14
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "110",
+      "circle": [
+        90,
+        1556,
+        14
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "10"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        90,
+        1619,
+        14
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "3",
+      "circle": [
+        90,
+        1671,
+        14
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "16",
+      "circle": [
+        90,
+        1722,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "16"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "14",
+      "circle": [
+        90,
+        1758,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "14"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "10",
+      "circle": [
+        90,
+        1798,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "10"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "18",
+      "circle": [
+        90,
+        1829,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "18"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "36",
+      "circle": [
+        90,
+        1866,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "36"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "87",
+      "circle": [
+        90,
+        1898,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "87"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "91",
+      "circle": [
+        90,
+        1938,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "91"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "24",
+      "circle": [
+        90,
+        1983,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "24"
+    ]
+  },
+  {
+    "file": "RX-78 ver 3.0.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "17",
+      "circle": [
+        90,
+        2024,
+        14
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "17"
+    ]
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        168,
+        683,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "32",
+      "circle": [
+        168,
+        831,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "6",
+      "circle": [
+        168,
+        1179,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "40",
+      "circle": [
+        168,
+        1274,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "39",
+      "circle": [
+        168,
+        1376,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        168,
+        1561,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "7",
+      "circle": [
+        168,
+        1654,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "35",
+      "circle": [
+        168,
+        1745,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.7.0",
+    "truth": {
+      "number": "4",
+      "circle": [
+        168,
+        2011,
+        37
+      ]
+    },
+    "state": "candidate_miss",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        168,
+        683,
+        37
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "1"
+    ]
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "32",
+      "circle": [
+        168,
+        831,
+        37
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "82"
+    ]
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "6",
+      "circle": [
+        168,
+        1179,
+        37
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "6"
+    ]
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "40",
+      "circle": [
+        168,
+        1274,
+        37
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "40"
+    ]
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "39",
+      "circle": [
+        168,
+        1376,
+        37
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "39"
+    ]
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "1",
+      "circle": [
+        168,
+        1561,
+        37
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "7",
+      "circle": [
+        168,
+        1654,
+        37
+      ]
+    },
+    "state": "wrong",
+    "recognized": [
+      "9"
+    ]
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "35",
+      "circle": [
+        168,
+        1745,
+        37
+      ]
+    },
+    "state": "correct",
+    "recognized": [
+      "35"
+    ]
+  },
+  {
+    "file": "ルナマリアザクウォーリア.png",
+    "version": "1.8.0",
+    "truth": {
+      "number": "4",
+      "circle": [
+        168,
+        2011,
+        37
+      ]
+    },
+    "state": "unrecognized",
+    "recognized": []
+  }
+]

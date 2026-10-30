@@ -53,14 +53,15 @@ internal sealed class OcrRunner(string? runtimeDirectory = null) : IOcrRunner
             try
             {
                 var number = row.GetProperty("number").GetString();
+                bool unknown = row.TryGetProperty("is_unrecognized", out var flag) && flag.GetBoolean();
                 var box = row.GetProperty("bbox").EnumerateArray().Select(v => v.GetInt32()).ToArray();
                 var confidence = row.GetProperty("confidence").GetDouble();
                 var id = row.GetProperty("id").GetString();
-                if (!Detection.ValidNumber(number) || string.IsNullOrWhiteSpace(id) || ids.Contains(id) || box.Length != 4 ||
+                if (!(unknown ? number == "" : Detection.ValidNumber(number)) || string.IsNullOrWhiteSpace(id) || ids.Contains(id) || box.Length != 4 ||
                     box[0] < 0 || box[1] < 0 || box[2] <= 0 || box[3] <= 0 || (long)box[0]+box[2] > expected.Width ||
                     (long)box[1]+box[3] > expected.Height || !double.IsFinite(confidence) || confidence is < 0 or > 100) continue;
                 ids.Add(id);
-                records.Add(new(number!, new Rectangle(box[0],box[1],box[2],box[3]),confidence,id!));
+                records.Add(new(number!, new Rectangle(box[0],box[1],box[2],box[3]),confidence,id!) { IsUnrecognized = unknown });
             }
             catch (Exception ex) when (ex is KeyNotFoundException or InvalidOperationException or FormatException or OverflowException) { }
         }

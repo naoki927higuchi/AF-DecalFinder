@@ -10,3 +10,15 @@ __pycache__/
 bin/
 obj/
 viewer-checks/
+Evaluation180/*-overview.jpg
+Evaluation180/*-roi.png
+Evaluation180/*.log
+Evaluation180/experiments.json
+Evaluation180/quality.json
+Evaluation180/selected.json
+Evaluation180/temjin-new.json
+Evaluation180/*.jpg.*.json
+Evaluation180/*.png.*.json
+Evaluation180/mono-source.png
+Evaluation180/mono-new.json
+Evaluation180/mono-old.json

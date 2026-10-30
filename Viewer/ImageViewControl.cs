@@ -71,11 +71,11 @@ public class ImageViewControl : Control
 
     public void SetHighlights(IReadOnlyList<Detection> matches)
     {
-        highlights = matches;
+        highlights = matches.Where(d => !d.IsDeleted).ToArray();
         Invalidate(); // Search never modifies the transform.
     }
 
-    public void SetDetections(IReadOnlyList<Detection> records) => detections = records;
+    public void SetDetections(IReadOnlyList<Detection> records) => detections = records.Where(d => !d.IsDeleted).ToArray();
 
     internal Detection? HitTestDetection(Point point)
     {
@@ -115,7 +115,7 @@ public class ImageViewControl : Control
 
     public void SetSelections(IReadOnlyList<Detection> detections)
     {
-        selections = detections;
+        selections = detections.Where(d => !d.IsDeleted).ToArray();
         Invalidate(); // Selection never changes the image transform or red search matches.
     }
 

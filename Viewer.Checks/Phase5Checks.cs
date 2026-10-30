@@ -140,7 +140,7 @@ internal static class Phase5Checks
             using (var isolatedList = new OcrResultsList())
             {
                 isolatedList.SetDetections([new Detection("1", new Rectangle(1, 1, 2, 2), 90, "test")]);
-                check(!isolatedList.Rename("test", "12a") && !isolatedList.Rename("test", ""), "Invalid and empty number edits rejected");
+                check(isolatedList.Rename("test", "12a") && !isolatedList.Rename("test", ""), "Alphanumeric labels accepted; empty edits rejected");
             }
             check(list.Rename(targetRecord.Id, "002") && list.Items[0].Tag == targetRecord && target.Selected && targetRecord.Id == "b",
                 "Edit resorts numerically and retains selected fixed-ID record");

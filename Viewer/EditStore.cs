@@ -29,8 +29,19 @@ internal sealed class EditStore(string? directory = null)
         return archive;
     }
     internal sealed record Entry(string Id, string Number, int[] Bbox, double Confidence, bool IsManual, bool IsModified, bool IsDone,
-        string? OriginalNumber, int[]? OriginalBbox);
-    internal sealed record Document(int SchemaVersion, ImageIdentity Image, Entry[] Records);
+        string? OriginalNumber, int[]? OriginalBbox, bool IsUnrecognized = false, bool IsDeleted = false);
+    internal sealed record Document(int SchemaVersion, ImageIdentity Image, Entry[] Records, string? SourceSha256 = null);
+    private readonly Dictionary<ImageIdentity, string> hashes = new();
+    private string SourceHash(ImageIdentity image)
+    {
+        if (hashes.TryGetValue(image, out var hash)) return hash;
+        using var stream = File.OpenRead(image.AbsolutePath);
+        hash = Convert.ToHexString(SHA256.HashData(stream));
+        if (!image.Matches(ImageIdentity.Read(image.AbsolutePath, new Size(image.Width, image.Height))))
+            throw new IOException("画像が更新されました。開き直してください。");
+        hashes[image] = hash;
+        return hash;
+    }
     private static int[] Box(Rectangle r) => [r.X, r.Y, r.Width, r.Height];
     private static Rectangle ReadBox(int[]? b, ImageIdentity image)
     {
@@ -44,23 +55,41 @@ internal sealed class EditStore(string? directory = null)
         var path = PathFor(image.AbsolutePath);
         if (!File.Exists(path)) return null;
         var data = JsonSerializer.Deserialize<Document>(File.ReadAllText(path), Options);
-        if (data is not { SchemaVersion: 1, Image: not null, Records: not null })
+        if (data is not { SchemaVersion: 1 or 2, Image: not null, Records: not null })
             throw new InvalidDataException("保存データの形式に対応していません。");
         if (!image.Matches(data.Image)) throw new InvalidDataException("画像のサイズ・更新日時などが保存時と異なります。古い編集データは適用しません。");
+        return ReadRecords(data, image);
+    }
+
+    private static OcrCatalog ReadRecords(Document data, ImageIdentity image)
+    {
         var ids = new HashSet<string>(StringComparer.Ordinal);
         var records = new List<Detection>();
         foreach (var entry in data.Records)
         {
-            if (entry == null || string.IsNullOrWhiteSpace(entry.Id) || !ids.Add(entry.Id) || !Detection.ValidNumber(entry.Number)
+            if (entry == null || string.IsNullOrWhiteSpace(entry.Id) || !ids.Add(entry.Id) || !(entry.IsUnrecognized ? entry.Number == "" : Detection.ValidLabel(entry.Number))
                 || !double.IsFinite(entry.Confidence) || entry.Confidence is < 0 or > 100
-                || (!entry.IsManual && (!Detection.ValidNumber(entry.OriginalNumber) || entry.OriginalBbox == null)))
+                || (!entry.IsManual && (entry.OriginalNumber == null || entry.OriginalBbox == null)))
                 throw new InvalidDataException("保存データの番号・ID・OCR情報が不正です。");
             records.Add(new Detection(entry.Number, ReadBox(entry.Bbox, image), entry.Confidence, entry.Id) {
-                IsManual = entry.IsManual, IsModified = entry.IsModified, IsDone = entry.IsDone,
+                IsManual = entry.IsManual, IsModified = entry.IsModified, IsDone = entry.IsDone, IsUnrecognized = entry.IsUnrecognized, IsDeleted = entry.IsDeleted,
                 OriginalNumber = entry.OriginalNumber, OriginalBounds = entry.OriginalBbox == null ? null : ReadBox(entry.OriginalBbox, image) });
         }
         return new OcrCatalog(new Size(image.Width, image.Height), records);
     }
+    internal int RestoreProtected(ImageIdentity image, OcrCatalog fresh, string archive)
+    {
+        Document? old;
+        try { old = JsonSerializer.Deserialize<Document>(File.ReadAllText(archive), Options); }
+        catch (JsonException) { return 0; }
+        if (old is not { SchemaVersion: 2, Image: not null, Records: not null, SourceSha256: not null }
+            || !string.Equals(old.Image.AbsolutePath, image.AbsolutePath, StringComparison.OrdinalIgnoreCase)
+            || old.Image.Width != image.Width || old.Image.Height != image.Height
+            || !string.Equals(old.SourceSha256, SourceHash(image), StringComparison.Ordinal)) return 0;
+        try { return fresh.PreserveWork(ReadRecords(old, image)); }
+        catch (InvalidDataException) { return 0; } // Archive remains intact; never import malformed records.
+    }
+
     internal void Save(ImageIdentity image, OcrCatalog catalog)
     {
         if (!image.Matches(ImageIdentity.Read(image.AbsolutePath, catalog.ImageSize)))
@@ -68,8 +97,8 @@ internal sealed class EditStore(string? directory = null)
         Directory.CreateDirectory(DirectoryPath);
         var path = PathFor(image.AbsolutePath);
         var temp = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
-        var data = new Document(1, image, catalog.Detections.Select(d => new Entry(d.Id, d.Number, Box(d.Bounds), d.Confidence,
-            d.IsManual, d.IsModified, d.IsDone, d.OriginalNumber, d.OriginalBounds is Rectangle original ? Box(original) : null)).ToArray());
+        var data = new Document(2, image, catalog.Detections.Select(d => new Entry(d.Id, d.Number, Box(d.Bounds), d.Confidence,
+            d.IsManual, d.IsModified, d.IsDone, d.OriginalNumber, d.OriginalBounds is Rectangle original ? Box(original) : null, d.IsUnrecognized, d.IsDeleted)).ToArray(), SourceHash(image));
         try
         {
             using (var stream = new FileStream(temp, FileMode.CreateNew, FileAccess.Write, FileShare.None))

@@ -1,4 +1,4 @@
-﻿using AF.DecalFinder;
+using AF.DecalFinder;
 using System.Text.Json;
 using System.Numerics;
 
@@ -19,6 +19,7 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
+        if (args.Contains("--workflow")) { WorkflowChecks.Run(root); return; }
         if (args.Contains("--ocr")) { OcrChecks.Run(root); return; }
         if (args.Contains("--inputs")) { OcrChecks.Run(root); return; }
         var catalog = OcrCatalog.Load(Path.Combine(root, "results", "600dpi.json"));
@@ -44,7 +45,7 @@ internal static class Program
 
         using var input = new DigitsTextBox();
         input.Text = "a10+2 日本３";
-        Check(input.Text == "102", "Paste filters ASCII non-digits including full-width digits");
+        Check(input.Text == "a10+2 日本３", "Label input preserves pasted text without normalization");
         input.Text = ""; Check(input.Text.Length == 0, "Empty input allowed");
         using (var highDpi = new Bitmap(100, 80))
         {
