@@ -6,6 +6,7 @@ namespace AF.DecalFinder;
 internal sealed class OcrResultsList : ListView
 {
     private bool updating;
+    private readonly Dictionary<string, ListViewItem> rowsById = new(StringComparer.Ordinal);
     public event Action<IReadOnlyList<Detection>>? SelectionChanged;
     public event Action<Detection>? NavigateRequested;
     public IReadOnlyList<Detection> SelectedDetections => SelectedItems.Cast<ListViewItem>().Select(row => (Detection)row.Tag!).ToArray();
@@ -31,12 +32,34 @@ internal sealed class OcrResultsList : ListView
         try
         {
             Items.Clear();
+            rowsById.Clear();
             foreach (var detection in detections.OrderBy(d => BigInteger.Parse(d.Number, CultureInfo.InvariantCulture))
                 .ThenBy(d => d.Bounds.Y).ThenBy(d => d.Bounds.X).ThenBy(d => d.Id, StringComparer.Ordinal))
-                Items.Add(new ListViewItem(detection.Number) { Tag = detection });
+            {
+                var row = new ListViewItem(detection.Number) { Tag = detection };
+                Items.Add(row);
+                rowsById.Add(detection.Id, row);
+            }
         }
         finally { EndUpdate(); updating = false; }
         SelectionChanged?.Invoke(SelectedDetections);
+    }
+
+    internal void SelectDetection(string id, bool add)
+    {
+        if (!rowsById.TryGetValue(id, out var row)) return;
+        updating = true;
+        BeginUpdate();
+        try
+        {
+            if (!add)
+                foreach (var selected in SelectedItems.Cast<ListViewItem>().ToArray()) selected.Selected = false;
+            row.Selected = true;
+            row.Focused = true;
+            row.EnsureVisible();
+        }
+        finally { EndUpdate(); updating = false; }
+        SelectionChanged?.Invoke(SelectedDetections); // Painting only; Enter navigation is a separate event.
     }
 
     protected override void OnKeyDown(KeyEventArgs e)

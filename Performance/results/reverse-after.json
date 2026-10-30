@@ -1,0 +1,2013 @@
+{
+  "variant": "improved",
+  "sourceCommit": "working tree",
+  "image": {
+    "Width": 7783,
+    "Height": 6579,
+    "pixelFormat": "Format32bppPArgb"
+  },
+  "modeledWindowPixels": "3840x2160 (32-inch 4K scenario; physical inches do not define render cost)",
+  "panePixels": "1838x2016 each",
+  "frames": 30,
+  "repeats": 3,
+  "methodology": "Reusable offscreen GDI\u002B targets; production OnMouseMove and OnPaint; invalidated controls flushed once per move, without OS event coalescing, compositor or display latency; timings are CPU-side surrogate responsiveness, not measured physical mouse-to-photon latency.",
+  "bitmapAccounting": "Counts application-owned bitmap create/dispose inside controls during measured drag. Two render targets and one shared decoded source are allocated before timing; GDI\u002B internal buffers are not counted.",
+  "os": "Microsoft Windows 10.0.26200",
+  "runtime": ".NET 9.0.20",
+  "logicalProcessors": 32,
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "results": [
+    {
+      "scale": 0.25,
+      "operation": "detail-pan",
+      "samples": [
+        {
+          "repeat": 0,
+          "frames": 30,
+          "elapsedMs": 3908.9634,
+          "response": {
+            "count": 30,
+            "meanMs": 130.25751333333335,
+            "p95Ms": 176.1191,
+            "maxMs": 177.7772
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.519464285714286,
+              "p95Ms": 9.6135,
+              "maxMs": 9.9196
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.1326535714285715,
+              "p95Ms": 6.9982,
+              "maxMs": 7.9681
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.3791571428571427,
+              "p95Ms": 1.9748,
+              "maxMs": 2.6489
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 130.31834999999998,
+              "p95Ms": 164.7347,
+              "maxMs": 164.9289
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 129.61822500000002,
+              "p95Ms": 163.7235,
+              "maxMs": 164.2987
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.6950000000000001,
+              "p95Ms": 1.0058,
+              "maxMs": 1.0488
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.09509,
+              "p95Ms": 0.4398,
+              "maxMs": 0.6293
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 3984.375,
+          "cpuPercentMachine": 3.18528740253746,
+          "privateStartBytes": 418635776,
+          "privateEndBytes": 420577280,
+          "workingStartBytes": 467828736,
+          "workingEndBytes": 470949888,
+          "allocatedBytes": 40976,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 1,
+          "frames": 30,
+          "elapsedMs": 4106.9163,
+          "response": {
+            "count": 30,
+            "meanMs": 136.81455000000003,
+            "p95Ms": 168.0019,
+            "maxMs": 169.9648
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.762410714285715,
+              "p95Ms": 9.5654,
+              "maxMs": 10.3275
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.321842857142857,
+              "p95Ms": 6.7658,
+              "maxMs": 7.7124
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.4379392857142859,
+              "p95Ms": 2.6095,
+              "maxMs": 2.7973
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 137.0087607142857,
+              "p95Ms": 156.8289,
+              "maxMs": 158.9584
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 136.25804642857145,
+              "p95Ms": 155.7746,
+              "maxMs": 157.9655
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.7458464285714285,
+              "p95Ms": 1.0497,
+              "maxMs": 1.5711
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.06159333333333334,
+              "p95Ms": 0.3754,
+              "maxMs": 0.4422
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 4078.125,
+          "cpuPercentMachine": 3.1030923676238547,
+          "privateStartBytes": 419864576,
+          "privateEndBytes": 419864576,
+          "workingStartBytes": 470118400,
+          "workingEndBytes": 470241280,
+          "allocatedBytes": 37712,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 2,
+          "frames": 30,
+          "elapsedMs": 4049.6921,
+          "response": {
+            "count": 30,
+            "meanMs": 134.87606333333332,
+            "p95Ms": 165.7427,
+            "maxMs": 196.2142
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.208614285714286,
+              "p95Ms": 7.2596,
+              "maxMs": 9.3574
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 4.872517857142858,
+              "p95Ms": 5.6727,
+              "maxMs": 7.0707
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.3341428571428569,
+              "p95Ms": 1.8073,
+              "maxMs": 2.2849
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 135.3751857142857,
+              "p95Ms": 155.9198,
+              "maxMs": 186.5269
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 134.64451428571425,
+              "p95Ms": 155.2912,
+              "maxMs": 185.7805
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.7257571428571431,
+              "p95Ms": 0.9691,
+              "maxMs": 1.4321
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.24375999999999998,
+              "p95Ms": 1.2418,
+              "maxMs": 1.4132
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 3968.75,
+          "cpuPercentMachine": 3.0625399274181855,
+          "privateStartBytes": 418930688,
+          "privateEndBytes": 418906112,
+          "workingStartBytes": 469188608,
+          "workingEndBytes": 469258240,
+          "allocatedBytes": 37712,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "scale": 0.25,
+      "operation": "overview-drag",
+      "samples": [
+        {
+          "repeat": 0,
+          "frames": 30,
+          "elapsedMs": 4067.9799,
+          "response": {
+            "count": 30,
+            "meanMs": 135.4997666666667,
+            "p95Ms": 162.205,
+            "maxMs": 168.1737
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.649664285714287,
+              "p95Ms": 9.1036,
+              "maxMs": 9.22
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.2073464285714275,
+              "p95Ms": 7.024,
+              "maxMs": 7.1997
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.4392464285714284,
+              "p95Ms": 2.2868,
+              "maxMs": 2.4809
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.16404,
+              "p95Ms": 0.8592,
+              "maxMs": 1.149
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 135.66103928571428,
+              "p95Ms": 149.3641,
+              "maxMs": 155.9106
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 134.87864642857144,
+              "p95Ms": 148.6669,
+              "maxMs": 154.9554
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.7768964285714287,
+              "p95Ms": 1.039,
+              "maxMs": 1.6908
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 4015.625,
+          "cpuPercentMachine": 3.0847812510086396,
+          "privateStartBytes": 420765696,
+          "privateEndBytes": 420765696,
+          "workingStartBytes": 474562560,
+          "workingEndBytes": 474574848,
+          "allocatedBytes": 40736,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 1,
+          "frames": 30,
+          "elapsedMs": 3968.0033,
+          "response": {
+            "count": 30,
+            "meanMs": 132.22117000000003,
+            "p95Ms": 160.0187,
+            "maxMs": 160.6035
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.38435357142857,
+              "p95Ms": 8.8404,
+              "maxMs": 9.3968
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.02795,
+              "p95Ms": 6.6301,
+              "maxMs": 7.846
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.3541428571428573,
+              "p95Ms": 2.2675,
+              "maxMs": 2.7646
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.15982000000000005,
+              "p95Ms": 0.7853,
+              "maxMs": 2.1175
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 132.41667142857142,
+              "p95Ms": 149.2844,
+              "maxMs": 150.0047
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 131.7307392857143,
+              "p95Ms": 148.325,
+              "maxMs": 149.3499
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.6805607142857142,
+              "p95Ms": 0.9359,
+              "maxMs": 0.9538
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 3953.125,
+          "cpuPercentMachine": 3.1132825985805,
+          "privateStartBytes": 420962304,
+          "privateEndBytes": 420962304,
+          "workingStartBytes": 474607616,
+          "workingEndBytes": 474664960,
+          "allocatedBytes": 37712,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 2,
+          "frames": 30,
+          "elapsedMs": 4369.5709,
+          "response": {
+            "count": 30,
+            "meanMs": 145.60264000000004,
+            "p95Ms": 191.8258,
+            "maxMs": 209.9528
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 7.200696428571428,
+              "p95Ms": 12.9512,
+              "maxMs": 15.6813
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.757321428571428,
+              "p95Ms": 9.9071,
+              "maxMs": 14.5964
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.4408214285714287,
+              "p95Ms": 2.2319,
+              "maxMs": 3.0415
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.2263633333333334,
+              "p95Ms": 1.649,
+              "maxMs": 2.3104
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 145.64231071428566,
+              "p95Ms": 170.2581,
+              "maxMs": 198.7625
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 144.84120357142857,
+              "p95Ms": 169.5665,
+              "maxMs": 196.0612
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.7950392857142857,
+              "p95Ms": 1.5345,
+              "maxMs": 2.697
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 4187.5,
+          "cpuPercentMachine": 2.9947877719526192,
+          "privateStartBytes": 420171776,
+          "privateEndBytes": 420069376,
+          "workingStartBytes": 474132480,
+          "workingEndBytes": 474144768,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "scale": 0.5,
+      "operation": "detail-pan",
+      "samples": [
+        {
+          "repeat": 0,
+          "frames": 30,
+          "elapsedMs": 1967.233,
+          "response": {
+            "count": 30,
+            "meanMs": 65.51796333333333,
+            "p95Ms": 78.3151,
+            "maxMs": 78.9218
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 5.889803571428571,
+              "p95Ms": 8.2892,
+              "maxMs": 8.344
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 4.836253571428571,
+              "p95Ms": 6.5135,
+              "maxMs": 6.8717
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.0511607142857142,
+              "p95Ms": 1.4703,
+              "maxMs": 1.7689
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 61.64987857142857,
+              "p95Ms": 67.8702,
+              "maxMs": 70.6636
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 61.24945000000001,
+              "p95Ms": 67.4585,
+              "maxMs": 70.1633
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.39525,
+              "p95Ms": 0.4963,
+              "maxMs": 0.4985
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.06549999999999999,
+              "p95Ms": 0.3064,
+              "maxMs": 0.6767
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 1968.75,
+          "cpuPercentMachine": 3.1274097933493388,
+          "privateStartBytes": 420646912,
+          "privateEndBytes": 420642816,
+          "workingStartBytes": 475549696,
+          "workingEndBytes": 475553792,
+          "allocatedBytes": 40608,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 1,
+          "frames": 30,
+          "elapsedMs": 1993.7197,
+          "response": {
+            "count": 30,
+            "meanMs": 66.39832333333331,
+            "p95Ms": 80.8438,
+            "maxMs": 82.5947
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.196746428571429,
+              "p95Ms": 7.7298,
+              "maxMs": 8.23
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.103221428571429,
+              "p95Ms": 6.3383,
+              "maxMs": 6.6282
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.091707142857143,
+              "p95Ms": 1.4698,
+              "maxMs": 1.8897
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 62.15331785714285,
+              "p95Ms": 71.8418,
+              "maxMs": 74.8323
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 61.71481428571428,
+              "p95Ms": 71.4376,
+              "maxMs": 73.9515
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.4329321428571428,
+              "p95Ms": 0.7516,
+              "maxMs": 0.8656
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.13009,
+              "p95Ms": 0.6874,
+              "maxMs": 0.8746
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 2000,
+          "cpuPercentMachine": 3.1348438800098126,
+          "privateStartBytes": 419860480,
+          "privateEndBytes": 420634624,
+          "workingStartBytes": 474447872,
+          "workingEndBytes": 475127808,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 2,
+          "frames": 30,
+          "elapsedMs": 2075.5235,
+          "response": {
+            "count": 30,
+            "meanMs": 69.10063,
+            "p95Ms": 98.4555,
+            "maxMs": 107.5271
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.939610714285715,
+              "p95Ms": 8.7151,
+              "maxMs": 27.1994
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.7196678571428565,
+              "p95Ms": 7.4049,
+              "maxMs": 22.6751
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.2178428571428574,
+              "p95Ms": 2.0634,
+              "maxMs": 4.5215
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 63.82537857142857,
+              "p95Ms": 77.3657,
+              "maxMs": 90.0355
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 63.397042857142864,
+              "p95Ms": 76.3781,
+              "maxMs": 89.5999
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.4234892857142857,
+              "p95Ms": 0.5663,
+              "maxMs": 0.9821
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.13453333333333334,
+              "p95Ms": 0.5759,
+              "maxMs": 0.9927
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 2046.875,
+          "cpuPercentMachine": 3.081865551028452,
+          "privateStartBytes": 420646912,
+          "privateEndBytes": 420904960,
+          "workingStartBytes": 475156480,
+          "workingEndBytes": 475480064,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "scale": 0.5,
+      "operation": "overview-drag",
+      "samples": [
+        {
+          "repeat": 0,
+          "frames": 30,
+          "elapsedMs": 2125.9448,
+          "response": {
+            "count": 30,
+            "meanMs": 70.79559333333334,
+            "p95Ms": 98.0134,
+            "maxMs": 100.8262
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 7.044307142857141,
+              "p95Ms": 10.4549,
+              "maxMs": 23.6891
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.859185714285714,
+              "p95Ms": 9.0446,
+              "maxMs": 22.4522
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.1823428571428571,
+              "p95Ms": 1.4867,
+              "maxMs": 1.8902
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.1766766666666667,
+              "p95Ms": 0.6536,
+              "maxMs": 2.0735
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 65.6618392857143,
+              "p95Ms": 80.6436,
+              "maxMs": 85.5267
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 65.19011071428572,
+              "p95Ms": 80.0694,
+              "maxMs": 84.9684
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.4658678571428572,
+              "p95Ms": 0.5987,
+              "maxMs": 0.9786
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 2046.875,
+          "cpuPercentMachine": 3.00877255844084,
+          "privateStartBytes": 421580800,
+          "privateEndBytes": 421580800,
+          "workingStartBytes": 476831744,
+          "workingEndBytes": 476831744,
+          "allocatedBytes": 40608,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 1,
+          "frames": 30,
+          "elapsedMs": 2149.0811,
+          "response": {
+            "count": 30,
+            "meanMs": 71.58386333333333,
+            "p95Ms": 91.6196,
+            "maxMs": 95.6004
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.30415,
+              "p95Ms": 8.2423,
+              "maxMs": 8.9207
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.145464285714285,
+              "p95Ms": 6.6184,
+              "maxMs": 6.7643
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.1562607142857144,
+              "p95Ms": 2.1156,
+              "maxMs": 2.1416
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.2561166666666666,
+              "p95Ms": 1.4223,
+              "maxMs": 4.7854
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 67.51418214285715,
+              "p95Ms": 81.4142,
+              "maxMs": 84.7676
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 67.06080357142858,
+              "p95Ms": 80.9157,
+              "maxMs": 84.2137
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.4484464285714286,
+              "p95Ms": 0.7021,
+              "maxMs": 0.7938
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 2125,
+          "cpuPercentMachine": 3.0899834352458826,
+          "privateStartBytes": 419880960,
+          "privateEndBytes": 419880960,
+          "workingStartBytes": 474832896,
+          "workingEndBytes": 474832896,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 2,
+          "frames": 30,
+          "elapsedMs": 2240.2633,
+          "response": {
+            "count": 30,
+            "meanMs": 74.62543333333332,
+            "p95Ms": 118.8252,
+            "maxMs": 122.3768
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.570499999999998,
+              "p95Ms": 9.3853,
+              "maxMs": 9.9932
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.346610714285715,
+              "p95Ms": 7.079,
+              "maxMs": 8.1482
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.2216357142857144,
+              "p95Ms": 1.8423,
+              "maxMs": 2.3042
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.15561333333333333,
+              "p95Ms": 0.6252,
+              "maxMs": 1.3886
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 70.43739285714285,
+              "p95Ms": 108.093,
+              "maxMs": 108.3213
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 69.95924642857143,
+              "p95Ms": 107.0903,
+              "maxMs": 107.7561
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.47335714285714287,
+              "p95Ms": 0.7531,
+              "maxMs": 0.9968
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 2218.75,
+          "cpuPercentMachine": 3.0949905531193584,
+          "privateStartBytes": 419880960,
+          "privateEndBytes": 419885056,
+          "workingStartBytes": 474832896,
+          "workingEndBytes": 474836992,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "scale": 1,
+      "operation": "detail-pan",
+      "samples": [
+        {
+          "repeat": 0,
+          "frames": 30,
+          "elapsedMs": 1090.7205,
+          "response": {
+            "count": 30,
+            "meanMs": 36.22293666666667,
+            "p95Ms": 44.4317,
+            "maxMs": 44.8423
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 5.910867857142856,
+              "p95Ms": 7.1981,
+              "maxMs": 7.5131
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.039607142857142,
+              "p95Ms": 6.0909,
+              "maxMs": 6.376
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.8691607142857142,
+              "p95Ms": 1.1624,
+              "maxMs": 1.1881
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 30.017317857142864,
+              "p95Ms": 34.5499,
+              "maxMs": 37.4927
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 29.83178571428571,
+              "p95Ms": 34.3802,
+              "maxMs": 37.2667
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.18045357142857146,
+              "p95Ms": 0.2497,
+              "maxMs": 0.2526
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.18472333333333335,
+              "p95Ms": 1.4538,
+              "maxMs": 1.5382
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 1062.5,
+          "cpuPercentMachine": 3.044146048414787,
+          "privateStartBytes": 420208640,
+          "privateEndBytes": 420229120,
+          "workingStartBytes": 475168768,
+          "workingEndBytes": 475181056,
+          "allocatedBytes": 40608,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 1,
+          "frames": 30,
+          "elapsedMs": 1114.3694,
+          "response": {
+            "count": 30,
+            "meanMs": 37.05692666666666,
+            "p95Ms": 50.1239,
+            "maxMs": 58.7486
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.082492857142857,
+              "p95Ms": 8.5904,
+              "maxMs": 8.953
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.085178571428571,
+              "p95Ms": 6.7912,
+              "maxMs": 6.8583
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.9946964285714287,
+              "p95Ms": 1.8668,
+              "maxMs": 2.088
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 30.778564285714285,
+              "p95Ms": 42.0578,
+              "maxMs": 46.2597
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 30.580217857142856,
+              "p95Ms": 41.5363,
+              "maxMs": 46.0744
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.19305714285714284,
+              "p95Ms": 0.2447,
+              "maxMs": 0.5067
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.10734333333333332,
+              "p95Ms": 0.437,
+              "maxMs": 0.4748
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 1109.375,
+          "cpuPercentMachine": 3.110994321093167,
+          "privateStartBytes": 420220928,
+          "privateEndBytes": 420229120,
+          "workingStartBytes": 475181056,
+          "workingEndBytes": 475189248,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 2,
+          "frames": 30,
+          "elapsedMs": 1144.2512,
+          "response": {
+            "count": 30,
+            "meanMs": 37.99508,
+            "p95Ms": 61.1475,
+            "maxMs": 78.4233
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.177075000000001,
+              "p95Ms": 7.5436,
+              "maxMs": 17.3533
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.186171428571429,
+              "p95Ms": 6.316,
+              "maxMs": 12.8973
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.9890285714285714,
+              "p95Ms": 1.2254,
+              "maxMs": 4.4531
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 31.524460714285716,
+              "p95Ms": 52.1095,
+              "maxMs": 52.9424
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 31.340185714285717,
+              "p95Ms": 51.8434,
+              "maxMs": 52.6951
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.17982857142857145,
+              "p95Ms": 0.2445,
+              "maxMs": 0.2603
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.15123000000000003,
+              "p95Ms": 1.0858,
+              "maxMs": 1.4547
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 1125,
+          "cpuPercentMachine": 3.072424132043733,
+          "privateStartBytes": 419598336,
+          "privateEndBytes": 419758080,
+          "workingStartBytes": 474824704,
+          "workingEndBytes": 475041792,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "scale": 1,
+      "operation": "overview-drag",
+      "samples": [
+        {
+          "repeat": 0,
+          "frames": 30,
+          "elapsedMs": 1143.723,
+          "response": {
+            "count": 30,
+            "meanMs": 38.082280000000004,
+            "p95Ms": 49.2434,
+            "maxMs": 60.9018
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.251942857142857,
+              "p95Ms": 9.4693,
+              "maxMs": 10.1333
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.239635714285714,
+              "p95Ms": 7.2696,
+              "maxMs": 8.0172
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.0100499999999997,
+              "p95Ms": 2.113,
+              "maxMs": 2.1978
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.13569666666666666,
+              "p95Ms": 0.5079,
+              "maxMs": 1.7117
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 31.64562857142857,
+              "p95Ms": 36.8295,
+              "maxMs": 46.998
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 31.458896428571425,
+              "p95Ms": 36.6331,
+              "maxMs": 46.7937
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.18188214285714288,
+              "p95Ms": 0.3214,
+              "maxMs": 0.4031
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 1156.25,
+          "cpuPercentMachine": 3.1592275839517083,
+          "privateStartBytes": 420757504,
+          "privateEndBytes": 421081088,
+          "workingStartBytes": 475840512,
+          "workingEndBytes": 476160000,
+          "allocatedBytes": 40608,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 1,
+          "frames": 30,
+          "elapsedMs": 1165.9565,
+          "response": {
+            "count": 30,
+            "meanMs": 38.80178666666667,
+            "p95Ms": 49.9119,
+            "maxMs": 50.4113
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.4132250000000015,
+              "p95Ms": 8.9519,
+              "maxMs": 10.2272
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.4043,
+              "p95Ms": 7.0355,
+              "maxMs": 9.0676
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.0067964285714286,
+              "p95Ms": 1.9095,
+              "maxMs": 2.0497
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.13873,
+              "p95Ms": 0.7313,
+              "maxMs": 1.0712
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 32.22359999999999,
+              "p95Ms": 39.9313,
+              "maxMs": 40.1393
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 32.02145357142857,
+              "p95Ms": 39.6207,
+              "maxMs": 39.9766
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.19633571428571428,
+              "p95Ms": 0.3475,
+              "maxMs": 0.373
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 1156.25,
+          "cpuPercentMachine": 3.098984610489328,
+          "privateStartBytes": 421081088,
+          "privateEndBytes": 421081088,
+          "workingStartBytes": 476127232,
+          "workingEndBytes": 476127232,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 2,
+          "frames": 30,
+          "elapsedMs": 1326.2312,
+          "response": {
+            "count": 30,
+            "meanMs": 44.158123333333336,
+            "p95Ms": 69.9298,
+            "maxMs": 87.0598
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 7.089332142857143,
+              "p95Ms": 10.6293,
+              "maxMs": 29.5943
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.9504214285714285,
+              "p95Ms": 9.4098,
+              "maxMs": 25.8169
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.136789285714286,
+              "p95Ms": 3.7753,
+              "maxMs": 3.922
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.23719333333333337,
+              "p95Ms": 0.7417,
+              "maxMs": 3.3315
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 36.61615714285715,
+              "p95Ms": 56.9346,
+              "maxMs": 60.0168
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 36.42875357142857,
+              "p95Ms": 56.7586,
+              "maxMs": 59.7896
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.1827857142857143,
+              "p95Ms": 0.3182,
+              "maxMs": 0.33
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 1187.5,
+          "cpuPercentMachine": 2.798107524540216,
+          "privateStartBytes": 420683776,
+          "privateEndBytes": 420683776,
+          "workingStartBytes": 475758592,
+          "workingEndBytes": 475758592,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "scale": 2,
+      "operation": "detail-pan",
+      "samples": [
+        {
+          "repeat": 0,
+          "frames": 30,
+          "elapsedMs": 879.9156,
+          "response": {
+            "count": 30,
+            "meanMs": 29.283666666666665,
+            "p95Ms": 36.1175,
+            "maxMs": 47.0407
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.209614285714287,
+              "p95Ms": 9.3837,
+              "maxMs": 10.1184
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.397810714285714,
+              "p95Ms": 8.4164,
+              "maxMs": 9.4539
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.8092214285714283,
+              "p95Ms": 1.0472,
+              "maxMs": 1.1565
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 22.06250714285714,
+              "p95Ms": 26.1705,
+              "maxMs": 28.8959
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 21.973367857142854,
+              "p95Ms": 26.0464,
+              "maxMs": 28.7797
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.08457499999999998,
+              "p95Ms": 0.1398,
+              "maxMs": 0.1463
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.16832,
+              "p95Ms": 0.9434,
+              "maxMs": 1.9757
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 859.375,
+          "cpuPercentMachine": 3.052050531891922,
+          "privateStartBytes": 420073472,
+          "privateEndBytes": 420073472,
+          "workingStartBytes": 475389952,
+          "workingEndBytes": 475389952,
+          "allocatedBytes": 40608,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 1,
+          "frames": 30,
+          "elapsedMs": 981.1399,
+          "response": {
+            "count": 30,
+            "meanMs": 32.63948333333333,
+            "p95Ms": 43.7327,
+            "maxMs": 47.472
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.808892857142857,
+              "p95Ms": 9.2333,
+              "maxMs": 9.4731
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.7577107142857145,
+              "p95Ms": 7.2922,
+              "maxMs": 7.7137
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.0490107142857146,
+              "p95Ms": 1.9385,
+              "maxMs": 2.0429
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 25.104328571428567,
+              "p95Ms": 34.6339,
+              "maxMs": 34.724
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 25.011485714285715,
+              "p95Ms": 34.5036,
+              "maxMs": 34.6313
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.08833214285714286,
+              "p95Ms": 0.1252,
+              "maxMs": 0.1301
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.15004000000000003,
+              "p95Ms": 0.6141,
+              "maxMs": 0.9341
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 968.75,
+          "cpuPercentMachine": 3.0855372918785586,
+          "privateStartBytes": 420073472,
+          "privateEndBytes": 420073472,
+          "workingStartBytes": 475389952,
+          "workingEndBytes": 475389952,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 2,
+          "frames": 30,
+          "elapsedMs": 882.7597,
+          "response": {
+            "count": 30,
+            "meanMs": 29.38067,
+            "p95Ms": 39.5125,
+            "maxMs": 65.3068
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.1757428571428585,
+              "p95Ms": 6.7168,
+              "maxMs": 24.5966
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.339432142857143,
+              "p95Ms": 5.8826,
+              "maxMs": 21.4437
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.8345857142857145,
+              "p95Ms": 1.0418,
+              "maxMs": 3.1515
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 22.177371428571433,
+              "p95Ms": 28.475,
+              "maxMs": 30.8003
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 22.09438928571428,
+              "p95Ms": 28.3585,
+              "maxMs": 30.6641
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.07869999999999999,
+              "p95Ms": 0.1124,
+              "maxMs": 0.1318
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.10575666666666665,
+              "p95Ms": 0.5228,
+              "maxMs": 1.1137
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 843.75,
+          "cpuPercentMachine": 2.986904307027156,
+          "privateStartBytes": 419827712,
+          "privateEndBytes": 419954688,
+          "workingStartBytes": 475168768,
+          "workingEndBytes": 475348992,
+          "allocatedBytes": 37584,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "scale": 2,
+      "operation": "overview-drag",
+      "samples": [
+        {
+          "repeat": 0,
+          "frames": 30,
+          "elapsedMs": 881.2404,
+          "response": {
+            "count": 30,
+            "meanMs": 29.327159999999992,
+            "p95Ms": 37.1564,
+            "maxMs": 37.5028
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 6.067360714285714,
+              "p95Ms": 7.2665,
+              "maxMs": 8.4783
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 5.194800000000001,
+              "p95Ms": 6.3939,
+              "maxMs": 6.4912
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.8705571428571429,
+              "p95Ms": 1.0792,
+              "maxMs": 1.9822
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.11844000000000002,
+              "p95Ms": 0.644,
+              "maxMs": 1.469
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 22.481403571428565,
+              "p95Ms": 26.7475,
+              "maxMs": 28.3495
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 22.374432142857138,
+              "p95Ms": 26.5272,
+              "maxMs": 28.2407
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.10196071428571428,
+              "p95Ms": 0.1531,
+              "maxMs": 0.2089
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 875,
+          "cpuPercentMachine": 3.102870680917489,
+          "privateStartBytes": 420294656,
+          "privateEndBytes": 420294656,
+          "workingStartBytes": 475566080,
+          "workingEndBytes": 475607040,
+          "allocatedBytes": 40544,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 1,
+          "frames": 30,
+          "elapsedMs": 955.9132,
+          "response": {
+            "count": 30,
+            "meanMs": 31.815269999999998,
+            "p95Ms": 57.8397,
+            "maxMs": 59.3124
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 7.354410714285715,
+              "p95Ms": 19.3715,
+              "maxMs": 29.4853
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 6.336675,
+              "p95Ms": 16.3352,
+              "maxMs": 26.3793
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 1.0158535714285715,
+              "p95Ms": 3.0346,
+              "maxMs": 3.1042
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.19829666666666668,
+              "p95Ms": 0.8905,
+              "maxMs": 2.647
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 23.52060357142857,
+              "p95Ms": 34.9394,
+              "maxMs": 39.7089
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 23.41114285714286,
+              "p95Ms": 34.8301,
+              "maxMs": 39.5498
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.1055642857142857,
+              "p95Ms": 0.1545,
+              "maxMs": 0.1771
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 890.625,
+          "cpuPercentMachine": 2.9115646954137677,
+          "privateStartBytes": 420294656,
+          "privateEndBytes": 420294656,
+          "workingStartBytes": 475623424,
+          "workingEndBytes": 475623424,
+          "allocatedBytes": 37520,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "repeat": 2,
+          "frames": 30,
+          "elapsedMs": 980.834,
+          "response": {
+            "count": 30,
+            "meanMs": 32.61784666666667,
+            "p95Ms": 47.9186,
+            "maxMs": 60.181
+          },
+          "overview": {
+            "paint": {
+              "count": 28,
+              "meanMs": 7.076646428571429,
+              "p95Ms": 16.3272,
+              "maxMs": 17.2969
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 6.188564285714285,
+              "p95Ms": 15.5702,
+              "maxMs": 16.5659
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.8855464285714288,
+              "p95Ms": 1.6093,
+              "maxMs": 1.8829
+            },
+            "mouse": {
+              "count": 30,
+              "meanMs": 0.09985333333333332,
+              "p95Ms": 0.6216,
+              "maxMs": 0.6512
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "detail": {
+            "paint": {
+              "count": 28,
+              "meanMs": 24.691164285714283,
+              "p95Ms": 38.8759,
+              "maxMs": 45.147
+            },
+            "image": {
+              "count": 28,
+              "meanMs": 24.562739285714287,
+              "p95Ms": 38.7931,
+              "maxMs": 44.7767
+            },
+            "overlay": {
+              "count": 28,
+              "meanMs": 0.12402500000000002,
+              "p95Ms": 0.3485,
+              "maxMs": 0.3664
+            },
+            "mouse": {
+              "count": 0,
+              "meanMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "Invalidations": 28,
+            "BitmapCreations": 0,
+            "BitmapDisposals": 0
+          },
+          "cpuMs": 921.875,
+          "cpuPercentMachine": 2.9371528464551595,
+          "privateStartBytes": 420294656,
+          "privateEndBytes": 420294656,
+          "workingStartBytes": 475623424,
+          "workingEndBytes": 475623424,
+          "allocatedBytes": 37520,
+          "gcCollections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

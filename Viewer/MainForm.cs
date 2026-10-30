@@ -51,6 +51,8 @@ internal sealed class MainForm : Form
         Controls.Add(strip);
         number.TextChanged += (_, _) => Search();
         list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
+        view.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
+        overview.DetectionClicked += (record, add) => list.SelectDetection(record.Id, add);
         list.NavigateRequested += detection => view.CenterOn(new PointF(detection.Bounds.X + detection.Bounds.Width / 2f, detection.Bounds.Y + detection.Bounds.Height / 2f));
         floatList.Click += (_, _) => { if (floatingList == null) FloatList(); else DockList(); };
         view.ViewportChanged += () => overview.SetNavigationBounds(view.VisibleImageBounds);
@@ -195,6 +197,8 @@ internal sealed class MainForm : Form
             }
             catalog = candidate;
             list.SetDetections(catalog.Detections);
+            overview.SetDetections(catalog.Detections);
+            view.SetDetections(catalog.Detections);
             number.Enabled = true;
             status.Text = $"{description}  |  OCR結果 {catalog.Detections.Count}件  |  全体：クリック・枠ドラッグ / 拡大：左ドラッグ";
             Search();

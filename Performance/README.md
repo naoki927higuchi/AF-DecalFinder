@@ -28,3 +28,15 @@ PArgb変換の最初の試行ではDrawImageUnscaledがJPEGの600dpiメタデー
 これは同じOnMouseMove/OnPaintを用いたCPU描画ハーネス。OSの入力待ち行列や画面提示遅延は測らない。再利用するオフスクリーン描画先へ、Invalidateされた各ビューを1更新ずつ描画する。アプリの部分Invalidateより広い全表示領域を描画するため、その最適化による追加効果は主比較に含めない。
 
 P95は各反復のnearest-rank値を生JSONへ保存し、表は3反復中の最大P95。OnPaint平均は実際のpaint回数で加重平均。Bitmap生成/破棄はアプリ管理のBitmapだけを数え、GDI+内部のバッファは含めない。GCは世代別、メモリはProcessのPrivate BytesとWorking Set。初回画像読込・中央縮小画像生成はウォームアップに含め、パンの測定区間から除外する。
+
+## 1.4.1 逆引き追加の回帰比較
+
+1.3.0との比較ファイルを維持し、1.4.0との比較を別ファイルへ保存する。`previous` はfde03afのImageViewControlをクラス名だけ変更した固定スナップショット。操作開始の5pxしきい値による再描画回数差は報告書に明記する。
+
+```powershell
+dotnet run --project Performance/AF.DecalFinder.Performance.csproj -c Release -- W:\dev\AF-DecalFinder previous W:\dev\AF-DecalFinder\Performance\results\reverse-before.json 30 3
+dotnet run --project Performance/AF.DecalFinder.Performance.csproj -c Release -- W:\dev\AF-DecalFinder improved W:\dev\AF-DecalFinder\Performance\results\reverse-after.json 30 3
+& 'C:\Program Files\LibreOffice\program\python.exe' Performance/reverse_report.py
+```
+
+[逆引き追加前後の実測値](REVERSE-MEASUREMENTS.md)。描画経路は変更していないため、今回の結果を描画最適化の効果とは扱わない。

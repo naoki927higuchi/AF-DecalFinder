@@ -150,10 +150,35 @@ internal static class Program
             typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                 .Invoke(list, new object[] { new KeyEventArgs(Keys.Control | Keys.A) });
             Check(notified.Count == 181 && list.SelectedItems.Count == 181, "Ctrl+A selects all 181 records");
+            list.SelectDetection(((Detection)duplicates[0].Tag!).Id, false);
+            Check(list.SelectedItems.Count == 1 && ReferenceEquals(list.SelectedItems[0], duplicates[0]), "Reverse lookup clears all-selection by fixed ID");
+            list.SelectDetection(((Detection)duplicates[1].Tag!).Id, true);
+            Check(list.SelectedItems.Count == 2 && ReferenceEquals(list.FocusedItem, duplicates[1]), "Ctrl reverse lookup adds distinct duplicate number without toggling");
+            list.SelectDetection("missing-id", false);
+            Check(list.SelectedItems.Count == 2, "Stale detection ID leaves selection unchanged");
+            toggle.Checked = false;
+            list.SelectDetection(rows.Last().Id, false);
+            Check(list.SelectedItems.Count == 1 && ((Detection)list.SelectedItems[0].Tag!).Id == rows.Last().Id, "Reverse lookup updates hidden list");
+            toggle.Checked = true;
+            Check(list.SelectedItems[0].Bounds.IntersectsWith(list.ClientRectangle), "Reverse lookup scrolls distant row into view");
+            undock.PerformClick();
+            list.SelectDetection(((Detection)duplicates[1].Tag!).Id, false);
+            Check(list.Parent is Form && ReferenceEquals(list.SelectedItems[0], duplicates[1]) && detail.ImageCenter == beforeSelectAll, "Floating reverse lookup retains image center and uses same record");
+            undock.PerformClick();
             Check(detail.ImageCenter == beforeSelectAll && navigationCount == 1, "Ctrl+A never triggers navigation");
             typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                 .Invoke(list, new object[] { new KeyEventArgs(Keys.Escape) });
             Check(notified.Count == 0, "Escape clears all selected records");
+            var clickedRecord = (Detection)duplicates[0].Tag!;
+            var clickedCenter = new PointF(clickedRecord.Bounds.X + clickedRecord.Bounds.Width / 2f, clickedRecord.Bounds.Y + clickedRecord.Bounds.Height / 2f);
+            detail.CenterOn(clickedCenter);
+            var screenBox = detail.ScreenBounds(clickedRecord.Bounds);
+            var clickPoint = Point.Round(new PointF(screenBox.X + screenBox.Width / 2, screenBox.Y + screenBox.Height / 2));
+            foreach (var handler in new[] { "OnMouseDown", "OnMouseUp" })
+                typeof(ImageViewControl).GetMethod(handler, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
+                    .Invoke(detail, new object[] { new MouseEventArgs(MouseButtons.Left, 1, clickPoint.X, clickPoint.Y, 0) });
+            Check(list.SelectedItems.Count == 1 && ReferenceEquals(list.SelectedItems[0].Tag, clickedRecord)
+                && detail.ImageCenter == clickedCenter && search.Text == "49", "Real form image-to-list wiring selects fixed ID and retains search and center");
             detail.CenterOn(new PointF(4000, 3000));
             var zoom = images.Panel2.Controls.OfType<FlowLayoutPanel>().Single().Controls.OfType<ComboBox>().Single();
             zoom.SelectedIndex = 5;
@@ -282,17 +307,75 @@ internal static class Program
         overviewCanvas.Size = new Size(600, 300);
         Check(overviewCanvas.ScreenBounds(new Rectangle(0, 0, 800, 600)) == new RectangleF(100, 0, 400, 300), "Overview letterboxes and fits on resize");
         using var png = new Bitmap(120, 80); png.Save(Path.Combine(temp, "mismatch.png"));
+        ReverseLookupChecks();
         File.WriteAllText(Path.Combine(temp, "broken.jpg"), "not an image");
         Console.WriteLine($"PASS: {checks} checks");
     }
 
     private static bool IsRed(Color c) => c.R > 200 && c.G < 80 && c.B < 80;
+    private static void ReverseLookupChecks()
+    {
+        using var detail = new TestCanvas { Size = new Size(400, 300), Mode = ImageViewMode.Detail };
+        detail.SetImage(new Bitmap(800, 600));
+        var records = new[] { new Detection("wrong", new Rectangle(300, 250, 30, 20), 90, "a"), new Detection("wrong", new Rectangle(450, 250, 30, 20), 90, "b") };
+        detail.SetDetections(records);
+        Detection? clicked = null; bool added = false; int hits = 0;
+        detail.DetectionClicked += (d, add) => { clicked = d; added = add; hits++; };
+        var center = detail.ImageCenter;
+        detail.ClickAt(110, 110);
+        Check(ReferenceEquals(clicked, records[0]) && detail.ImageCenter == center, "Detail click finds record regardless of OCR text, without pan");
+        detail.ControlHeld = true;
+        detail.ClickAt(250, 110);
+        Check(ReferenceEquals(clicked, records[1]) && added, "Ctrl image click signals additive selection for duplicate text");
+        detail.ClickAt(30, 30);
+        Check(hits == 2, "Empty detail click does not signal selection");
+        detail.ControlHeld = false;
+        detail.DragFrom(110, 110, 3, 4);
+        Check(hits == 3 && detail.ImageCenter == center, "Exactly five pixels remains a click and does not pan");
+        detail.Down(110, 110); detail.MovePointerTo(130, 110); detail.MovePointerTo(110, 110); detail.Up(110, 110);
+        Check(hits == 3 && detail.ImageCenter == center, "Move out then back remains drag, no reverse lookup");
+        detail.Down(110, 110); detail.Up(120, 110);
+        Check(hits == 3, "MouseUp displacement also rejects a click without MouseMove");
+        detail.Down(110, 110); detail.LoseCapture(); detail.Up(110, 110);
+        Check(hits == 3, "Capture loss cancels pending click");
+        Check(ReferenceEquals(detail.HitTestDetection(new Point(96, 110)), records[0]) && detail.HitTestDetection(new Point(94, 110)) == null, "Detail hit halo uses screen-space five pixels");
+        detail.SetZoom(2);
+        var box = detail.ScreenBounds(records[0].Bounds);
+        Check(ReferenceEquals(detail.HitTestDetection(new Point((int)box.X + 5, (int)box.Y + 5)), records[0]), "Hit testing follows zoom and pan transform");
+        detail.SetImage(new Bitmap(800, 600));
+        Check(detail.HitTestDetection(new Point(110, 110)) == null, "Image replacement clears stale hit records");
+
+        using var overview = new TestCanvas { Size = new Size(400, 300), Mode = ImageViewMode.Overview };
+        overview.SetImage(new Bitmap(800, 600)); overview.SetDetections(records);
+        PointF destination = PointF.Empty; int overviewHits = 0;
+        overview.DetectionClicked += (_, _) => overviewHits++;
+        overview.NavigateRequested += p => destination = p;
+        overview.ClickAt(153, 128);
+        Check(overviewHits == 1 && destination == new PointF(315, 260), "Overview OCR click navigates to bbox center rather than click point");
+        overview.ClickAt(40, 40);
+        Check(overviewHits == 1 && destination == new PointF(80, 80), "Overview miss keeps ordinary point navigation");
+        overview.SetNavigationBounds(new RectangleF(200, 150, 400, 300));
+        overview.DragFrom(153, 128, 40, 20);
+        Check(overviewHits == 1, "Dragging from OCR box inside navigation frame never selects");
+        var dense = new[] { new Detection("1", new Rectangle(300, 250, 10, 10), 90, "x"), new Detection("2", new Rectangle(304, 250, 10, 10), 90, "y") };
+        overview.SetDetections(dense);
+        Check(overview.HitTestDetection(new Point(154, 127)) == null, "Ambiguous overlapping Fit labels are not selected");
+        Check(overview.HitTestDetection(new Point(146, 127)) == null, "Fit hit expansion stays small for tiny labels");
+        detail.SetDetections(new[] { new Detection("1", new Rectangle(300, 250, 30, 20), 90, "inside"), new Detection("2", new Rectangle(328, 250, 2, 20), 90, "near") });
+        Check(detail.HitTestDetection(new Point(126,110))?.Id == "inside", "Actual bbox containment beats a nearer halo candidate");
+    }
     private static void Key(Control control, Keys key) => typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(control, new object[] { new KeyEventArgs(key) });
     private static bool RedNear(Bitmap image, int x, int y) => Enumerable.Range(-2, 5).Any(dx => Enumerable.Range(-2, 5).Any(dy => IsRed(image.GetPixel(x + dx, y + dy))));
     private static bool BlueNear(Bitmap image, int x, int y) => Enumerable.Range(-2, 5).Any(dx => Enumerable.Range(-2, 5).Any(dy => { var c = image.GetPixel(x + dx, y + dy); return c.B > 200 && c.R < 80 && c.G < 80; }));
 
     private sealed class TestCanvas : ImageViewControl
     {
+        public bool ControlHeld;
+        protected override bool AddToSelection => ControlHeld;
+        public void Down(int x,int y) => OnMouseDown(new MouseEventArgs(MouseButtons.Left,1,x,y,0));
+        public void MovePointerTo(int x,int y) => OnMouseMove(new MouseEventArgs(MouseButtons.Left,0,x,y,0));
+        public void Up(int x,int y) => OnMouseUp(new MouseEventArgs(MouseButtons.Left,1,x,y,0));
+        public void LoseCapture() => Capture = false;
         public Bitmap Render() { var b = new Bitmap(Width, Height); using var g = Graphics.FromImage(b); g.Clear(BackColor); OnPaint(new PaintEventArgs(g, ClientRectangle)); return b; }
         public void Wheel(int x, int y, int delta) => OnMouseWheel(new MouseEventArgs(MouseButtons.None, 0, x, y, delta));
         public void PanBy(int dx, int dy)

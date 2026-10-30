@@ -11,6 +11,7 @@ public class ImageViewControl : Control
     private Bitmap? overviewImage;
     private IReadOnlyList<Detection> highlights = Array.Empty<Detection>();
     private IReadOnlyList<Detection> selections = Array.Empty<Detection>();
+    private IReadOnlyList<Detection> detections = Array.Empty<Detection>();
     private bool ownsBitmap = true;
     internal RenderProbe? Probe;
     private PointF navigationGrabOffset;
@@ -21,6 +22,8 @@ public class ImageViewControl : Control
     public ImageViewMode Mode { get; init; }
     public event Action? ViewportChanged;
     public event Action<PointF>? NavigateRequested;
+    public event Action<Detection, bool>? DetectionClicked;
+    protected virtual bool AddToSelection => (ModifierKeys & Keys.Control) != 0;
     public double Zoom => transform.Scale;
     public PointF ImageCenter => transform.ToImage(new PointF(ClientSize.Width / 2f, ClientSize.Height / 2f));
     public RectangleF VisibleImageBounds => bitmap == null ? RectangleF.Empty : RectangleF.Intersect(
@@ -51,6 +54,7 @@ public class ImageViewControl : Control
         ownsBitmap = takeOwnership;
         highlights = Array.Empty<Detection>();
         selections = Array.Empty<Detection>();
+        detections = Array.Empty<Detection>();
         navigationBounds = RectangleF.Empty;
         EndDrag();
         if (Mode == ImageViewMode.Detail)
@@ -67,6 +71,39 @@ public class ImageViewControl : Control
     {
         highlights = matches;
         Invalidate(); // Search never modifies the transform.
+    }
+
+    public void SetDetections(IReadOnlyList<Detection> records) => detections = records;
+
+    internal Detection? HitTestDetection(Point point)
+    {
+        if (bitmap == null || !ClientRectangle.Contains(point)) return null;
+        var imageBox = transform.ToScreen(new Rectangle(Point.Empty, bitmap.Size));
+        if (!imageBox.Contains(point)) return null;
+        Detection? best = null;
+        bool bestInside = false;
+        double bestDistance = double.PositiveInfinity, secondDistance = double.PositiveInfinity;
+        foreach (var record in detections)
+        {
+            var box = transform.ToScreen(record.Bounds);
+            bool inside = box.Contains(point);
+            // Fit labels can be only a few pixels wide; do not give each one a 10px halo.
+            float margin = Mode == ImageViewMode.Overview ? Math.Min(2f, Math.Min(box.Width, box.Height) / 4f) : 5f;
+            var target = box; target.Inflate(margin, margin);
+            if (!target.Contains(point)) continue;
+            double dx = point.X - (box.X + box.Width / 2), dy = point.Y - (box.Y + box.Height / 2);
+            double distance = Math.Sqrt(dx * dx + dy * dy);
+            if (best == null || (inside && !bestInside))
+            { best = record; bestInside = inside; bestDistance = distance; secondDistance = double.PositiveInfinity; }
+            else if (inside == bestInside)
+            {
+                if (distance < bestDistance || (distance == bestDistance && StringComparer.Ordinal.Compare(record.Id, best.Id) < 0))
+                { secondDistance = bestDistance; best = record; bestDistance = distance; }
+                else secondDistance = Math.Min(secondDistance, distance);
+            }
+        }
+        // No arbitrary winner for dense Fit labels. A miss still permits normal navigation.
+        return Mode == ImageViewMode.Overview && secondDistance - bestDistance <= 2 ? null : best;
     }
 
     public void SetSelection(Detection? detection)
@@ -255,16 +292,15 @@ public class ImageViewControl : Control
         base.OnMouseDown(e);
         Focus();
         if (e.Button != MouseButtons.Left || bitmap == null) return;
+        navigationStart = e.Location;
+        navigationMoved = false;
         if (Mode == ImageViewMode.Overview)
         {
             var point = transform.ToImage(e.Location);
-            if (point.X < 0 || point.Y < 0 || point.X > bitmap.Width || point.Y > bitmap.Height) return;
-            navigationStart = e.Location;
-            navigationMoved = false;
+            if (point.X < 0 || point.Y < 0 || point.X > bitmap.Width || point.Y > bitmap.Height) { EndDrag(); return; }
             navigationGrabOffset = navigationBounds.Contains(point)
                 ? new PointF(point.X - (navigationBounds.Left + navigationBounds.Width / 2), point.Y - (navigationBounds.Top + navigationBounds.Height / 2))
                 : PointF.Empty;
-            if (navigationGrabOffset == PointF.Empty) NavigateRequested?.Invoke(point);
         }
         dragPoint = e.Location;
         Capture = true;
@@ -283,10 +319,10 @@ public class ImageViewControl : Control
     {
         base.OnMouseMove(e);
         if (dragPoint is not Point previous) return;
+        TrackMovement(e.Location);
+        if (!navigationMoved) return;
         if (Mode == ImageViewMode.Overview)
         {
-            if (navigationStart is Point start && (Math.Abs(e.X - start.X) + Math.Abs(e.Y - start.Y) > 2)) navigationMoved = true;
-            if (!navigationMoved) return;
             var point = transform.ToImage(e.Location);
             NavigateRequested?.Invoke(new PointF(point.X - navigationGrabOffset.X, point.Y - navigationGrabOffset.Y));
             dragPoint = e.Location;
@@ -306,9 +342,29 @@ public class ImageViewControl : Control
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
-        if (e.Button == MouseButtons.Left && Mode == ImageViewMode.Overview && navigationStart != null && !navigationMoved)
-            NavigateRequested?.Invoke(transform.ToImage(e.Location));
+        if (e.Button == MouseButtons.Left && navigationStart != null)
+        {
+            TrackMovement(e.Location);
+            if (!navigationMoved && ClientRectangle.Contains(e.Location))
+            {
+                var hit = HitTestDetection(e.Location);
+                if (hit != null)
+                {
+                    DetectionClicked?.Invoke(hit, AddToSelection);
+                    if (Mode == ImageViewMode.Overview)
+                        NavigateRequested?.Invoke(new PointF(hit.Bounds.X + hit.Bounds.Width / 2f, hit.Bounds.Y + hit.Bounds.Height / 2f));
+                }
+                else if (Mode == ImageViewMode.Overview) NavigateRequested?.Invoke(transform.ToImage(e.Location));
+            }
+        }
         if (e.Button == MouseButtons.Left) EndDrag();
+    }
+
+    private void TrackMovement(Point point)
+    {
+        if (navigationStart is not Point start || navigationMoved) return;
+        long dx = (long)point.X - start.X, dy = (long)point.Y - start.Y;
+        if (dx * dx + dy * dy > 25) navigationMoved = true;
     }
 
     protected override void OnMouseCaptureChanged(EventArgs e)

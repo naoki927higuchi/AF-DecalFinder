@@ -18,7 +18,7 @@ internal static class Program
         var frames = args.Length > 3 ? int.Parse(args[3]) : 30;
         var repeats = args.Length > 4 ? int.Parse(args[4]) : 3;
         using var sourceFile = Image.FromFile(Path.Combine(root, "inputs", "600dpi.jpg"));
-        using var source = variant is "pargb" or "improved" ? DisplayBitmap.Create(sourceFile) : new Bitmap(sourceFile);
+        using var source = variant is "pargb" or "improved" or "previous" ? DisplayBitmap.Create(sourceFile) : new Bitmap(sourceFile);
         var catalog = OcrCatalog.Load(Path.Combine(root, "results", "600dpi.json"));
         if (variant == "quality") { Quality(sourceFile, source, catalog, output); return; }
         var results = new List<object>();
@@ -30,6 +30,8 @@ internal static class Program
             left.SetMarks(catalog); right.SetMarks(catalog);
             if (right.Control is ImageViewControl r && left.Control is ImageViewControl l)
             { r.ViewportChanged += () => l.SetNavigationBounds(r.VisibleImageBounds); l.NavigateRequested += r.CenterOn; }
+            else if (right.Control is PreviousImageViewControl pr && left.Control is PreviousImageViewControl pl)
+            { pr.ViewportChanged += () => pl.SetNavigationBounds(pr.VisibleImageBounds); pl.NavigateRequested += pr.CenterOn; }
             else
             {
                 var br = (BaselineImageViewControl)right.Control; var bl = (BaselineImageViewControl)left.Control;
@@ -81,7 +83,7 @@ internal static class Program
             Console.WriteLine($"Finished {variant}: {scale:P0} {operation}");
             Directory.CreateDirectory(Path.GetDirectoryName(output)!);
             File.WriteAllText(output, JsonSerializer.Serialize(new {
-                variant, sourceCommit = "6008a2e", image = new { source.Width, source.Height, pixelFormat = source.PixelFormat.ToString() },
+                variant, sourceCommit = variant == "baseline" ? "6008a2e" : variant == "previous" ? "fde03af (1.4.0)" : "working tree", image = new { source.Width, source.Height, pixelFormat = source.PixelFormat.ToString() },
                 modeledWindowPixels = "3840x2160 (32-inch 4K scenario; physical inches do not define render cost)",
                 panePixels = "1838x2016 each", frames, repeats,
                 methodology = "Reusable offscreen GDI+ targets; production OnMouseMove and OnPaint; invalidated controls flushed once per move, without OS event coalescing, compositor or display latency; timings are CPU-side surrogate responsiveness, not measured physical mouse-to-photon latency.",
@@ -139,14 +141,16 @@ internal static class Program
         public int Invalidations;
         public Surface(string variant, ImageViewMode mode, Bitmap source, Size size)
         {
-            Control = variant == "baseline" ? new BaselineImageViewControl { Mode = mode, Size = size, Probe = Probe } : new ImageViewControl { Mode = mode, Size = size, Probe = Probe };
+            Control = variant == "baseline" ? new BaselineImageViewControl { Mode = mode, Size = size, Probe = Probe }
+                : variant == "previous" ? new PreviousImageViewControl { Mode = mode, Size = size, Probe = Probe }
+                : new ImageViewControl { Mode = mode, Size = size, Probe = Probe };
             Control.CreateControl();
             Control.Invalidated += (_, _) => { dirty = true; Invalidations++; };
             target = new Bitmap(size.Width, size.Height); graphics = Graphics.FromImage(target);
             Call("SetImage", source, false);
         }
         public void Call(string method, params object[] args) => Control.GetType().GetMethod(method)!.Invoke(Control, args);
-        public void SetMarks(OcrCatalog catalog) { Call("SetHighlights", catalog.Find("49")); Call("SetSelections", catalog.Detections); }
+        public void SetMarks(OcrCatalog catalog) { Call("SetHighlights", catalog.Find("49")); Call("SetSelections", catalog.Detections); if (Control is ImageViewControl view) view.SetDetections(catalog.Detections); }
         public void Mouse(string method, Point point) => Control.GetType().GetMethod(method, BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(Control, new object[] { new MouseEventArgs(MouseButtons.Left, 1, point.X, point.Y, 0) });
         public void Flush()
         {
