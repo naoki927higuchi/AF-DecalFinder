@@ -1,6 +1,37 @@
 # AF-DecalFinder
 
-## 1.6.1：LV選択連動パン・ウィンドウ状態復元（現在版）
+## 1.6.2：画像別OCR参照の修正・アプリアイコン（現在版）
+
+[AF-DecalFinder.exe](bin/Release-1.6.2/AF-DecalFinder.exe) を起動する。
+
+### 原因と修正
+
+1.6.1の `MainForm.jsonPath` は実行フォルダーの `results/600dpi.json` に固定されていた。`OpenImage()` は `store.Load(identity)` で画像別キャッシュを探し、ない／無効なら `candidate ??= OcrCatalog.Load(jsonPath)` を無条件実行していた。その後の寸法チェックで、ガンダム5009×5809とテムジンJSON7783×6579の不一致警告になっていた。同じ寸法の別画像では誤流用され得る経路でもあった。
+
+画像切替時は既にcatalogをnull、LVを空にし、両ImageViewControl.SetImageでdetections/highlights/selectionsを空にしていた。今回の原因は前画像の配列の残留ではなく、固定JSONへのフォールバックだった。
+
+1.6.2では `Phase1Seed.Load()` がPhase 1 manifestに記録された600dpi原本のSHA256と寸法を確認し、一致したときだけ固定JSONを初期データとして読む。ファイル名・寸法だけでは判定しない。原本と同一バイトのコピーは利用できるが、再圧縮や画像内容を変更したファイルは、対応する編集キャッシュがなければ未解析となる。このハッシュは初期OCRとの対応確認だけに使用し、画像履歴のキーには使用しない。
+
+キャッシュも対応初期データもない画像は画像だけを表示し、一覧を空、検索不可にする。番号の手動追加は既存機能として利用できる。OCRは実行しない。
+
+### 画像別キャッシュ
+
+保存先は `%LOCALAPPDATA%\AF-DecalFinder\Cache\`。`EditStore.PathFor()` が `Path.GetFullPath(path).ToUpperInvariant()` のUTF-8 SHA256をファイル名にする。読み込み時はキャッシュ内の絶対パス（大文字小文字を区別しない）・UTC最終更新日時・Width/Height・ファイルサイズを `ImageIdentity.Matches()` で照合する。固定ID、修正番号、手動追加、済み状態はその画像のレコードとして独立して保持する。
+
+キャッシュ形式や保存方式は変更していない。無効データは警告して適用せず、ファイルを自動削除しない。次の編集保存で既存ファイルを置換するときも従来のバックアップを保持する。画像を戻せばそのパスの有効な作業データを復元する。
+
+### アイコンと確認結果（2026-10-30）
+
+- `inputs/icon.png` を変更せず `Build-Icon.ps1` で `Viewer/Assets/App.ico` を生成。16/24/32/48/64/128/256px、32bit PNGフレーム、透過維持。デザイン・縦横比を維持して縮小し、EXEのApplicationIconと埋込みリソースからのForm.Iconに適用。
+- Releaseビルド成功（警告0・エラー0）、自動回帰 **202項目合格**。テムジン原本181件、5009×5809未解析、同寸法別バイトの誤適用拒否、画像間の修正・追加・済み独立性、切替時のLV・逆引き・赤青枠クリア、復帰時の182件復元、無効キャッシュ保全を確認。
+- 既存の履歴10件・前回画像・ウィンドウ復元・検索・パン・編集・チェック・逆引き・ドッキングの回帰も継続。7サイズICOのサイズと透過画素、Release EXEからWindowsがアイコンを抽出できることを自動確認。
+- 実画面で `Z:\図面\カトキガンダム.png`（5009×5809）を開き、寸法エラーなし、両ビュー表示・空一覧・検索不可を確認。テムジン検証コピーへ戻すと保存済み182件を復元した。ガンダム原本への編集やOCR実行は行っていない。
+- Explorerの大アイコン、タスクバー、フォーム左上で新デザインの表示を目視確認した。Windowsのアイコンキャッシュを消去する操作は行っていない。
+- 画像描画経路は変更なし。性能再計測・長時間使用・他PCのアイコンキャッシュ挙動は未確認。Phase 1 JSON/コード/REPORT、300/600dpi原本は変更していない。icon.png SHA256は `303d5f5cb66e0a94198aad2b32dba5cd9d2964cf3b1904460db3ad32cfd1ccdd` のまま。
+
+再現：`./Build-Icon.ps1`、`./Build-Viewer.ps1`、`dotnet run --project Viewer.Checks/AF.DecalFinder.Checks.csproj -c Release -- W:\dev\AF-DecalFinder`。テストログ：`viewer-checks/1.6.2-regression.txt`。1.6.1で起動中のユーザーのウィンドウは終了していないため、新版EXEで確認すること。
+
+## 1.6.1：LV選択連動パン・ウィンドウ状態復元
 
 [AF-DecalFinder.exe](bin/Release-1.6.1/AF-DecalFinder.exe) を起動する。
 

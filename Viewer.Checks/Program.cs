@@ -309,6 +309,7 @@ internal static class Program
         Phase5Checks.Run(root, Check);
         HistoryChecks.Run(root, Check);
         WindowSelectionChecks.Run(root, Check);
+        ImageIsolationChecks.Run(root, Check);
         File.WriteAllText(Path.Combine(temp, "broken.jpg"), "not an image");
         Console.WriteLine($"PASS: {checks} checks");
     }

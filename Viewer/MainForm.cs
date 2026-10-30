@@ -39,6 +39,8 @@ internal sealed class MainForm : Form
         store = editStore ?? new EditStore();
         settings = settingsStore ?? new AppSettingsStore();
         Text = AppTitle;
+        using (var iconStream = typeof(MainForm).Assembly.GetManifestResourceStream("AF.DecalFinder.App.ico")!)
+            Icon = new Icon(iconStream);
         ClientSize = new Size(1200, 880);
         MinimumSize = new Size(850, 450);
         StartPosition = FormStartPosition.CenterScreen;
@@ -320,10 +322,15 @@ internal sealed class MainForm : Form
             try { candidate = store.Load(identity); }
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or InvalidDataException)
             {
-                MessageBox.Show(this, $"編集データを復元できませんでした。元のOCR結果を使用します。\n{ex.Message}\n\n既存の保存ファイルは保持し、次回保存時にはバックアップします。", "編集データの警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, $"編集データを復元できませんでした。画像に対応する初期OCRデータがある場合のみ使用します。\n{ex.Message}\n\n既存の保存ファイルは保持し、次回保存時にはバックアップします。", "編集データの警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             bool restored = candidate != null;
-            candidate ??= OcrCatalog.Load(jsonPath);
+            candidate ??= Phase1Seed.Load(identity.AbsolutePath, loaded.Size, jsonPath);
+            if (candidate == null)
+            {
+                status.Text = $"{description}  |  未解析画像：検索不可（番号追加は可能）";
+                return;
+            }
             if (candidate.ImageSize != loaded.Size)
             {
                 status.Text = $"{description}  |  寸法不一致：検索不可";
