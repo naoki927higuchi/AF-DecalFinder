@@ -38,7 +38,7 @@ internal sealed partial class MainForm
     }
     private void ApplyImportedPreferences()
     {
-        restoringFrameWidth=true;try{frameWidth.SelectedIndex=settings.LoadFrameWidth()-1;}finally{restoringFrameWidth=false;}
+        restoringFrameWidth=true;try{frameWidth.SelectedIndex=settings.LoadFrameWidth()-1;highlightFill.Checked=settings.LoadHighlightFill();}finally{restoringFrameWidth=false;}
         deleteConfirmation.Checked=settings.LoadDeleteConfirmation();
     }
     private void ManageSearchFolders()

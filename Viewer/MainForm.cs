@@ -14,6 +14,7 @@ internal sealed partial class MainForm : Form
     private readonly ComboBox zoom = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 85, AccessibleName = "拡大倍率" };
     private readonly ComboBox frameWidth = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 70, AccessibleName = "枠線幅" };
     private bool restoringFrameWidth;
+    private readonly CheckBox highlightFill = new() { Text = "強調塗りつぶし", AutoSize = true, Margin = new Padding(8, 7, 5, 0) };
     private int savedListWidth = 150;
     private readonly Button floatList = new() { Text = "一覧を切り離す", AutoSize = true, Height = 30 };
     private Form? floatingList;
@@ -73,6 +74,16 @@ internal sealed partial class MainForm : Form
             if (!restoringFrameWidth)
             {
                 try { settings.SaveFrameWidth(width); }
+                catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
+            }
+        };
+        toolbar.Controls.Add(highlightFill);
+        highlightFill.CheckedChanged += (_, _) =>
+        {
+            view.HighlightFill = overview.HighlightFill = highlightFill.Checked;
+            if (!restoringFrameWidth)
+            {
+                try { settings.SaveHighlightFill(highlightFill.Checked); }
                 catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
             }
         };
@@ -194,7 +205,7 @@ internal sealed partial class MainForm : Form
         try { confirmDelete=settings.LoadDeleteConfirmation(); deleteConfirmation.Checked=confirmDelete; }
         catch(Exception ex) when(SettingsError(ex)) { NotifySettingsError(ex); }
         restoringFrameWidth = true;
-        try { frameWidth.SelectedIndex = settings.LoadFrameWidth() - 1; }
+        try { frameWidth.SelectedIndex = settings.LoadFrameWidth() - 1; highlightFill.Checked = settings.LoadHighlightFill(); }
         catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
         finally { restoringFrameWidth = false; }
         try

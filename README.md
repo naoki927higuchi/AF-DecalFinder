@@ -1,6 +1,32 @@
 # AF-DecalFinder
 
-## 1.9.0：棚卸・UNDO・データ移行（現在版）
+## 1.9.1：貼付作業前のキー操作・強調表示改善（現在版）
+
+起動：[AF-DecalFinder.exe](bin/Release-1.9.1/AF-DecalFinder.exe)。Release生成は `./Build-Viewer.ps1`。
+
+- **LV Enter**：選択先頭1件を、既存F2と同じ標準LabelEditで編集する。通常・棚卸の両方で使用可能。Enter確定／Esc取消後はLVへ戻る。選択0件は何もしない。検索欄Enterの先頭ヒット移動は従来どおり。
+- **通常モードのLV Space**：選択先頭1件だけ貼付済みを反転する。複数選択とパン・倍率を維持し、両ビューへ即時反映、自動保存・UNDO対象。KeyUpまで再実行しない。
+- **棚卸Space／Ctrl+Enter**：従来の単一／全件確認を維持する。Ctrl+Spaceはフォーカス行の選択反転だけを行い、済みチェックを変更しない。
+- 上部の **強調塗りつぶし**：初期OFF。ONで検索赤／選択青をAlpha90（約35%）で塗る。青の領域を赤から除外し、同色も領域を統合して二重塗りを防ぐ。済み黒Alpha128の上に表示する。両ビュー共通で即時更新。
+- 枠線幅1～4画面px、統一UI矩形、OCR元座標、クリック判定は変更しない。
+- `Settings.json` の `HighlightFill`（bool）に保存・復元。欠落・不正型はOFF。既存設定を保持し、設定のインポート／エクスポートにも含める。キャッシュスキーマは変更なし。
+
+### Enter／Spaceのイベント調査と修正
+
+旧LVのOnKeyDownはEnterを選択位置へのパン、Spaceを標準一括チェック防止のため抑止していた。ItemActivate／KeyPress／ProcessDialogKeyの独自処理はなく、メインフォームにAcceptButtonはない。画像直接編集のNumberDialogはAcceptButton/CancelButtonで確定・取消を処理する。
+
+今回、**OcrResultsList自身のProcessCmdKey**で未編集中のEnter・Space・Ctrl+Space・棚卸Ctrl+Enterだけを先に消費し、共通のOnKeyDown処理へ渡す。KeyPressやWinForms標準のチェック／ItemActivate／フォームのダイアログキー処理へ流さない。編集中はこの分岐を通さず、標準LabelEditのEnter/Escへ委ねる。フォーム全体のEnter処理は追加しない。番号編集の確定・保存・棚卸確認は既存の共通処理を使用する。
+
+### 検証
+
+Release警告0・エラー0。自動回帰 **558件成功**（既存202、編集34、棚卸34、移行26、画像編集26、Ctrl反転18、線幅106、矩形40、新規キー／塗り72）。新規テストは `--ui191`、詳細は [CHECKS-191.md](CHECKS-191.md)。
+
+テムジン600dpiの検証コピーを使用し、LV Enter編集、Enter確定後のSpace、通常モード全選択と1件済み反転、検索Enter、赤／青塗り、済み黒との共存、棚卸SpaceとCtrl+Enter、再起動後の塗りON復元を実画面で確認。検証後は塗りOFFへ戻した。OCRアルゴリズム・入力原本・既存作業キャッシュ・Phase 1成果物は変更していない（テスト用画像の新規キャッシュのみ操作）。
+
+物理キー長押しは未確認。KeyUpまでの反復抑止はコントロールのキーイベント経路で確認。実際の別PC・モニタ/DPI変更・長時間利用は未確認。8画像のOCR再解析は今回の自動回帰では再実行せず、既存結果の座標・ヒット・フィルタを検証した。
+
+
+## 1.9.0：棚卸・UNDO・データ移行（旧版の記録）
 
 起動：[AF-DecalFinder.exe](bin/Release-1.9.0/AF-DecalFinder.exe)。Release生成は `./Build-Viewer.ps1`。実行環境（.NET 9 Desktop Runtime、OCR用Python/依存物）は1.8.3と同じ。
 

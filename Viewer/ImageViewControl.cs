@@ -30,6 +30,13 @@ public class ImageViewControl : Control
     public event Action<PointF>? AddPointClicked;
     internal bool AddingPoint;
     internal Predicate<Detection>? ControlClickTarget;
+    private bool highlightFill;
+    [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+    public bool HighlightFill
+    {
+        get => highlightFill;
+        set { if (highlightFill == value) return; highlightFill = value; Invalidate(); }
+    }
     private int frameWidthPx = 2;
     [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
     public int FrameWidthPx
@@ -230,6 +237,28 @@ public class ImageViewControl : Control
             if (!detection.IsDone) continue;
             var box = transform.ToScreen(detection.UiBounds);
             if (box.IntersectsWith(e.ClipRectangle)) e.Graphics.FillRectangle(doneBrush, box);
+        }
+        if (HighlightFill)
+        {
+            // Union each color once and remove blue from red, including partial overlaps.
+            using var redRegion = new Region();
+            using var blueRegion = new Region();
+            redRegion.MakeEmpty(); blueRegion.MakeEmpty();
+            foreach (var match in highlights)
+            {
+                var box = transform.ToScreen(match.UiBounds);
+                if (box.IntersectsWith(e.ClipRectangle)) redRegion.Union(box);
+            }
+            foreach (var selection in selections)
+            {
+                var box = transform.ToScreen(selection.UiBounds);
+                if (box.IntersectsWith(e.ClipRectangle)) blueRegion.Union(box);
+            }
+            redRegion.Exclude(blueRegion);
+            using var redFill = new SolidBrush(Color.FromArgb(90, Color.Red));
+            using var blueFill = new SolidBrush(Color.FromArgb(90, Color.Blue));
+            e.Graphics.FillRegion(redFill, redRegion);
+            e.Graphics.FillRegion(blueFill, blueRegion);
         }
         using var pen = new Pen(Color.Red, FrameWidthPx);
         foreach (var match in highlights)

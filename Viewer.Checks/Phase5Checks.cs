@@ -132,7 +132,7 @@ internal static class Phase5Checks
             check(list.CheckedItems.Count == 1 && targetRecord.IsDone && list.SelectedItems.Count == 3,
                 "Native checkbox click changes exactly one of multiple selected rows");
             var key = new KeyEventArgs(Keys.Space); Invoke(list, "OnKeyDown", key);
-            check(key.SuppressKeyPress && list.CheckedItems.Count == 1, "Space suppresses native bulk checking");
+            check(key.SuppressKeyPress && list.CheckedItems.Count == 2 && ((Detection)list.SelectedItems[0].Tag!).IsDone, "Space toggles only first selected while suppressing native bulk checking");
             check(store.Load(identity)!.Detections.Single(d => d.Id == targetRecord.Id).IsDone, "Checkbox autosaves without changing other records");
             target.Checked = false;
             check(!store.Load(identity)!.Detections.Single(d => d.Id == targetRecord.Id).IsDone, "Uncheck autosaves immediately");

@@ -34,9 +34,13 @@ internal sealed class AppSettingsStore(string? path = null)
     {
         var data=ReadDocument();
         if(source["FrameWidthPx"] is JsonValue v && v.TryGetValue<int>(out var w) && w is >=1 and <=4) data["FrameWidthPx"]=w;
+        if(source["HighlightFill"] is JsonValue fill && fill.TryGetValue<bool>(out var filled)) data["HighlightFill"]=filled;
         if(source["ConfirmDelete"] is JsonValue b && b.TryGetValue<bool>(out var enabled)) data["ConfirmDelete"]=enabled;
         WriteDocument(data);
     }
+    internal bool LoadHighlightFill() => ReadDocument()["HighlightFill"] is JsonValue v && v.TryGetValue<bool>(out var enabled) && enabled;
+    internal void SaveHighlightFill(bool enabled) { var data=ReadDocument(); data["HighlightFill"]=enabled; WriteDocument(data); }
+
     internal int LoadFrameWidth() => ReadDocument()["FrameWidthPx"] is JsonValue value &&
         value.TryGetValue<int>(out var width) && width is >= 1 and <= 4 ? width : 2;
     internal void SaveFrameWidth(int width)

@@ -19,6 +19,7 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
+        if (args.Contains("--ui191")) { Ui191Checks.Run(root); return; }
         if (args.Contains("--inventory")) { InventoryChecks.Run(root); return; }
         if (args.Contains("--transfer")) { TransferChecks.Run(root); return; }
         if (args.Contains("--image-edit")) { ImageEditChecks.Run(root); return; }
@@ -123,15 +124,22 @@ internal static class Program
             list.NavigateRequested += d => { navigationCount++; navigationTarget = d; };
             duplicates[1].Focused = true;
             detail.SetZoom(2);
+            int editIndex=-1;
+            LabelEditEventHandler observeEdit=(_,e)=>editIndex=e.Item;
+            list.BeforeLabelEdit+=observeEdit;
             Key(list, Keys.Enter);
             var target = (Detection)duplicates[1].Tag!;
-            Check(ReferenceEquals(navigationTarget, target) && detail.ImageCenter == new PointF(target.Bounds.X + target.Bounds.Width / 2f, target.Bounds.Y + target.Bounds.Height / 2f) && detail.Zoom == 2,
-                "Enter navigates focused selected duplicate by record, retaining zoom");
-            var navigationCenter = detail.ImageCenter;
-            Check(navigationCount == 1 && detail.ImageCenter == navigationCenter, "Selection retains navigation target");
-            list.Items[0].Focused = true; // Deliberately focused but not selected.
-            Key(list, Keys.Enter);
-            Check(navigationCount == 1, "Ambiguous multiple selection without selected focus does not navigate");
+            Check(list.IsEditing && editIndex==duplicates[0].Index && detail.Zoom==2,
+                "Enter edits first selected duplicate rather than focused row");
+            typeof(OcrResultsList).GetMethod("SendMessage",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic)!.Invoke(null,[list.Handle,0x10B3u,IntPtr.Zero,IntPtr.Zero]);
+            Application.DoEvents();
+            var navigationCenter=detail.ImageCenter;
+            Check(navigationCount==0,"Enter editing does not navigate");
+            Check(!list.IsEditing && detail.Zoom==2,"Cancel exits Enter editor and retains zoom");
+            list.BeforeLabelEdit-=observeEdit;
+            duplicates = list.Items.Cast<ListViewItem>().Where(i => ((Detection)i.Tag!).Number == "49").ToArray();
+            list.SelectDetection(((Detection)duplicates[0].Tag!).Id,false);
+            list.SelectDetection(((Detection)duplicates[1].Tag!).Id,true);
             duplicates[1].Focused = true;
             var undock = toolbar.Controls.OfType<Button>().Single(b => b.Text == "一覧を切り離す");
             var widthBeforeFloat = panes.SplitterDistance;
@@ -172,7 +180,7 @@ internal static class Program
             list.SelectDetection(((Detection)duplicates[1].Tag!).Id, false);
             Check(list.Parent is Form && ReferenceEquals(list.SelectedItems[0], duplicates[1]) && detail.ImageCenter == beforeSelectAll, "Floating reverse lookup retains image center and uses same record");
             undock.PerformClick();
-            Check(detail.ImageCenter == beforeSelectAll && navigationCount == 1, "Ctrl+A never triggers navigation");
+            Check(detail.ImageCenter == beforeSelectAll && navigationCount == 0, "Ctrl+A never triggers navigation");
             typeof(Control).GetMethod("OnKeyDown", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!
                 .Invoke(list, new object[] { new KeyEventArgs(Keys.Escape) });
             Check(notified.Count == 0, "Escape clears all selected records");

@@ -327,33 +327,60 @@ internal sealed class OcrResultsList : ListView
             row.EnsureVisible();
         }
         finally { EndUpdate(); updating = false; }
-        SelectionChanged?.Invoke(SelectedDetections); // Painting only; Enter navigation is a separate event.
+        SelectionChanged?.Invoke(SelectedDetections); // Painting only; programmatic selection does not trigger navigation.
     }
 
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+        // Consume only LV commands before native activation/dialog-key/check-box handling.
+        // The native label editor must continue to receive Enter/Esc itself.
+        if (!editing && (keyData == Keys.Enter || keyData == Keys.Space ||
+            keyData == (Keys.Control | Keys.Space) ||
+            (InventoryMode && keyData == (Keys.Control | Keys.Enter))))
+        {
+            OnKeyDown(new KeyEventArgs(keyData));
+            return true;
+        }
+        return base.ProcessCmdKey(ref msg, keyData);
+    }
     protected override void OnKeyDown(KeyEventArgs e)
     {
         if (editing) { base.OnKeyDown(e); return; }
         if (e.Control && e.KeyCode == Keys.Z) { UndoRequested?.Invoke(); e.Handled=e.SuppressKeyPress=true; return; }
-        if (InventoryMode && (e.KeyCode == Keys.Space || (e.Control && e.KeyCode == Keys.Enter)))
+        if (InventoryMode && (e.KeyData == Keys.Space || e.KeyData == (Keys.Control | Keys.Enter)))
         {
             if (heldCommands.Add(e.KeyCode)) ReviewRequested?.Invoke(e.KeyCode == Keys.Enter);
             e.Handled=e.SuppressKeyPress=true; return;
         }
         if (e.KeyCode == Keys.Delete) { RequestDelete(); e.Handled = e.SuppressKeyPress = true; return; }
-        if (e.KeyCode == Keys.Space || e.KeyCode == Keys.F2)
+        if (e.KeyData == Keys.Space)
         {
-            if (e.KeyCode == Keys.F2 && SelectedItems.Count > 0) EditRow(SelectedItems[0]);
+            CancelSelectionNavigation();
+            if (heldCommands.Add(Keys.Space) && SelectedItems.Count > 0)
+                SelectedItems[0].Checked = !SelectedItems[0].Checked;
             e.Handled = e.SuppressKeyPress = true;
             return;
         }
-        if (e.KeyCode == Keys.Enter && e.Modifiers == Keys.None)
+        if (e.KeyData == (Keys.Control | Keys.Space))
+        {
+            // Native CheckBoxes also handles Space: preserve selection toggling without changing checks.
+            if (heldCommands.Add(Keys.Space) && FocusedItem is {} focused)
+                focused.Selected = !focused.Selected;
+            e.Handled = e.SuppressKeyPress = true;
+            return;
+        }
+        if (e.KeyCode == Keys.Space)
+        {
+            // Other modified Space gestures must not fall through to bulk native checks.
+            e.Handled = e.SuppressKeyPress = true;
+            return;
+        }
+        if (e.KeyData == Keys.Enter || e.KeyData == Keys.F2)
         {
             CancelSelectionNavigation();
-            // Multiple selection is not a navigation target: the focused selected row is.
-            var target = FocusedItem is { Selected: true } focused ? focused
-                : SelectedItems.Count == 1 ? SelectedItems[0] : null;
-            if (target?.Tag is Detection detection) NavigateRequested?.Invoke(detection);
+            EditSelected();
             e.Handled = e.SuppressKeyPress = true;
+            return;
         }
         if ((e.Control && e.KeyCode == Keys.A) || e.KeyCode == Keys.Escape)
         {
@@ -394,3 +421,4 @@ internal sealed class OcrResultsList : ListView
         SelectionChanged?.Invoke(SelectedDetections);
     }
 }
+
