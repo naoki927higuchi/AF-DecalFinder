@@ -30,7 +30,7 @@ internal sealed class EditStore(string? directory = null)
     }
     internal sealed record Entry(string Id, string Number, int[] Bbox, double Confidence, bool IsManual, bool IsModified, bool IsDone,
         string? OriginalNumber, int[]? OriginalBbox, bool IsUnrecognized = false, bool IsDeleted = false,
-        CircleEvidence? Circle = null, PointF? ManualCenter = null);
+        CircleEvidence? Circle = null, PointF? ManualCenter = null, bool IsReviewed = false);
     internal sealed record Document(int SchemaVersion, ImageIdentity Image, Entry[] Records, string? SourceSha256 = null);
     private readonly Dictionary<ImageIdentity, string> hashes = new();
     private string SourceHash(ImageIdentity image)
@@ -62,7 +62,7 @@ internal sealed class EditStore(string? directory = null)
         return ReadRecords(data, image);
     }
 
-    private static OcrCatalog ReadRecords(Document data, ImageIdentity image)
+    internal static OcrCatalog ReadRecords(Document data, ImageIdentity image)
     {
         var ids = new HashSet<string>(StringComparer.Ordinal);
         var records = new List<Detection>();
@@ -75,7 +75,7 @@ internal sealed class EditStore(string? directory = null)
             records.Add(new Detection(entry.Number, ReadBox(entry.Bbox, image), entry.Confidence, entry.Id) {
                 Circle = ValidCircle(entry.Circle,image) ? entry.Circle : null,
                 ManualCenter = entry.ManualCenter is PointF p && ValidPoint(p,image) ? p : null,
-                IsManual = entry.IsManual, IsModified = entry.IsModified, IsDone = entry.IsDone, IsUnrecognized = entry.IsUnrecognized, IsDeleted = entry.IsDeleted,
+                IsManual = entry.IsManual, IsModified = entry.IsModified, IsDone = entry.IsDone, IsUnrecognized = entry.IsUnrecognized, IsDeleted = entry.IsDeleted, IsReviewed = entry.IsReviewed,
                 OriginalNumber = entry.OriginalNumber, OriginalBounds = entry.OriginalBbox == null ? null : ReadBox(entry.OriginalBbox, image) });
         }
         return new OcrCatalog(new Size(image.Width, image.Height), records);
@@ -107,7 +107,7 @@ internal sealed class EditStore(string? directory = null)
         var temp = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
         var data = new Document(2, image, catalog.Detections.Select(d => new Entry(d.Id, d.Number, Box(d.Bounds), d.Confidence,
             d.IsManual, d.IsModified, d.IsDone, d.OriginalNumber, d.OriginalBounds is Rectangle original ? Box(original) : null, d.IsUnrecognized, d.IsDeleted,
-            d.Circle, d.ManualCenter)).ToArray(), SourceHash(image));
+            d.Circle, d.ManualCenter, d.IsReviewed)).ToArray(), SourceHash(image));
         try
         {
             using (var stream = new FileStream(temp, FileMode.CreateNew, FileAccess.Write, FileShare.None))

@@ -13,6 +13,7 @@ public sealed class Detection(string number, Rectangle bounds, double confidence
     public bool IsDone { get; internal set; }
     public bool IsUnrecognized { get; internal set; }
     public bool IsDeleted { get; internal set; }
+    public bool IsReviewed { get; internal set; }
     public CircleEvidence? Circle { get; internal set; }
     public PointF? ManualCenter { get; init; }
     public RectangleF UiBounds { get; internal set; } = bounds;
@@ -35,6 +36,23 @@ public sealed class OcrCatalog
     public IReadOnlyList<Detection> ActiveDetections => records.Where(d => !d.IsDeleted).ToArray();
     public int DoneCount => records.Count(d => !d.IsDeleted && d.IsDone);
     private readonly List<Detection> records;
+    internal Action CaptureUndo()
+    {
+        var saved = records.Select(d => (Record: d, d.Number, d.Bounds, d.IsModified, d.IsDone,
+            d.IsUnrecognized, d.IsDeleted, d.IsReviewed, d.Circle)).ToArray();
+        return () =>
+        {
+            records.Clear();
+            foreach (var s in saved)
+            {
+                var d = s.Record;
+                d.Number=s.Number; d.Bounds=s.Bounds; d.IsModified=s.IsModified; d.IsDone=s.IsDone;
+                d.IsUnrecognized=s.IsUnrecognized; d.IsDeleted=s.IsDeleted; d.IsReviewed=s.IsReviewed; d.Circle=s.Circle;
+                records.Add(d);
+            }
+            RecalculateUiBounds();
+        };
+    }
     public LabelSizeEstimate? RepresentativeSize { get; private set; }
     internal void RecalculateUiBounds()
     {
@@ -67,7 +85,7 @@ public sealed class OcrCatalog
 
     internal int PreserveWork(OcrCatalog old)
     {
-        var protectedRecords = old.Detections.Where(d => d.IsModified || d.IsManual || d.IsDone || d.IsDeleted).ToArray();
+        var protectedRecords = old.Detections.Where(d => d.IsModified || d.IsManual || d.IsDone || d.IsDeleted || d.IsReviewed).ToArray();
         foreach (var saved in protectedRecords.Where(d => !d.IsManual && d.Circle == null))
         {
             // Same-image reanalysis: attach actual new measurements only on an exact original-box match.

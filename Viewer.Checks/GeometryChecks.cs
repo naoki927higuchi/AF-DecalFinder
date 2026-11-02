@@ -79,7 +79,8 @@ internal static class GeometryChecks
             search.Text="4";Check(Field<IReadOnlyList<Detection>>(view,"highlights").Count==4,"Search still highlights recognized records outside filtered LV");
             Key(search,Keys.Enter);Check(view.ImageCenter==new PointF(550,350),"Search Enter navigates first all-data hit while filter active");
             view.CenterOn(center);list.Rename("c0","あ");Application.DoEvents();
-            Check(list.Items.Count==1 && list.SelectedDetections.Single().Id=="c5" && Field<IReadOnlyList<Detection>>(view,"selections").Count==1 && view.ImageCenter==center,"Correction leaves unknown list and retains other fixed-ID selection without pan");
+            Check(!filter.Checked && list.Items.Count==9 && list.SelectedDetections.Any(d=>d.Id=="c0") && list.SelectedDetections.Any(d=>d.Id=="c5") && view.ImageCenter==center,"Normal correction keeps edited fixed ID selected and reveals it without pan");
+            filter.Checked=true;
             form.ConfirmDeletion=_=>false;Key(list,Keys.Delete);
             Check(list.Items.Count==1,"Filtered delete cancel retains record");
             form.ConfirmDeletion=_=>true;Key(list,Keys.Delete);Application.DoEvents();

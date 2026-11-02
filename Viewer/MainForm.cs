@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace AF.DecalFinder;
 
-internal sealed class MainForm : Form
+internal sealed partial class MainForm : Form
 {
     private readonly ImageViewControl view = new() { Dock = DockStyle.Fill, Mode = ImageViewMode.Detail, AccessibleName = "拡大画像（左ドラッグでパン）" };
     private readonly ImageViewControl overview = new() { Dock = DockStyle.Fill, Mode = ImageViewMode.Overview, AccessibleName = "全体画像（クリック・青い破線枠のドラッグで移動）" };
@@ -106,6 +106,7 @@ internal sealed class MainForm : Form
         menu.Items.Add(fileMenu);
         MainMenuStrip = menu;
         Controls.Add(menu);
+        InitializeCommands(menu, fileMenu);
         UpdateHistoryMenu();
         number.TextChanged += (_, _) => Search();
         number.KeyDown += (_, e) =>
@@ -116,7 +117,11 @@ internal sealed class MainForm : Form
                 .FirstOrDefault(d => !d.IsUnrecognized && !d.IsDeleted && number.Text.Length > 0 && d.Number == number.Text);
             if (first != null) view.CenterOn(first.UiCenter);
         };
-        list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); };
+        list.SelectionChanged += selected => { overview.SetSelections(selected); view.SetSelections(selected); UpdateCommands(); };
+        list.BeforeDataChange += BeginMutation;
+        list.EditHandler = CommitLabel;
+        list.ReviewRequested += ReviewSelection;
+        list.UndoRequested += Undo;
         view.ControlClickTarget = record => list.ContainsDetection(record.Id);
         view.DetectionClicked += (record, control) =>
         {
@@ -126,7 +131,7 @@ internal sealed class MainForm : Form
         overview.DetectionClicked += SelectFromImage;
         view.DetectionEditRequested += (record, point) =>
         {
-            if (IsAnalyzing || adding || catalog == null) return;
+            if (IsAnalyzing || transferBusy || adding || catalog == null) return;
             list.SuppressPendingNavigation();
             string? value;
             if (ImageEditPrompt != null) value = ImageEditPrompt(record, point);
@@ -141,8 +146,8 @@ internal sealed class MainForm : Form
         list.DataChanged += Changed;
         list.DeleteRequested += selected =>
         {
-            if (ConfirmDeletion?.Invoke(selected.Count) ?? (MessageBox.Show(this, $"選択した{selected.Count}件を誤検出として削除しますか？", "削除の確認",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) DeleteDetections(selected);
+            if (!confirmDelete || (ConfirmDeletion?.Invoke(selected.Count) ?? (MessageBox.Show(this, $"選択した{selected.Count}件を誤検出として削除しますか？", "削除の確認",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK))) DeleteDetections(selected);
         };
         list.EditRejected += message => MessageBox.Show(this, message, "番号編集", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         addNumber.Click += (_, _) => BeginAdd();
@@ -186,6 +191,8 @@ internal sealed class MainForm : Form
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e); // Apply WinForms DPI autoscaling before restoring physical screen bounds.
+        try { confirmDelete=settings.LoadDeleteConfirmation(); deleteConfirmation.Checked=confirmDelete; }
+        catch(Exception ex) when(SettingsError(ex)) { NotifySettingsError(ex); }
         restoringFrameWidth = true;
         try { frameWidth.SelectedIndex = settings.LoadFrameWidth() - 1; }
         catch (Exception ex) when (SettingsError(ex)) { NotifySettingsError(ex); }
@@ -299,6 +306,7 @@ internal sealed class MainForm : Form
 
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
+        if(transferBusy){e.Cancel=true;return;}
         if (dirty && !ConfirmLeave()) { e.Cancel = true; return; }
         base.OnFormClosing(e);
         closing = !e.Cancel;
@@ -343,6 +351,7 @@ internal sealed class MainForm : Form
 
     private void OpenImage(string path)
     {
+        if(transferBusy)return;
         if (dirty && !ConfirmLeave()) return;
         Bitmap loaded;
         ImageIdentity loadedIdentity;
@@ -369,6 +378,7 @@ internal sealed class MainForm : Form
         RememberImage(loadedIdentity.AbsolutePath);
         EndAdd();
         dirty = false;
+        undoState = null;
         identity = loadedIdentity;
         catalog = null;
         addNumber.Enabled = true;
@@ -394,6 +404,7 @@ internal sealed class MainForm : Form
         reanalyze.Enabled = !value && identity != null;
         addNumber.Enabled = !value && identity != null;
         number.Enabled = !value && catalog != null;
+        UpdateCommands();
     }
 
     private async Task LoadAnalysisAsync(ImageIdentity image, string description, int generation, CancellationToken token, bool force = false)
@@ -405,6 +416,7 @@ internal sealed class MainForm : Form
         try
         {
             OcrCatalog? candidate;
+            if(!force)ResolveOpenedImage(image);
             try
             {
                 if (force) { archive = store.ArchiveInvalid(image.AbsolutePath); candidate = null; }
@@ -459,13 +471,14 @@ internal sealed class MainForm : Form
 
     internal void Reanalyze()
     {
-        if (identity == null || IsAnalyzing) return;
+        if (identity == null || IsAnalyzing || transferBusy) return;
         // Upgrade a valid legacy cache and record its content fingerprint before rerunning.
         if (catalog != null) { dirty = true; if (!SaveChanges()) return; }
         EndAdd();
         analysisCancellation?.Cancel(); analysisCancellation?.Dispose();
         analysisCancellation = new CancellationTokenSource();
         catalog = null;
+        undoState = null;
         list.SetDetections([]); view.SetDetections([]); overview.SetDetections([]);
         number.Clear(); Search();
         var description = $"{Path.GetFileName(identity.AbsolutePath)}  |  {identity.Width} × {identity.Height} px";
@@ -475,12 +488,13 @@ internal sealed class MainForm : Form
 
     internal void BeginAdd()
     {
-        if (identity == null || adding || IsAnalyzing) return;
+        if (identity == null || adding || IsAnalyzing || transferBusy) return;
         listWasVisible = showList.Checked;
         if (floatingList == null && !panes.Panel1Collapsed) savedListWidth = panes.SplitterDistance;
         adding = true; view.AddingPoint = true;
         addPrompt.Visible = cancelAdd.Visible = true; showList.Enabled = false;
         ApplyListVisibility();
+        UpdateCommands();
     }
 
     internal void EndAdd()
@@ -490,12 +504,14 @@ internal sealed class MainForm : Form
         addPrompt.Visible = cancelAdd.Visible = false; showList.Enabled = true;
         showList.Checked = listWasVisible;
         ApplyListVisibility();
+        UpdateCommands();
     }
 
     internal void AddAt(string value, PointF point)
     {
         if (!adding || identity == null) return;
         catalog ??= new OcrCatalog(new Size(identity.Width, identity.Height), []);
+        BeginMutation();
         var record = catalog.AddManual(value, point);
         unknownOnly.Checked = false;
         list.SetDetections(catalog.Detections, preserveSelection: true);
@@ -506,10 +522,13 @@ internal sealed class MainForm : Form
 
     internal void DeleteDetections(IReadOnlyList<Detection> selected)
     {
-        if (catalog == null || IsAnalyzing) return;
+        if (catalog == null || IsAnalyzing || transferBusy) return;
+        int index=list.FirstSelectedIndex;
+        BeginMutation();
         var ids = selected.Select(d => d.Id).ToHashSet(StringComparer.Ordinal);
         foreach (var record in catalog.Detections.Where(d => ids.Contains(d.Id))) record.IsDeleted = true;
         list.SetDetections(catalog.Detections, preserveSelection: true);
+        list.SelectNext(index, navigate: true);
         Changed();
     }
 
@@ -528,6 +547,7 @@ internal sealed class MainForm : Form
         view.SetDetections(catalog.Detections); overview.SetDetections(catalog.Detections);
         Search(); // Invalidate both images; keeps transform and selection intact.
         SaveChanges();
+        UpdateCommands();
     }
 
     private bool SaveChanges()

@@ -19,6 +19,8 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
+        if (args.Contains("--inventory")) { InventoryChecks.Run(root); return; }
+        if (args.Contains("--transfer")) { TransferChecks.Run(root); return; }
         if (args.Contains("--image-edit")) { ImageEditChecks.Run(root); return; }
         if (args.Contains("--frames")) { FrameChecks.Run(root); return; }
         if (args.Contains("--toggle")) { ToggleChecks.Run(root); return; }

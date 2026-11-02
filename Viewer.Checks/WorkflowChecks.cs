@@ -66,7 +66,7 @@ internal static class WorkflowChecks
             form.ConfirmDeletion=n=>{asked=n;return true;};
             Check(list.ContextMenuStrip!.Items[0].Text=="誤検出として削除","Context menu exposes explicit false-positive deletion");
             list.ContextMenuStrip.Items[0].PerformClick();Application.DoEvents();
-            Check(list.Items.Count==6 && list.SelectedItems.Count==0,"Delete removes selected fixed IDs from list and blue selection");
+            Check(list.Items.Count==6 && list.SelectedItems.Count==1 && !list.SelectedDetections[0].IsDeleted,"Delete removes selected fixed IDs and selects next candidate");
             var after=store.Load(identity)!;
             Check(after.Detections.Count==8 && after.Detections.Count(d=>d.IsDeleted)==2 && after.DoneCount==0,"Logical deletion persisted; deleted done records excluded from count");
             Check(after.Find("4").Count==0 && after.Find("04").Count==0,"Deleted records excluded from search");

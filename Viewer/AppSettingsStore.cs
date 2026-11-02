@@ -21,6 +21,22 @@ internal sealed class AppSettingsStore(string? path = null)
         return new(last, recent);
     }
     internal ImageHistory Load() => ReadHistory(ReadDocument());
+    internal bool LoadDeleteConfirmation() => ReadDocument()["ConfirmDelete"] is not JsonValue v || !v.TryGetValue<bool>(out var enabled) || enabled;
+    internal void SaveDeleteConfirmation(bool enabled) { var data=ReadDocument();data["ConfirmDelete"]=enabled;WriteDocument(data); }
+    internal string[] LoadSearchFolders() => ReadDocument()["ImageSearchFolders"] is JsonArray a
+        ? a.Select(n=>Absolute(n?.GetValue<string>())).Where(s=>s!=null).Cast<string>().Distinct(StringComparer.OrdinalIgnoreCase).ToArray() : [];
+    internal void SaveSearchFolders(IEnumerable<string> paths)
+    {
+        var data=ReadDocument();data["ImageSearchFolders"]=new JsonArray(paths.Select(Path.GetFullPath).Distinct(StringComparer.OrdinalIgnoreCase).Select(s=>(JsonNode?)JsonValue.Create(s)).ToArray());WriteDocument(data);
+    }
+    internal JsonObject ExportSettings() => ReadDocument();
+    internal void ImportPortableSettings(JsonObject source)
+    {
+        var data=ReadDocument();
+        if(source["FrameWidthPx"] is JsonValue v && v.TryGetValue<int>(out var w) && w is >=1 and <=4) data["FrameWidthPx"]=w;
+        if(source["ConfirmDelete"] is JsonValue b && b.TryGetValue<bool>(out var enabled)) data["ConfirmDelete"]=enabled;
+        WriteDocument(data);
+    }
     internal int LoadFrameWidth() => ReadDocument()["FrameWidthPx"] is JsonValue value &&
         value.TryGetValue<int>(out var width) && width is >= 1 and <= 4 ? width : 2;
     internal void SaveFrameWidth(int width)

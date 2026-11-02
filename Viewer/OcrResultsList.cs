@@ -21,6 +21,13 @@ internal sealed class OcrResultsList : ListView
     private static extern bool SetWindowText(IntPtr window, string text);
     private readonly Dictionary<string, ListViewItem> rowsById = new(StringComparer.Ordinal);
     private IReadOnlyList<Detection> allRecords = [];
+    [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+    internal bool InventoryMode { get; set; }
+    internal Func<string, string, bool, bool>? EditHandler;
+    internal event Action? BeforeDataChange;
+    internal event Action<bool>? ReviewRequested;
+    internal event Action? UndoRequested;
+    private readonly HashSet<Keys> heldCommands = [];
     internal bool OnlyUnrecognized { get; private set; }
     internal IEnumerable<Detection> OrderedDetections => allRecords.Where(d => !d.IsDeleted)
         .OrderBy(d => d, Comparer<Detection>.Create(CompareRecords));
@@ -48,6 +55,7 @@ internal sealed class OcrResultsList : ListView
         ImeMode = ImeMode.NoControl;
         var menu = new ContextMenuStrip();
         menu.Items.Add("誤検出として削除", null, (_, _) => RequestDelete());
+        menu.Opening+=(_,_)=>menu.Items[0].Enabled=SelectedItems.Count>0&&!editing&&Enabled;
         ContextMenuStrip = menu;
         AccessibleName = "OCR検出番号一覧";
         Columns.Add("番号", 120);
@@ -62,6 +70,8 @@ internal sealed class OcrResultsList : ListView
         {
             if (updating) return;
             var record = (Detection)Items[e.Index].Tag!;
+            if (record.IsDone == (e.NewValue == CheckState.Checked)) return;
+            BeforeDataChange?.Invoke();
             record.IsDone = e.NewValue == CheckState.Checked;
             DataChanged?.Invoke();
         };
@@ -79,6 +89,7 @@ internal sealed class OcrResultsList : ListView
                 BeginInvoke(() => EditRejected?.Invoke("空欄でないラベルを入力してください。"));
                 return;
             }
+            if (EditHandler != null) { EditHandler(record.Id, value, true); return; }
             if (!record.IsUnrecognized && record.Number == value) return;
             record.Number = value; record.IsUnrecognized = false; record.IsModified = true;
             DataChanged?.Invoke(); // Closing or switching images cannot lose a queued edit.
@@ -91,6 +102,7 @@ internal sealed class OcrResultsList : ListView
 
     internal bool Rename(string id, string value)
     {
+        if (EditHandler != null) return EditHandler(id, value, false);
         if (!rowsById.TryGetValue(id, out var row)) return false;
         if (!Detection.ValidLabel(value)) { EditRejected?.Invoke("空欄でないラベルを入力してください。"); return false; }
         var record = (Detection)row.Tag!;
@@ -104,6 +116,7 @@ internal sealed class OcrResultsList : ListView
     internal void SuppressPendingNavigation() => CancelSelectionNavigation();
     internal bool RenameFromImage(string id, string value)
     {
+        if (EditHandler != null) return EditHandler(id, value, false);
         var record = allRecords.FirstOrDefault(d => d.Id == id && !d.IsDeleted);
         if (record == null || !Detection.ValidLabel(value)) return false;
         CancelSelectionNavigation();
@@ -170,7 +183,7 @@ internal sealed class OcrResultsList : ListView
     private static int LabelGroup(Detection d) => d.IsUnrecognized ? 3 : NumericLabel(d.Number) ? 0
         : d.Number.Any(c => c is >= 'A' and <= 'Z' or >= 'a' and <= 'z' or >= 'Ａ' and <= 'Ｚ' or >= 'ａ' and <= 'ｚ') ? 1 : 2;
 
-    private void RequestDelete()
+    internal void RequestDelete()
     {
         if (editing || SelectedItems.Count == 0) return;
         CancelSelectionNavigation();
@@ -207,6 +220,8 @@ internal sealed class OcrResultsList : ListView
         }
         finally { explicitEdit = false; }
     }
+    internal void EditSelected() { if (SelectedItems.Count > 0) { Focus(); EditRow(SelectedItems[0]); } }
+    internal bool IsEditing => editing;
 
     private void RetireLabelWindow()
     {
@@ -253,7 +268,7 @@ internal sealed class OcrResultsList : ListView
         {
             Items.Clear();
             rowsById.Clear();
-            foreach (var detection in detections.Where(d => !d.IsDeleted && (!OnlyUnrecognized || d.IsUnrecognized)))
+            foreach (var detection in detections.Where(d => !d.IsDeleted && (!InventoryMode || !d.IsReviewed) && (!OnlyUnrecognized || d.IsUnrecognized)))
             {
                 var row = new ListViewItem(detection.DisplayNumber) { Tag = detection, Checked = detection.IsDone };
                 Items.Add(row);
@@ -269,6 +284,33 @@ internal sealed class OcrResultsList : ListView
     }
 
     internal bool ContainsDetection(string id) => rowsById.ContainsKey(id);
+    internal int FirstSelectedIndex => SelectedIndices.Count > 0 ? SelectedIndices[0] : 0;
+    internal int IndexOf(string id) => rowsById.TryGetValue(id, out var row) ? row.Index : FirstSelectedIndex;
+    internal sealed record ViewState(string[] Selected, string? Focused, string? Top);
+    internal ViewState CaptureView() => new(SelectedDetections.Select(d=>d.Id).ToArray(), (FocusedItem?.Tag as Detection)?.Id, (TopItem?.Tag as Detection)?.Id);
+    internal void RestoreView(ViewState state)
+    {
+        CancelSelectionNavigation(); updating = true;
+        try
+        {
+            foreach(ListViewItem row in Items) row.Selected=state.Selected.Contains(((Detection)row.Tag!).Id);
+            if(state.Focused != null && rowsById.TryGetValue(state.Focused,out var focused)) focused.Focused=true;
+            if(state.Top != null && rowsById.TryGetValue(state.Top,out var top)) TopItem=top;
+        }
+        finally { updating=false; }
+        SelectionChanged?.Invoke(SelectedDetections);
+    }
+    internal void SelectNext(int index, bool navigate)
+    {
+        CancelSelectionNavigation();
+        if(Items.Count > 0)
+        {
+            var record=(Detection)Items[Math.Clamp(index,0,Items.Count-1)].Tag!;
+            SelectDetection(record.Id,false);
+            if(navigate) NavigateRequested?.Invoke(record);
+        }
+        Focus();
+    }
 
     internal void SelectDetection(string id, bool add, bool toggle = false)
     {
@@ -291,6 +333,12 @@ internal sealed class OcrResultsList : ListView
     protected override void OnKeyDown(KeyEventArgs e)
     {
         if (editing) { base.OnKeyDown(e); return; }
+        if (e.Control && e.KeyCode == Keys.Z) { UndoRequested?.Invoke(); e.Handled=e.SuppressKeyPress=true; return; }
+        if (InventoryMode && (e.KeyCode == Keys.Space || (e.Control && e.KeyCode == Keys.Enter)))
+        {
+            if (heldCommands.Add(e.KeyCode)) ReviewRequested?.Invoke(e.KeyCode == Keys.Enter);
+            e.Handled=e.SuppressKeyPress=true; return;
+        }
         if (e.KeyCode == Keys.Delete) { RequestDelete(); e.Handled = e.SuppressKeyPress = true; return; }
         if (e.KeyCode == Keys.Space || e.KeyCode == Keys.F2)
         {
@@ -324,6 +372,8 @@ internal sealed class OcrResultsList : ListView
         }
         base.OnKeyDown(e);
     }
+    protected override void OnKeyUp(KeyEventArgs e) { heldCommands.Remove(e.KeyCode); base.OnKeyUp(e); }
+    protected override void OnLostFocus(EventArgs e) { heldCommands.Clear(); base.OnLostFocus(e); }
 
     internal void MoveTo(Control parent)
     {
