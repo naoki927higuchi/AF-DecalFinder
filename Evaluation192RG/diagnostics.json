@@ -1,0 +1,46 @@
+{
+  "web": {
+    "estimated_mode_radius": 10.0,
+    "true_label_radius": 9.0,
+    "strict_hough_count": 180,
+    "raw_hough_count": 321,
+    "size_gate": [
+      7.199999999999999,
+      12.8
+    ],
+    "hough_matches_before_size_gate": 24
+  },
+  "scan": {
+    "estimated_mode_radius": 28.46975020647049,
+    "true_label_radius": 26.975594571508584,
+    "strict_hough_count": 217,
+    "raw_hough_count": 1332,
+    "size_gate": [
+      20.498220148658753,
+      36.44128026428223
+    ],
+    "hough_matches_before_size_gate": 24
+  },
+  "phone_upright": {
+    "estimated_mode_radius": 36.0000010899135,
+    "true_label_radius": 15.79760754261155,
+    "strict_hough_count": 219,
+    "raw_hough_count": 1259,
+    "size_gate": [
+      25.92000078473772,
+      46.08000139508928
+    ],
+    "hough_matches_before_size_gate": 24
+  },
+  "phone_raw": {
+    "estimated_mode_radius": 13.714286259242467,
+    "true_label_radius": 15.79760754261155,
+    "strict_hough_count": 248,
+    "raw_hough_count": 2603,
+    "size_gate": [
+      9.874286106654576,
+      17.554286411830358
+    ],
+    "hough_matches_before_size_gate": 24
+  }
+}

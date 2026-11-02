@@ -1,0 +1,32 @@
+{
+  "check_count": 23,
+  "checks": [
+    "web input sha256",
+    "web input mtime and size",
+    "web three repeat result equality",
+    "web 24 label accounting",
+    "web distinct ground truth IDs",
+    "scan input sha256",
+    "scan input mtime and size",
+    "scan three repeat result equality",
+    "scan 24 label accounting",
+    "scan distinct ground truth IDs",
+    "phone_upright input sha256",
+    "phone_upright input mtime and size",
+    "phone_upright three repeat result equality",
+    "phone_upright 24 label accounting",
+    "phone_upright distinct ground truth IDs",
+    "phone_raw input sha256",
+    "phone_raw input mtime and size",
+    "phone_raw three repeat result equality",
+    "phone_raw 24 label accounting",
+    "phone_raw distinct ground truth IDs",
+    "worker.py source matches shipped code",
+    "recognition.py source matches shipped code",
+    "candidates.py source matches shipped code"
+  ],
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "logical_processors": 32
+}

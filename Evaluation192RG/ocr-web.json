@@ -1,0 +1,4955 @@
+{
+  "schema_version": 2,
+  "image": {
+    "width": 1433,
+    "height": 2024
+  },
+  "detections": [
+    {
+      "number": "",
+      "bbox": [
+        878,
+        48,
+        18,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:158",
+      "candidate_circle": [
+        886.9693908691406,
+        56.67619705200195,
+        8.26271939277649
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0001"
+    },
+    {
+      "number": "",
+      "bbox": [
+        241,
+        56,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:53",
+      "candidate_circle": [
+        249.5,
+        64.5,
+        8.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0002"
+    },
+    {
+      "number": "",
+      "bbox": [
+        627,
+        69,
+        20,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:154",
+      "candidate_circle": [
+        637.0667114257812,
+        78.30103302001953,
+        9.143813133239746
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0003"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1255,
+        69,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:157",
+      "candidate_circle": [
+        1264.5843505859375,
+        78.03961181640625,
+        9.014894485473633
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0004"
+    },
+    {
+      "number": "",
+      "bbox": [
+        507,
+        70,
+        15,
+        16
+      ],
+      "confidence": 0,
+      "tile_id": "circle:153",
+      "candidate_circle": [
+        514.6102294921875,
+        77.99108123779297,
+        7.29318904876709
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0005"
+    },
+    {
+      "number": "",
+      "bbox": [
+        612,
+        71,
+        15,
+        15
+      ],
+      "confidence": 0,
+      "tile_id": "circle:36",
+      "candidate_circle": [
+        619.5,
+        78.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0006"
+    },
+    {
+      "number": "",
+      "bbox": [
+        507,
+        92,
+        16,
+        16
+      ],
+      "confidence": 0,
+      "tile_id": "circle:152",
+      "candidate_circle": [
+        514.78369140625,
+        100.2702407836914,
+        7.375152826309204
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0007"
+    },
+    {
+      "number": "",
+      "bbox": [
+        882,
+        92,
+        16,
+        16
+      ],
+      "confidence": 0,
+      "tile_id": "circle:155",
+      "candidate_circle": [
+        890.2006530761719,
+        100.2091064453125,
+        7.658199071884155
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0008"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1177,
+        92,
+        18,
+        18
+      ],
+      "confidence": 0,
+      "tile_id": "circle:156",
+      "candidate_circle": [
+        1185.7320556640625,
+        100.96543884277344,
+        8.628777980804443
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0009"
+    },
+    {
+      "number": "",
+      "bbox": [
+        914,
+        93,
+        15,
+        15
+      ],
+      "confidence": 0,
+      "tile_id": "circle:80",
+      "candidate_circle": [
+        921.5,
+        100.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0010"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1053,
+        93,
+        15,
+        15
+      ],
+      "confidence": 0,
+      "tile_id": "circle:81",
+      "candidate_circle": [
+        1060.5,
+        100.5,
+        7.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0011"
+    },
+    {
+      "number": "",
+      "bbox": [
+        228,
+        95,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:43",
+      "candidate_circle": [
+        236.5,
+        103.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0012"
+    },
+    {
+      "number": "",
+      "bbox": [
+        59,
+        96,
+        15,
+        15
+      ],
+      "confidence": 0,
+      "tile_id": "circle:30",
+      "candidate_circle": [
+        66.5,
+        103.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0013"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1101,
+        175,
+        15,
+        15
+      ],
+      "confidence": 0,
+      "tile_id": "circle:78",
+      "candidate_circle": [
+        1108.5,
+        182.5,
+        7.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0014"
+    },
+    {
+      "number": "24",
+      "bbox": [
+        1141,
+        242,
+        18,
+        18
+      ],
+      "confidence": 74.0072250366211,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 96.74041366577148,
+      "raw_word": "24",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            16,
+            14,
+            27,
+            36
+          ],
+          "confidence": 97.19408416748047
+        },
+        {
+          "text": "4",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 96.2867431640625
+        }
+      ],
+      "tile_id": "circle:58",
+      "candidate_circle": [
+        1149.5,
+        250.5,
+        10.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0015"
+    },
+    {
+      "number": "18",
+      "bbox": [
+        192,
+        258,
+        13,
+        10
+      ],
+      "confidence": 95.93280792236328,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.47488784790039,
+      "raw_word": "18",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            23,
+            22,
+            14,
+            21
+          ],
+          "confidence": 99.53079986572266
+        },
+        {
+          "text": "8",
+          "bbox": [
+            42,
+            22,
+            20,
+            21
+          ],
+          "confidence": 99.41897583007812
+        }
+      ],
+      "tile_id": "circle:7",
+      "candidate_circle": [
+        198.5,
+        262.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0016"
+    },
+    {
+      "number": "20",
+      "bbox": [
+        238,
+        258,
+        14,
+        10
+      ],
+      "confidence": 96.75920104980469,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.5389175415039,
+      "raw_word": "20",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            20,
+            20,
+            20,
+            21
+          ],
+          "confidence": 99.54080963134766
+        },
+        {
+          "text": "0",
+          "bbox": [
+            42,
+            20,
+            19,
+            21
+          ],
+          "confidence": 99.53702545166016
+        }
+      ],
+      "tile_id": "circle:20",
+      "candidate_circle": [
+        244.5,
+        262.5,
+        9.100000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0017"
+    },
+    {
+      "number": "14",
+      "bbox": [
+        305,
+        258,
+        13,
+        10
+      ],
+      "confidence": 93.99129486083984,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.3338623046875,
+      "raw_word": "14",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            22,
+            20,
+            14,
+            21
+          ],
+          "confidence": 99.14161682128906
+        },
+        {
+          "text": "4",
+          "bbox": [
+            40,
+            20,
+            21,
+            21
+          ],
+          "confidence": 99.52610778808594
+        }
+      ],
+      "tile_id": "circle:26",
+      "candidate_circle": [
+        310.5,
+        262.5,
+        9.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0018"
+    },
+    {
+      "number": "15",
+      "bbox": [
+        352,
+        258,
+        12,
+        10
+      ],
+      "confidence": 95.83724975585938,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.4820785522461,
+      "raw_word": "15",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            24,
+            22,
+            13,
+            21
+          ],
+          "confidence": 99.558837890625
+        },
+        {
+          "text": "5",
+          "bbox": [
+            42,
+            22,
+            20,
+            21
+          ],
+          "confidence": 99.40531921386719
+        }
+      ],
+      "tile_id": "circle:1",
+      "candidate_circle": [
+        357.5,
+        262.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0019"
+    },
+    {
+      "number": "19",
+      "bbox": [
+        419,
+        258,
+        12,
+        10
+      ],
+      "confidence": 82.61332702636719,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.52425384521484,
+      "raw_word": "19",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            24,
+            22,
+            13,
+            21
+          ],
+          "confidence": 99.53231811523438
+        },
+        {
+          "text": "9",
+          "bbox": [
+            42,
+            22,
+            20,
+            21
+          ],
+          "confidence": 97.51618957519531
+        }
+      ],
+      "tile_id": "circle:4",
+      "candidate_circle": [
+        424.5,
+        262.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0020"
+    },
+    {
+      "number": "21",
+      "bbox": [
+        464,
+        258,
+        12,
+        10
+      ],
+      "confidence": 96.1252212524414,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.47124481201172,
+      "raw_word": "21",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            20,
+            20,
+            20,
+            21
+          ],
+          "confidence": 99.49603271484375
+        },
+        {
+          "text": "1",
+          "bbox": [
+            43,
+            20,
+            13,
+            21
+          ],
+          "confidence": 99.44645690917969
+        }
+      ],
+      "tile_id": "circle:12",
+      "candidate_circle": [
+        470.5,
+        262.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0021"
+    },
+    {
+      "number": "16",
+      "bbox": [
+        785,
+        258,
+        13,
+        10
+      ],
+      "confidence": 96.62728118896484,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.54294967651367,
+      "raw_word": "16",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            22,
+            20,
+            14,
+            21
+          ],
+          "confidence": 99.51818084716797
+        },
+        {
+          "text": "6",
+          "bbox": [
+            41,
+            20,
+            20,
+            21
+          ],
+          "confidence": 99.56771850585938
+        }
+      ],
+      "tile_id": "circle:65",
+      "candidate_circle": [
+        790.5,
+        262.5,
+        9.100000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0022"
+    },
+    {
+      "number": "17",
+      "bbox": [
+        832,
+        258,
+        12,
+        10
+      ],
+      "confidence": 96.60847473144531,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.528564453125,
+      "raw_word": "17",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            25,
+            22,
+            12,
+            21
+          ],
+          "confidence": 99.51549530029297
+        },
+        {
+          "text": "7",
+          "bbox": [
+            43,
+            23,
+            19,
+            20
+          ],
+          "confidence": 99.54163360595703
+        }
+      ],
+      "tile_id": "circle:55",
+      "candidate_circle": [
+        837.5,
+        262.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0023"
+    },
+    {
+      "number": "12",
+      "bbox": [
+        662,
+        327,
+        12,
+        11
+      ],
+      "confidence": 96.54170227050781,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.50973510742188,
+      "raw_word": "12",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            24,
+            22,
+            14,
+            21
+          ],
+          "confidence": 99.5059585571289
+        },
+        {
+          "text": "2",
+          "bbox": [
+            43,
+            22,
+            19,
+            21
+          ],
+          "confidence": 99.51351165771484
+        }
+      ],
+      "tile_id": "circle:5",
+      "candidate_circle": [
+        667.5,
+        331.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0024"
+    },
+    {
+      "number": "1",
+      "bbox": [
+        909,
+        327,
+        11,
+        11
+      ],
+      "confidence": 35.676361083984375,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 90.8109130859375,
+      "raw_word": "1",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            24,
+            22,
+            33,
+            21
+          ],
+          "confidence": 90.8109130859375
+        }
+      ],
+      "tile_id": "circle:57",
+      "candidate_circle": [
+        914.5,
+        331.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0025"
+    },
+    {
+      "number": "",
+      "bbox": [
+        467,
+        336,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:6",
+      "candidate_circle": [
+        477.5,
+        346.5,
+        10.5
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0026"
+    },
+    {
+      "number": "26",
+      "bbox": [
+        137,
+        342,
+        13,
+        10
+      ],
+      "confidence": 96.77786254882812,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.54695129394531,
+      "raw_word": "26",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            15,
+            16,
+            16,
+            20
+          ],
+          "confidence": 99.55420684814453
+        },
+        {
+          "text": "6",
+          "bbox": [
+            34,
+            16,
+            20,
+            20
+          ],
+          "confidence": 99.5396957397461
+        }
+      ],
+      "tile_id": "circle:27",
+      "candidate_circle": [
+        142.5,
+        346.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0027"
+    },
+    {
+      "number": "3",
+      "bbox": [
+        282,
+        364,
+        12,
+        14
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 18.7166748046875,
+      "raw_word": "3",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            16,
+            14,
+            37,
+            28
+          ],
+          "confidence": 18.7166748046875
+        }
+      ],
+      "tile_id": "circle:48",
+      "candidate_circle": [
+        288.5,
+        370.5,
+        8.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0028"
+    },
+    {
+      "number": "",
+      "bbox": [
+        113,
+        368,
+        19,
+        18
+      ],
+      "confidence": 0,
+      "tile_id": "circle:151",
+      "candidate_circle": [
+        122.49453735351562,
+        377.40606689453125,
+        8.552486896514893
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0029"
+    },
+    {
+      "number": "",
+      "bbox": [
+        488,
+        368,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:150",
+      "candidate_circle": [
+        497.5120849609375,
+        377.46197509765625,
+        8.633055210113525
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0030"
+    },
+    {
+      "number": "10",
+      "bbox": [
+        136,
+        372,
+        13,
+        10
+      ],
+      "confidence": 87.50308990478516,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.82012557983398,
+      "raw_word": "10",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            23,
+            22,
+            14,
+            21
+          ],
+          "confidence": 99.42552185058594
+        },
+        {
+          "text": "0",
+          "bbox": [
+            42,
+            22,
+            20,
+            21
+          ],
+          "confidence": 98.21472930908203
+        }
+      ],
+      "tile_id": "circle:2",
+      "candidate_circle": [
+        142.5,
+        376.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0031"
+    },
+    {
+      "number": "",
+      "bbox": [
+        377,
+        372,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:42",
+      "candidate_circle": [
+        387.5,
+        382.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0032"
+    },
+    {
+      "number": "13",
+      "bbox": [
+        472,
+        372,
+        13,
+        10
+      ],
+      "confidence": 96.78450775146484,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.54905700683594,
+      "raw_word": "13",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            25,
+            22,
+            13,
+            21
+          ],
+          "confidence": 99.54064178466797
+        },
+        {
+          "text": "3",
+          "bbox": [
+            43,
+            22,
+            20,
+            21
+          ],
+          "confidence": 99.5574722290039
+        }
+      ],
+      "tile_id": "circle:0",
+      "candidate_circle": [
+        477.5,
+        376.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0033"
+    },
+    {
+      "number": "",
+      "bbox": [
+        683,
+        382,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:41",
+      "candidate_circle": [
+        693.5,
+        392.5,
+        10.5
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0034"
+    },
+    {
+      "number": "1",
+      "bbox": [
+        140,
+        399,
+        4,
+        10
+      ],
+      "confidence": 95.78612518310547,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.39801788330078,
+      "raw_word": "1",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            28,
+            18,
+            12,
+            20
+          ],
+          "confidence": 99.39801788330078
+        }
+      ],
+      "tile_id": "circle:34",
+      "candidate_circle": [
+        142.5,
+        403.5,
+        8.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0035"
+    },
+    {
+      "number": "2",
+      "bbox": [
+        475,
+        399,
+        6,
+        10
+      ],
+      "confidence": 96.54530334472656,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.5064697265625,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            28,
+            18,
+            19,
+            20
+          ],
+          "confidence": 99.5064697265625
+        }
+      ],
+      "tile_id": "circle:39",
+      "candidate_circle": [
+        477.5,
+        403.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0036"
+    },
+    {
+      "number": "1",
+      "bbox": [
+        621,
+        399,
+        4,
+        10
+      ],
+      "confidence": 96.68389892578125,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.5262680053711,
+      "raw_word": "1",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            30,
+            18,
+            13,
+            20
+          ],
+          "confidence": 99.5262680053711
+        }
+      ],
+      "tile_id": "circle:35",
+      "candidate_circle": [
+        622.5,
+        403.5,
+        8.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0037"
+    },
+    {
+      "number": "2",
+      "bbox": [
+        956,
+        399,
+        7,
+        10
+      ],
+      "confidence": 96.27229309082031,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.46746826171875,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            26,
+            18,
+            19,
+            20
+          ],
+          "confidence": 99.46746826171875
+        }
+      ],
+      "tile_id": "circle:69",
+      "candidate_circle": [
+        959.5,
+        403.5,
+        8.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0038"
+    },
+    {
+      "number": "",
+      "bbox": [
+        196,
+        430,
+        27,
+        27
+      ],
+      "confidence": 0,
+      "tile_id": "circle:28",
+      "candidate_circle": [
+        209.5,
+        443.5,
+        12.699999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0039"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1327,
+        435,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:54",
+      "candidate_circle": [
+        1337.5,
+        445.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0040"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1145,
+        436,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:75",
+      "candidate_circle": [
+        1154.5,
+        445.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0041"
+    },
+    {
+      "number": "29",
+      "bbox": [
+        1217,
+        438,
+        17,
+        16
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 77.77001190185547,
+      "raw_word": "29",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            17,
+            16,
+            23,
+            33
+          ],
+          "confidence": 98.41718292236328
+        },
+        {
+          "text": "9",
+          "bbox": [
+            17,
+            16,
+            50,
+            33
+          ],
+          "confidence": 57.122840881347656
+        }
+      ],
+      "tile_id": "circle:56",
+      "candidate_circle": [
+        1225.5,
+        445.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0042"
+    },
+    {
+      "number": "",
+      "bbox": [
+        405,
+        444,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:50",
+      "candidate_circle": [
+        413.5,
+        452.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0043"
+    },
+    {
+      "number": "40",
+      "bbox": [
+        469,
+        445,
+        18,
+        18
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 68.66279983520508,
+      "raw_word": "40",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            16,
+            14,
+            27,
+            36
+          ],
+          "confidence": 56.913002014160156
+        },
+        {
+          "text": "0",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 80.41259765625
+        }
+      ],
+      "tile_id": "circle:19",
+      "candidate_circle": [
+        477.5,
+        453.5,
+        10.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0044"
+    },
+    {
+      "number": "0",
+      "bbox": [
+        950,
+        445,
+        18,
+        18
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 37.10738754272461,
+      "raw_word": "0",
+      "symbols": [
+        {
+          "text": "0",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 37.10738754272461
+        }
+      ],
+      "tile_id": "circle:68",
+      "candidate_circle": [
+        958.5,
+        453.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0045"
+    },
+    {
+      "number": "19",
+      "bbox": [
+        134,
+        446,
+        18,
+        18
+      ],
+      "confidence": 37.721981048583984,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 94.73982620239258,
+      "raw_word": "19",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 98.37651062011719
+        },
+        {
+          "text": "9",
+          "bbox": [
+            46,
+            14,
+            24,
+            36
+          ],
+          "confidence": 91.10314178466797
+        }
+      ],
+      "tile_id": "circle:29",
+      "candidate_circle": [
+        142.5,
+        454.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0046"
+    },
+    {
+      "number": "1",
+      "bbox": [
+        615,
+        446,
+        18,
+        18
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 58.10214614868164,
+      "raw_word": "1",
+      "symbols": [
+        {
+          "text": "1",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 58.10214614868164
+        }
+      ],
+      "tile_id": "circle:23",
+      "candidate_circle": [
+        623.5,
+        454.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0047"
+    },
+    {
+      "number": "",
+      "bbox": [
+        882,
+        456,
+        23,
+        23
+      ],
+      "confidence": 0,
+      "tile_id": "circle:73",
+      "candidate_circle": [
+        893.5,
+        467.5,
+        11.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0048"
+    },
+    {
+      "number": "",
+      "bbox": [
+        191,
+        460,
+        25,
+        25
+      ],
+      "confidence": 0,
+      "tile_id": "circle:40",
+      "candidate_circle": [
+        203.5,
+        472.5,
+        11.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0049"
+    },
+    {
+      "number": "",
+      "bbox": [
+        611,
+        469,
+        23,
+        23
+      ],
+      "confidence": 0,
+      "tile_id": "circle:15",
+      "candidate_circle": [
+        622.5,
+        480.5,
+        10.800000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0050"
+    },
+    {
+      "number": "",
+      "bbox": [
+        949,
+        470,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:70",
+      "candidate_circle": [
+        959.5,
+        480.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0051"
+    },
+    {
+      "number": "",
+      "bbox": [
+        467,
+        472,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:22",
+      "candidate_circle": [
+        476.5,
+        481.5,
+        8.800000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0052"
+    },
+    {
+      "number": "5",
+      "bbox": [
+        139,
+        476,
+        7,
+        10
+      ],
+      "confidence": 96.02828216552734,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.43260955810547,
+      "raw_word": "5",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            26,
+            18,
+            19,
+            20
+          ],
+          "confidence": 99.43260955810547
+        }
+      ],
+      "tile_id": "circle:25",
+      "candidate_circle": [
+        142.5,
+        480.5,
+        8.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0053"
+    },
+    {
+      "number": "",
+      "bbox": [
+        492,
+        496,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:47",
+      "candidate_circle": [
+        501.5,
+        505.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0054"
+    },
+    {
+      "number": "",
+      "bbox": [
+        132,
+        509,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:18",
+      "candidate_circle": [
+        142.5,
+        519.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0055"
+    },
+    {
+      "number": "",
+      "bbox": [
+        467,
+        509,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:13",
+      "candidate_circle": [
+        477.5,
+        519.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0056"
+    },
+    {
+      "number": "",
+      "bbox": [
+        949,
+        509,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:62",
+      "candidate_circle": [
+        959.5,
+        519.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0057"
+    },
+    {
+      "number": "2",
+      "bbox": [
+        614,
+        510,
+        19,
+        19
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 33.32102966308594,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            15,
+            13,
+            58,
+            39
+          ],
+          "confidence": 33.32102966308594
+        }
+      ],
+      "tile_id": "circle:16",
+      "candidate_circle": [
+        622.5,
+        518.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0058"
+    },
+    {
+      "number": "",
+      "bbox": [
+        663,
+        517,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:51",
+      "candidate_circle": [
+        671.5,
+        525.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0059"
+    },
+    {
+      "number": "",
+      "bbox": [
+        676,
+        520,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:45",
+      "candidate_circle": [
+        684.5,
+        528.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0060"
+    },
+    {
+      "number": "",
+      "bbox": [
+        373,
+        528,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:52",
+      "candidate_circle": [
+        382.5,
+        537.5,
+        9.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0061"
+    },
+    {
+      "number": "",
+      "bbox": [
+        898,
+        528,
+        25,
+        25
+      ],
+      "confidence": 0,
+      "tile_id": "circle:71",
+      "candidate_circle": [
+        910.5,
+        540.5,
+        11.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0062"
+    },
+    {
+      "number": "",
+      "bbox": [
+        949,
+        531,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:66",
+      "candidate_circle": [
+        959.5,
+        541.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0063"
+    },
+    {
+      "number": "",
+      "bbox": [
+        132,
+        532,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:38",
+      "candidate_circle": [
+        142.5,
+        542.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0064"
+    },
+    {
+      "number": "",
+      "bbox": [
+        467,
+        532,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:21",
+      "candidate_circle": [
+        477.5,
+        542.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0065"
+    },
+    {
+      "number": "",
+      "bbox": [
+        612,
+        532,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:17",
+      "candidate_circle": [
+        622.5,
+        542.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0066"
+    },
+    {
+      "number": "",
+      "bbox": [
+        671,
+        545,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:44",
+      "candidate_circle": [
+        679.5,
+        553.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0067"
+    },
+    {
+      "number": "",
+      "bbox": [
+        900,
+        545,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:79",
+      "candidate_circle": [
+        908.5,
+        553.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0068"
+    },
+    {
+      "number": "",
+      "bbox": [
+        131,
+        560,
+        23,
+        23
+      ],
+      "confidence": 0,
+      "tile_id": "circle:24",
+      "candidate_circle": [
+        142.5,
+        571.5,
+        10.899999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0069"
+    },
+    {
+      "number": "",
+      "bbox": [
+        467,
+        561,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:32",
+      "candidate_circle": [
+        477.5,
+        571.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0070"
+    },
+    {
+      "number": "",
+      "bbox": [
+        949,
+        561,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:63",
+      "candidate_circle": [
+        959.5,
+        571.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0071"
+    },
+    {
+      "number": "49",
+      "bbox": [
+        617,
+        567,
+        13,
+        10
+      ],
+      "confidence": 88.77647399902344,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 98.82412719726562,
+      "raw_word": "49",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            15,
+            16,
+            19,
+            20
+          ],
+          "confidence": 99.25161743164062
+        },
+        {
+          "text": "9",
+          "bbox": [
+            36,
+            16,
+            19,
+            20
+          ],
+          "confidence": 98.39663696289062
+        }
+      ],
+      "tile_id": "circle:37",
+      "candidate_circle": [
+        622.5,
+        571.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0072"
+    },
+    {
+      "number": "",
+      "bbox": [
+        299,
+        601,
+        25,
+        25
+      ],
+      "confidence": 0,
+      "tile_id": "circle:33",
+      "candidate_circle": [
+        311.5,
+        613.5,
+        11.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0073"
+    },
+    {
+      "number": "",
+      "bbox": [
+        132,
+        605,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:10",
+      "candidate_circle": [
+        142.5,
+        615.5,
+        10.5
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0074"
+    },
+    {
+      "number": "",
+      "bbox": [
+        467,
+        605,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:11",
+      "candidate_circle": [
+        477.5,
+        615.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0075"
+    },
+    {
+      "number": "",
+      "bbox": [
+        612,
+        605,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:8",
+      "candidate_circle": [
+        622.5,
+        615.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0076"
+    },
+    {
+      "number": "",
+      "bbox": [
+        949,
+        605,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:60",
+      "candidate_circle": [
+        959.5,
+        615.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0077"
+    },
+    {
+      "number": "",
+      "bbox": [
+        612,
+        628,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:9",
+      "candidate_circle": [
+        622.5,
+        638.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0078"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1041,
+        638,
+        23,
+        23
+      ],
+      "confidence": 0,
+      "tile_id": "circle:74",
+      "candidate_circle": [
+        1052.5,
+        649.5,
+        10.899999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0079"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1326,
+        639,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:64",
+      "candidate_circle": [
+        1336.5,
+        649.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0080"
+    },
+    {
+      "number": "2",
+      "bbox": [
+        1090,
+        646,
+        9,
+        13
+      ],
+      "confidence": 96.74604797363281,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.53514862060547,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            29,
+            21,
+            25,
+            27
+          ],
+          "confidence": 99.53514862060547
+        }
+      ],
+      "tile_id": "circle:59",
+      "candidate_circle": [
+        1094.5,
+        650.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0081"
+    },
+    {
+      "number": "4",
+      "bbox": [
+        1141,
+        646,
+        6,
+        10
+      ],
+      "confidence": 96.46851348876953,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.49549865722656,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            27,
+            18,
+            20,
+            20
+          ],
+          "confidence": 99.49549865722656
+        }
+      ],
+      "tile_id": "circle:76",
+      "candidate_circle": [
+        1143.5,
+        650.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0082"
+    },
+    {
+      "number": "37",
+      "bbox": [
+        1192,
+        646,
+        12,
+        10
+      ],
+      "confidence": 94.47264862060547,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.32993698120117,
+      "raw_word": "37",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            15,
+            16,
+            18,
+            20
+          ],
+          "confidence": 99.44949340820312
+        },
+        {
+          "text": "7",
+          "bbox": [
+            35,
+            16,
+            17,
+            20
+          ],
+          "confidence": 99.21038055419922
+        }
+      ],
+      "tile_id": "circle:72",
+      "candidate_circle": [
+        1197.5,
+        650.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0083"
+    },
+    {
+      "number": "4",
+      "bbox": [
+        1245,
+        646,
+        6,
+        10
+      ],
+      "confidence": 96.81117248535156,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.5444564819336,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            27,
+            17,
+            20,
+            21
+          ],
+          "confidence": 99.5444564819336
+        }
+      ],
+      "tile_id": "circle:77",
+      "candidate_circle": [
+        1247.5,
+        650.5,
+        8.100000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0084"
+    },
+    {
+      "number": "2",
+      "bbox": [
+        1293,
+        646,
+        9,
+        13
+      ],
+      "confidence": 96.74993896484375,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.53570556640625,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            32,
+            21,
+            25,
+            27
+          ],
+          "confidence": 99.53570556640625
+        }
+      ],
+      "tile_id": "circle:61",
+      "candidate_circle": [
+        1296.5,
+        650.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0085"
+    },
+    {
+      "number": "",
+      "bbox": [
+        612,
+        651,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:14",
+      "candidate_circle": [
+        622.5,
+        661.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0086"
+    },
+    {
+      "number": "45",
+      "bbox": [
+        951,
+        653,
+        18,
+        18
+      ],
+      "confidence": 22.442771911621094,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 90.1011962890625,
+      "raw_word": "45",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            16,
+            14,
+            27,
+            36
+          ],
+          "confidence": 88.92039489746094
+        },
+        {
+          "text": "5",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 91.28199768066406
+        }
+      ],
+      "tile_id": "circle:67",
+      "candidate_circle": [
+        959.5,
+        661.5,
+        10.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0087"
+    },
+    {
+      "number": "",
+      "bbox": [
+        242,
+        668,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:49",
+      "candidate_circle": [
+        250.5,
+        676.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0088"
+    },
+    {
+      "number": "",
+      "bbox": [
+        360,
+        668,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:46",
+      "candidate_circle": [
+        370.5,
+        678.5,
+        10.5
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0089"
+    },
+    {
+      "number": "36",
+      "bbox": [
+        470,
+        672,
+        16,
+        16
+      ],
+      "confidence": 41.916053771972656,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 93.21600341796875,
+      "raw_word": "36",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            19,
+            16,
+            23,
+            32
+          ],
+          "confidence": 94.7297134399414
+        },
+        {
+          "text": "6",
+          "bbox": [
+            19,
+            16,
+            49,
+            32
+          ],
+          "confidence": 91.7022933959961
+        }
+      ],
+      "tile_id": "circle:3",
+      "candidate_circle": [
+        477.5,
+        679.5,
+        10.5
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0090"
+    },
+    {
+      "number": "36",
+      "bbox": [
+        137,
+        675,
+        13,
+        10
+      ],
+      "confidence": 96.56993103027344,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.5280532836914,
+      "raw_word": "36",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            16,
+            16,
+            15,
+            20
+          ],
+          "confidence": 99.5099868774414
+        },
+        {
+          "text": "6",
+          "bbox": [
+            34,
+            16,
+            20,
+            20
+          ],
+          "confidence": 99.5461196899414
+        }
+      ],
+      "tile_id": "circle:31",
+      "candidate_circle": [
+        142.5,
+        679.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0091"
+    },
+    {
+      "number": "",
+      "bbox": [
+        132,
+        728,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:90",
+      "candidate_circle": [
+        142.5,
+        738.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0092"
+    },
+    {
+      "number": "",
+      "bbox": [
+        467,
+        728,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:94",
+      "candidate_circle": [
+        477.5,
+        738.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0093"
+    },
+    {
+      "number": "60",
+      "bbox": [
+        950,
+        777,
+        18,
+        18
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 60.513736724853516,
+      "raw_word": "60",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            16,
+            14,
+            26,
+            36
+          ],
+          "confidence": 97.98815155029297
+        },
+        {
+          "text": "0",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 23.039321899414062
+        }
+      ],
+      "tile_id": "circle:115",
+      "candidate_circle": [
+        958.5,
+        785.5,
+        10.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0094"
+    },
+    {
+      "number": "0",
+      "bbox": [
+        616,
+        779,
+        12,
+        14
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 58.48579406738281,
+      "raw_word": "0",
+      "symbols": [
+        {
+          "text": "0",
+          "bbox": [
+            13,
+            12,
+            36,
+            28
+          ],
+          "confidence": 58.48579406738281
+        }
+      ],
+      "tile_id": "circle:99",
+      "candidate_circle": [
+        622.5,
+        785.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0095"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1189,
+        832,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:159",
+      "candidate_circle": [
+        1198.4661254882812,
+        841.3403930664062,
+        9.180163383483887
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0096"
+    },
+    {
+      "number": "",
+      "bbox": [
+        467,
+        838,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:83",
+      "candidate_circle": [
+        477.5,
+        848.5,
+        10.5
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0097"
+    },
+    {
+      "number": "",
+      "bbox": [
+        190,
+        847,
+        25,
+        25
+      ],
+      "confidence": 0,
+      "tile_id": "circle:95",
+      "candidate_circle": [
+        202.5,
+        859.5,
+        11.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0098"
+    },
+    {
+      "number": "",
+      "bbox": [
+        612,
+        850,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:89",
+      "candidate_circle": [
+        622.5,
+        860.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0099"
+    },
+    {
+      "number": "45",
+      "bbox": [
+        951,
+        852,
+        18,
+        18
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 91.33507919311523,
+      "raw_word": "45",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            16,
+            26,
+            3,
+            3
+          ],
+          "confidence": 98.66309356689453
+        },
+        {
+          "text": "5",
+          "bbox": [
+            19,
+            14,
+            51,
+            36
+          ],
+          "confidence": 84.00706481933594
+        }
+      ],
+      "tile_id": "circle:117",
+      "candidate_circle": [
+        959.5,
+        860.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0100"
+    },
+    {
+      "number": "",
+      "bbox": [
+        373,
+        855,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:98",
+      "candidate_circle": [
+        383.5,
+        865.5,
+        10.5
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0101"
+    },
+    {
+      "number": "2",
+      "bbox": [
+        1092,
+        906,
+        7,
+        15
+      ],
+      "confidence": 96.98027801513672,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.56861114501953,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            34,
+            21,
+            20,
+            29
+          ],
+          "confidence": 99.56861114501953
+        }
+      ],
+      "tile_id": "circle:110",
+      "candidate_circle": [
+        1094.5,
+        911.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0102"
+    },
+    {
+      "number": "2",
+      "bbox": [
+        1293,
+        906,
+        7,
+        11
+      ],
+      "confidence": 96.50160217285156,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.50022888183594,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            28,
+            19,
+            21,
+            21
+          ],
+          "confidence": 99.50022888183594
+        }
+      ],
+      "tile_id": "circle:116",
+      "candidate_circle": [
+        1296.5,
+        911.5,
+        8.800000190734863
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0103"
+    },
+    {
+      "number": "46",
+      "bbox": [
+        134,
+        922,
+        18,
+        18
+      ],
+      "confidence": 76.82991027832031,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 97.67201614379883,
+      "raw_word": "46",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            16,
+            14,
+            27,
+            36
+          ],
+          "confidence": 96.68998718261719
+        },
+        {
+          "text": "6",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 98.65404510498047
+        }
+      ],
+      "tile_id": "circle:87",
+      "candidate_circle": [
+        142.5,
+        930.5,
+        10.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0104"
+    },
+    {
+      "number": "6",
+      "bbox": [
+        469,
+        922,
+        18,
+        18
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 21.209274291992188,
+      "raw_word": "6",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            15,
+            14,
+            55,
+            36
+          ],
+          "confidence": 21.209274291992188
+        }
+      ],
+      "tile_id": "circle:91",
+      "candidate_circle": [
+        477.5,
+        930.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0105"
+    },
+    {
+      "number": "",
+      "bbox": [
+        612,
+        933,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:84",
+      "candidate_circle": [
+        622.5,
+        943.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0106"
+    },
+    {
+      "number": "",
+      "bbox": [
+        949,
+        933,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:108",
+      "candidate_circle": [
+        959.5,
+        943.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0107"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1177,
+        966,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:126",
+      "candidate_circle": [
+        1186.5,
+        975.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0108"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1084,
+        992,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:127",
+      "candidate_circle": [
+        1093.5,
+        1001.5,
+        8.800000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0109"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1111,
+        1021,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:124",
+      "candidate_circle": [
+        1120.5,
+        1030.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0110"
+    },
+    {
+      "number": "5",
+      "bbox": [
+        234,
+        1026,
+        16,
+        16
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 52.800987243652344,
+      "raw_word": "5",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            18,
+            16,
+            49,
+            32
+          ],
+          "confidence": 52.800987243652344
+        }
+      ],
+      "tile_id": "circle:85",
+      "candidate_circle": [
+        241.5,
+        1033.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0111"
+    },
+    {
+      "number": "22",
+      "bbox": [
+        344,
+        1029,
+        12,
+        10
+      ],
+      "confidence": 95.97016143798828,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.44306945800781,
+      "raw_word": "22",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            16,
+            16,
+            16,
+            20
+          ],
+          "confidence": 99.46183013916016
+        },
+        {
+          "text": "2",
+          "bbox": [
+            34,
+            16,
+            19,
+            20
+          ],
+          "confidence": 99.42430877685547
+        }
+      ],
+      "tile_id": "circle:97",
+      "candidate_circle": [
+        349.5,
+        1033.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0112"
+    },
+    {
+      "number": "23",
+      "bbox": [
+        652,
+        1029,
+        14,
+        10
+      ],
+      "confidence": 96.92780303955078,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.56430053710938,
+      "raw_word": "23",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            17,
+            18,
+            19,
+            20
+          ],
+          "confidence": 99.56111145019531
+        },
+        {
+          "text": "3",
+          "bbox": [
+            38,
+            18,
+            19,
+            20
+          ],
+          "confidence": 99.56748962402344
+        }
+      ],
+      "tile_id": "circle:100",
+      "candidate_circle": [
+        658.5,
+        1033.5,
+        7.800000190734863
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0113"
+    },
+    {
+      "number": "",
+      "bbox": [
+        937,
+        1050,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:114",
+      "candidate_circle": [
+        947.5,
+        1060.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0114"
+    },
+    {
+      "number": "5",
+      "bbox": [
+        1238,
+        1052,
+        18,
+        18
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 32.24617004394531,
+      "raw_word": "5",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            16,
+            14,
+            54,
+            36
+          ],
+          "confidence": 32.24617004394531
+        }
+      ],
+      "tile_id": "circle:104",
+      "candidate_circle": [
+        1246.5,
+        1060.5,
+        10.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0115"
+    },
+    {
+      "number": "3",
+      "bbox": [
+        1244,
+        1104,
+        6,
+        11
+      ],
+      "confidence": 96.96797180175781,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.56685638427734,
+      "raw_word": "3",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            34,
+            23,
+            19,
+            21
+          ],
+          "confidence": 99.56685638427734
+        }
+      ],
+      "tile_id": "circle:105",
+      "candidate_circle": [
+        1246.5,
+        1108.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0116"
+    },
+    {
+      "number": "6",
+      "bbox": [
+        920,
+        1134,
+        7,
+        12
+      ],
+      "confidence": 94.9828872680664,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.28327178955078,
+      "raw_word": "6",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            25,
+            16,
+            20,
+            24
+          ],
+          "confidence": 99.28327178955078
+        }
+      ],
+      "tile_id": "circle:118",
+      "candidate_circle": [
+        922.5,
+        1138.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0117"
+    },
+    {
+      "number": "7",
+      "bbox": [
+        1012,
+        1152,
+        6,
+        10
+      ],
+      "confidence": 93.12931060791016,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.01847076416016,
+      "raw_word": "7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            28,
+            19,
+            19,
+            20
+          ],
+          "confidence": 99.01847076416016
+        }
+      ],
+      "tile_id": "circle:120",
+      "candidate_circle": [
+        1014.5,
+        1155.5,
+        8.0
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0118"
+    },
+    {
+      "number": "3",
+      "bbox": [
+        1244,
+        1152,
+        6,
+        10
+      ],
+      "confidence": 96.97696685791016,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.5681381225586,
+      "raw_word": "3",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            31,
+            20,
+            19,
+            21
+          ],
+          "confidence": 99.5681381225586
+        }
+      ],
+      "tile_id": "circle:111",
+      "candidate_circle": [
+        1246.5,
+        1156.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0119"
+    },
+    {
+      "number": "4",
+      "bbox": [
+        1244,
+        1197,
+        6,
+        11
+      ],
+      "confidence": 96.52185821533203,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.50312042236328,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            33,
+            22,
+            20,
+            21
+          ],
+          "confidence": 99.50312042236328
+        }
+      ],
+      "tile_id": "circle:106",
+      "candidate_circle": [
+        1246.5,
+        1201.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0120"
+    },
+    {
+      "number": "4",
+      "bbox": [
+        920,
+        1198,
+        7,
+        10
+      ],
+      "confidence": 94.43426513671875,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.20489501953125,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            34,
+            22,
+            21,
+            20
+          ],
+          "confidence": 99.20489501953125
+        }
+      ],
+      "tile_id": "circle:112",
+      "candidate_circle": [
+        922.5,
+        1202.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0121"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1061,
+        1211,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:128",
+      "candidate_circle": [
+        1070.5,
+        1220.5,
+        9.100000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0122"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1236,
+        1233,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:102",
+      "candidate_circle": [
+        1246.5,
+        1243.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0123"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1123,
+        1245,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:123",
+      "candidate_circle": [
+        1133.5,
+        1255.5,
+        10.5
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0124"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1146,
+        1262,
+        25,
+        25
+      ],
+      "confidence": 0,
+      "tile_id": "circle:122",
+      "candidate_circle": [
+        1158.5,
+        1274.5,
+        11.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0125"
+    },
+    {
+      "number": "",
+      "bbox": [
+        302,
+        1268,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:93",
+      "candidate_circle": [
+        312.5,
+        1278.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0126"
+    },
+    {
+      "number": "47",
+      "bbox": [
+        108,
+        1274,
+        13,
+        10
+      ],
+      "confidence": 95.68274688720703,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.4696044921875,
+      "raw_word": "47",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            14,
+            16,
+            19,
+            20
+          ],
+          "confidence": 99.38324737548828
+        },
+        {
+          "text": "7",
+          "bbox": [
+            35,
+            16,
+            17,
+            20
+          ],
+          "confidence": 99.55596160888672
+        }
+      ],
+      "tile_id": "circle:96",
+      "candidate_circle": [
+        114.5,
+        1278.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0127"
+    },
+    {
+      "number": "3",
+      "bbox": [
+        107,
+        1319,
+        16,
+        16
+      ],
+      "confidence": 9.780540466308594,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 87.11150360107422,
+      "raw_word": "3",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            18,
+            16,
+            49,
+            32
+          ],
+          "confidence": 87.11150360107422
+        }
+      ],
+      "tile_id": "circle:82",
+      "candidate_circle": [
+        114.5,
+        1326.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0128"
+    },
+    {
+      "number": "7",
+      "bbox": [
+        1244,
+        1321,
+        6,
+        10
+      ],
+      "confidence": 78.64933776855469,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 96.94990539550781,
+      "raw_word": "7",
+      "symbols": [
+        {
+          "text": "7",
+          "bbox": [
+            30,
+            20,
+            20,
+            20
+          ],
+          "confidence": 96.94990539550781
+        }
+      ],
+      "tile_id": "circle:113",
+      "candidate_circle": [
+        1246.5,
+        1325.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0129"
+    },
+    {
+      "number": "6",
+      "bbox": [
+        1356,
+        1321,
+        9,
+        12
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 46.45343780517578,
+      "raw_word": "6",
+      "symbols": [
+        {
+          "text": "6",
+          "bbox": [
+            31,
+            22,
+            27,
+            24
+          ],
+          "confidence": 46.45343780517578
+        }
+      ],
+      "tile_id": "circle:103",
+      "candidate_circle": [
+        1359.5,
+        1325.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0130"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1122,
+        1324,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:125",
+      "candidate_circle": [
+        1131.5,
+        1333.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0131"
+    },
+    {
+      "number": "",
+      "bbox": [
+        369,
+        1339,
+        25,
+        25
+      ],
+      "confidence": 0,
+      "tile_id": "circle:88",
+      "candidate_circle": [
+        381.5,
+        1351.5,
+        11.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0132"
+    },
+    {
+      "number": "",
+      "bbox": [
+        915,
+        1340,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:119",
+      "candidate_circle": [
+        923.5,
+        1348.5,
+        8.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0133"
+    },
+    {
+      "number": "20",
+      "bbox": [
+        483,
+        1344,
+        19,
+        20
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 86.17756652832031,
+      "raw_word": "20",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            15,
+            13,
+            27,
+            39
+          ],
+          "confidence": 84.57167053222656
+        },
+        {
+          "text": "0",
+          "bbox": [
+            15,
+            13,
+            58,
+            39
+          ],
+          "confidence": 87.78346252441406
+        }
+      ],
+      "tile_id": "circle:86",
+      "candidate_circle": [
+        491.5,
+        1353.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0134"
+    },
+    {
+      "number": "3",
+      "bbox": [
+        1033,
+        1344,
+        7,
+        12
+      ],
+      "confidence": 81.29226684570312,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 97.32746887207031,
+      "raw_word": "3",
+      "symbols": [
+        {
+          "text": "3",
+          "bbox": [
+            23,
+            16,
+            20,
+            24
+          ],
+          "confidence": 97.32746887207031
+        }
+      ],
+      "tile_id": "circle:121",
+      "candidate_circle": [
+        1036.5,
+        1348.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0135"
+    },
+    {
+      "number": "21",
+      "bbox": [
+        596,
+        1349,
+        11,
+        11
+      ],
+      "confidence": 95.952392578125,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.45084381103516,
+      "raw_word": "21",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            15,
+            16,
+            18,
+            21
+          ],
+          "confidence": 99.47991943359375
+        },
+        {
+          "text": "1",
+          "bbox": [
+            37,
+            16,
+            12,
+            21
+          ],
+          "confidence": 99.42176818847656
+        }
+      ],
+      "tile_id": "circle:101",
+      "candidate_circle": [
+        601.5,
+        1353.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0136"
+    },
+    {
+      "number": "",
+      "bbox": [
+        302,
+        1350,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:92",
+      "candidate_circle": [
+        312.5,
+        1360.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0137"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1110,
+        1351,
+        25,
+        25
+      ],
+      "confidence": 0,
+      "tile_id": "circle:109",
+      "candidate_circle": [
+        1122.5,
+        1363.5,
+        11.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0138"
+    },
+    {
+      "number": "5",
+      "bbox": [
+        816,
+        1382,
+        6,
+        10
+      ],
+      "confidence": 96.74098205566406,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.534423828125,
+      "raw_word": "5",
+      "symbols": [
+        {
+          "text": "5",
+          "bbox": [
+            34,
+            23,
+            18,
+            20
+          ],
+          "confidence": 99.534423828125
+        }
+      ],
+      "tile_id": "circle:107",
+      "candidate_circle": [
+        818.5,
+        1385.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0139"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1236,
+        1393,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:137",
+      "candidate_circle": [
+        1246.5,
+        1403.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0140"
+    },
+    {
+      "number": "",
+      "bbox": [
+        104,
+        1399,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:132",
+      "candidate_circle": [
+        114.5,
+        1409.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0141"
+    },
+    {
+      "number": "",
+      "bbox": [
+        808,
+        1460,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:139",
+      "candidate_circle": [
+        818.5,
+        1470.5,
+        10.0
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0142"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1236,
+        1503,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:141",
+      "candidate_circle": [
+        1246.5,
+        1513.5,
+        9.600000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0143"
+    },
+    {
+      "number": "",
+      "bbox": [
+        739,
+        1504,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:147",
+      "candidate_circle": [
+        747.5,
+        1512.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0144"
+    },
+    {
+      "number": "8",
+      "bbox": [
+        1357,
+        1509,
+        6,
+        11
+      ],
+      "confidence": 95.15592193603516,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 99.30799102783203,
+      "raw_word": "8",
+      "symbols": [
+        {
+          "text": "8",
+          "bbox": [
+            30,
+            20,
+            20,
+            21
+          ],
+          "confidence": 99.30799102783203
+        }
+      ],
+      "tile_id": "circle:142",
+      "candidate_circle": [
+        1359.5,
+        1513.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0145"
+    },
+    {
+      "number": "",
+      "bbox": [
+        550,
+        1538,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:129",
+      "candidate_circle": [
+        560.5,
+        1548.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0146"
+    },
+    {
+      "number": "",
+      "bbox": [
+        302,
+        1544,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:130",
+      "candidate_circle": [
+        312.5,
+        1554.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0147"
+    },
+    {
+      "number": "4",
+      "bbox": [
+        105,
+        1546,
+        20,
+        19
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 82.42107391357422,
+      "raw_word": "4",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            14,
+            13,
+            59,
+            39
+          ],
+          "confidence": 82.42107391357422
+        }
+      ],
+      "tile_id": "circle:131",
+      "candidate_circle": [
+        114.5,
+        1554.5,
+        10.199999809265137
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0148"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1025,
+        1549,
+        23,
+        23
+      ],
+      "confidence": 0,
+      "tile_id": "circle:145",
+      "candidate_circle": [
+        1036.5,
+        1560.5,
+        10.800000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0149"
+    },
+    {
+      "number": "",
+      "bbox": [
+        913,
+        1550,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:143",
+      "candidate_circle": [
+        923.5,
+        1560.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0150"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1102,
+        1557,
+        27,
+        27
+      ],
+      "confidence": 0,
+      "tile_id": "circle:144",
+      "candidate_circle": [
+        1115.5,
+        1570.5,
+        12.699999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0151"
+    },
+    {
+      "number": "",
+      "bbox": [
+        1349,
+        1594,
+        21,
+        21
+      ],
+      "confidence": 0,
+      "tile_id": "circle:138",
+      "candidate_circle": [
+        1359.5,
+        1604.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0152"
+    },
+    {
+      "number": "42",
+      "bbox": [
+        1239,
+        1597,
+        16,
+        17
+      ],
+      "confidence": 11.391372680664062,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 90.42030715942383,
+      "raw_word": "42",
+      "symbols": [
+        {
+          "text": "4",
+          "bbox": [
+            18,
+            16,
+            19,
+            33
+          ],
+          "confidence": 87.34162139892578
+        },
+        {
+          "text": "2",
+          "bbox": [
+            18,
+            16,
+            49,
+            33
+          ],
+          "confidence": 93.49899291992188
+        }
+      ],
+      "tile_id": "circle:140",
+      "candidate_circle": [
+        1246.5,
+        1604.5,
+        10.300000190734863
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0153"
+    },
+    {
+      "number": "2",
+      "bbox": [
+        701,
+        1668,
+        10,
+        12
+      ],
+      "confidence": 0.0,
+      "confidence_scope": "Tesseract parent word",
+      "symbol_confidence_mean": 26.021636962890625,
+      "raw_word": "2",
+      "symbols": [
+        {
+          "text": "2",
+          "bbox": [
+            13,
+            13,
+            31,
+            26
+          ],
+          "confidence": 26.021636962890625
+        }
+      ],
+      "tile_id": "circle:148",
+      "candidate_circle": [
+        707.5,
+        1673.5,
+        7.400000095367432
+      ],
+      "is_unrecognized": false,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0154"
+    },
+    {
+      "number": "",
+      "bbox": [
+        198,
+        1727,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:135",
+      "candidate_circle": [
+        207.5,
+        1736.5,
+        9.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0155"
+    },
+    {
+      "number": "",
+      "bbox": [
+        302,
+        1728,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:134",
+      "candidate_circle": [
+        311.5,
+        1737.5,
+        9.100000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0156"
+    },
+    {
+      "number": "",
+      "bbox": [
+        238,
+        1729,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:136",
+      "candidate_circle": [
+        246.5,
+        1737.5,
+        8.399999618530273
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0157"
+    },
+    {
+      "number": "",
+      "bbox": [
+        550,
+        1792,
+        17,
+        17
+      ],
+      "confidence": 0,
+      "tile_id": "circle:133",
+      "candidate_circle": [
+        558.5,
+        1800.5,
+        8.199999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0158"
+    },
+    {
+      "number": "",
+      "bbox": [
+        875,
+        1812,
+        27,
+        27
+      ],
+      "confidence": 0,
+      "tile_id": "circle:146",
+      "candidate_circle": [
+        888.5,
+        1825.5,
+        12.699999809265137
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0159"
+    },
+    {
+      "number": "",
+      "bbox": [
+        919,
+        1899,
+        19,
+        19
+      ],
+      "confidence": 0,
+      "tile_id": "circle:149",
+      "candidate_circle": [
+        928.5,
+        1908.5,
+        9.100000381469727
+      ],
+      "is_unrecognized": true,
+      "id": "ocr-fbf3fa26c1f44849b32caa8a4290c786-0160"
+    }
+  ],
+  "candidate_count": 160,
+  "candidates": [
+    [
+      477.5,
+      376.5,
+      9.600000381469727
+    ],
+    [
+      357.5,
+      262.5,
+      9.600000381469727
+    ],
+    [
+      142.5,
+      376.5,
+      9.600000381469727
+    ],
+    [
+      477.5,
+      679.5,
+      10.5
+    ],
+    [
+      424.5,
+      262.5,
+      9.600000381469727
+    ],
+    [
+      667.5,
+      331.5,
+      9.600000381469727
+    ],
+    [
+      477.5,
+      346.5,
+      10.5
+    ],
+    [
+      198.5,
+      262.5,
+      9.600000381469727
+    ],
+    [
+      622.5,
+      615.5,
+      10.0
+    ],
+    [
+      622.5,
+      638.5,
+      10.300000190734863
+    ],
+    [
+      142.5,
+      615.5,
+      10.5
+    ],
+    [
+      477.5,
+      615.5,
+      10.0
+    ],
+    [
+      470.5,
+      262.5,
+      9.399999618530273
+    ],
+    [
+      477.5,
+      519.5,
+      10.0
+    ],
+    [
+      622.5,
+      661.5,
+      10.0
+    ],
+    [
+      622.5,
+      480.5,
+      10.800000190734863
+    ],
+    [
+      622.5,
+      518.5,
+      10.300000190734863
+    ],
+    [
+      622.5,
+      542.5,
+      10.199999809265137
+    ],
+    [
+      142.5,
+      519.5,
+      10.300000190734863
+    ],
+    [
+      477.5,
+      453.5,
+      10.0
+    ],
+    [
+      244.5,
+      262.5,
+      9.100000381469727
+    ],
+    [
+      477.5,
+      542.5,
+      10.0
+    ],
+    [
+      476.5,
+      481.5,
+      8.800000190734863
+    ],
+    [
+      623.5,
+      454.5,
+      9.600000381469727
+    ],
+    [
+      142.5,
+      571.5,
+      10.899999618530273
+    ],
+    [
+      142.5,
+      480.5,
+      8.0
+    ],
+    [
+      310.5,
+      262.5,
+      9.0
+    ],
+    [
+      142.5,
+      346.5,
+      7.400000095367432
+    ],
+    [
+      209.5,
+      443.5,
+      12.699999809265137
+    ],
+    [
+      142.5,
+      454.5,
+      9.600000381469727
+    ],
+    [
+      66.5,
+      103.5,
+      7.400000095367432
+    ],
+    [
+      142.5,
+      679.5,
+      7.400000095367432
+    ],
+    [
+      477.5,
+      571.5,
+      9.600000381469727
+    ],
+    [
+      311.5,
+      613.5,
+      11.600000381469727
+    ],
+    [
+      142.5,
+      403.5,
+      8.0
+    ],
+    [
+      622.5,
+      403.5,
+      8.0
+    ],
+    [
+      619.5,
+      78.5,
+      7.400000095367432
+    ],
+    [
+      622.5,
+      571.5,
+      7.400000095367432
+    ],
+    [
+      142.5,
+      542.5,
+      9.600000381469727
+    ],
+    [
+      477.5,
+      403.5,
+      8.199999809265137
+    ],
+    [
+      203.5,
+      472.5,
+      11.600000381469727
+    ],
+    [
+      693.5,
+      392.5,
+      10.5
+    ],
+    [
+      387.5,
+      382.5,
+      10.199999809265137
+    ],
+    [
+      236.5,
+      103.5,
+      8.199999809265137
+    ],
+    [
+      679.5,
+      553.5,
+      8.199999809265137
+    ],
+    [
+      684.5,
+      528.5,
+      8.199999809265137
+    ],
+    [
+      370.5,
+      678.5,
+      10.5
+    ],
+    [
+      501.5,
+      505.5,
+      9.399999618530273
+    ],
+    [
+      288.5,
+      370.5,
+      8.0
+    ],
+    [
+      250.5,
+      676.5,
+      8.199999809265137
+    ],
+    [
+      413.5,
+      452.5,
+      8.199999809265137
+    ],
+    [
+      671.5,
+      525.5,
+      8.199999809265137
+    ],
+    [
+      382.5,
+      537.5,
+      9.0
+    ],
+    [
+      249.5,
+      64.5,
+      8.399999618530273
+    ],
+    [
+      1337.5,
+      445.5,
+      10.300000190734863
+    ],
+    [
+      837.5,
+      262.5,
+      9.600000381469727
+    ],
+    [
+      1225.5,
+      445.5,
+      10.199999809265137
+    ],
+    [
+      914.5,
+      331.5,
+      9.600000381469727
+    ],
+    [
+      1149.5,
+      250.5,
+      10.0
+    ],
+    [
+      1094.5,
+      650.5,
+      9.600000381469727
+    ],
+    [
+      959.5,
+      615.5,
+      10.300000190734863
+    ],
+    [
+      1296.5,
+      650.5,
+      9.600000381469727
+    ],
+    [
+      959.5,
+      519.5,
+      10.300000190734863
+    ],
+    [
+      959.5,
+      571.5,
+      10.300000190734863
+    ],
+    [
+      1336.5,
+      649.5,
+      10.199999809265137
+    ],
+    [
+      790.5,
+      262.5,
+      9.100000381469727
+    ],
+    [
+      959.5,
+      541.5,
+      10.300000190734863
+    ],
+    [
+      959.5,
+      661.5,
+      10.0
+    ],
+    [
+      958.5,
+      453.5,
+      9.600000381469727
+    ],
+    [
+      959.5,
+      403.5,
+      8.0
+    ],
+    [
+      959.5,
+      480.5,
+      10.0
+    ],
+    [
+      910.5,
+      540.5,
+      11.600000381469727
+    ],
+    [
+      1197.5,
+      650.5,
+      7.400000095367432
+    ],
+    [
+      893.5,
+      467.5,
+      11.399999618530273
+    ],
+    [
+      1052.5,
+      649.5,
+      10.899999618530273
+    ],
+    [
+      1154.5,
+      445.5,
+      9.399999618530273
+    ],
+    [
+      1143.5,
+      650.5,
+      8.199999809265137
+    ],
+    [
+      1247.5,
+      650.5,
+      8.100000381469727
+    ],
+    [
+      1108.5,
+      182.5,
+      7.300000190734863
+    ],
+    [
+      908.5,
+      553.5,
+      8.199999809265137
+    ],
+    [
+      921.5,
+      100.5,
+      7.400000095367432
+    ],
+    [
+      1060.5,
+      100.5,
+      7.300000190734863
+    ],
+    [
+      114.5,
+      1326.5,
+      10.300000190734863
+    ],
+    [
+      477.5,
+      848.5,
+      10.5
+    ],
+    [
+      622.5,
+      943.5,
+      10.199999809265137
+    ],
+    [
+      241.5,
+      1033.5,
+      10.300000190734863
+    ],
+    [
+      491.5,
+      1353.5,
+      10.300000190734863
+    ],
+    [
+      142.5,
+      930.5,
+      10.0
+    ],
+    [
+      381.5,
+      1351.5,
+      11.600000381469727
+    ],
+    [
+      622.5,
+      860.5,
+      9.600000381469727
+    ],
+    [
+      142.5,
+      738.5,
+      9.600000381469727
+    ],
+    [
+      477.5,
+      930.5,
+      9.600000381469727
+    ],
+    [
+      312.5,
+      1360.5,
+      10.0
+    ],
+    [
+      312.5,
+      1278.5,
+      9.600000381469727
+    ],
+    [
+      477.5,
+      738.5,
+      9.600000381469727
+    ],
+    [
+      202.5,
+      859.5,
+      11.600000381469727
+    ],
+    [
+      114.5,
+      1278.5,
+      7.400000095367432
+    ],
+    [
+      349.5,
+      1033.5,
+      7.400000095367432
+    ],
+    [
+      383.5,
+      865.5,
+      10.5
+    ],
+    [
+      622.5,
+      785.5,
+      7.400000095367432
+    ],
+    [
+      658.5,
+      1033.5,
+      7.800000190734863
+    ],
+    [
+      601.5,
+      1353.5,
+      7.400000095367432
+    ],
+    [
+      1246.5,
+      1243.5,
+      10.300000190734863
+    ],
+    [
+      1359.5,
+      1325.5,
+      9.600000381469727
+    ],
+    [
+      1246.5,
+      1060.5,
+      10.0
+    ],
+    [
+      1246.5,
+      1108.5,
+      9.600000381469727
+    ],
+    [
+      1246.5,
+      1201.5,
+      9.600000381469727
+    ],
+    [
+      818.5,
+      1385.5,
+      9.600000381469727
+    ],
+    [
+      959.5,
+      943.5,
+      10.199999809265137
+    ],
+    [
+      1122.5,
+      1363.5,
+      11.600000381469727
+    ],
+    [
+      1094.5,
+      911.5,
+      9.600000381469727
+    ],
+    [
+      1246.5,
+      1156.5,
+      9.399999618530273
+    ],
+    [
+      922.5,
+      1202.5,
+      9.600000381469727
+    ],
+    [
+      1246.5,
+      1325.5,
+      9.399999618530273
+    ],
+    [
+      947.5,
+      1060.5,
+      9.600000381469727
+    ],
+    [
+      958.5,
+      785.5,
+      10.0
+    ],
+    [
+      1296.5,
+      911.5,
+      8.800000190734863
+    ],
+    [
+      959.5,
+      860.5,
+      9.600000381469727
+    ],
+    [
+      922.5,
+      1138.5,
+      7.400000095367432
+    ],
+    [
+      923.5,
+      1348.5,
+      8.0
+    ],
+    [
+      1014.5,
+      1155.5,
+      8.0
+    ],
+    [
+      1036.5,
+      1348.5,
+      7.400000095367432
+    ],
+    [
+      1158.5,
+      1274.5,
+      11.600000381469727
+    ],
+    [
+      1133.5,
+      1255.5,
+      10.5
+    ],
+    [
+      1120.5,
+      1030.5,
+      9.399999618530273
+    ],
+    [
+      1131.5,
+      1333.5,
+      9.399999618530273
+    ],
+    [
+      1186.5,
+      975.5,
+      9.399999618530273
+    ],
+    [
+      1093.5,
+      1001.5,
+      8.800000190734863
+    ],
+    [
+      1070.5,
+      1220.5,
+      9.100000381469727
+    ],
+    [
+      560.5,
+      1548.5,
+      10.300000190734863
+    ],
+    [
+      312.5,
+      1554.5,
+      10.199999809265137
+    ],
+    [
+      114.5,
+      1554.5,
+      10.199999809265137
+    ],
+    [
+      114.5,
+      1409.5,
+      10.0
+    ],
+    [
+      558.5,
+      1800.5,
+      8.199999809265137
+    ],
+    [
+      311.5,
+      1737.5,
+      9.100000381469727
+    ],
+    [
+      207.5,
+      1736.5,
+      9.399999618530273
+    ],
+    [
+      246.5,
+      1737.5,
+      8.399999618530273
+    ],
+    [
+      1246.5,
+      1403.5,
+      10.199999809265137
+    ],
+    [
+      1359.5,
+      1604.5,
+      10.300000190734863
+    ],
+    [
+      818.5,
+      1470.5,
+      10.0
+    ],
+    [
+      1246.5,
+      1604.5,
+      10.300000190734863
+    ],
+    [
+      1246.5,
+      1513.5,
+      9.600000381469727
+    ],
+    [
+      1359.5,
+      1513.5,
+      9.399999618530273
+    ],
+    [
+      923.5,
+      1560.5,
+      10.300000190734863
+    ],
+    [
+      1115.5,
+      1570.5,
+      12.699999809265137
+    ],
+    [
+      1036.5,
+      1560.5,
+      10.800000190734863
+    ],
+    [
+      888.5,
+      1825.5,
+      12.699999809265137
+    ],
+    [
+      747.5,
+      1512.5,
+      8.199999809265137
+    ],
+    [
+      707.5,
+      1673.5,
+      7.400000095367432
+    ],
+    [
+      928.5,
+      1908.5,
+      9.100000381469727
+    ],
+    [
+      497.5120849609375,
+      377.46197509765625,
+      8.633055210113525
+    ],
+    [
+      122.49453735351562,
+      377.40606689453125,
+      8.552486896514893
+    ],
+    [
+      514.78369140625,
+      100.2702407836914,
+      7.375152826309204
+    ],
+    [
+      514.6102294921875,
+      77.99108123779297,
+      7.29318904876709
+    ],
+    [
+      637.0667114257812,
+      78.30103302001953,
+      9.143813133239746
+    ],
+    [
+      890.2006530761719,
+      100.2091064453125,
+      7.658199071884155
+    ],
+    [
+      1185.7320556640625,
+      100.96543884277344,
+      8.628777980804443
+    ],
+    [
+      1264.5843505859375,
+      78.03961181640625,
+      9.014894485473633
+    ],
+    [
+      886.9693908691406,
+      56.67619705200195,
+      8.26271939277649
+    ],
+    [
+      1198.4661254882812,
+      841.3403930664062,
+      9.180163383483887
+    ]
+  ],
+  "seconds": 0.6620208999956958,
+  "peak_rss_mb": 93.171875,
+  "engine": "tesseract 5.5.3\n leptonica-1.87.0 (Apr  6 2026, 06:47:44) [MSC v.1944 LIB Release x64]\n  libgif 5.2.2 : libjpeg 8d (libjpeg-turbo 3.1.2) : libpng 1.6.59 : libtiff 4.7.2 : zlib 1.3.2 : libwebp 1.6.0 : libopenjp2 2.5.4"
+}

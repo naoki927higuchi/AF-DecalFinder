@@ -1,0 +1,276 @@
+{
+  "web": {
+    "input": {
+      "sha256": "d89d316318f62fd4ba4662170e8bd5c31c43b8881aa0d7f5bbef39fb8d32d370",
+      "bytes": 2363056,
+      "mtime_ns": 1793632327962439000
+    },
+    "size": [
+      1433,
+      2024
+    ],
+    "runs": [
+      {
+        "seconds": 0.6620208999956958,
+        "wall_seconds": 1.0628212000010535,
+        "peak_rss_mib": 93.171875,
+        "candidates": 160,
+        "records": 160,
+        "unknown": 96
+      },
+      {
+        "seconds": 0.6422993000014685,
+        "wall_seconds": 1.0376081999856979,
+        "peak_rss_mib": 90.44921875,
+        "candidates": 160,
+        "records": 160,
+        "unknown": 96
+      },
+      {
+        "seconds": 0.6380121999536641,
+        "wall_seconds": 1.0347741000005044,
+        "peak_rss_mib": 90.34765625,
+        "candidates": 160,
+        "records": 160,
+        "unknown": 96
+      }
+    ],
+    "mean_seconds": 0.6474441333169428,
+    "mean_wall_seconds": 1.0450678333290853,
+    "peak_rss_mib": 93.171875,
+    "total_candidates": 160,
+    "total_records": 160,
+    "total_unknown": 96,
+    "evaluation": {
+      "ground_truth": 24,
+      "true_candidates": 23,
+      "false_candidates": 14,
+      "false_candidate_indices": [
+        28,
+        33,
+        40,
+        42,
+        46,
+        47,
+        48,
+        49,
+        50,
+        52,
+        95,
+        98,
+        150,
+        151
+      ],
+      "correct": 8,
+      "wrong": 2,
+      "unknown": 13,
+      "miss": 1
+    }
+  },
+  "scan": {
+    "input": {
+      "sha256": "d87f16c0b1a3f1a8f5536d36195e8ba8559dc48ea264ba324fa42aed475187fc",
+      "bytes": 14407205,
+      "mtime_ns": 1793634274801408100
+    },
+    "size": [
+      4320,
+      6062
+    ],
+    "runs": [
+      {
+        "seconds": 2.7638771000201814,
+        "wall_seconds": 3.1653383999946527,
+        "peak_rss_mib": 328.05859375,
+        "candidates": 152,
+        "records": 153,
+        "unknown": 88
+      },
+      {
+        "seconds": 2.769903200038243,
+        "wall_seconds": 3.1778418000321835,
+        "peak_rss_mib": 328.359375,
+        "candidates": 152,
+        "records": 153,
+        "unknown": 88
+      },
+      {
+        "seconds": 2.761452200007625,
+        "wall_seconds": 3.161317499994766,
+        "peak_rss_mib": 326.2578125,
+        "candidates": 152,
+        "records": 153,
+        "unknown": 88
+      }
+    ],
+    "mean_seconds": 2.7650775000220165,
+    "mean_wall_seconds": 3.168165900007201,
+    "peak_rss_mib": 328.359375,
+    "total_candidates": 152,
+    "total_records": 153,
+    "total_unknown": 88,
+    "evaluation": {
+      "ground_truth": 24,
+      "true_candidates": 19,
+      "false_candidates": 16,
+      "false_candidate_indices": [
+        29,
+        30,
+        31,
+        34,
+        35,
+        37,
+        39,
+        40,
+        41,
+        60,
+        61,
+        62,
+        64,
+        65,
+        66,
+        67
+      ],
+      "correct": 15,
+      "wrong": 2,
+      "unknown": 2,
+      "miss": 5
+    }
+  },
+  "phone_upright": {
+    "input": {
+      "sha256": "62b544c9eef8754dd5ecad41430d95b68369fd4ed16932ca878ea45d6494fdf5",
+      "bytes": 10449298,
+      "mtime_ns": 1793634641371905100
+    },
+    "size": [
+      3000,
+      4000
+    ],
+    "runs": [
+      {
+        "seconds": 1.4680976999807172,
+        "wall_seconds": 1.8640872000250965,
+        "peak_rss_mib": 202.96484375,
+        "candidates": 34,
+        "records": 33,
+        "unknown": 32
+      },
+      {
+        "seconds": 1.4631206000340171,
+        "wall_seconds": 1.8550267000100575,
+        "peak_rss_mib": 203.31640625,
+        "candidates": 34,
+        "records": 33,
+        "unknown": 32
+      },
+      {
+        "seconds": 1.5120495000155643,
+        "wall_seconds": 1.9138087999890558,
+        "peak_rss_mib": 201.33203125,
+        "candidates": 34,
+        "records": 33,
+        "unknown": 32
+      }
+    ],
+    "mean_seconds": 1.481089266676766,
+    "mean_wall_seconds": 1.87764090000807,
+    "peak_rss_mib": 203.31640625,
+    "total_candidates": 34,
+    "total_records": 33,
+    "total_unknown": 32,
+    "evaluation": {
+      "ground_truth": 24,
+      "true_candidates": 0,
+      "false_candidates": 13,
+      "false_candidate_indices": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        15,
+        16,
+        22,
+        23
+      ],
+      "correct": 0,
+      "wrong": 0,
+      "unknown": 0,
+      "miss": 24
+    }
+  },
+  "phone_raw": {
+    "input": {
+      "sha256": "34a5de214edecc4c35d24b70c4b855c05a75f7ba422785ac1c16d15db30a3380",
+      "bytes": 3333897,
+      "mtime_ns": 1793634049581743800
+    },
+    "size": [
+      4000,
+      3000
+    ],
+    "runs": [
+      {
+        "seconds": 2.7246716000372544,
+        "wall_seconds": 3.13935740001034,
+        "peak_rss_mib": 208.66796875,
+        "candidates": 212,
+        "records": 212,
+        "unknown": 195
+      },
+      {
+        "seconds": 2.6890529000083916,
+        "wall_seconds": 3.123865899979137,
+        "peak_rss_mib": 207.90234375,
+        "candidates": 212,
+        "records": 212,
+        "unknown": 195
+      },
+      {
+        "seconds": 2.71248889999697,
+        "wall_seconds": 3.127576800005045,
+        "peak_rss_mib": 201.8515625,
+        "candidates": 212,
+        "records": 212,
+        "unknown": 195
+      }
+    ],
+    "mean_seconds": 2.7087378000142053,
+    "mean_wall_seconds": 3.130266699998174,
+    "peak_rss_mib": 208.66796875,
+    "total_candidates": 212,
+    "total_records": 212,
+    "total_unknown": 195,
+    "evaluation": {
+      "ground_truth": 24,
+      "true_candidates": 24,
+      "false_candidates": 15,
+      "false_candidate_indices": [
+        136,
+        140,
+        149,
+        175,
+        176,
+        177,
+        182,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        211
+      ],
+      "correct": 0,
+      "wrong": 0,
+      "unknown": 24,
+      "miss": 0
+    }
+  }
+}
