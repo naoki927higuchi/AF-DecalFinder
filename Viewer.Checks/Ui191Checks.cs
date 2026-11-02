@@ -78,4 +78,3 @@ internal static class Ui191Checks
         Console.WriteLine($"PASS: {count} final UI checks");
     }
 }
-

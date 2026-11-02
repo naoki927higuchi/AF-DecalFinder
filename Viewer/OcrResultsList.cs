@@ -421,4 +421,3 @@ internal sealed class OcrResultsList : ListView
         SelectionChanged?.Invoke(SelectedDetections);
     }
 }
-
