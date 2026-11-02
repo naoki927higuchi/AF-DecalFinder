@@ -12,9 +12,11 @@ internal sealed class OcrRunner(string? runtimeDirectory = null) : IOcrRunner
 {
     public async Task<OcrCatalog> RunAsync(ImageIdentity image, CancellationToken cancellation)
     {
-        var directory = runtimeDirectory ?? Path.Combine(AppContext.BaseDirectory, "Ocr");
+        var directory = Path.GetFullPath(runtimeDirectory ?? Path.Combine(AppContext.BaseDirectory, "Ocr"));
         using var config = JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(directory, "runtime.json"), cancellation).ConfigureAwait(false));
         var python = config.RootElement.GetProperty("Python").GetString()!;
+        // Portable runtime paths are relative to Ocr/, never to the caller's working directory or PATH.
+        python = Path.GetFullPath(python, directory);
         var start = new ProcessStartInfo(python) { UseShellExecute = false, CreateNoWindow = true,
             RedirectStandardOutput = true, RedirectStandardError = true, WorkingDirectory = directory };
         start.ArgumentList.Add("-B");

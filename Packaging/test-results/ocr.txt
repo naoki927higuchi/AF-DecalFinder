@@ -1,0 +1,99 @@
+PASS: Exactly eight provided inputs
+PASS: Busy/empty/disabled immediately: 300dpi.jpg
+PASS: Initial OCR and cursor reset: 300dpi.jpg
+PASS: Saved image-specific OCR with responsive event pump
+PASS: Reload skips OCR
+PASS: New form restores own manual record
+PASS: New form restores correction/done/fixed ID
+PASS: Original SHA256 unchanged
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Busy/empty/disabled immediately: 600dpi.jpg
+PASS: Initial OCR and cursor reset: 600dpi.jpg
+PASS: Saved image-specific OCR with responsive event pump
+PASS: Phase 1: all 181 numbers and boxes retained
+PASS: Reload skips OCR
+PASS: New form restores own manual record
+PASS: New form restores correction/done/fixed ID
+PASS: Original SHA256 unchanged
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Busy/empty/disabled immediately: MGUCペルフェクティビティ2.png
+PASS: Initial OCR and cursor reset: MGUCペルフェクティビティ2.png
+PASS: Saved image-specific OCR with responsive event pump
+PASS: Reload skips OCR
+PASS: New form restores own manual record
+PASS: New form restores correction/done/fixed ID
+PASS: Original SHA256 unchanged
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Busy/empty/disabled immediately: RG RX-78-2 ver 2.png
+PASS: Initial OCR and cursor reset: RG RX-78-2 ver 2.png
+PASS: Saved image-specific OCR with responsive event pump
+PASS: Reload skips OCR
+PASS: New form restores own manual record
+PASS: New form restores correction/done/fixed ID
+PASS: Original SHA256 unchanged
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Busy/empty/disabled immediately: RGルージュ.png
+PASS: Initial OCR and cursor reset: RGルージュ.png
+PASS: Saved image-specific OCR with responsive event pump
+PASS: Reload skips OCR
+PASS: New form restores own manual record
+PASS: New form restores correction/done/fixed ID
+PASS: Original SHA256 unchanged
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Busy/empty/disabled immediately: RX-78 ver 3.0.png
+PASS: Initial OCR and cursor reset: RX-78 ver 3.0.png
+PASS: Saved image-specific OCR with responsive event pump
+PASS: Reload skips OCR
+PASS: New form restores own manual record
+PASS: New form restores correction/done/fixed ID
+PASS: Original SHA256 unchanged
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Busy/empty/disabled immediately: カトキガンダム.png
+PASS: Initial OCR and cursor reset: カトキガンダム.png
+PASS: Saved image-specific OCR with responsive event pump
+PASS: Reload skips OCR
+PASS: New form restores own manual record
+PASS: New form restores correction/done/fixed ID
+PASS: Original SHA256 unchanged
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Busy/empty/disabled immediately: ルナマリアザクウォーリア.png
+PASS: Initial OCR and cursor reset: ルナマリアザクウォーリア.png
+PASS: Saved image-specific OCR with responsive event pump
+PASS: Reload skips OCR
+PASS: New form restores own manual record
+PASS: New form restores correction/done/fixed ID
+PASS: Original SHA256 unchanged
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Zoom/pan after OCR
+PASS: Timestamp change reruns OCR and preserves work for identical bytes
+PASS: Stale edited data preserved byte-for-byte
+PASS: Wrong-size cache triggers fresh OCR
+PASS: Late previous result cannot replace current image
+PASS: Zero detections succeeds and saves
+PASS: Failure restores cursor and keeps image available with reason
+PASS: Invalid OCR records skipped; leading zero preserved
+PASS: Real subprocess supports cancellation
+SUCCESS: 98 checks; report OCR-INTEGRATION-192.md

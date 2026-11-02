@@ -1,0 +1,73 @@
+PASS: Missing fill setting defaults OFF
+PASS: Invalid fill setting defaults OFF
+PASS: Preprocessed Space changes first selected only
+PASS: Held Space cannot toggle twice
+PASS: Space preserves viewport and selection
+PASS: Space autosaves done state
+PASS: Space is one undo transaction
+PASS: New key presses each toggle once in both directions
+PASS: Ctrl+Space toggles focused selection without checks
+PASS: LV command preprocessing opens one editor for SelectedItems[0]
+PASS: Cancel returns focus to LV
+PASS: Enter with no selection is consumed without editing
+PASS: Inventory Space reviews once and advances
+PASS: Inventory Ctrl+Enter remains bulk review
+PASS: Inventory Enter still edits
+PASS: Fill setting instantly updates both views and saves
+PASS: Fill save preserves unknown settings
+PASS: Restart restores fill
+PASS: Detail 0.25: OFF keeps black done fill
+PASS: Detail 0.25: red alpha90 over black128 exactly once
+PASS: Detail 0.25: blue excludes red even at partial overlap
+PASS: Detail 0.25: blue alpha90 once without done
+PASS: Detail 0.25: geometry and hit test unchanged
+PASS: Detail 0.25: fill ON keeps 1px red outline
+PASS: Detail 0.25: fill ON keeps 2px red outline
+PASS: Detail 0.25: fill ON keeps 3px red outline
+PASS: Detail 0.25: fill ON keeps 4px red outline
+PASS: Detail 1: OFF keeps black done fill
+PASS: Detail 1: red alpha90 over black128 exactly once
+PASS: Detail 1: blue excludes red even at partial overlap
+PASS: Detail 1: blue alpha90 once without done
+PASS: Detail 1: geometry and hit test unchanged
+PASS: Detail 1: fill ON keeps 1px red outline
+PASS: Detail 1: fill ON keeps 2px red outline
+PASS: Detail 1: fill ON keeps 3px red outline
+PASS: Detail 1: fill ON keeps 4px red outline
+PASS: Detail 2: OFF keeps black done fill
+PASS: Detail 2: red alpha90 over black128 exactly once
+PASS: Detail 2: blue excludes red even at partial overlap
+PASS: Detail 2: blue alpha90 once without done
+PASS: Detail 2: geometry and hit test unchanged
+PASS: Detail 2: fill ON keeps 1px red outline
+PASS: Detail 2: fill ON keeps 2px red outline
+PASS: Detail 2: fill ON keeps 3px red outline
+PASS: Detail 2: fill ON keeps 4px red outline
+PASS: Overview 0.25: OFF keeps black done fill
+PASS: Overview 0.25: red alpha90 over black128 exactly once
+PASS: Overview 0.25: blue excludes red even at partial overlap
+PASS: Overview 0.25: blue alpha90 once without done
+PASS: Overview 0.25: geometry and hit test unchanged
+PASS: Overview 0.25: fill ON keeps 1px red outline
+PASS: Overview 0.25: fill ON keeps 2px red outline
+PASS: Overview 0.25: fill ON keeps 3px red outline
+PASS: Overview 0.25: fill ON keeps 4px red outline
+PASS: Overview 1: OFF keeps black done fill
+PASS: Overview 1: red alpha90 over black128 exactly once
+PASS: Overview 1: blue excludes red even at partial overlap
+PASS: Overview 1: blue alpha90 once without done
+PASS: Overview 1: geometry and hit test unchanged
+PASS: Overview 1: fill ON keeps 1px red outline
+PASS: Overview 1: fill ON keeps 2px red outline
+PASS: Overview 1: fill ON keeps 3px red outline
+PASS: Overview 1: fill ON keeps 4px red outline
+PASS: Overview 2: OFF keeps black done fill
+PASS: Overview 2: red alpha90 over black128 exactly once
+PASS: Overview 2: blue excludes red even at partial overlap
+PASS: Overview 2: blue alpha90 once without done
+PASS: Overview 2: geometry and hit test unchanged
+PASS: Overview 2: fill ON keeps 1px red outline
+PASS: Overview 2: fill ON keeps 2px red outline
+PASS: Overview 2: fill ON keeps 3px red outline
+PASS: Overview 2: fill ON keeps 4px red outline
+PASS: 72 final UI checks

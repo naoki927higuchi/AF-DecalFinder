@@ -1,0 +1,14 @@
+PASS: Self-contained includes Core and Windows Desktop runtimes
+PASS: Unused FFmpeg video plugin absent
+PASS: Packaged OCR starts asynchronously with busy cursor
+MEASURE initial=7.751s uiTicks=347
+PASS: Isolated Python OCR restores 276 candidates with responsive UI
+PASS: Busy state clears after completion
+PASS: All Phase 1 181 numbers/bboxes retained
+MEASURE cached=2.436s
+PASS: Reload uses saved cache without Python execution
+PASS: Edit/done/fixed ID restored
+PASS: Manual record restored
+PASS: Inventory mode works after portable OCR
+PASS: 600dpi source bytes unchanged
+PASS: 11 portable checks

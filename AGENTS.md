@@ -93,3 +93,10 @@
 ## 1.9.1 キー操作・表示
 - LV Enterは既存編集処理へ統合し、通常Spaceは先頭選択1件の済み反転、棚卸Spaceは確認を行う。KeyUpまでの反復とネイティブ一括チェックを抑止し、検索Enter・編集中Enter・Ctrl+Enterを分離する。
 - 強調塗りつぶしは初期OFF、赤青Alpha90、青優先で重複塗りを避ける。既存UI矩形を使い、済み黒・画面px線幅・OCR元情報を維持。HighlightFillだけ設定へ追加しキャッシュスキーマは変えない。
+
+## 1.9.2 別PC向け配布（今回の明示指示による例外）
+
+- オールインワン配布を優先し、.NET self-contained win-x64、CPython embeddable、固定wheelとTesseract DLL/モデルを同梱する。従来の「ランタイム非同梱・ZIP100MB未満」に代わり、この配布はZIP200MB以下を暫定容量基準とする。
+- Packaging/Build-Portable.ps1で新規フォルダーへ生成し、Distributionに配布ZIP・SHA256・日本語案内を保存する。公開済みZIPは上書きしない。GitHubへのpush・公開は別途指示が必要。
+- 上流ライセンス原文・NOTICE・LGPL対応ソース/ビルドパッチを同梱する。実際の配布ファイル一覧・サイズ・ハッシュをFILES.jsonへ記録する。入力画像・既存作業データ・開発用SDKは含めない。
+- OCRのアルゴリズム・パラメーターは維持する。実行環境とtessdataは配布フォルダーから解決し、開発PCのPython/PATHへ依存しない。日本語を含む展開先も検証する。

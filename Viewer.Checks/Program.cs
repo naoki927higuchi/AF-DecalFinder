@@ -19,6 +19,8 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
         Application.EnableVisualStyles();
         var root = Path.GetFullPath(args[0]);
+        if (args.Contains("--portable")) { PortableChecks.Run(root, args[Array.IndexOf(args, "--portable") + 1]); return; }
+        if (args.Contains("--portable-ocr")) { OcrChecks.Run(root, Path.GetFullPath(args[Array.IndexOf(args, "--portable-ocr") + 1])); return; }
         if (args.Contains("--ui191")) { Ui191Checks.Run(root); return; }
         if (args.Contains("--inventory")) { InventoryChecks.Run(root); return; }
         if (args.Contains("--transfer")) { TransferChecks.Run(root); return; }

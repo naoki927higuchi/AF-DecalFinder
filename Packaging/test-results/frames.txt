@@ -1,0 +1,113 @@
+PASS: Missing settings default to 2px
+PASS: Absent/invalid frame value falls back safely: {}
+PASS: Absent/invalid frame value falls back safely: {"FrameWidthPx":0}
+PASS: Absent/invalid frame value falls back safely: {"FrameWidthPx":5}
+PASS: Absent/invalid frame value falls back safely: {"FrameWidthPx":"3"}
+PASS: Absent/invalid frame value falls back safely: {"FrameWidthPx":null}
+PASS: Frame save preserves history, placement and unknown fields
+PASS: MainForm restores dropdown and both views
+PASS: Changing dropdown redraws both views and saves immediately
+PASS: Restart restores selected width
+PASS: Detail 25% red requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 25% blue requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 25% red requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 25% blue requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 25% red requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 25% blue requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 25% red requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 25% blue requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 100% red requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 100% blue requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 100% red requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 100% blue requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 100% red requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 100% blue requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 100% red requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 100% blue requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 200% red requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 200% blue requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 200% red requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 200% blue requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 200% red requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 200% blue requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 200% red requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Detail 200% blue requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 25% red requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 25% blue requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 25% red requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 25% blue requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 25% red requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 25% blue requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 25% red requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 25% blue requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 100% red requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 100% blue requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 100% red requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 100% blue requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 100% red requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 100% blue requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 100% red requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 100% blue requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 200% red requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 200% blue requested=1px measured=1px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 200% red requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 200% blue requested=2px measured=2px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 200% red requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 200% blue requested=3px measured=3px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 200% red requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PASS: Overview 200% blue requested=4px measured=4px
+PASS: Fill, source/UI geometry, hit region and viewport unchanged
+PAINT RX-78 25% 2px mean=30.938ms p95=36.337ms n=40 (DrawToBitmap included)
+PAINT RX-78 25% 4px mean=31.434ms p95=34.160ms n=40 (DrawToBitmap included)
+PAINT RX-78 100% 2px mean=6.398ms p95=8.753ms n=40 (DrawToBitmap included)
+PAINT RX-78 100% 4px mean=7.242ms p95=10.356ms n=40 (DrawToBitmap included)
+PAINT RX-78 200% 2px mean=8.974ms p95=12.576ms n=40 (DrawToBitmap included)
+PAINT RX-78 200% 4px mean=9.672ms p95=15.918ms n=40 (DrawToBitmap included)
+PASS: 106 frame width checks

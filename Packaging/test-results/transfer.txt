@@ -1,0 +1,27 @@
+PASS: Export inventory enumerates primary image caches, not backups
+PASS: ZIP contains JSON manifest only, no originals
+PASS: All-image export includes both images
+PASS: Selected export/import carries one image
+PASS: Import without image folders is durable pending data
+PASS: Portable preferences imported
+PASS: Destination history, placement and unknown settings preserved
+PASS: Pending imports survive service/application recreation
+PASS: Matching uses case-insensitive filename and dimensions, ignores path/time/content
+PASS: Different dimensions do not match
+PASS: Recursive search finds nested image
+PASS: Unique association registers destination cache and retires pending item
+PASS: Correction/review/done/source text and circle preserved
+PASS: Deletion and manual point preserved
+PASS: Skip collision preserves existing cache byte-for-byte
+PASS: Replace collision applies import
+PASS: Replace backs up previous local work
+PASS: Multiple candidates remain distinguishable for manual binding
+PASS: Explicit choice binds one of multiple candidates
+PASS: Folder removal persists locally without deleting images
+PASS: Invalid import changes neither local cache nor pending records
+PASS: Whole ZIP validated before publishing data or changing preferences
+PASS: Bound cache carries destination absolute path and UTC timestamp
+PASS: Later explicit open binds pending data without OCR despite different timestamp
+PASS: Restart/last-image path restores migrated local cache without OCR
+PASS: Migration never changes source originals
+PASS: 26 transfer checks

@@ -1,0 +1,27 @@
+PASS: RX-78 unknown Ctrl+A selects 237 candidates
+PASS: First Ctrl click is deferred, not toggled before double click
+PASS: Dialog opens for hit fixed ID without changing selection
+PASS: Cancel leaves record, complete selection and cache bytes unchanged
+PASS: Cancel preserves both viewports and zoom
+PASS: Real WinForms timer commits a single Ctrl click after interval
+PASS: Second single click restores target selection
+PASS: Double-click second press dragged beyond threshold neither edits nor toggles
+PASS: Floating edit opens without altering selection
+PASS: Normal edit keeps corrected target and other selections
+PASS: Normal edit reveals corrected fixed ID for selection retention
+PASS: Correction persisted with fixed ID and viewport unchanged
+PASS: Hidden recognized record can be directly edited
+PASS: Recognized edit cancellation preserves filter and all state
+PASS: Recognized edit reveals target and preserves unrelated selections
+PASS: Recognized edit saved under original fixed ID
+PASS: Delete removes remaining unknown selection, preserving corrected record
+PASS: Restart restores correction and deletions
+PASS: Dialog initial text/select-all/focus and work-area clipping: 
+PASS: Whitespace cannot confirm
+PASS: Mixed Unicode label accepted
+PASS: Dialog initial text/select-all/focus and work-area clipping: A102
+PASS: Whitespace cannot confirm
+PASS: Mixed Unicode label accepted
+PASS: Modal dialog keyboard result: Enter
+PASS: Modal dialog keyboard result: Escape
+PASS: 26 image-edit checks

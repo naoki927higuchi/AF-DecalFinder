@@ -1,0 +1,29 @@
+{
+  "version": "1.9.2",
+  "folderBytes": 350020499.0,
+  "zipBytes": 144419358,
+  "zipSha256": "8BBF9F62ACFF469FEF5A9A7369CC84D94601CD3BC4DC52B299AF5934A25969E1",
+  "filesManifestBytes": 250240,
+  "categories": [
+    {
+      "category": "Application",
+      "bytes": 1036011.0
+    },
+    {
+      "category": "DotNet",
+      "bytes": 119754608.0
+    },
+    {
+      "category": "OCR",
+      "bytes": 199480756.0
+    },
+    {
+      "category": "Other",
+      "bytes": 6997637.0
+    },
+    {
+      "category": "Python",
+      "bytes": 22501247.0
+    }
+  ]
+}

@@ -44,15 +44,18 @@ internal static class OcrChecks
             var source = new TaskCompletionSource<OcrCatalog>(); Pending.Add(source); return source.Task;
         }
     }
-    internal static void Run(string root)
+    internal static void Run(string root, string? runtimeOverride = null)
     {
         var folder = Path.Combine(root, "viewer-checks", "ocr-" + Guid.NewGuid()); Directory.CreateDirectory(folder);
-        var runtime = Path.Combine(root, "bin", "Release-" + File.ReadAllText(Path.Combine(root, "VERSION.txt")).Trim(), "Ocr");
+        var runtime = runtimeOverride ?? Path.Combine(root, "bin", "Release-" + File.ReadAllText(Path.Combine(root, "VERSION.txt")).Trim(), "Ocr");
         var store = new EditStore(Path.Combine(folder, "cache"));
         var settings = new AppSettingsStore(Path.Combine(folder, "Settings.json"));
         var runner = new CountingRunner(new OcrRunner(runtime));
         var report = new StringBuilder("# " + File.ReadAllText(Path.Combine(root,"VERSION.txt")).Trim() + " OCR統合検証\n\n日時：" + DateTimeOffset.Now.ToString("u") + "\n\n専用の空キャッシュ・設定を使用。Release実MainFormから8原本を順次読み込み、UIメッセージを処理しながら完了待機。各値は1回測定。OCR秒はプロセス起動・Python import・画像decode・認識・JSON検証を含む。初回/再読込秒は画像decode・表示・キャッシュI/Oを含む。\n\n|画像|寸法|検出数|OCR秒|初回秒|キャッシュ再読込秒|待機中UI処理回数|\n|---|---|---:|---:|---:|---:|---:|\n");
-        var files = Directory.GetFiles(Path.Combine(root, "inputs")).Where(p => Path.GetFileName(p) != "icon.png" && new[] { ".jpg", ".png", ".jpeg" }.Contains(Path.GetExtension(p).ToLowerInvariant())).Order().ToArray();
+        // Use the established evaluation set; additional user images must not change the regression fixtures.
+        using var fixtures = JsonDocument.Parse(File.ReadAllText(Path.Combine(root,"Evaluation180","ground-truth.json")));
+        var files = fixtures.RootElement.GetProperty("images").EnumerateArray()
+            .Select(i => Path.Combine(root,"inputs",i.GetProperty("file").GetString()!)).Distinct().Order().ToArray();
         Check(files.Length == 8, "Exactly eight provided inputs");
         using (var form = new MainForm(null, store, settings, runner))
         {

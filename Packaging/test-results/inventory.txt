@@ -1,0 +1,35 @@
+PASS: Legacy records default to unreviewed without mutation
+PASS: Same-image reanalysis preserves review-only work and its fixed ID
+PASS: Startup is normal mode
+PASS: Inventory enters at first unreviewed candidate with one pan
+PASS: Space reviews one; keeps done separate; next row, focus and one pan
+PASS: Space autorepeat ignored until KeyUp
+PASS: Undo review restores fixed ID selection and state
+PASS: Undo is one-shot without redo
+PASS: Global Space from image focuses next LV row and suppresses repeat
+PASS: Ctrl+Enter reviews entire selection in one action
+PASS: Bulk confirmation autorepeat ignored
+PASS: Bulk review undo restores both selected records
+PASS: Inventory label commit reviews and advances once
+PASS: Label and review state undo together
+PASS: Image-edit cancellation changes no review/cache state
+PASS: Image editing uses shared inventory commit
+PASS: Filtered zero rows is not completion while recognized unreviewed records remain
+PASS: Delete confirmation ON cancels safely
+PASS: Confirmation OFF deletes selection and advances once
+PASS: Multi-delete undo restores all records and selection
+PASS: Normal image edit keeps target selection without reviewing
+PASS: Normal last-row delete selects preceding sorted candidate
+PASS: Done checkbox undo restores previous done state
+PASS: Manual addition recorded
+PASS: Manual-add undo removes only new record
+PASS: All reviewed shows completion and empty selection
+PASS: Review progress persisted per image
+PASS: Normal mode shows reviewed records
+PASS: Mode/undo command enablement shared across entry points
+PASS: Menu Undo uses transaction handler
+PASS: Toolbar review shares keyboard operation
+PASS: Image switch clears one-transaction undo
+PASS: Restart restores review and delete preference, not inventory mode
+PASS: Restart has no undo history
+PASS: 34 inventory/undo checks

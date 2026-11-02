@@ -1,5 +1,5 @@
 """Numeric recognition with retained circle candidates; Phase 1 is read-only."""
-import math,uuid
+import math,uuid,os
 import candidates as detector
 phase1=detector.phase1
 np=phase1.np
@@ -7,7 +7,7 @@ from PIL import Image
 
 def recognize(image,baseline=False):
  cfg=phase1.CONFIGS['circle_psm7_wide']
- with phase1.tesserocr.PyTessBaseAPI(path=str(phase1.ROOT/'tessdata'),lang='eng',oem=phase1.tesserocr.OEM.LSTM_ONLY,psm=7,variables={'load_system_dawg':'0','load_freq_dawg':'0'}) as api:
+ with phase1.tesserocr.PyTessBaseAPI(path=os.path.relpath(phase1.ROOT/'tessdata'),lang='eng',oem=phase1.tesserocr.OEM.LSTM_ONLY,psm=7,variables={'load_system_dawg':'0','load_freq_dawg':'0'}) as api:
   api.SetVariable('tessedit_char_whitelist','0123456789')
   if baseline:
    original=phase1.circle_candidates

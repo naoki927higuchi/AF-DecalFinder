@@ -26,3 +26,7 @@ Evaluation181/*.jpg.json
 Evaluation181/*.png.json
 Evaluation181/*.log
 Evaluation181/*.png
+
+Packaging/downloads/
+Packaging/tools/
+Packaging/staging/

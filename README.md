@@ -1,5 +1,16 @@
 # AF-DecalFinder
 
+## 1.9.2：別PC向けオールインワン配布
+
+別PCでは [配布ZIP](Distribution/AF-DecalFinder-1.9.2-win-x64.zip) を全て展開し、AF-DecalFinder.exeを起動してください。Python/Tesseract/.NET Runtimeの事前導入は不要です。
+開発PCの配布フォルダー：[起動EXE](bin/AF-DecalFinder-1.9.2-win-x64/AF-DecalFinder.exe)。ZIP144.42 MB、展開後350.02 MB。
+
+.NET self-contained9.0.20、公式Python3.12.10 embeddable、既存と同版のOCR依存物を同梱しました。Python設定をOcr基準の相対パスで解決し、日本語展開先でもTesseractが言語データを読めるようにしました。認識アルゴリズム・キャッシュ形式・既存操作は変更していません。原本画像とPhase1成果物、既存編集キャッシュは不変です。
+
+既存回帰558、同梱OCR統合98、配布専用11の計667項目成功。日本語・空白を含む展開先で再確認し、最終ZIP内1,114掲載ファイルのSHA256も一致。600dpiの276候補は1.9.1と番号・座標・信頼度・未認識状態が全件一致（実行ごとの生成IDのみ除外）、Phase1の181件も保持しています。配布EXEの実画面で起動・キャッシュ復元・検索Enter・逆引き・アイコンを確認しました。実際の別PCとクリーンWindows VMは未確認です。
+
+操作案内は [README-portable](Packaging/README-portable.md)、容量内訳・ライセンス・測定・制限・再生成方法は [配布検証レポート](Packaging/RESULTS.md)、8画像の測定は [OCR統合結果](OCR-INTEGRATION-192.md) を参照してください。
+
 ## 1.9.1：貼付作業前のキー操作・強調表示改善（現在版）
 
 起動：[AF-DecalFinder.exe](bin/Release-1.9.1/AF-DecalFinder.exe)。Release生成は `./Build-Viewer.ps1`。

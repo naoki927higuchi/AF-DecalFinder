@@ -1,0 +1,41 @@
+[
+  {
+    "name": "libdeflate",
+    "version": "1.25",
+    "package": "win-64/libdeflate-1.25-h1a1d4e4_1.conda",
+    "url": "https://conda.anaconda.org/conda-forge/win-64/libdeflate-1.25-h1a1d4e4_1.conda",
+    "sha256": "af1cda21d4653f594fbef20aa4e1ff158a546902b3307ef8af9a9b44b43862d2",
+    "dll": "deflate-6dd36dd208f18c6b44b3a78ae2c9462f.dll"
+  },
+  {
+    "name": "lerc",
+    "version": "4.2.0",
+    "package": "win-64/lerc-4.2.0-hd936e49_0.conda",
+    "url": "https://conda.anaconda.org/conda-forge/win-64/lerc-4.2.0-hd936e49_0.conda",
+    "sha256": "93d666f63f284ef77b87b0b1f77b70f7d36d315a132f9afa64bc0012d937ba39",
+    "dll": "Lerc-22a85a36f4a6a0a5b34eede8d466ade1.dll"
+  },
+  {
+    "name": "bzip2",
+    "version": "1.0.8",
+    "package": "win-64/bzip2-1.0.8-h0ad9c76_10.conda",
+    "url": "https://conda.anaconda.org/conda-forge/win-64/bzip2-1.0.8-h0ad9c76_10.conda",
+    "sha256": "04767466ee9227c9c57ab2c6503e0149177d34111c7418d2f420297acb1eb229",
+    "dll": "libbz2-7f3ddbb88b670d79ada028480067ccdf.dll"
+  },
+  {
+    "name": "libiconv",
+    "version": "1.18",
+    "url": "https://conda.anaconda.org/conda-forge/win-64/libiconv-1.18-hc1393d2_3.conda",
+    "dlls": [
+      {
+        "dll": "charset-4983c202d0424ad6e271741fb9453b7a.dll",
+        "code_sha256": "73765d595572022dbe226698893fded1303f4a81f8bdbbff48e4b9fff23364ca"
+      },
+      {
+        "dll": "iconv-c2d775a215adb752cf5ad8784a130aa6.dll",
+        "code_sha256": "c52108b1ea647d43800870528f9893a2626485f801a460e1adee470161a6d78b"
+      }
+    ]
+  }
+]

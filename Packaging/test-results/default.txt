@@ -1,0 +1,203 @@
+PASS: Phase 1 JSON: dimensions and 181 records
+PASS: 102 exact match and source pixel bbox
+PASS: All separately located duplicate numbers retained
+PASS: Detection IDs preserved from JSON in source order
+PASS: Exact string matching and empty query
+PASS: Wheel zoom preserves image point under cursor
+PASS: Pan translates bbox without resizing
+PASS: Label input preserves pasted text without normalization
+PASS: Empty input allowed
+PASS: 600dpi display conversion copies original pixels, ignores physical print size
+PASS: Search focus selects existing text
+PASS: Search click reselects existing text
+PASS: Single PNG file drop accepted
+PASS: Multiple file drop rejected
+PASS: Non-image drop rejected
+PASS: Actual form Drop handler loads original and enables search
+PASS: Drop-to-search integration finds two matches
+PASS: Displayed image does not lock source file
+PASS: Initial 150px list and equal image panes
+PASS: List toggle hides list and splitter
+PASS: List toggle restores previous width
+PASS: Image splitter independently adjustable
+PASS: 181 editable Details rows with multi selection and checkboxes
+PASS: Number-only list column
+PASS: Numeric Y/X sort preserves text and IDs
+PASS: Multiple selected rows retain distinct record references
+PASS: Selection and search do not move detail view
+PASS: Enter edits first selected duplicate rather than focused row
+PASS: Enter editing does not navigate
+PASS: Cancel exits Enter editor and retains zoom
+PASS: Float reparents same selected ListView, collapses pane, remains modeless
+PASS: Float retains focused record, selection references and search
+PASS: Floating list and add toolbar follow host resize
+PASS: Floating OFF hides host, retains selection and float mode
+PASS: Floating ON restores same host
+PASS: Closing floating host redocks same list and restores width
+PASS: Toggle button redocks without duplicate host or selection loss
+PASS: Ctrl+A selects all 181 records
+PASS: Reverse lookup clears all-selection by fixed ID
+PASS: Ctrl reverse lookup adds distinct duplicate number without toggling
+PASS: Stale detection ID leaves selection unchanged
+PASS: Reverse lookup updates hidden list
+PASS: Reverse lookup scrolls distant row into view
+PASS: Floating reverse lookup retains image center and uses same record
+PASS: Ctrl+A never triggers navigation
+PASS: Escape clears all selected records
+PASS: Real form image-to-list wiring selects fixed ID and retains search and center
+PASS: Dropdown zoom preserves image center
+PASS: Resize preserves detail center and zoom
+PASS: Overview auto fits after splitter and window resize
+PASS: Image reload resets search, selection and zoom
+PASS: Image reload replaces catalog references
+PASS: Valid cache works even without Phase 1 JSON
+PASS: Restored JSON repopulates list on next load
+PASS: Malformed/schema-invalid JSON case 0 rejected
+PASS: Malformed/schema-invalid JSON case 1 rejected
+PASS: Malformed/schema-invalid JSON case 2 rejected
+PASS: Malformed/schema-invalid JSON case 3 rejected
+PASS: Malformed/schema-invalid JSON case 4 rejected
+PASS: Malformed/schema-invalid JSON case 5 rejected
+PASS: Missing JSON reported distinctly
+PASS: Both hits drawn red
+PASS: Highlight interior is not filled
+PASS: Painted boxes follow real wheel+pan handlers
+PASS: Screen pen stays approximately 2px after zoom
+PASS: Clearing query clears highlights without refitting
+PASS: Changing matches does not zoom or move image
+PASS: Blue overrides red for selected hit only, other red hit remains
+PASS: Blue and red follow the same pan and zoom mapping
+PASS: Switching selection restores red on previous record without moving view
+PASS: Clearing blue preserves red matches
+PASS: Empty search leaves independent blue selection
+PASS: Replacing image clears blue selection
+PASS: 100 percent maps original pixels one to one
+PASS: Overview click centers detail on image coordinate
+PASS: Overview frame drag follows without grab offset jump
+PASS: Detail pan updates source viewport bounds
+PASS: Top and left pan limits prevent empty margins
+PASS: Bottom and right pan limits prevent empty margins
+PASS: Small image centered when viewport exceeds image size
+PASS: Both panes paint identical records with blue priority and red remainder
+PASS: Multiple selected records are simultaneously blue
+PASS: Zoom updates navigation bounds and retains center
+PASS: Overview letterboxes and fits on resize
+PASS: Detail click finds record regardless of OCR text, without pan
+PASS: Ctrl image click signals additive selection for duplicate text
+PASS: Empty detail click does not signal selection
+PASS: Exactly five pixels remains a click and does not pan
+PASS: Move out then back remains drag, no reverse lookup
+PASS: MouseUp displacement also rejects a click without MouseMove
+PASS: Capture loss cancels pending click
+PASS: Hit area equals visible rectangle without hidden halo (1.8.1)
+PASS: Hit testing follows zoom and pan transform
+PASS: Image replacement clears stale hit records
+PASS: Overview OCR click navigates to bbox center rather than click point
+PASS: Overview miss keeps ordinary point navigation
+PASS: Dragging from OCR box inside navigation frame never selects
+PASS: Overlapping Fit labels choose nearest center (1.8.1)
+PASS: Fit hit expansion stays small for tiny labels
+PASS: Actual bbox containment beats a nearer halo candidate
+PASS: Absent edit cache returns no overrides
+PASS: Manual record has distinct origin, median size and clamped image-edge bounds
+PASS: Restart restores corrected text, done state, ID and original OCR evidence
+PASS: Restart restores searchable manual record with same ID
+PASS: Atomic replacement restores unchecked state, retains backup and removes temp
+PASS: Locked destination reports save failure
+PASS: Failed replacement preserves previous committed cache
+PASS: Changed image metadata rejects stale overrides
+PASS: Image changed during editing prevents overwrite
+PASS: Invalid persisted schema is rejected
+PASS: Absolute image path keys are case insensitive and image-specific
+PASS: F2 edits SelectedItems[0], not focused selected item
+PASS: Native label accessibility owner is retained during edit
+PASS: Native label cleanup releases retained callbacks before subsequent GC
+PASS: Double click edits clicked row independently of previous selection
+PASS: Esc/null label leaves record and persistence untouched
+PASS: Label commit updates and saves model before queued sort
+PASS: Deferred native label refresh preserves record selection
+PASS: Main form loads saved records before incompatible Phase 1 JSON
+PASS: Native checkbox click changes exactly one of multiple selected rows
+PASS: Space toggles only first selected while suppressing native bulk checking
+PASS: Checkbox autosaves without changing other records
+PASS: Uncheck autosaves immediately
+PASS: Alphanumeric labels accepted; empty edits rejected
+PASS: Edit resorts numerically and retains selected fixed-ID record
+PASS: Edit autosaves and refreshes exact search without navigation
+PASS: Add mode temporarily hides list and arms detail click
+PASS: Cancel addition restores docking and leaves records unchanged
+PASS: Add selects new manual record and exits mode
+PASS: Manual record participates in image reverse lookup
+PASS: Manual record participates in immediate search
+PASS: Floating add mode hides same modeless host
+PASS: Cancel restores floating host and same selection
+PASS: Redocking preserves model, checks and fixed-ID selection
+PASS: List rebuild restores selection by IDs
+PASS: New application form restores corrected and manually added records
+PASS: Overview: 50% black under blue/red borders, source pixel unaffected
+PASS: Overview: uncheck clears shade and source stays unchanged
+PASS: Detail: 50% black under blue/red borders, source pixel unaffected
+PASS: Detail: uncheck clears shade and source stays unchanged
+PASS: Add click emits original pixel coordinates even over existing detection
+PASS: Detail drag in add mode never opens number entry
+PASS: Absent settings starts with empty history
+PASS: History retains newest ten in order
+PASS: Reopening case-insensitive path moves one entry to front
+PASS: Unknown settings fields survive safe replacement
+PASS: Settings replacement failure is reported
+PASS: Failed settings save keeps previous bytes and removes temp
+PASS: Malformed settings cannot be silently overwritten
+PASS: Startup without arguments restores image and done cache
+PASS: Startup restores modified and manual records
+PASS: Typing updates search without pan or selection events
+PASS: Exact matches update count immediately
+PASS: Search Enter suppresses keypress and beep
+PASS: Search Enter chooses first Y then X match and keeps zoom
+PASS: Search navigation never changes list selection
+PASS: Enter keeps all duplicate search hits
+PASS: No-match and empty Enter are no-ops
+PASS: History menu displays names with absolute-path tooltips
+PASS: History menu uses normal cached image load
+PASS: Missing last image starts normally without restore loop
+PASS: Missing history remains stored
+PASS: Empty recent-images menu is disabled
+PASS: Selection pan is deferred until final selection
+PASS: Selection burst pans once to first final selected record
+PASS: Ctrl+A pans once to first selected record
+PASS: Scrolling alone never pans
+PASS: Empty selection never pans
+PASS: Reverse lookup cancels queued user pan
+PASS: Rebuild cancels pending selection pan
+PASS: Edit and numeric sort do not pan
+PASS: Reparenting cancels pending selection pan
+PASS: Visible negative-coordinate monitor placement preserved
+PASS: Disconnected monitor and oversized window corrected into work area
+PASS: Work area smaller than minimum still keeps window on screen
+PASS: Existing settings without placement retain defaults
+PASS: Window and history saves preserve each other's fields
+PASS: Normal bounds restored by real MainForm
+PASS: Minimized-from-maximized saves maximized state
+PASS: Maximized MainForm restored on startup
+PASS: Maximized restart retains normal RestoreBounds
+PASS: Minimized-from-normal saves normal state
+PASS: Unanalysed image never reads Temjin JSON
+PASS: Same dimensions alone cannot authorize Phase 1 data
+PASS: Verified original receives 181 Phase 1 detections
+PASS: Switch to 5009x5809 clears list and accepts zero-result OCR
+PASS: Image switch clears reverse lookup and all overlays
+PASS: Unanalysed image remains displayed
+PASS: Return to Temjin restores corrected/manual/done records
+PASS: Other image manual entry never leaks to Temjin
+PASS: Other image restores its own independent cache
+PASS: Invalid cache is rejected without deleting work data
+PASS: ICO has seven icon entries
+PASS: ICO contains every requested resolution
+PASS: ICO frame preserves size and transparent corner: 16
+PASS: ICO frame preserves size and transparent corner: 24
+PASS: ICO frame preserves size and transparent corner: 32
+PASS: ICO frame preserves size and transparent corner: 48
+PASS: ICO frame preserves size and transparent corner: 64
+PASS: ICO frame preserves size and transparent corner: 128
+PASS: ICO frame preserves size and transparent corner: 256
+PASS: Windows extracts application icon from Release EXE
+PASS: 202 checks
