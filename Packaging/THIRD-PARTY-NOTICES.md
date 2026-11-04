@@ -1,5 +1,7 @@
 # Third-party notices / 再配布資料
 
+AF-DecalFinder本体はApache License 2.0です（`LICENSE`、`NOTICE`）。以下の第三者コンポーネントには、本体のライセンスではなく各コンポーネントの条件が適用されます。
+
 各コンポーネントの著作権と条件は `licenses/` の原文が適用されます。上流wheelのライセンス集合は省略せず保持しています。集合内にはビルド環境用・任意機能用の文書もありますが、それらすべてのバイナリを同梱しているという意味ではありません。
 
 |コンポーネント|ライセンス文書|
@@ -9,6 +11,7 @@
 |NumPy / OpenBLAS / LAPACK / GNU runtime|numpy-2.5.4.dist-info/licenses/LICENSE.txt（全文・GCC Runtime Library Exceptionを含む）|
 |OpenCVと静的組込ライブラリ|opencv_python_headless-5.0.0.93.dist-info/ のLICENSE、LICENSE-3RD-PARTY.txt|
 |Pillowと画像コーデック|pillow-12.3.0.dist-info/licenses/LICENSE|
+|libaom 3.14.1（PillowのAVIFモジュール `_avif` に静的組込）|BSD-2-Clause。Alliance for Open Mediaの著作権表示と条件はopencv_python_headless-5.0.0.93.dist-info/LICENSE-3RD-PARTY.txtに同文を収録|
 |psutil|psutil-7.2.2.dist-info/LICENSE|
 |tesserocr|tesserocr-2.12.0.dist-info/licenses/LICENSE|
 |Tesseract / Leptonicaと間接DLL|tesserocr-2.12.0.dist-info/licenses/.wheel-licenses/各ライブラリ/（隠し名も保持）|

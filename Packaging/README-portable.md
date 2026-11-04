@@ -1,4 +1,4 @@
-# AF-DecalFinder 1.9.2 ポータブル版
+# AF-DecalFinder 1.9.3 ポータブル版
 
 Windows 10/11 x64用です。フォルダー全体を展開して `AF-DecalFinder.exe` を起動してください。ZIP内から直接起動せず、EXEだけを移動しないでください。Python、Tesseract、.NET Runtimeの追加インストール・PATH設定は不要です。ARM64ネイティブ版、32bit Windowsは対象外です。
 
@@ -18,8 +18,14 @@ Windows 10/11 x64用です。フォルダー全体を展開して `AF-DecalFinde
 - アプリは未署名です。セキュリティソフトが隔離した場合は配布元とSHA256を確認してください。
 - OCR失敗時も画像閲覧は可能です。診断結果とエラー内容を記録してください。検出0件は実行失敗とは異なります。
 
+## ライセンス
+
+AF-DecalFinder本体は Apache License 2.0 です（`LICENSE`、`NOTICE`）。Copyright 2026 af-ailab (https://af-ailab.com/)。
+
+同梱した.NET、Python、Tesseract、OpenCVなどの第三者コンポーネントは、それぞれのライセンスに従います。再配布する場合は、`LICENSE`、`NOTICE`、`THIRD-PARTY-NOTICES.md`、`licenses/`、`sources/` を含めたフォルダー全体のまま配布してください。
+
 ## 同梱物
 
 依存関係・容量の説明は `DEPENDENCIES.md`、ライセンス案内は `THIRD-PARTY-NOTICES.md`、全文は `licenses/`、LGPL対応ソースは `sources/` にあります。`FILES.json` はファイル容量・SHA256・分類の一覧です（一覧自身のハッシュは除外）。第三者文書を削除せずフォルダー全体を扱ってください。
 
-Microsoft Distributable CodeにはMicrosoftの条件が適用されます。Microsoftの著作権表示等を削除せず、Windows上で本アプリの一部として使用してください。Microsoftによる推奨・保証を意味しません。Microsoftコンポーネントへの制限は、LGPLその他のオープンソース部分の権利を制限しません。本アプリは個人利用PC間の移動を目的とした非公開ビルドであり、製品全体の一般公開ライセンスは未決定です。
+Microsoft Distributable CodeにはMicrosoftの条件が適用されます。Microsoftの著作権表示等を削除せず、Windows上で本アプリの一部として使用してください。Microsoftによる推奨・保証を意味しません。Microsoftコンポーネントへの制限は、LGPLその他のオープンソース部分の権利を制限しません。再配布者と利用者も、Microsoft Distributable Codeについてこれらの条件に従ってください。

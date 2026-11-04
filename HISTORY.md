@@ -1,5 +1,11 @@
 # AF-DecalFinder 変更履歴
 
+## 1.9.3 — 2026-11-04
+
+- 一般公開用のパッチ版。Apache License 2.0のLICENSEとNOTICE（Copyright 2026 af-ailab）を追加し、配布フォルダーのルートに同梱。
+- README-portable・THIRD-PARTY-NOTICESを公開用に改訂（本体ライセンス、再配布時の注意、PillowのAVIFに組み込まれたlibaomの記載）。
+- 配布ZIPはGitHub Releasesで配布し、Gitにコミットしない。入力画像をGit管理外に設定。アプリ・OCRの機能とアルゴリズムは1.9.2から変更なし。
+
 ## 1.9.2 — 2026-11-02
 
 - 別PC用Windows x64ポータブル配布を追加。.NET 9.0.20、CPython 3.12.10、既存と同版のOCR依存物を同梱。

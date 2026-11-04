@@ -1,4 +1,16 @@
-# AF-DecalFinder 1.9.2 — 別PC向けリリース検証
+# AF-DecalFinder 配布検証
+
+## 1.9.3 — 2026-11-04（一般公開用パッチ版）
+
+1.9.2と同じ手順（`Packaging/Build-Portable.ps1 -Zip`）で `bin/AF-DecalFinder-1.9.3-win-x64/` とZIPを生成。ZIP 144,424,074 bytes、展開後350,033,166 bytes。SHA256：`24F0571D873E04730A9004D6E0193D09C360821D82388596CFA6F07FA030CF65`。
+
+FILES.jsonで1.9.2と比較し、追加はLICENSE・NOTICEの2件、変更はAF-DecalFinder.exe/dll（版数1.9.3.0）・deps.json・README.md・THIRD-PARTY-NOTICES.mdの5件だけ。OCR・Python・.NETランタイム・第三者ライセンス原文・LGPLソースはバイト単位で1.9.2と同一。
+
+配布専用11項目（`--portable`）と同梱OCR統合98項目（`--portable-ocr`、[OCR-INTEGRATION-193.md](../OCR-INTEGRATION-193.md)）に成功。アプリのコードは版数以外変更していないため、既存回帰558項目は再実行していない。実際の別PC・クリーンWindows VMは未確認のまま。
+
+以下は1.9.2の記録。
+
+## 1.9.2 — 別PC向けリリース検証
 
 検証日：2026-11-02。基準は1.9.1（e436178）。配布方法の変更に伴うパッチ版。OCRアルゴリズム・モデル・前処理・UI機能・データ形式は変更していません。
 

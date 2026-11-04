@@ -48,6 +48,7 @@ Get-ChildItem "$ocr/.deps" -Directory -Filter '*.dist-info' | ForEach-Object {
     Get-ChildItem $_.FullName -Force | Where-Object { $_.Name -match '^(licenses|LICENSE.*|COPYING.*)$' } | Copy-Item -Destination $target -Recurse -Force
 }
 Copy-Item "$PSScriptRoot/README-portable.md" "$out/README.md"
+Copy-Item "$root/LICENSE", "$root/NOTICE" $out
 Copy-Item "$PSScriptRoot/THIRD-PARTY-NOTICES.md", "$PSScriptRoot/DEPENDENCIES.md", "$PSScriptRoot/Diagnose.ps1", "$PSScriptRoot/diagnose.py" $out
 Copy-Item "$PSScriptRoot/python-lock.json", "$PSScriptRoot/native-provenance.json" "$out/licenses"
 $inventory = @(Get-ChildItem $out -Recurse -File -Force | ForEach-Object {

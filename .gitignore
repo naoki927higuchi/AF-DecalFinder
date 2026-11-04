@@ -30,3 +30,9 @@ Evaluation181/*.png
 Packaging/downloads/
 Packaging/tools/
 Packaging/staging/
+
+# 説明書などの入力画像は公開しない（アイコンのみ管理）
+inputs/*
+!inputs/icon.png
+# 配布ZIPはGitHub Releasesで配布し、コミットしない
+Distribution/*.zip

@@ -17,10 +17,10 @@
 | バージョン設定元 | VERSION.txt |
 | Windowsリリース出力 | bin/Release-<Version>/。EXEとDLL、results/600dpi.jsonを配置 |
 | 検証方法 | Phase 1はrun.ps1。Phase 2〜5はBuild-Viewer.ps1、Viewer.Checks、自動確認とWindows実画面確認 |
-| 公開先 | 未定（非公開・ローカルのみ） |
+| 公開先 | GitHub（リポジトリ AF-DecalFinder、配布ZIPはGitHub Releases）。2026-11-04 決定 |
 | 利用者が別途用意するランタイム・外部ツール | ビューアは.NET 9 Desktop Runtime。1.7.0ではPython 3.12 + PillowとPhase 1同一のネイティブ依存物をOCRに使用 |
-| 製品ライセンス | 公開時に決定 |
-| 第三者ライセンス表記 | 公開時に決定。入力画像と依存物はGit管理外 |
+| 製品ライセンス | Apache License 2.0（LICENSE、NOTICE）。Copyright 2026 af-ailab (https://af-ailab.com/)。2026-11-04 決定 |
+| 第三者ライセンス表記 | Packaging/THIRD-PARTY-NOTICES.md、licenses/、sources/。入力画像（inputs/のicon.png以外）・依存物・配布ZIPはGit管理外 |
 
 - 入力ZIP/画像は変更しない。確認画像はresults以下に別出力。
 - OCRの前に目視で正解を作成する。OCR出力から正解を生成しない。
@@ -93,6 +93,11 @@
 ## 1.9.1 キー操作・表示
 - LV Enterは既存編集処理へ統合し、通常Spaceは先頭選択1件の済み反転、棚卸Spaceは確認を行う。KeyUpまでの反復とネイティブ一括チェックを抑止し、検索Enter・編集中Enter・Ctrl+Enterを分離する。
 - 強調塗りつぶしは初期OFF、赤青Alpha90、青優先で重複塗りを避ける。既存UI矩形を使い、済み黒・画面px線幅・OCR元情報を維持。HighlightFillだけ設定へ追加しキャッシュスキーマは変えない。
+
+## 1.9.3 一般公開（2026-11-04 ユーザー指示）
+
+- 配布ZIPはGitにコミットせず、GitHub Releasesの添付ファイルとして配布する。Distribution/にはZIPのSHA256と案内だけを置く。1.9.2のZIPは履歴から除去した（ユーザー承認済みの例外的な履歴書き換え）。
+- 配布フォルダーのルートにLICENSE・NOTICEを同梱する。アプリ・OCRの機能とアルゴリズムは1.9.2から変更しない。
 
 ## 1.9.2 別PC向け配布（今回の明示指示による例外）
 

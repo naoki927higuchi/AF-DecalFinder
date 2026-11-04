@@ -1,8 +1,20 @@
 # AF-DecalFinder
 
+プラモデルの説明書のスキャン画像から、デカール番号の位置をOCRで探して強調表示するWindows用ソフトです（C# WinForms / .NET 9、OCRはTesseract）。
+
+- ダウンロード：このリポジトリのGitHub Releases（Windows x64、オールインワンZIP）
+- 使い方：[README-portable](Packaging/README-portable.md)
+- ライセンス：Apache License 2.0（[LICENSE](LICENSE)、[NOTICE](NOTICE)）。同梱の第三者コンポーネントは [THIRD-PARTY-NOTICES](Packaging/THIRD-PARTY-NOTICES.md) を参照。
+- 制作記録：[afさんのAIラボ](https://af-ailab.com/)
+
+## 1.9.3：一般公開版（現在版）
+
+Apache License 2.0のLICENSE・NOTICEを追加し、配布フォルダーに同梱しました。案内文書を公開用に改訂しています。アプリ・OCRの機能と依存物は1.9.2と同一です。配布ZIPはGitHub Releasesで配布し、Gitにはコミットしません。
+
+
 ## 1.9.2：別PC向けオールインワン配布
 
-別PCでは [配布ZIP](Distribution/AF-DecalFinder-1.9.2-win-x64.zip) を全て展開し、AF-DecalFinder.exeを起動してください。Python/Tesseract/.NET Runtimeの事前導入は不要です。
+別PCでは配布ZIP（GitHub Releases）を全て展開し、AF-DecalFinder.exeを起動してください。Python/Tesseract/.NET Runtimeの事前導入は不要です。
 開発PCの配布フォルダー：[起動EXE](bin/AF-DecalFinder-1.9.2-win-x64/AF-DecalFinder.exe)。ZIP144.42 MB、展開後350.02 MB。
 
 .NET self-contained9.0.20、公式Python3.12.10 embeddable、既存と同版のOCR依存物を同梱しました。Python設定をOcr基準の相対パスで解決し、日本語展開先でもTesseractが言語データを読めるようにしました。認識アルゴリズム・キャッシュ形式・既存操作は変更していません。原本画像とPhase1成果物、既存編集キャッシュは不変です。
@@ -11,7 +23,7 @@
 
 操作案内は [README-portable](Packaging/README-portable.md)、容量内訳・ライセンス・測定・制限・再生成方法は [配布検証レポート](Packaging/RESULTS.md)、8画像の測定は [OCR統合結果](OCR-INTEGRATION-192.md) を参照してください。
 
-## 1.9.1：貼付作業前のキー操作・強調表示改善（現在版）
+## 1.9.1：貼付作業前のキー操作・強調表示改善
 
 起動：[AF-DecalFinder.exe](bin/Release-1.9.1/AF-DecalFinder.exe)。Release生成は `./Build-Viewer.ps1`。
 
