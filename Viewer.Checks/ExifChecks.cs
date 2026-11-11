@@ -171,6 +171,17 @@ internal static class ExifChecks
                 Check(image.Frame == 6 && catalog.ImageSize == new Size(3000, 4000), "Real worker: smartphone photo (orientation 6) analysed as 3000 × 4000 upright");
                 Check(catalog.Detections.All(d => d.Bounds.Right <= 3000 && d.Bounds.Bottom <= 4000), "Real worker: every bbox lies inside the upright image");
                 Check(Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(phone))) == before, "Input original unchanged");
+                // 1.11.0: label circles in the upright photo are no longer outvoted by large drawing outlines.
+                var truth = Path.Combine(root, "Evaluation192RG", "ground-truth.json");
+                if (File.Exists(truth))
+                {
+                    using var gt = JsonDocument.Parse(File.ReadAllText(truth));
+                    var labels = gt.RootElement.GetProperty("phone_upright").GetProperty("records").EnumerateArray()
+                        .Select(r => (X: r.GetProperty("center")[0].GetDouble(), Y: r.GetProperty("center")[1].GetDouble(), R: r.GetProperty("radius").GetDouble())).ToArray();
+                    int found = labels.Count(l => catalog.Detections.Any(d => d.Circle is { } c && Math.Sqrt((c.X - l.X) * (c.X - l.X) + (c.Y - l.Y) * (c.Y - l.Y)) <= l.R));
+                    Console.WriteLine($"INFO: phone photo label circles found {found}/{labels.Length}");
+                    Check(labels.Length == 24 && found == 24, "Real worker: all 24 verified label circles in the smartphone photo are candidates");
+                }
                 File.WriteAllText(Path.Combine(folder, "phone-ocr.txt"),
                     $"detections={catalog.Detections.Count} recognized={catalog.Detections.Count(d => !d.IsUnrecognized)}\n" +
                     string.Join("\n", catalog.Detections.Select(d => $"{d.Id}\t{(d.IsUnrecognized ? "?" : d.Number)}\t{d.Bounds}")));

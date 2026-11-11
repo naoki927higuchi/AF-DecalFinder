@@ -57,6 +57,10 @@ def quality(image,cs):
   result.append((support,contrast))
  return result
 
+def representative_radius(radii,power):
+ mode=max(radii,key=lambda r:sum(abs(v-r)<r*.12 for v in radii)*r**power)
+ return float(np.median([r for r in radii if abs(r-mode)<mode*.12]))
+
 def select_candidates(image,variants=None):
  variants=variants or {m:candidates(image,m) for m in ['hough','adaptive','color']}
  hough=variants['hough'];qh=quality(image,hough)
@@ -66,8 +70,11 @@ def select_candidates(image,variants=None):
  binary=sum(v>0 for v in image.convert('L').histogram())<=2
  power=1 if binary else 2
  tolerance=.4 if binary else .28
- mode=max(radii,key=lambda r:sum(abs(v-r)<r*.12 for v in radii)*r**power)
- mode=float(np.median([r for r in radii if abs(r-mode)<mode*.12]))
+ mode=representative_radius(radii,power)
+ # Area weighting can let a few large drawing outlines outvote many label circles (upright
+ # smartphone photos). When it lands far above the count-based size, trust the count.
+ counted=representative_radius(radii,1)
+ if mode>=counted*1.5:mode=counted
  base=variants.get('baseline');base=phase1.circle_candidates(image) if base is None else base
  groups=[(base,.55),(hough,.95 if binary else .9),(variants['adaptive'],.7),(variants['color'],.7)]
  selected=[]
