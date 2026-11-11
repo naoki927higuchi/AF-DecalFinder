@@ -98,7 +98,7 @@ internal sealed class DataTransfer(EditStore cache, AppSettingsStore settings, s
     }
     internal static bool Matches(TransferItem item,ImageIdentity image) =>
         string.Equals(item.FileName,Path.GetFileName(image.AbsolutePath),StringComparison.OrdinalIgnoreCase)&&
-        item.Data.Image.Width==image.Width&&item.Data.Image.Height==image.Height;
+        item.Data.Image.Width==image.Width&&item.Data.Image.Height==image.Height&&item.Data.Image.Frame==image.Frame;
     internal bool Bind(TransferItem item,ImageIdentity image,Func<ImageIdentity,ImportConflict> conflict)
     {
         if(!Matches(item,image))throw new InvalidDataException("ファイル名または画像寸法が一致しません。");
@@ -127,7 +127,7 @@ internal sealed class DataTransfer(EditStore cache, AppSettingsStore settings, s
             {
                 if(!names.Contains(Path.GetFileName(path)))continue;
                 if(!new[]{".jpg",".jpeg",".png"}.Contains(Path.GetExtension(path).ToLowerInvariant()))continue;
-                try {using var stream=File.OpenRead(path);using var image=Image.FromStream(stream);found[Path.GetFullPath(path)]=ImageIdentity.Read(path,image.Size);}
+                try {found[Path.GetFullPath(path)]=ImageIdentity.Probe(path);}
                 catch(Exception ex) when(ex is IOException or UnauthorizedAccessException or ArgumentException or OutOfMemoryException or System.Runtime.InteropServices.ExternalException){ }
             }
         }

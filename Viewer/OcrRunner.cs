@@ -22,6 +22,9 @@ internal sealed class OcrRunner(string? runtimeDirectory = null) : IOcrRunner
         start.ArgumentList.Add("-B");
         start.ArgumentList.Add(Path.Combine(directory, "worker.py"));
         start.ArgumentList.Add(image.AbsolutePath);
+        // The viewer decides the EXIF orientation once; the worker applies exactly this value.
+        start.ArgumentList.Add("--orientation");
+        start.ArgumentList.Add(image.Frame.ToString(System.Globalization.CultureInfo.InvariantCulture));
         start.Environment["OMP_THREAD_LIMIT"] = "1";
         start.Environment["PYTHONUTF8"] = "1";
         using var process = Process.Start(start) ?? throw new IOException("OCRワーカーを起動できませんでした。");

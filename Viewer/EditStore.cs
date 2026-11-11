@@ -1,18 +1,31 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AF.DecalFinder;
 
-internal sealed record ImageIdentity(string AbsolutePath, int Width, int Height, long FileSize, DateTime LastWriteUtc)
+// Width/Height are the upright size after applying the EXIF orientation. Orientation records which
+// EXIF value was applied; data saved before 1.10.0 lacks it and therefore refers to the raw pixel matrix (1).
+internal sealed record ImageIdentity(string AbsolutePath, int Width, int Height, long FileSize, DateTime LastWriteUtc, int Orientation = 1)
 {
-    public static ImageIdentity Read(string path, Size size)
+    public static ImageIdentity Read(string path, Size size, int orientation = 1)
     {
         var file = new FileInfo(Path.GetFullPath(path));
-        return new(file.FullName, size.Width, size.Height, file.Length, file.LastWriteTimeUtc);
+        return new(file.FullName, size.Width, size.Height, file.Length, file.LastWriteTimeUtc, ImageOrientation.Normalize(orientation));
     }
+    /// <summary>Header-only read of the upright size and EXIF orientation.</summary>
+    public static ImageIdentity Probe(string path)
+    {
+        var (size, orientation) = ImageOrientation.Probe(path);
+        return Read(path, size, orientation);
+    }
+    /// <summary>Re-reads file metadata for the same image and coordinate frame.</summary>
+    public ImageIdentity Reread(Size size) => Read(AbsolutePath, size, Orientation);
+    [JsonIgnore] public int Frame => ImageOrientation.Normalize(Orientation);
     public bool Matches(ImageIdentity other) => string.Equals(AbsolutePath, other.AbsolutePath, StringComparison.OrdinalIgnoreCase)
-        && Width == other.Width && Height == other.Height && FileSize == other.FileSize && LastWriteUtc == other.LastWriteUtc;
+        && Width == other.Width && Height == other.Height && FileSize == other.FileSize && LastWriteUtc == other.LastWriteUtc
+        && Frame == other.Frame;
 }
 
 internal sealed class EditStore(string? directory = null)
@@ -38,7 +51,7 @@ internal sealed class EditStore(string? directory = null)
         if (hashes.TryGetValue(image, out var hash)) return hash;
         using var stream = File.OpenRead(image.AbsolutePath);
         hash = Convert.ToHexString(SHA256.HashData(stream));
-        if (!image.Matches(ImageIdentity.Read(image.AbsolutePath, new Size(image.Width, image.Height))))
+        if (!image.Matches(image.Reread(new Size(image.Width, image.Height))))
             throw new IOException("画像が更新されました。開き直してください。");
         hashes[image] = hash;
         return hash;
@@ -92,7 +105,7 @@ internal sealed class EditStore(string? directory = null)
         catch (JsonException) { return 0; }
         if (old is not { SchemaVersion: 2, Image: not null, Records: not null, SourceSha256: not null }
             || !string.Equals(old.Image.AbsolutePath, image.AbsolutePath, StringComparison.OrdinalIgnoreCase)
-            || old.Image.Width != image.Width || old.Image.Height != image.Height
+            || old.Image.Width != image.Width || old.Image.Height != image.Height || old.Image.Frame != image.Frame
             || !string.Equals(old.SourceSha256, SourceHash(image), StringComparison.Ordinal)) return 0;
         try { return fresh.PreserveWork(ReadRecords(old, image)); }
         catch (InvalidDataException) { return 0; } // Archive remains intact; never import malformed records.
@@ -100,7 +113,7 @@ internal sealed class EditStore(string? directory = null)
 
     internal void Save(ImageIdentity image, OcrCatalog catalog)
     {
-        if (!image.Matches(ImageIdentity.Read(image.AbsolutePath, catalog.ImageSize)))
+        if (!image.Matches(image.Reread(catalog.ImageSize)))
             throw new IOException("編集中に画像ファイルが更新されました。保存せず、現在の編集を保持しています。");
         Directory.CreateDirectory(DirectoryPath);
         var path = PathFor(image.AbsolutePath);

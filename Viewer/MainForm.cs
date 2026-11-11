@@ -371,10 +371,11 @@ internal sealed partial class MainForm : Form
             if (!IsImageExtension(path)) throw new InvalidDataException("JPGまたはPNGを選択してください。");
             using var stream = File.OpenRead(path);
             using var source = Image.FromStream(stream, useEmbeddedColorManagement: false, validateImageData: true);
-            // Clone to release the source file immediately. Do not apply EXIF rotation:
-            // JSON coordinates refer to the original pixel matrix.
-            loaded = DisplayBitmap.Create(source);
-            loadedIdentity = ImageIdentity.Read(path, loaded.Size);
+            // Clone to release the source file immediately. Apply the EXIF orientation (smartphone photos);
+            // JSON coordinates refer to the upright image and the OCR worker receives the same orientation.
+            int orientation = ImageOrientation.Read(source);
+            loaded = DisplayBitmap.Create(source, orientation);
+            loadedIdentity = ImageIdentity.Read(path, loaded.Size, orientation);
         }
         catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or OutOfMemoryException or System.Runtime.InteropServices.ExternalException)
         {
@@ -448,7 +449,7 @@ internal sealed partial class MainForm : Form
             if (token.IsCancellationRequested || generation != analysisGeneration || closing || IsDisposed) return;
             if (candidate.ImageSize != new Size(image.Width, image.Height))
                 throw new InvalidDataException("OCR結果の画像寸法が一致しません。");
-            if (!image.Matches(ImageIdentity.Read(image.AbsolutePath, candidate.ImageSize)))
+            if (!image.Matches(image.Reread(candidate.ImageSize)))
                 throw new IOException("解析中に画像が更新されました。画像を開き直してください。");
             int preserved = !restored && archive != null ? store.RestoreProtected(image, candidate, archive) : 0;
             catalog = candidate;

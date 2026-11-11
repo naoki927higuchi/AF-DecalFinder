@@ -112,7 +112,7 @@ internal sealed partial class MainForm
                 if(listBox.SelectedItem is not TransferItem item)return;
                 using var file=new OpenFileDialog{Filter="画像|*.jpg;*.jpeg;*.png",Title=$"{item.FileName}（{item.Data.Image.Width}×{item.Data.Image.Height}）に紐付け"};
                 if(file.ShowDialog(dialog)!=DialogResult.OK)return;
-                try{using var source=Image.FromFile(file.FileName);Transfers.Bind(item,ImageIdentity.Read(file.FileName,source.Size),AskImportConflict);RefreshImportedCurrent();Reload();}
+                try{Transfers.Bind(item,ImageIdentity.Probe(file.FileName),AskImportConflict);RefreshImportedCurrent();Reload();}
                 catch(Exception ex){TransferError(ex);}
             };
             bar.Controls.AddRange([scan,bind,close]);dialog.Controls.Add(listBox);dialog.Controls.Add(bar);dialog.CancelButton=close;

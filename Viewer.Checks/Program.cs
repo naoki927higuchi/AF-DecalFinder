@@ -21,6 +21,14 @@ internal static class Program
         var root = Path.GetFullPath(args[0]);
         if (args.Contains("--portable")) { PortableChecks.Run(root, args[Array.IndexOf(args, "--portable") + 1]); return; }
         if (args.Contains("--portable-ocr")) { OcrChecks.Run(root, Path.GetFullPath(args[Array.IndexOf(args, "--portable-ocr") + 1])); return; }
+        if (args.Contains("--exif"))
+        {
+            // Optional runtime directory enables the real-worker check; default is this version's Release output.
+            int at = Array.IndexOf(args, "--exif");
+            var runtime = at + 1 < args.Length ? Path.GetFullPath(args[at + 1])
+                : Path.Combine(root, "bin", "Release-" + File.ReadAllText(Path.Combine(root, "VERSION.txt")).Trim(), "Ocr");
+            ExifChecks.Run(root, Directory.Exists(runtime) ? runtime : null); return;
+        }
         if (args.Contains("--ui191")) { Ui191Checks.Run(root); return; }
         if (args.Contains("--inventory")) { InventoryChecks.Run(root); return; }
         if (args.Contains("--transfer")) { TransferChecks.Run(root); return; }
