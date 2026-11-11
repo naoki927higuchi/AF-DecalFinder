@@ -99,7 +99,9 @@ internal sealed partial class MainForm : Form
         images.Panel1.Controls.Add(new Label { Text = "全体画像 — 青い破線：拡大表示範囲", Dock = DockStyle.Top, Height = 38, TextAlign = ContentAlignment.MiddleLeft });
         images.Panel2.Controls.Add(view);
         images.Panel2.Controls.Add(detailToolbar);
-        var strip = new StatusStrip { ShowItemToolTips = true };
+        // No sizing grip: with it, the spring status label is dropped (Placement None) after the window
+        // moves from a 125% to a 100% monitor, hiding the status text. Window edges still resize.
+        var strip = new StatusStrip { ShowItemToolTips = true, SizingGrip = false };
         strip.Items.Add(status);
         Controls.Add(panes);
         Controls.Add(toolbar);

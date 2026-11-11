@@ -7,6 +7,10 @@
 - ライセンス：Apache License 2.0（[LICENSE](LICENSE)、[NOTICE](NOTICE)）。同梱の第三者コンポーネントは [THIRD-PARTY-NOTICES](Packaging/THIRD-PARTY-NOTICES.md) を参照。
 - 制作記録：[afさんのAIラボ](https://af-ailab.com/)
 
+## 1.11.1：ステータスバー表示の修正（開発中・未公開）
+
+拡大率の異なるモニター間でウィンドウを移すと、ステータスバーの文字が消える不具合を直しました。起動：[AF-DecalFinder.exe](bin/Release-1.11.1/AF-DecalFinder.exe)。
+
 ## 1.11.0：スマホ写真の丸検出改善・アンインストール用スクリプト（開発中・未公開）
 
 正立させたスマホ写真で番号の丸を見落とす問題を、丸の代表サイズの選び方で改善しました（RG RX-78-2の評価24個で丸検出0→24、番号正解0→22）。スキャン画像の結果は変わりません。OCRの数字認識は変更していません。配布フォルダーに、保存データを削除する `Uninstall.bat` を追加しました。起動：[AF-DecalFinder.exe](bin/Release-1.11.0/AF-DecalFinder.exe)。

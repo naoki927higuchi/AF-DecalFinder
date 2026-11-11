@@ -1,4 +1,4 @@
-# AF-DecalFinder 1.11.0 ポータブル版
+# AF-DecalFinder 1.11.1 ポータブル版
 
 Windows 10/11 x64用です。フォルダー全体を展開して `AF-DecalFinder.exe` を起動してください。ZIP内から直接起動せず、EXEだけを移動しないでください。Python、Tesseract、.NET Runtimeの追加インストール・PATH設定は不要です。ARM64ネイティブ版、32bit Windowsは対象外です。
 
