@@ -7,19 +7,19 @@
 - ライセンス：Apache License 2.0（[LICENSE](LICENSE)、[NOTICE](NOTICE)）。同梱の第三者コンポーネントは [THIRD-PARTY-NOTICES](Packaging/THIRD-PARTY-NOTICES.md) を参照。
 - 制作記録：[afさんのAIラボ](https://af-ailab.com/)
 
-## 1.11.1：ステータスバー表示の修正（開発中・未公開）
+## 1.11.1：ステータスバー表示の修正（現在の公開版）
 
 拡大率の異なるモニター間でウィンドウを移すと、ステータスバーの文字が消える不具合を直しました。起動：[AF-DecalFinder.exe](bin/Release-1.11.1/AF-DecalFinder.exe)。
 
-## 1.11.0：スマホ写真の丸検出改善・アンインストール用スクリプト（開発中・未公開）
+## 1.11.0：スマホ写真の丸検出改善・アンインストール用スクリプト
 
 正立させたスマホ写真で番号の丸を見落とす問題を、丸の代表サイズの選び方で改善しました（RG RX-78-2の評価24個で丸検出0→24、番号正解0→22）。スキャン画像の結果は変わりません。OCRの数字認識は変更していません。配布フォルダーに、保存データを削除する `Uninstall.bat` を追加しました。起動：[AF-DecalFinder.exe](bin/Release-1.11.0/AF-DecalFinder.exe)。
 
-## 1.10.0：EXIF回転情報への対応（開発中・未公開）
+## 1.10.0：EXIF回転情報への対応
 
 スマホで撮った写真など、EXIFの回転情報を持つ画像を正しい向きで表示し、同じ向きでOCRします。回転情報のない画像（スキャン）の動作と結果は1.9.3と同じです。向きの異なる旧版の作業データは適用せず、退避してから解析し直します。スマホ写真の丸検出・番号認識の精度は改善していません。詳細は [HISTORY](HISTORY.md) を参照してください。起動：[AF-DecalFinder.exe](bin/Release-1.10.0/AF-DecalFinder.exe)。再確認は `dotnet run --project Viewer.Checks/AF.DecalFinder.Checks.csproj -c Release -- W:\dev\AF-DecalFinder --exif`。
 
-## 1.9.3：一般公開版（現在の公開版）
+## 1.9.3：一般公開版
 
 Apache License 2.0のLICENSE・NOTICEを追加し、配布フォルダーに同梱しました。案内文書を公開用に改訂しています。アプリ・OCRの機能と依存物は1.9.2と同一です。配布ZIPはGitHub Releasesで配布し、Gitにはコミットしません。
 

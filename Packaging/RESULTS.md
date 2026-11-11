@@ -1,5 +1,13 @@
 # AF-DecalFinder 配布検証
 
+## 1.11.1 — 2026-11-11
+
+`Packaging/Build-Portable.ps1 -OutputDirectory bin/AF-DecalFinder-1.11.1-win-x64 -Zip` でZIPを生成（出力先の相対パスはPowerShellの現在位置でなく.NETの作業フォルダー基準で解決されるため、リポジトリ直下から実行するか絶対パスを渡すこと）。ZIP 144,430,043 bytes、展開後350,040,330 bytes。SHA256：`206739667EE2936C92BFB19F54FFC328B111A8DAEBEFD17A03C380C76FB9769F`。
+
+FILES.jsonで1.9.3と比較し、追加は `Uninstall.bat`・`Uninstall.ps1` の2件、変更はAF-DecalFinder.exe/dll/deps.json（1.11.1）、`Ocr/worker.py`（EXIF回転）、`Ocr/candidates.py`（代表半径）、README.mdの6件だけ。Python・.NETランタイム・Tesseract・第三者ライセンス原文・LGPLソースはバイト単位で1.9.3と同一。
+
+最終ZIPを日本語・空白を含む新しい展開先へ展開し、配布専用11項目（`--portable`）、同梱OCR統合98項目（`--portable-ocr`、[OCR-INTEGRATION-1111.md](../OCR-INTEGRATION-1111.md)）、同梱OCRでのEXIF・スマホ写真34項目（`--exif <配布フォルダー/Ocr>`、評価24個の丸をすべて検出）に成功。開発出力では既存回帰558項目も成功。実際の別PC・クリーンWindows VMは未確認のまま。
+
 ## 1.9.3 — 2026-11-04（一般公開用パッチ版）
 
 1.9.2と同じ手順（`Packaging/Build-Portable.ps1 -Zip`）で `bin/AF-DecalFinder-1.9.3-win-x64/` とZIPを生成。ZIP 144,424,074 bytes、展開後350,033,166 bytes。SHA256：`24F0571D873E04730A9004D6E0193D09C360821D82388596CFA6F07FA030CF65`。

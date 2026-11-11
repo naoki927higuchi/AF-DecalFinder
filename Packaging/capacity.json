@@ -1,25 +1,25 @@
 {
-  "version": "1.9.3",
-  "folderBytes": 350033166.0,
-  "zipBytes": 144424074,
-  "zipSha256": "24F0571D873E04730A9004D6E0193D09C360821D82388596CFA6F07FA030CF65",
-  "filesManifestBytes": 250618,
+  "version": "1.11.1",
+  "folderBytes": 350040330.0,
+  "zipBytes": 144430043,
+  "zipSha256": "206739667EE2936C92BFB19F54FFC328B111A8DAEBEFD17A03C380C76FB9769F",
+  "filesManifestBytes": 251010,
   "categories": [
     {
       "category": "Application",
-      "bytes": 1036011.0
+      "bytes": 1038573.0
     },
     {
       "category": "DotNet",
-      "bytes": 119766029.0
+      "bytes": 119766226.0
     },
     {
       "category": "OCR",
-      "bytes": 199480756.0
+      "bytes": 199481628.0
     },
     {
       "category": "Other",
-      "bytes": 6998505.0
+      "bytes": 7001646.0
     },
     {
       "category": "Python",
